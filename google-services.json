@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "348010185137",
+    "firebase_url": "https://wtcb-1ef9a.firebaseio.com",
+    "project_id": "wtcb-1ef9a",
+    "storage_bucket": "wtcb-1ef9a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348010185137:android:9889b570aad75b69",
+        "android_client_info": {
+          "package_name": "news.ctn.wtcb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "348010185137-bkio0449gic99ii8auve1krnk06tvtct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN4ouKSDp8N0AIO3jkoZ5vh9--LxTpjHM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

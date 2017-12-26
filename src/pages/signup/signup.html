@@ -1,0 +1,37 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Signup</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card>
+
+        <img src="assets/imgs/building.jpg"/>
+
+        <ion-item>
+            <ion-input type="text" placeholder="Username" [(ngModel)]="user.username"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-input type="email" placeholder="Email" [(ngModel)]="user.email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-input type="password" placeholder="Password" [(ngModel)]="user.password"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-select [(ngModel)]="user.level" interface="popover" placeholder="Access Level">
+                <ion-option value="3">Office Renter (Owner)</ion-option>
+                <ion-option value="5">Vendor / Technician</ion-option>
+            </ion-select>
+        </ion-item>
+
+    </ion-card>
+
+    <button ion-button clear block color="dark" (click)="doSignUp()">Sign Up</button>
+</ion-content>
