@@ -30,7 +30,7 @@ export class OtrsRequestPage {
     otrsRequest = {
             _id: '',
             comment: '',
-            is_urgent: false,
+            is_urgent: true,
             photos: [],
             step: 1,
             created_at: new Date(),
@@ -46,6 +46,9 @@ export class OtrsRequestPage {
     myfile:any;
     file:any;
     create_or_update: boolean = false;
+
+    building_name: any;
+    floor_name: any;
     constructor(public navCtrl: NavController, public navParams: NavParams,  private loadingCtrl: LoadingController, 
         public actionSheetCtrl: ActionSheetController, public userService: UserService, public storage: Storage, 
         public camera: Camera, public alertCtrl: AlertController, public pushService: PushServiceProvider,
@@ -77,6 +80,35 @@ export class OtrsRequestPage {
                 console.log("Getting Offices:", data);
 
                 this.office = data[0];
+
+                let buildingId = this.office.buildingId;
+                let floorId = this.office.floorId;
+                let buildings = this.buildingService.list();
+                let building = {
+                    name: '',
+                    floors: []
+                };
+                let floor = {
+                    name: ''
+                };
+                for (let i = 0; i < buildings.length; i ++) {
+                    if (buildings[i].id.toString() == buildingId) {
+                        building = buildings[i];
+                        break;
+                    }
+                }
+                if (floorId) {
+                    for (let j = 0; j < building.floors.length; j ++) {
+                        if (building.floors[j].id.toString() == floorId) {
+                            floor = building.floors[j];
+                            console.log("floor", floor);
+                            break;
+                        }
+                    }
+                }
+
+                this.building_name = building.name;
+                this.floor_name = floor.name;
               },
               (data) => {
                 loading.dismiss();
@@ -192,34 +224,8 @@ export class OtrsRequestPage {
         this.otrsRequest.token = this.token;
         this.otrsRequest.officeName = this.office.name;
 
-        let buildingId = this.office.buildingId;
-        let floorId = this.office.floorId;
-        let buildings = this.buildingService.list();
-        let building = {
-            name: '',
-            floors: []
-        };
-        let floor = {
-            name: ''
-        };
-        for (let i = 0; i < buildings.length; i ++) {
-            if (buildings[i].id.toString() == buildingId) {
-                building = buildings[i];
-                break;
-            }
-        }
-        if (floorId) {
-            for (let j = 0; j < building.floors.length; j ++) {
-                if (building.floors[j].id.toString() == floorId) {
-                    floor = building.floors[j];
-                    console.log("floor", floor);
-                    break;
-                }
-            }
-        }
-
-        this.otrsRequest.buildingName = building.name;
-        this.otrsRequest.floorName = floor.name;
+        this.otrsRequest.buildingName = this.building_name;
+        this.otrsRequest.floorName = this.floor_name;
         console.log("this.otrsRequest", this.otrsRequest);
 
         if (this.create_or_update == false){

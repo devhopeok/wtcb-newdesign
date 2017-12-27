@@ -1617,7 +1617,7 @@ var OtrsRequestPage = (function () {
         this.otrsRequest = {
             _id: '',
             comment: '',
-            is_urgent: false,
+            is_urgent: true,
             photos: [],
             step: 1,
             created_at: new Date(),
@@ -1652,6 +1652,33 @@ var OtrsRequestPage = (function () {
                     loading_1.dismiss();
                     console.log("Getting Offices:", data);
                     _this.office = data[0];
+                    var buildingId = _this.office.buildingId;
+                    var floorId = _this.office.floorId;
+                    var buildings = _this.buildingService.list();
+                    var building = {
+                        name: '',
+                        floors: []
+                    };
+                    var floor = {
+                        name: ''
+                    };
+                    for (var i = 0; i < buildings.length; i++) {
+                        if (buildings[i].id.toString() == buildingId) {
+                            building = buildings[i];
+                            break;
+                        }
+                    }
+                    if (floorId) {
+                        for (var j = 0; j < building.floors.length; j++) {
+                            if (building.floors[j].id.toString() == floorId) {
+                                floor = building.floors[j];
+                                console.log("floor", floor);
+                                break;
+                            }
+                        }
+                    }
+                    _this.building_name = building.name;
+                    _this.floor_name = floor.name;
                 }, function (data) {
                     loading_1.dismiss();
                 });
@@ -1755,33 +1782,8 @@ var OtrsRequestPage = (function () {
         this.otrsRequest.officeKey = this.officeKey;
         this.otrsRequest.token = this.token;
         this.otrsRequest.officeName = this.office.name;
-        var buildingId = this.office.buildingId;
-        var floorId = this.office.floorId;
-        var buildings = this.buildingService.list();
-        var building = {
-            name: '',
-            floors: []
-        };
-        var floor = {
-            name: ''
-        };
-        for (var i = 0; i < buildings.length; i++) {
-            if (buildings[i].id.toString() == buildingId) {
-                building = buildings[i];
-                break;
-            }
-        }
-        if (floorId) {
-            for (var j = 0; j < building.floors.length; j++) {
-                if (building.floors[j].id.toString() == floorId) {
-                    floor = building.floors[j];
-                    console.log("floor", floor);
-                    break;
-                }
-            }
-        }
-        this.otrsRequest.buildingName = building.name;
-        this.otrsRequest.floorName = floor.name;
+        this.otrsRequest.buildingName = this.building_name;
+        this.otrsRequest.floorName = this.floor_name;
         console.log("this.otrsRequest", this.otrsRequest);
         if (this.create_or_update == false) {
             var loading_2 = this.loadingCtrl.create();
@@ -1852,14 +1854,12 @@ var OtrsRequestPage = (function () {
 }());
 OtrsRequestPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-otrs-request',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/otrs-request/otrs-request.html"*/'<!--\n  Generated template for the OtrsRequestPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>NUEVA SOLICITUD</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-list>\n        <ion-list-header>\n            DESCRIBA SU SOLICITUD\n        </ion-list-header>\n\n        <ion-item>\n            <ion-label>REQUERIMIENTO</ion-label>\n            <div item-content style="width: 70%;padding:18px 0px">\n                <textarea placeholder="DESCRIPCIÓN" style="width: 100%; height: 80px;" [(ngModel)]="otrsRequest.comment"></textarea>\n            </div>\n        </ion-item>\n\n        <ion-item>\n            <ion-toggle [(ngModel)]="otrsRequest.is_urgent"></ion-toggle>\n            <ion-label>\n                URGENTE (SUJETO T&C)\n            </ion-label>\n        </ion-item>\n    </ion-list>\n\n    <input type="file" name="file" id="file" class="inputfile" (change)="fileEvent($event)"/>\n    <label for="file" ion-button block primary>Add Photo</label>\n    <!-- <button ion-button icon-left block (click)="addPhoto()">\n        <ion-icon ios="ios-camera" md="md-camera"></ion-icon>\n        CARGAR FOTO \n    </button> -->\n\n    <ion-row *ngIf="otrsRequest.photos.length > 0">\n        <ion-col col-3 *ngFor="let item of otrsRequest.photos; let i = index;">\n            <img src="{{item}}"/>\n        </ion-col>\n    </ion-row>\n\n    <ion-list style="margin-top: 30px;">\n        <ion-list-header>\n            INFORMACIÓN CLIENTE\n        </ion-list-header>\n        <ion-item>\n            <ion-avatar item-start>\n                <img src="assets/imgs/working-icon.png">\n            </ion-avatar>\n            <h2>{{office.company}}</h2>\n            <p>{{office.name}}</p>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Office #</ion-label>\n            <ion-note item-end>{{office._id}}</ion-note>\n        </ion-item>\n    </ion-list>\n\n    <button ion-button block (click)="createNewRequest()">ENVIAR NUEVA SOLICITUD</button>\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/otrs-request/otrs-request.html"*/,
+        selector: 'page-otrs-request',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/otrs-request/otrs-request.html"*/'<!--\n  Generated template for the OtrsRequestPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>NUEVA SOLICITUD</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-list>\n        <ion-list-header class="header-style">\n            <!-- DESCRIBA SU SOLICITUD -->\n            REQUERIMIENTO\n        </ion-list-header>\n\n        <ion-item>\n            \n            <textarea placeholder="DESCRIPCIÓN" class="textarea-style" [(ngModel)]="otrsRequest.comment"></textarea>\n            \n        </ion-item>\n\n        <ion-item>\n            <ion-toggle color="custom" [(ngModel)]="otrsRequest.is_urgent"></ion-toggle>\n            <ion-label style="color: gray;">\n                URGENTE (SUJETO T&C)\n            </ion-label>\n        </ion-item>\n    </ion-list>\n\n    <input type="file" name="file" id="file" class="inputfile" (change)="fileEvent($event)"/>\n    <label for="file" ion-button block class="main-btn">Add Photo</label>\n    <!-- <button ion-button icon-left block (click)="addPhoto()">\n        <ion-icon ios="ios-camera" md="md-camera"></ion-icon>\n        CARGAR FOTO \n    </button> -->\n\n    <ion-row *ngIf="otrsRequest.photos.length > 0">\n        <ion-col col-3 *ngFor="let item of otrsRequest.photos; let i = index;">\n            <img src="{{item}}"/>\n        </ion-col>\n    </ion-row>\n\n    <ion-list style="margin-top: 30px;">\n        <!-- <ion-list-header>\n            INFORMACIÓN CLIENTE\n        </ion-list-header> -->\n        \n        <ion-avatar class="client-avatar">\n            <img src="assets/imgs/working-icon.png">\n        </ion-avatar>\n        \n        <h2 class="header-style" style="text-align: center;">{{office.company}}</h2>\n        <p style="text-align:center; font-size: 15px; color:gray;">{{office.name}}</p>\n        <h2 class="header-style" style="text-align: center; opacity: 0.7; margin-top: 8vw;">{{building_name}} - {{floor_name}}</h2>\n        \n        <!-- <ion-item>\n            <ion-label fixed>Office #</ion-label>\n            <ion-note item-end>{{office._id}}</ion-note>\n        </ion-item> -->\n    </ion-list>\n\n    <button class="main-btn" ion-button block (click)="createNewRequest()">ENVIAR NUEVA SOLICITUD</button>\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/otrs-request/otrs-request.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */], __WEBPACK_IMPORTED_MODULE_2__providers_user_service__["a" /* UserService */], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */],
-        __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__["a" /* Camera */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_3__providers_push_service__["a" /* PushServiceProvider */],
-        __WEBPACK_IMPORTED_MODULE_6__providers_building__["a" /* BuildingProvider */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__providers_user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_user_service__["a" /* UserService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__["a" /* Camera */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_3__providers_push_service__["a" /* PushServiceProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_push_service__["a" /* PushServiceProvider */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_6__providers_building__["a" /* BuildingProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_building__["a" /* BuildingProvider */]) === "function" && _k || Object])
 ], OtrsRequestPage);
 
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
 //# sourceMappingURL=otrs-request.js.map
 
 /***/ }),

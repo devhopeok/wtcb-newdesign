@@ -15,27 +15,27 @@
 
 <ion-content padding>
     <ion-list>
-        <ion-list-header>
-            DESCRIBA SU SOLICITUD
+        <ion-list-header class="header-style">
+            <!-- DESCRIBA SU SOLICITUD -->
+            REQUERIMIENTO
         </ion-list-header>
 
         <ion-item>
-            <ion-label>REQUERIMIENTO</ion-label>
-            <div item-content style="width: 70%;padding:18px 0px">
-                <textarea placeholder="DESCRIPCIÓN" style="width: 100%; height: 80px;" [(ngModel)]="otrsRequest.comment"></textarea>
-            </div>
+            
+            <textarea placeholder="DESCRIPCIÓN" class="textarea-style" [(ngModel)]="otrsRequest.comment"></textarea>
+            
         </ion-item>
 
         <ion-item>
-            <ion-toggle [(ngModel)]="otrsRequest.is_urgent"></ion-toggle>
-            <ion-label>
+            <ion-toggle color="custom" [(ngModel)]="otrsRequest.is_urgent"></ion-toggle>
+            <ion-label style="color: gray;">
                 URGENTE (SUJETO T&C)
             </ion-label>
         </ion-item>
     </ion-list>
 
     <input type="file" name="file" id="file" class="inputfile" (change)="fileEvent($event)"/>
-    <label for="file" ion-button block primary>Add Photo</label>
+    <label for="file" ion-button block class="main-btn">Add Photo</label>
     <!-- <button ion-button icon-left block (click)="addPhoto()">
         <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
         CARGAR FOTO 
@@ -48,21 +48,23 @@
     </ion-row>
 
     <ion-list style="margin-top: 30px;">
-        <ion-list-header>
+        <!-- <ion-list-header>
             INFORMACIÓN CLIENTE
-        </ion-list-header>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/imgs/working-icon.png">
-            </ion-avatar>
-            <h2>{{office.company}}</h2>
-            <p>{{office.name}}</p>
-        </ion-item>
-        <ion-item>
+        </ion-list-header> -->
+        
+        <ion-avatar class="client-avatar">
+            <img src="assets/imgs/working-icon.png">
+        </ion-avatar>
+        
+        <h2 class="header-style" style="text-align: center;">{{office.company}}</h2>
+        <p style="text-align:center; font-size: 15px; color:gray;">{{office.name}}</p>
+        <h2 class="header-style" style="text-align: center; opacity: 0.7; margin-top: 8vw;">{{building_name}} - {{floor_name}}</h2>
+        
+        <!-- <ion-item>
             <ion-label fixed>Office #</ion-label>
             <ion-note item-end>{{office._id}}</ion-note>
-        </ion-item>
+        </ion-item> -->
     </ion-list>
 
-    <button ion-button block (click)="createNewRequest()">ENVIAR NUEVA SOLICITUD</button>
+    <button class="main-btn" ion-button block (click)="createNewRequest()">ENVIAR NUEVA SOLICITUD</button>
 </ion-content>
