@@ -16,7 +16,7 @@
 <ion-content padding>
 
     <ion-list>
-        <ion-list-header>
+        <ion-list-header class="header-style">
             FASE
         </ion-list-header>
     </ion-list>
@@ -24,76 +24,77 @@
     <div class="wrapper">
         <ul class="StepProgress">
             <li class="StepProgress-item" [ngClass]="{'is-done': request.step > 1, 'current': request.step == 1}">
-                <strong>FASE 1 - Solicitud</strong>
-                <ion-list *ngIf="authUser.level == 4 && request.step == 1">
+                <strong class="subheader-style">FASE 1 - Solicitud</strong>
+                <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 1">
                     <ion-item>
-                        <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
-                        FECHA DE SOLICITUD
-                        <ion-note item-end>{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY, h:mm:ss a'}}</ion-note>
+                        <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>
+                        <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY'}}</ion-note>
+                        -
+                        <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>
+                        <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'h:mm a'}}</ion-note>
                     </ion-item>
+                    
                     <ion-item>
-                        {{office.buildingName}} | {{office.floorName}} | {{office.name}}
-                    </ion-item>
-                    <ion-item>
-                        <ion-toggle checked="true" disabled="true"></ion-toggle>
-                        <ion-label>
-                            Sent
+                        <ion-toggle color="custom" checked="true" disabled="true"></ion-toggle>
+                        <ion-label class="icon-style">
+                            Request Sent
                         </ion-label>
                     </ion-item>
                 </ion-list>
-                <ion-list *ngIf="(authUser.level == 7 || authUser.level == 8)  && request.step == 1">
+
+                <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8)">
                     <ion-item>
-                        <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
-                        FECHA DE SOLICITUD
-                        <ion-note item-end>{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY, h:mm:ss a'}}</ion-note>
+                        <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>
+                        <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY'}}</ion-note>
+                        -
+                        <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>
+                        <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'h:mm a'}}</ion-note>
                     </ion-item>
                     <ion-item>
-                        {{office.buildingName}} | {{office.floorName}} | {{office.name}}
-                    </ion-item>
-                    <ion-item>
-                        <ion-toggle [(ngModel)]="showQuote"></ion-toggle>
+                        <ion-toggle color="custom" [(ngModel)]="showQuote"></ion-toggle>
                         <ion-label>
                             CARGAR COTIZACIÓN
                         </ion-label>
                     </ion-item>
                     <ion-item *ngIf="showQuote">
-                        <ion-label>Request</ion-label>
-                        <div item-content style="width: 70%;">
-                            <textarea placeholder="Your comments" style="width: 100%; height: 80px;" [(ngModel)]="quote"></textarea>
+                        <div>
+                            <textarea placeholder="Your comments" class="textarea-style" [(ngModel)]="quote"></textarea>
                         </div>
                     </ion-item>
                 </ion-list>
 
-                <button ion-button block (click)="goToStep2()"
-                        *ngIf="request.step == 1 && (authUser.level == 7 || authUser.level == 8 || authUser.level == 4)">
+                <button ion-button block (click)="goToStep2()" class="main-btn" style="margin-top:2vw;" *ngIf="(authUser.level == 7 || authUser.level == 8)">
                     ENVIAR COTIZACIÓN
                 </button>
 
-                <!-- <button ion-button block (click)="goToStep2()"
-                        *ngIf="(request.step == 1) && (authUser.level == 7 || authUser.level == 8)">
-                    Submit Quote
-                </button> -->
             </li>
             <li class="StepProgress-item" [ngClass]="{'is-done': request.step > 2, 'current': request.step == 2}">
-                <strong>FASE 2 - Cotización</strong>
-                <ion-list *ngIf="authUser.level == 4 && request.step == 2">
+                <strong class="subheader-style">FASE 2 - Cotización</strong>
+                <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 2">
                     <ion-item>
-                        <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
-                        FECHA DE SOLICITUD
-                        <ion-note item-end>{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY, h:mm:ss a'}}</ion-note>
+                        <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>
+                        <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY'}}</ion-note>
+                        -
+                        <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>
+                        <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'h:mm a'}}</ion-note>
                     </ion-item>
-                    <ion-item>
-                        {{office.buildingName}} | {{office.floorName}} | {{office.name}}
-                    </ion-item>
-                    <ion-item>
+                    
+                    
+                    <p class="icon-style" style="word-wrap: break-word;">You would get email from Admin about Quote. Please check your email. </p>
+                    
+                    <!-- <ion-item>
                         <ion-toggle [(ngModel)]="quoteAccept"></ion-toggle>
                         <ion-label>
                             Accept Quote
                         </ion-label>
-                    </ion-item>
+                    </ion-item> -->
                 </ion-list>
 
-                <ion-list *ngIf="(authUser.level == 7 || authUser.level == 8)  && request.step == 2">
+                <button ion-button block (click)="acceptQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == '3.1' || authUser.level == '3.2')">
+                    Accept Quote
+                </button>
+
+                <ion-list *ngIf="(authUser.level == 7 || authUser.level == 8)">
                     <ion-item>
                         <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
                         FECHA DE SOLICITUD
@@ -144,14 +145,14 @@
                 </ion-list>
 
                 <button ion-button block (click)="goToStep3()"
-                        *ngIf="request.step == 2 && (authUser.level == 7 || authUser.level == 8 || authUser.level == 4)">
+                        *ngIf="request.step == 2 && (authUser.level == 7 || authUser.level == 8)">
                     PROGRAMAR VISITA
                 </button>
             </li>
             <li class="StepProgress-item" [ngClass]="{'is-done': request.step > 3, 'current': request.step == 3}">
                 <strong>FASE 3 - Inicio & Finalización trabajo</strong>
 
-                <ion-list *ngIf="authUser.level == 4 && request.step == 3">
+                <ion-list *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 3">
                     <ion-item>
                         <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
                         FECHA DE SOLICITUD
@@ -188,7 +189,7 @@
                     </ion-item>
                 </ion-list>
 
-                <ion-list *ngIf="(authUser.level == 7 || authUser.level == 8)  && request.step == 3">
+                <ion-list *ngIf="(authUser.level == 7 || authUser.level == 8)">
                     <ion-item>
                         <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
                         FECHA DE SOLICITUD
@@ -210,14 +211,14 @@
                 </ion-list>
 
                 <button ion-button block (click)="goToStep4()"
-                        *ngIf="request.step == 3 && (authUser.level == 7 || authUser.level == 8 || authUser.level == 4)">
+                        *ngIf="request.step == 3 && (authUser.level == 7 || authUser.level == 8 || (authUser.level == '3.1' || authUser.level == '3.2'))">
                     PROGRAMAR VISITA
                 </button>
             </li>
             <li class="StepProgress-item" [ngClass]="{'is-done': request.step > 4, 'current': request.step == 4}">
                 <strong>FASE 4 - Facturación</strong>
 
-                <ion-list *ngIf="authUser.level == 4 && request.step == 4">
+                <ion-list *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 4">
                     <ion-item>
                         <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
                         FECHA DE SOLICITUD
@@ -239,7 +240,7 @@
                     Pay Invoice
                 </button>
 
-                <ion-list *ngIf="(authUser.level == 7 || authUser.level == 8)  && request.step == 4">
+                <ion-list *ngIf="(authUser.level == 7 || authUser.level == 8)">
                     <ion-item>
                         <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
                         FECHA DE SOLICITUD
@@ -267,7 +268,7 @@
             <li class="StepProgress-item" [ngClass]="{'is-done': request.step > 5, 'current': request.step == 5}">
                 <strong>FASE 5 -  Pago</strong>
 
-                <ion-list *ngIf="authUser.level == 4 && request.step == 5">
+                <ion-list *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 5">
                     <ion-item>
                         <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
                         FECHA DE SOLICITUD
@@ -283,11 +284,11 @@
                     </ion-item>
                 </ion-list>
 
-                <ion-card *ngIf="authUser.level == 4 && request.step == 5 && showInvoice">
+                <ion-card *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 5 && showInvoice">
                     <img src="{{requestDetail.invoice}}"/>
                 </ion-card>
 
-                <ion-list *ngIf="authUser.level == 4 && request.step == 5">
+                <ion-list *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 5">
                     <ion-item>
                         <ion-label>Please rate work</ion-label>
                         <ion-select [(ngModel)]="rate">
@@ -307,13 +308,13 @@
                     </ion-item>
                 </ion-list>
 
-                <button ion-button block icon-left *ngIf="request.step == 5 && (authUser.level == 4)" (click)="leaveReview()">
+                <button ion-button block icon-left *ngIf="request.step == 5 && (authUser.level == '3.1' || authUser.level == '3.2')" (click)="leaveReview()">
                     <ion-icon ios="ios-star" md="md-star"></ion-icon>
                     Leave Review
                 </button>
 
 
-                <ion-list *ngIf="(authUser.level == 7 || authUser.level == 8)  && request.step == 5">
+                <ion-list *ngIf="(authUser.level == 7 || authUser.level == 8)">
                     <ion-item>
                         <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
                         FECHA DE SOLICITUD

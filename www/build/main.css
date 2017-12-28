@@ -28216,6 +28216,29 @@ page-home .menu-scroll ion-item-sliding ion-item h1 {
   font-size: 18px;
 }
 
+page-maintenance-tracker .header-style {
+  color: #1b4c5c;
+  font-size: 18px;
+}
+
+page-maintenance-tracker .subheader-style {
+  color: #1b4c5c;
+  /*font-size: 18px;*/
+}
+
+page-maintenance-tracker .icon-style {
+  color: #1b4c5c;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+page-maintenance-tracker .textarea-style {
+  width: 100%;
+  height: 80px;
+  border: 2px solid #d2dcf5;
+  /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+}
+
 page-maintenance-tracker .StepProgress {
   position: relative;
   padding-left: 45px;
@@ -28270,7 +28293,7 @@ page-maintenance-tracker .StepProgress-item::after {
 }
 
 page-maintenance-tracker .StepProgress-item.is-done::before {
-  border-left: 2px solid green;
+  border-left: 2px solid #1b4c5c;
 }
 
 page-maintenance-tracker .StepProgress-item.is-done::after {
@@ -28278,12 +28301,12 @@ page-maintenance-tracker .StepProgress-item.is-done::after {
   font-size: 10px;
   color: #FFF;
   text-align: center;
-  border: 2px solid green;
-  background-color: green;
+  border: 2px solid #1b4c5c;
+  background-color: #1b4c5c;
 }
 
 page-maintenance-tracker .StepProgress-item.current::before {
-  border-left: 2px solid green;
+  border-left: 2px solid #1b4c5c;
 }
 
 page-maintenance-tracker .StepProgress-item.current::after {
@@ -28295,8 +28318,8 @@ page-maintenance-tracker .StepProgress-item.current::after {
   left: -40px;
   font-size: 14px;
   text-align: center;
-  color: green;
-  border: 2px solid green;
+  color: #1b4c5c;
+  border: 2px solid #1b4c5c;
   background-color: white;
 }
 

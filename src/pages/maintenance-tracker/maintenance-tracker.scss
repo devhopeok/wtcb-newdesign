@@ -1,4 +1,27 @@
 page-maintenance-tracker {
+    .header-style{
+        color:#1b4c5c;
+        font-size: 18px;
+    }
+
+    .subheader-style{
+        color:#1b4c5c;
+        /*font-size: 18px;*/
+    }
+
+    .icon-style{
+        color: #1b4c5c;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+    .textarea-style{
+        width: 100%; 
+        height: 80px;
+        border: 2px solid rgb(210, 220, 245);
+        /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+    }
+
     .StepProgress {
         position: relative;
         padding-left: 45px;
@@ -52,21 +75,21 @@ page-maintenance-tracker {
 
             &.is-done {
                 &::before {
-                    border-left: 2px solid green;
+                    border-left: 2px solid #1b4c5c;
                 }
                 &::after {
                     content: "✔";
                     font-size: 10px;
                     color: #FFF;
                     text-align: center;
-                    border: 2px solid green;
-                    background-color: green;
+                    border: 2px solid #1b4c5c;
+                    background-color: #1b4c5c;
                 }
             }
 
             &.current {
                 &::before {
-                    border-left: 2px solid green;
+                    border-left: 2px solid #1b4c5c;
                 }
 
                 &::after {
@@ -78,8 +101,8 @@ page-maintenance-tracker {
                     left: -40px;
                     font-size: 14px;
                     text-align: center;
-                    color: green;
-                    border: 2px solid green;
+                    color: #1b4c5c;
+                    border: 2px solid #1b4c5c;
                     background-color: white;
                 }
             }

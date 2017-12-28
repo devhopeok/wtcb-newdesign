@@ -266,6 +266,10 @@ export class MaintenanceTrackerPage {
             });
     }
 
+    acceptQuote(){
+      
+    }
+    
     public goToStep2() {
 
         let email = {
