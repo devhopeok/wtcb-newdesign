@@ -265,10 +265,6 @@ export class MaintenanceTrackerPage {
               
             });
     }
-
-    acceptQuote(){
-      
-    }
     
     public goToStep2() {
 
@@ -307,7 +303,7 @@ export class MaintenanceTrackerPage {
             .subscribe(
               (data) => {
                   loading.dismiss();
-                this.request.step = 2;
+                  this.request.step = 2;
               },
               (data) => {
                 loading.dismiss();
@@ -318,78 +314,109 @@ export class MaintenanceTrackerPage {
           });
         console.log("aaaaaaaaaaaaaaaaaaaaaa", this.request._id);
         this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager attached quote to your request - " + this.quote, this.token);
-        this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your quote", this.token);
+        //this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your quote", this.token);
+    }
+
+    acceptQuote(){
+      this.requestDetail.status1 = 1;
+      this.requestDetail.token = this.token;
+      let loading = this.loadingCtrl.create();
+      loading.present();
+      this.userService.updateStep(this.requestDetailKey, this.requestDetail)
+      .subscribe(
+        (data1) => {
+          loading.dismiss();
+          this.quoteAccept = true;
+        },
+        (data1) => {
+          loading.dismiss();
+          this.quoteAccept = false;
+        });
+      
+      this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your quote", this.token);
     }
 
     public goToStep3() {
         // let appointment_date;
-        this.datePicker.show({
-          date: new Date(),
-          mode: 'datetime',
-          androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
-        }).then(
-          (date) => {
-            console.log("appointment_date", date + "asdaf");
-            this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled technician time to " + date, this.token)
-          },
-          (err) => {
-            console.log('Error occurred while getting date: ', err);
-          }
-        );
+        // this.datePicker.show({
+        //   date: new Date(),
+        //   mode: 'datetime',
+        //   androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+        // }).then(
+        //   (date) => {
+        //     console.log("appointment_date", date + "asdaf");
+            
+        //   },
+        //   (err) => {
+        //     console.log('Error occurred while getting date: ', err);
+        //   }
+        // );
 
         this.requestDetail.token = this.token;
         this.requestDetail.step = 3;
 
-        if (this.authUser.level == 4) {
-            this.requestDetail.status1 = 1;
-            let loading = this.loadingCtrl.create();
-            loading.present();
-            this.userService.updateStep(this.requestDetailKey, this.requestDetail)
-            .subscribe(
-              (data1) => {
-                loading.dismiss();
-              },
-              (data1) => {
-                loading.dismiss();
-              });
-            
-            this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your quote", this.token);
-        }else {
-
-            this.requestDetail.token = this.token;
-            this.requestDetail.technician_info={
-                company : this.technician_company,
-                date : this.technician_date,
-                name : this.technician_name,
-                phone : this.technician_phone,
-                time : this.technician_time
-            }
-            this.requestDetail.step = 3;
-            let loading = this.loadingCtrl.create();
-            loading.present();
-            this.userService.updateStep(this.requestDetailKey, this.requestDetail)
-            .subscribe(
-              (data1) => {
-                let params = {
-                    token: this.token,
-                    step: 3
-                }
-                this.userService.updateRequest(this.requestKey, params)
-                .subscribe(
-                  (data) => {
-                      loading.dismiss();
-                    this.request.step = 3;
-                  },
-                  (data) => {
-                    loading.dismiss();
-                  });
-              },
-              (data1) => {
-                loading.dismiss();
-              });
-            
-            this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
+        this.requestDetail.technician_info={
+            company : this.technician_company,
+            date : this.technician_date,
+            name : this.technician_name,
+            phone : this.technician_phone,
+            time : this.technician_time
         }
+
+        console.log("this.requestDetail.technician_info", this.requestDetail.technician_info);
+
+        if (this.requestDetail.technician_info.company == '' || this.requestDetail.technician_info.date == '' || this.requestDetail.technician_info.name == '' || 
+           this.requestDetail.technician_info.phone == '' || this.requestDetail.technician_info.time == ''){
+          let alert = this.alertCtrl.create({
+            title: "Error", subTitle: "Please fill in the blanks", buttons: ['OK']
+          });
+          alert.present();
+        }
+        else{
+          this.requestDetail.step = 3;
+          let loading = this.loadingCtrl.create();
+          loading.present();
+          this.userService.updateStep(this.requestDetailKey, this.requestDetail)
+          .subscribe(
+            (data1) => {
+              let params = {
+                  token: this.token,
+                  step: 3
+              }
+              this.userService.updateRequest(this.requestKey, params)
+              .subscribe(
+                (data) => {
+                    loading.dismiss();
+                    this.request.step = 3;
+                    this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled technician time to " + this.technician_date + " " + this.technician_time, this.token);
+                },
+                (data) => {
+                  loading.dismiss();
+                });
+            },
+            (data1) => {
+              loading.dismiss();
+            });
+        }
+    }
+
+    acceptSchedule(){
+      this.requestDetail.status2 = 1;
+      this.requestDetail.token = this.token;
+      let loading = this.loadingCtrl.create();
+      loading.present();
+      this.userService.updateStep(this.requestDetailKey, this.requestDetail)
+      .subscribe(
+        (data1) => {
+          loading.dismiss();
+          this.scheduleAccept = true;
+        },
+        (data1) => {
+          loading.dismiss();
+          this.scheduleAccept = false;
+        });
+      
+      this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
     }
 
     public goToStep4() {
