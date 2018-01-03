@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { NavController, NavParams} from 'ionic-angular';
-import {LoadingController} from 'ionic-angular';
+import {LoadingController, AlertController} from 'ionic-angular';
 import {BuildingProvider} from '../../providers/building';
 import { PushServiceProvider } from '../../providers/push-service';
 import { UserService } from '../../providers/user-service';
@@ -64,7 +64,8 @@ export class MaintenanceTrackerPage {
         public storage: Storage,
         public emailComposer: EmailComposer,
         public datePicker: DatePicker,
-        public iab: InAppBrowser) {
+        public iab: InAppBrowser,
+        public alertCtrl: AlertController) {
         
         this.requestKey = this.navParams.get('requestKey');
         this.request = {};
@@ -433,22 +434,6 @@ export class MaintenanceTrackerPage {
         this.requestDetail.token = this.token;
         this.requestDetail.step = 4;
 
-        if (this.authUser.level == 4) {
-            this.requestDetail.status2 = 1;
-            let loading = this.loadingCtrl.create();
-            loading.present();
-            this.userService.updateStep(this.requestDetailKey, this.requestDetail)
-            .subscribe(
-              (data1) => {
-                loading.dismiss();
-              },
-              (data1) => {
-                loading.dismiss();
-              });
-            
-            this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
-        }else {
-
             this.requestDetail.token = this.token;
             this.requestDetail.is_completed = true;
             this.requestDetail.step = 4;
@@ -475,12 +460,29 @@ export class MaintenanceTrackerPage {
                 loading.dismiss();
               });
             
-            // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager completed your request", this.token);
-             this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager accepted your payment", this.token);
-         }
+             this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager completed your request", this.token);
+            // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager accepted your payment", this.token);
+         
     }
 
     public payInvoice() {
+      this.requestDetail.status3 = 1;
+      this.requestDetail.token = this.token;
+      let loading = this.loadingCtrl.create();
+      loading.present();
+      this.userService.updateStep(this.requestDetailKey, this.requestDetail)
+      .subscribe(
+        (data1) => {
+          loading.dismiss();
+          this.is_paid = true;
+        },
+        (data1) => {
+          loading.dismiss();
+          this.is_paid = false;
+        });
+      
+      this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee paid to your invoice", this.token);
+      this.iab.create('https://www.pse.com.co/inicio');
 //         let step = this.db.object('/maintenance_steps/'+this.requestDetailKey+'/3');
 
 //         let actionSheet = this.actionSheetCtrl.create({
@@ -612,6 +614,6 @@ export class MaintenanceTrackerPage {
               });
         
         this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager archived your request", this.token);
-        this.iab.create('https://www.pse.com.co/inicio');
+        
     }
 }
