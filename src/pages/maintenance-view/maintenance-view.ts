@@ -97,7 +97,7 @@ export class MaintenanceViewPage {
             (data) => {
               loading.dismiss();
               for (let i=0; i<data.length; i++){
-                if (data[i].step >= 5) {
+                if (data[i].step > 5) {
                   this.closedRequests.push(data[i]);
                 }else {
                   this.openedRequests.push(data[i]);
@@ -123,7 +123,7 @@ export class MaintenanceViewPage {
             (data) => {
               loading.dismiss();
               for (let i=0; i<data.length; i++){
-                if (data[i].step >= 5) {
+                if (data[i].step > 5) {
                   this.closedRequests.push(data[i]);
                 }else {
                   this.openedRequests.push(data[i]);

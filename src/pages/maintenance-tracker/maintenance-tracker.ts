@@ -558,7 +558,7 @@ export class MaintenanceTrackerPage {
             this.userService.updateRequest(this.requestKey, params)
             .subscribe(
               (data) => {
-                  loading.dismiss();
+                loading.dismiss();
                 this.request.step = 5;
               },
               (data) => {

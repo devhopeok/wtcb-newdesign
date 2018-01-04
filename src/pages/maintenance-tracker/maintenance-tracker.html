@@ -42,7 +42,7 @@
                     </ion-item>
                 </ion-list>
 
-                <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8)">
+                <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1">
                     <!-- <ion-item>
                         <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>
                         <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY'}}</ion-note>
@@ -63,7 +63,7 @@
                     </ion-item>
                 </ion-list>
 
-                <button ion-button block (click)="goToStep2()" class="main-btn" style="margin-top:2vw;" *ngIf="(authUser.level == 7 || authUser.level == 8)">
+                <button ion-button block (click)="goToStep2()" class="main-btn" style="margin-top:2vw;" *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1">
                     ENVIAR COTIZACIÓN
                 </button>
 
@@ -95,7 +95,7 @@
                     Accept Quote
                 </button>
 
-                <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8)">
+                <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 2">
                     <!-- <ion-item>
                         <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>
                         <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY'}}</ion-note>
@@ -191,7 +191,7 @@
                     Accept Schedule
                 </button>
 
-                <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8)">
+                <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >=3">
                     <!-- <ion-item>
                         <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>
                         <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY'}}</ion-note>
@@ -218,7 +218,7 @@
                 </button>
             </li>
             <li class="StepProgress-item" [ngClass]="{'is-done': request.step > 4, 'current': request.step == 4}">
-                <strong>FASE 4 - Facturación</strong>
+                <strong class="subheader-style">FASE 4 - Facturación</strong>
 
                 <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 4">
                     <!-- <ion-item>
@@ -241,7 +241,7 @@
                     Pay Invoice
                 </button>
 
-                <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8)">
+                <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 4">
                     <!-- <ion-item>
                         <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
                         FECHA DE SOLICITUD
@@ -268,17 +268,9 @@
                 </button>
             </li>
             <li class="StepProgress-item" [ngClass]="{'is-done': request.step > 5, 'current': request.step == 5}">
-                <strong>FASE 5 -  Pago</strong>
+                <strong class="subheader-style">FASE 5 -  Pago</strong>
 
-                <ion-list *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 5">
-                    <ion-item>
-                        <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
-                        FECHA DE SOLICITUD
-                        <ion-note item-end>{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY, h:mm:ss a'}}</ion-note>
-                    </ion-item>
-                    <ion-item>
-                        {{office.buildingName}} | {{office.floorName}} | {{office.name}}
-                    </ion-item>
+                <!-- <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 5">
                     <ion-item>
                         <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
                         Job Paid
@@ -288,11 +280,11 @@
 
                 <ion-card *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 5 && showInvoice">
                     <img src="{{requestDetail.invoice}}"/>
-                </ion-card>
+                </ion-card> -->
 
-                <ion-list *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 5">
+                <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 5">
                     <ion-item>
-                        <ion-label>Please rate work</ion-label>
+                        <ion-label class="icon-style">Please rate work</ion-label>
                         <ion-select [(ngModel)]="rate">
                             <ion-option value="5">5 stars</ion-option>
                             <ion-option value="4">4 stars</ion-option>
@@ -303,43 +295,34 @@
                         </ion-select>
                     </ion-item>
                     <ion-item>
-                        <ion-label>Comments</ion-label>
-                        <div item-content style="width: 70%;">
-                            <textarea placeholder="You comments" style="width: 100%; height: 80px;" [(ngModel)]="comment"></textarea>
+                        <div>
+                            <textarea placeholder="Your comments" class="textarea-style" [(ngModel)]="comment"></textarea>
                         </div>
                     </ion-item>
                 </ion-list>
 
-                <button ion-button block icon-left *ngIf="request.step == 5 && (authUser.level == '3.1' || authUser.level == '3.2')" (click)="leaveReview()">
+                <button ion-button block icon-left class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 5 && (authUser.level == '3.1' || authUser.level == '3.2')" (click)="leaveReview()">
                     <ion-icon ios="ios-star" md="md-star"></ion-icon>
                     Leave Review
                 </button>
 
 
-                <ion-list *ngIf="(authUser.level == 7 || authUser.level == 8)">
-                    <ion-item>
-                        <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
-                        FECHA DE SOLICITUD
-                        <ion-note item-end>{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY, h:mm:ss a'}}</ion-note>
-                    </ion-item>
-                    <ion-item>
-                        {{office.buildingName}} | {{office.floorName}} | {{office.name}}
-                    </ion-item>
+                <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 5">
                     <ion-item *ngIf="requestDetail.status5 == 0">
-                        <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
+                        <ion-icon class="icon-style" ios="ios-calendar" md="md-calendar"></ion-icon>
                         Complete
-                        <ion-note item-end>Pending Review</ion-note>
+                        <ion-note class="icon-style" item-end>Pending Review</ion-note>
                     </ion-item>
                     <ion-item *ngIf="requestDetail.status5 == 1">
                         Rate
-                        <ion-note item-end>{{requestDetail.star}} stars</ion-note>
+                        <ion-note class="icon-style" item-end>{{requestDetail.star}} stars</ion-note>
                     </ion-item>
                     <ion-item *ngIf="requestDetail.status5 == 1">
                         {{requestDetail.comment}}
                     </ion-item>
                 </ion-list>
 
-                <button ion-button block icon-left *ngIf="request.step == 5 && ((authUser.level == 7 || authUser.level == 8))" (click)="archiveRequest()">
+                <button ion-button block icon-left class="main-btn" *ngIf="requestDetail.status5 == 1 && ((authUser.level == 7 || authUser.level == 8))" (click)="archiveRequest()">
                     <ion-icon ios="ios-cloud-download" md="md-cloud-download"></ion-icon>
                     Archive MAINT. REQ.
                 </button>
