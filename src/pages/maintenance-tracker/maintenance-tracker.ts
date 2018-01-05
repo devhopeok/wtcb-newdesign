@@ -56,6 +56,7 @@ export class MaintenanceTrackerPage {
     comment: any;
 
     token:any;
+
     constructor(public navCtrl: NavController, public navParams: NavParams, 
         public loadingCtrl: LoadingController, 
         private buildingService: BuildingProvider, 

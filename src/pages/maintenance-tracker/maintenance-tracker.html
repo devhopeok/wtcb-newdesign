@@ -330,11 +330,26 @@
         </ul>
     </div>
 
-    <ion-list style="margin-top: 20px;">
-        <ion-list-header>
+    <ion-list no-lines style="margin-top: 20px;">
+        <ion-list-header class="header-style">
             INFORMACIÓN CLIENTE
         </ion-list-header>
-        <ion-item>
+
+        <ion-avatar class="client-avatar">
+            <img src="assets/imgs/working-icon.png">
+        </ion-avatar>
+        
+        <h2 class="header-style" style="text-align: center;">{{office.company}}</h2>
+        <p style="text-align:center; font-size: 15px; color:gray;">{{office.name}}</p>
+        <h2 class="header-style" style="text-align: center; opacity: 0.7;">{{office.buildingName}} - {{office.floorName}}</h2>
+        <ion-item style="opacity:0.7; text-align: center;">
+            <ion-icon class="icon-style" name="md-calendar"></ion-icon>
+            <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY'}}</ion-note>
+            -
+            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>
+            <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'h:mm a'}}</ion-note>
+        </ion-item>
+        <!-- <ion-item>
             <ion-avatar item-start>
                 <img src="assets/imgs/working-icon.png">
             </ion-avatar>
@@ -345,20 +360,21 @@
             <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
             FECHA DE SOLICITUD
             <ion-note item-end *ngIf="authUser.level != 4">{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY, h:mm:ss a'}}</ion-note>
-        </ion-item>
+        </ion-item> -->
     </ion-list>
 
-    <ion-list>
-        <ion-list-header>
+    <ion-list no-lines>
+        <ion-list-header class="header-style">
             SOLICITADO POR
         </ion-list-header>
-        <ion-item>
-            <ion-icon ios="ios-person" md="md-person"></ion-icon>
+        <!-- <ion-item class="icon-style">
+            <ion-icon  ios="ios-person" md="md-person"></ion-icon>
             {{user.first_name + ' ' + user.last_name}}
-        </ion-item>
+        </ion-item> -->
+        <h2 class="header-style" style="text-align: center;">{{user.first_name}} {{user.last_name}}</h2>
         <ion-item>
-            <ion-toggle [(ngModel)]="viewRequest"></ion-toggle>
-            <ion-label>
+            <ion-toggle color="custom" [(ngModel)]="viewRequest"></ion-toggle>
+            <ion-label class="icon-style">
                 VER DETALES DE LA SOLICITUD
             </ion-label>
         </ion-item>

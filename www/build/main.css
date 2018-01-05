@@ -28216,6 +28216,12 @@ page-home .menu-scroll ion-item-sliding ion-item h1 {
   font-size: 18px;
 }
 
+page-maintenance-tracker .client-avatar {
+  width: 20%;
+  margin-top: 8vw;
+  margin-left: 40%;
+}
+
 page-maintenance-tracker .header-style {
   color: #1b4c5c;
   font-size: 18px;
@@ -28230,6 +28236,7 @@ page-maintenance-tracker .icon-style {
   color: #1b4c5c;
   padding-left: 3px;
   padding-right: 3px;
+  font-size: 14px;
 }
 
 page-maintenance-tracker .textarea-style {
