@@ -4,7 +4,6 @@ import { OtrsRequestPage } from '../otrs-request/otrs-request';
 import { MaintenanceTrackerPage } from '../maintenance-tracker/maintenance-tracker';
 import { Storage } from '@ionic/storage';
 import { UserService } from '../../providers/user-service';
-import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 
 @Component({
   selector: 'page-maintenance-view',
@@ -20,7 +19,7 @@ export class MaintenanceViewPage {
   closedRequests: any;
   token: any;
   constructor(public navCtrl: NavController, public storage: Storage, public userService: UserService, 
-    public loadingCtrl: LoadingController, public alertCtrl: AlertController, public firebaseAnalytics: FirebaseAnalytics) {
+    public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
       this.user = {
             level: 4
         };
@@ -184,9 +183,9 @@ export class MaintenanceViewPage {
             });
       }
       else{
-        this.firebaseAnalytics.logEvent('page_view', {page: "dashboard"})
-          .then((res: any) => console.log("firebase analytics -success ", res))
-          .catch((error: any) => console.error("firebase analytics - fail", error));
+        // this.firebaseAnalytics.logEvent('page_view', {page: "dashboard"})
+        //   .then((res: any) => console.log("firebase analytics -success ", res))
+        //   .catch((error: any) => console.error("firebase analytics - fail", error));
         this.navCtrl.push(MaintenanceTrackerPage, {requestKey: request._id});
       }
       

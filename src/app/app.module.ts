@@ -24,14 +24,13 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Camera } from '@ionic-native/camera';
-import {AngularFireModule} from 'angularfire2';
+// import {AngularFireModule} from 'angularfire2';
 import {CloudSettings, CloudModule} from '@ionic/cloud-angular';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { DatePicker } from '@ionic-native/date-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Badge } from '@ionic-native/badge';
 import { MomentModule } from 'angular2-moment';
-import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDzuNnzZXieJMFnG9C2-VRjPN3IfuJ_EoI",
@@ -80,7 +79,7 @@ const cloudSettings: CloudSettings = {
     TextMaskModule,
     MomentModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig),
+    // AngularFireModule.initializeApp(firebaseConfig),
     IonicStorageModule.forRoot(),
     CloudModule.forRoot(cloudSettings)
   ],
@@ -110,7 +109,6 @@ const cloudSettings: CloudSettings = {
     DatePicker,
     InAppBrowser,
     Badge,
-    FirebaseAnalytics,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
