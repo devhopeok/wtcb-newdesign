@@ -14,6 +14,7 @@ import { OtrsRequestPage } from '../pages/otrs-request/otrs-request';
 import { BuildingListPage } from '../pages/building-list/building-list';
 import { CreateOfficePage } from '../pages/create-office/create-office';
 import { BuildingProfilePage } from '../pages/building-profile/building-profile';
+import { PopupPage } from '../pages/popup/popup';
 
 import { UserService } from '../providers/user-service';
 import { BaseService } from '../providers/base-service';
@@ -71,7 +72,8 @@ const cloudSettings: CloudSettings = {
     BuildingListPage,
     CreateOfficePage,
     BuildingProfilePage,
-    MaintenanceTrackerPage
+    MaintenanceTrackerPage,
+    PopupPage
   ],
   imports: [
     BrowserModule,
@@ -95,7 +97,8 @@ const cloudSettings: CloudSettings = {
     BuildingListPage,
     CreateOfficePage,
     BuildingProfilePage,
-    MaintenanceTrackerPage
+    MaintenanceTrackerPage,
+    PopupPage
   ],
   providers: [
     StatusBar,

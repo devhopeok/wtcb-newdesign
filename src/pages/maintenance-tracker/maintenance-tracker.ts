@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { NavController, NavParams} from 'ionic-angular';
-import {LoadingController, AlertController} from 'ionic-angular';
+import {LoadingController, AlertController, ModalController} from 'ionic-angular';
 import {BuildingProvider} from '../../providers/building';
 import { PushServiceProvider } from '../../providers/push-service';
 import { UserService } from '../../providers/user-service';
@@ -8,6 +8,8 @@ import { Storage } from '@ionic/storage';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { DatePicker } from '@ionic-native/date-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { PopupPage } from '../popup/popup';
+import { OtrsRequestPage } from '../otrs-request/otrs-request';
 /**
  * Generated class for the MaintenanceTrackerPage page.
  *
@@ -32,10 +34,11 @@ export class MaintenanceTrackerPage {
 
     //step 1
     showQuote: any;
-    quote: any;
+    quote = {date: '', time: '', comment: ''};
 
     //step 2
     quoteAccept: any;
+    quoteDeny: any;
     showSchedule: any;
     technician_date: any;
     technician_time: any;
@@ -66,14 +69,19 @@ export class MaintenanceTrackerPage {
         public emailComposer: EmailComposer,
         public datePicker: DatePicker,
         public iab: InAppBrowser,
-        public alertCtrl: AlertController) {
+        public alertCtrl: AlertController,
+        public modalCtrl: ModalController) {
         
         this.requestKey = this.navParams.get('requestKey');
         this.request = {};
         this.requestDetail = {
                 token: '',
                 status1: 0,
-                quote: '',
+                quote: {
+                  date: '',
+                  time: '',
+                  comment: ''
+                },
                 updated_at1: '',
             
             
@@ -111,8 +119,7 @@ export class MaintenanceTrackerPage {
         this.requestDetailKey = '';
 
         //step1
-        this.showQuote = false;
-        this.quote = '';
+        this.showQuote = true;
 
         //step2
         this.quoteAccept = false;
@@ -209,6 +216,10 @@ export class MaintenanceTrackerPage {
 
                 if (this.requestDetail['status1'] == 1) {
                     this.quoteAccept = true;
+                }
+
+                if (this.requestDetail['status1'] == 2) {
+                    this.quoteDeny = true;
                 }
 
                 if (this.requestDetail['status2'] == 1) {
@@ -336,6 +347,36 @@ export class MaintenanceTrackerPage {
         });
       
       this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your quote", this.token);
+    }
+
+    denyQuote(){
+
+      let modal = this.modalCtrl.create(PopupPage);
+      modal.present();
+
+      modal.onDidDismiss(data =>{
+        this.requestDetail.status1 = 2;
+        this.requestDetail.quote.comment = data.comment;
+        this.requestDetail.token = this.token;
+
+        let loading = this.loadingCtrl.create();
+        loading.present();
+        this.userService.updateStep(this.requestDetailKey, this.requestDetail)
+        .subscribe(
+          (data1) => {
+            loading.dismiss();
+            this.quoteDeny = true;
+            this.navCtrl.push(OtrsRequestPage);
+          },
+          (data1) => {
+            loading.dismiss();
+            this.quoteDeny = false;
+          });
+        
+        this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee denied your quote", this.token);
+      });
+
+      
     }
 
     public goToStep3() {

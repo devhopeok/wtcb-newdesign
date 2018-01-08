@@ -58,8 +58,18 @@
                     </ion-item>
                     <ion-item *ngIf="showQuote">
                         <div>
-                            <textarea placeholder="Your comments" class="textarea-style" [(ngModel)]="quote"></textarea>
+                            <textarea placeholder="Your comments" class="textarea-style" [(ngModel)]="quote.comment"></textarea>
                         </div>
+
+                    </ion-item>
+
+                    <ion-item *ngIf="showQuote">
+                        <ion-label>Date</ion-label>
+                        <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="quote.date"></ion-datetime>
+                    </ion-item>
+                    <ion-item *ngIf="showQuote">
+                        <ion-label>Time</ion-label>
+                        <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="quote.time"></ion-datetime>
                     </ion-item>
                 </ion-list>
 
@@ -79,7 +89,22 @@
                         <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'h:mm a'}}</ion-note>
                     </ion-item> -->
                     
-                    
+                    <ion-item>
+                        <div>
+                            <textarea placeholder="Your comments" class="textarea-style" [readonly]="true" [(ngModel)]="requestDetail.quote.comment"></textarea>
+                        </div>
+
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label>Date</ion-label>
+                        <ion-input type="text" [readonly]="true" [(ngModel)]="requestDetail.quote.date"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Time</ion-label>
+                        <ion-input type="text" [readonly]="true" [(ngModel)]="requestDetail.quote.time"></ion-input>
+                    </ion-item>
+
                     <p class="icon-style" style="word-wrap: break-word;">You would get email from Admin about Quote. Please check your email. </p>
                     
                     <p class="icon-style" *ngIf = "quoteAccept" style="word-wrap: break-word;">Quote Accepted</p>
@@ -91,10 +116,13 @@
                     </ion-item> -->
                 </ion-list>
 
-                <button ion-button block (click)="acceptQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == '3.1' || authUser.level == '3.2') && !quoteAccept">
+                <button ion-button block (click)="acceptQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == '3.1' || authUser.level == '3.2') && (!quoteAccept || !quoteDeny)">
                     Accept Quote
                 </button>
-
+                <button ion-button block (click)="denyQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == '3.1' || authUser.level == '3.2') && (!quoteAccept || !quoteDeny)">
+                    Deny Quote
+                </button>
+            
                 <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 2">
                     <!-- <ion-item>
                         <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>
@@ -104,12 +132,27 @@
                         <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'h:mm a'}}</ion-note>
                     </ion-item> -->
 
-                    <ion-item>
+                    <ion-item *ngIf="quoteAccept">
                         <ion-toggle color="custom" [(ngModel)]="quoteAccept" disabled="true"></ion-toggle>
                         <ion-label>
                             COTIZACIÓN ACEPTADA
                         </ion-label>
                     </ion-item>
+
+                    <ion-item *ngIf="quoteDeny">
+                        <ion-toggle color="custom" [(ngModel)]="quoteDeny" disabled="true"></ion-toggle>
+                        <ion-label>
+                            Quote Denied
+                        </ion-label>
+                    </ion-item>
+
+                    <ion-item *ngIf="quoteDeny">
+                        <div>
+                            <textarea class="textarea-style" [(ngModel)]="requestDetail.quote.comment" [readonly]="true"></textarea>
+                        </div>
+
+                    </ion-item>
+
                     <ion-item *ngIf="quoteAccept">
                         <ion-toggle color="custom" [(ngModel)]="showSchedule"></ion-toggle>
                         <ion-label>

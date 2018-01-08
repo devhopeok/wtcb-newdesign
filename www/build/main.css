@@ -28475,3 +28475,54 @@ page-otrs-request .client-avatar {
   margin-top: 8vw;
   margin-left: 40%;
 }
+
+page-popup .main-view {
+  background: transparent;
+}
+
+page-popup .overlay {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: .5;
+  background-color: #ccc;
+}
+
+page-popup .modal_content {
+  position: absolute;
+  top: calc(50% - 260px);
+  left: 0;
+  right: 0;
+  margin-left: 5%;
+  width: 90%;
+  height: 400px;
+  padding: 10px;
+  z-index: 100;
+  margin: 0 auto;
+  padding: 10px;
+  color: #333;
+  background: #e8e8e8;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e8e8e8));
+  background: linear-gradient(to bottom, #fff 0%, #e8e8e8 100%);
+  border-radius: 5px;
+  -webkit-box-shadow: 0 2px 3px rgba(51, 51, 51, 0.35);
+  box-shadow: 0 2px 3px rgba(51, 51, 51, 0.35);
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  overflow: hidden;
+}
+
+page-popup .modal_content .header-content {
+  color: #1b4c5c;
+  text-align: center;
+}
+
+page-popup .modal_content .textarea-style {
+  width: 100%;
+  height: 190px;
+  border: 2px solid #d2dcf5;
+  /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+}
