@@ -340,7 +340,11 @@ export class MaintenanceTrackerPage {
     }
     
     public goToStep2() {
-
+        this.show1=false;
+        this.show2=true;
+        this.show3=false;
+        this.show4=false;
+        this.show5=false;
         let email = {
           to: this.user.email,
           //cc: 'erika@mustermann.de',
@@ -455,6 +459,12 @@ export class MaintenanceTrackerPage {
         //   }
         // );
 
+        this.show1=false;
+        this.show2=false;
+        this.show3=true;
+        this.show4=false;
+        this.show5=false;
+
         this.requestDetail.token = this.token;
         this.requestDetail.step = 3;
 
@@ -532,6 +542,11 @@ export class MaintenanceTrackerPage {
         //   date => console.log('Got date: ', date),
         //   err => console.log('Error occurred while getting date: ', err)
         // );
+        this.show1=false;
+        this.show2=false;
+        this.show3=false;
+        this.show4=true;
+        this.show5=false;
 
         this.requestDetail.token = this.token;
         this.requestDetail.step = 4;
@@ -645,6 +660,12 @@ export class MaintenanceTrackerPage {
     }
 
     public paidInvoice() {
+        this.show1=false;
+        this.show2=false;
+        this.show3=false;
+        this.show4=false;
+        this.show5=true;
+        
         this.requestDetail.token = this.token;
         this.requestDetail.is_paid = true;
         this.requestDetail.step = 5;

@@ -338,15 +338,8 @@
 
                     <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 5">
                         <ion-item>
-                            <ion-label class="icon-style">Please rate work</ion-label>
-                            <ion-select [(ngModel)]="rate">
-                                <ion-option value="5">5 stars</ion-option>
-                                <ion-option value="4">4 stars</ion-option>
-                                <ion-option value="3">3 stars</ion-option>
-                                <ion-option value="2">2 stars</ion-option>
-                                <ion-option value="1">1 stars</ion-option>
-                                <ion-option value="0">0 stars</ion-option>
-                            </ion-select>
+                            
+                            <rating [(ngModel)]="rate" class="rating"></rating>
                         </ion-item>
                         <ion-item>
                             <div>
@@ -368,11 +361,14 @@
                             <ion-note class="icon-style" item-end>Pending Review</ion-note>
                         </ion-item>
                         <ion-item *ngIf="requestDetail.status5 == 1">
-                            Rate
-                            <ion-note class="icon-style" item-end>{{requestDetail.star}} stars</ion-note>
+                            
+                            <rating [(ngModel)]="requestDetail.star" readOnly="true" class="rating"></rating>
+                            <!-- <ion-note class="icon-style" item-end>{{requestDetail.star}} stars</ion-note> -->
                         </ion-item>
                         <ion-item *ngIf="requestDetail.status5 == 1">
-                            {{requestDetail.comment}}
+                            <div>
+                                <textarea class="textarea-style" [(ngModel)]="requestDetail.comment" [readonly]="true"></textarea>
+                            </div>
                         </ion-item>
                     </ion-list>
 

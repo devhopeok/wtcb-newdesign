@@ -32,6 +32,7 @@ import { DatePicker } from '@ionic-native/date-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Badge } from '@ionic-native/badge';
 import { MomentModule } from 'angular2-moment';
+import { Ionic2RatingModule } from 'ionic2-rating';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDzuNnzZXieJMFnG9C2-VRjPN3IfuJ_EoI",
@@ -80,6 +81,7 @@ const cloudSettings: CloudSettings = {
     HttpModule,
     TextMaskModule,
     MomentModule,
+    Ionic2RatingModule,
     IonicModule.forRoot(MyApp),
     // AngularFireModule.initializeApp(firebaseConfig),
     IonicStorageModule.forRoot(),

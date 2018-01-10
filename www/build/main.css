@@ -28334,6 +28334,21 @@ page-maintenance-tracker .StepProgress strong {
   display: block;
 }
 
+page-maintenance-tracker .rating {
+  padding: 0px;
+  text-align: center;
+}
+
+page-maintenance-tracker .rating.rating li {
+  padding: 5px 10px !important;
+  background: none;
+  color: #ffb400;
+}
+
+page-maintenance-tracker .rating.rating li ion-icon {
+  font-size: 30px;
+}
+
 page-maintenance-view ion-item-sliding:nth-child(even) .row-content {
   height: 20vw;
   font-size: 3.5vw;
