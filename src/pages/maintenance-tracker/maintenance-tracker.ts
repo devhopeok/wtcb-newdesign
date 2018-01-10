@@ -60,6 +60,11 @@ export class MaintenanceTrackerPage {
 
     token:any;
 
+    show1 = false;
+    show2 = false;
+    show3 = false;
+    show4 = false;
+    show5 = false;
     constructor(public navCtrl: NavController, public navParams: NavParams, 
         public loadingCtrl: LoadingController, 
         private buildingService: BuildingProvider, 
@@ -180,6 +185,42 @@ export class MaintenanceTrackerPage {
                    ];
 
                    this.request = data[0];
+                   if (this.request.step == 1){
+                     this.show1 = true;
+                     this.show2 = false;
+                     this.show3 = false;
+                     this.show4 = false;
+                     this.show5 = false;
+                   }
+                   else if(this.request.step == 2){
+                     this.show1 = false;
+                     this.show2 = true;
+                     this.show3 = false;
+                     this.show4 = false;
+                     this.show5 = false;
+                   }
+                   else if(this.request.step == 3){
+                     this.show1 = false;
+                     this.show2 = false;
+                     this.show3 = true;
+                     this.show4 = false;
+                     this.show5 = false;
+                   }
+                   else if(this.request.step == 4){
+                     this.show1 = false;
+                     this.show2 = false;
+                     this.show3 = false;
+                     this.show4 = true;
+                     this.show5 = false;
+                   }
+                   else if(this.request.step == 5){
+                     this.show1 = false;
+                     this.show2 = false;
+                     this.show3 = false;
+                     this.show4 = false;
+                     this.show5 = true;
+                   }
+
                     console.log("this.request", this.request);
                     this.request.stepText = 'Step ' + this.request.step;
 
@@ -204,6 +245,25 @@ export class MaintenanceTrackerPage {
 //        //console.log('ionViewDidLoad MaintenanceTrackerPage');
     }
 
+    onShow1(){
+      this.show1 = !this.show1;
+    }
+
+    onShow2(){
+      this.show2 = !this.show2;
+    }
+
+    onShow3(){
+      this.show3 = !this.show3;
+    }
+
+    onShow4(){
+      this.show4 = !this.show4;
+    }
+
+    onShow5(){
+      this.show5 = !this.show5;
+    }
     private loadStepDetail() {
         let loading = this.loadingCtrl.create();
         loading.present();
