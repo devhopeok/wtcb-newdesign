@@ -82,6 +82,32 @@ export class MyApp {
                     });
             });
         }
+
+     this.events.subscribe("user:changed", ()=> {
+        this.storage.get('userdata').then(val=>{
+          console.log("userdata", val);
+          if (val != null){
+            if (val.user.level == 7 || val.user.level == 8){
+              this.pages = [
+                { title: 'Home', component: HomePage },
+                { title: 'Mantenimiento', component: MaintenanceViewPage },
+                { title: 'Edificios', component: BuildingListPage},
+                { title: 'Notificaciones', component: NotificationPage},
+                { title: 'Sign Out', component: null}
+              ];
+            }
+            else{
+              this.pages = [
+                
+                { title: 'Mantenimiento', component: MaintenanceViewPage },
+                { title: 'Edificios', component: BuildingListPage},
+                { title: 'Notificaciones', component: NotificationPage},
+                { title: 'Sign Out', component: null}
+              ];
+            }
+          }
+        });
+      });
   }
 
   initializeApp() {

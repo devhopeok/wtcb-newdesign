@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController } from 'ionic-angular';
+import { NavController, AlertController, LoadingController, Events } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { SignupPage } from '../signup/signup';
 import { UserService } from '../../providers/user-service';
 import { Storage } from '@ionic/storage';
+import { MaintenanceViewPage } from '../maintenance-view/maintenance-view';
 
 @Component({
   selector: 'page-login',
@@ -18,16 +19,22 @@ export class LoginPage {
 
   device_token = "1";
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public loadingCtrl: LoadingController,
-    public userService: UserService, public storage: Storage) {
+    public userService: UserService, public storage: Storage, public events: Events) {
 
   }
 
   ionViewWillEnter(){
 
     this.storage.get('userdata').then(val=>{
+      this.events.publish("user:changed");
       console.log("userdata", val);
       if (val != null){
-        this.navCtrl.setRoot(HomePage);
+        if (val.user.level == 7 || val.user.level == 8){
+          this.navCtrl.setRoot(HomePage);
+        }
+        else{
+          this.navCtrl.setRoot(MaintenanceViewPage);
+        }
       }
     });
 
@@ -67,12 +74,29 @@ export class LoginPage {
               this.userService.insertDeviceToken(params)
                 .subscribe(
                   (data1)=>{
-                    this.navCtrl.setRoot(HomePage);
+                    if (data.user.level == 7 || data.user.level == 8){
+                      this.navCtrl.setRoot(HomePage);
+                    }
+                    else{
+                      this.navCtrl.setRoot(MaintenanceViewPage);
+                    }
+                    this.events.publish("user:changed");
                   },
                   (data1)=>{
-                    this.navCtrl.setRoot(HomePage);
+                    if (data.user.level == 7 || data.user.level == 8){
+                      this.navCtrl.setRoot(HomePage);
+                    }
+                    else{
+                      this.navCtrl.setRoot(MaintenanceViewPage);
+                    }
+                    this.events.publish("user:changed");
                   });
-              this.navCtrl.setRoot(HomePage);
+              if (data.user.level == 7 || data.user.level == 8){
+                this.navCtrl.setRoot(HomePage);
+              }
+              else{
+                this.navCtrl.setRoot(MaintenanceViewPage);
+              }
             } else{
               let alert = this.alertCtrl.create({
                 title: "Error", subTitle: "Invalid Credential", buttons: ['OK']
