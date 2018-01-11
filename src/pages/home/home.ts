@@ -4,6 +4,9 @@ import {BuildingProvider} from '../../providers/building';
 import { UserService } from '../../providers/user-service';
 import { Storage } from '@ionic/storage';
 import { BuildingListPage } from '../building-list/building-list';
+import { MaintenanceViewPage } from '../maintenance-view/maintenance-view';
+import { NotificationPage } from '../notification/notification';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -79,6 +82,18 @@ export class HomePage {
     }
 
     public viewBuildingList() {
-        this.navCtrl.push(BuildingListPage);
+        this.navCtrl.setRoot(BuildingListPage);
+    }
+
+    gotoMaintenance(){
+      this.navCtrl.setRoot(MaintenanceViewPage);
+    }
+
+    gotoNotification(){
+      this.navCtrl.setRoot(NotificationPage);
+    }
+
+    viewFloorOfffice(floorId, buildingId){
+      
     }
 }

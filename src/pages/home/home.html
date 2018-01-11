@@ -5,8 +5,8 @@
         </button>
 
         <ion-buttons end>
-              <button ion-button icon-only>
-                    <ion-icon name="contact"></ion-icon>
+              <button ion-button icon-only style="color:white;" (click)="gotoNotification();">
+                    <ion-icon name="md-notifications"></ion-icon>
               </button>
         </ion-buttons>
     </ion-navbar>
@@ -18,14 +18,14 @@
             <ion-col style="background-color:black;color:white;">
                 <ion-slides pager="true" class="superfill">
                     <ion-slide class="dashboard">
-                        <h1 class="bold">World Trade Center Bogota</h1>
+                        <h1 class="bold" style="color: #1b4c5c;">World Trade Center Bogota</h1>
                     </ion-slide>
-                    <ion-slide class="alerts">
+                    <!-- <ion-slide class="alerts">
                         <h1>Alertas</h1>
                     </ion-slide>
                     <ion-slide class="news">
                         <h1>Noticias</h1>
-                    </ion-slide>
+                    </ion-slide> -->
                 </ion-slides>
             </ion-col>
         </ion-row>
@@ -114,68 +114,47 @@
                 </ion-slides>
             </ion-col>
             <ion-scroll scrollY="true" col-4 style="background-color:rgba(239, 239, 239, 0);color:white;border:0;" class="menu-scroll">
-                <ion-list>
+                <ion-list >
                     <!-- Sliding item -->
                     <ion-item-sliding menuToggle>
                         <ion-item>
                             <ion-icon name="ios-menu-outline"></ion-icon>
                         </ion-item>
-                        <ion-item-options>
-
-                        </ion-item-options>
+                        
                     </ion-item-sliding>
 
                     <!-- Sliding item -->
                     <ion-item-sliding>
                         <ion-item (click)="viewBuildingList()">
-                            <h1>TORRES</h1>
+                            TORRES
                         </ion-item>
-                        <ion-item-options>
-                            <button ion-button color="primary" (click)="archive()">MANEJAR</button>
-                        </ion-item-options>
+                        
                     </ion-item-sliding>
 
 
                     <!-- Sliding item -->
                     <ion-item-sliding>
-                        <ion-item>
-                            <h1>CONTROL</h1>
+                        <ion-item (click)="gotoMaintenance()">
+                            MANTENIMIENTO
                         </ion-item>
-                        <ion-item-options>
-                            <button ion-button color="primary" (click)="archive()">REPORTES</button>
-                        </ion-item-options>
+                        
                     </ion-item-sliding>
 
                     <!-- Sliding item -->
                     <ion-item-sliding>
-                        <ion-item >
-                            <h1>ALERTAS</h1>
+                        <ion-item (click)="gotoNotification()">
+                            CENTRO DE <br/>NOTIFICACIONES
                         </ion-item>
-                        <ion-item-options>
-                            <button ion-button color="primary" (click)="archive()">AJUSTES</button>
-                        </ion-item-options>
+                        
                     </ion-item-sliding>
 
                     <!-- Sliding item -->
                     <ion-item-sliding>
                         <ion-item>
-                            <h1> NOTICIAS</h1>
+                            CORREOS
                         </ion-item>
-                        <ion-item-options>
-                            <button ion-button color="primary" (click)="archive()">CREAR</button>
-                        </ion-item-options>
+                        
                     </ion-item-sliding>
-
-                    <!-- Sliding item -->
-                    <ion-item-sliding>
-                        <ion-item>
-                            <h1> CHAT</h1>
-                        </ion-item>
-                        <ion-item-options>
-                            <button ion-button color="primary" (click)="archive()">HISTORIA</button>
-                        </ion-item-options>
-                    </ion-item-sliding>
-
 
                 </ion-list>
             </ion-scroll>

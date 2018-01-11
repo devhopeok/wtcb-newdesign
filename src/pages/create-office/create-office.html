@@ -16,27 +16,27 @@
 <ion-content padding>
     <ion-list>
         <ion-item>
-            <ion-label>Select Building</ion-label>
+            <ion-label>Seleccione Edificio</ion-label>
             <ion-select [(ngModel)]="office.buildingId" interface="popover" (ngModelChange)="updateFloors()">
                 <ion-option value="{{item.id}}" *ngFor="let item of buildings">{{item.name}}</ion-option>
             </ion-select>
         </ion-item>
         <ion-item>
-            <ion-label>Select Floor</ion-label>
+            <ion-label>Seleccione Piso</ion-label>
             <ion-select interface="popover" [(ngModel)]="office.floorId">
                 <ion-option value="{{item.id}}" *ngFor="let item of floors">{{item.name}}</ion-option>
             </ion-select>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Office #</ion-label>
+            <ion-label fixed>Oficina No.</ion-label>
             <ion-input type="text" [(ngModel)]="office.name"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Company</ion-label>
+            <ion-label fixed>Compañia</ion-label>
             <ion-input type="text" [(ngModel)]="office.company"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Area - Mts 2</ion-label>
+            <ion-label fixed>Area Mts</ion-label>
             <ion-input type="text" [(ngModel)]="office.area"></ion-input>
         </ion-item>
         <ion-item>
@@ -44,67 +44,67 @@
             <ion-input type="text" [(ngModel)]="office.garages"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Co-Pay</ion-label>
+            <ion-label fixed>Co-Pago</ion-label>
             <ion-input type="text" [(ngModel)]="office.coPay"></ion-input>
         </ion-item>
     </ion-list>
 
     <ion-list>
         <ion-list-header>
-            Owner Info
+            Information del dueño
         </ion-list-header>
         <ion-item>
-            <ion-label fixed>First Name</ion-label>
+            <ion-label fixed>Nombre</ion-label>
             <ion-input type="text" [(ngModel)]="owner.first_name"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Last Name</ion-label>
+            <ion-label fixed>Apellido</ion-label>
             <ion-input type="text" [(ngModel)]="owner.last_name"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Phone Number</ion-label>
+            <ion-label fixed>Telefono</ion-label>
             <ion-input type="text" [(ngModel)]="owner.phone_number" [textMask]="{mask: phoneMask, guide: true}"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Email Address</ion-label>
+            <ion-label fixed>Email</ion-label>
             <ion-input type="text" [(ngModel)]="owner.email"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Password</ion-label>
+            <ion-label fixed>Contraseña</ion-label>
             <ion-input type="text" [(ngModel)]="owner.password"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Blood Type</ion-label>
+            <ion-label fixed>Tipo de sangre</ion-label>
             <ion-input type="text" [(ngModel)]="owner.blood_type"></ion-input>
         </ion-item>
     </ion-list>
 
     <ion-list>
         <ion-list-header>
-            Renter Info
+            Información del rentatario
         </ion-list-header>
         <ion-item>
-            <ion-label fixed>First Name</ion-label>
+            <ion-label fixed>Nombre</ion-label>
             <ion-input type="text" [(ngModel)]="renter.first_name"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Last Name</ion-label>
+            <ion-label fixed>Apellido</ion-label>
             <ion-input type="text" [(ngModel)]="renter.last_name"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Phone Number</ion-label>
+            <ion-label fixed>Telefono</ion-label>
             <ion-input type="text" [(ngModel)]="renter.phone_number" [textMask]="{mask: phoneMask, guide: true}"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Email Address</ion-label>
+            <ion-label fixed>Email</ion-label>
             <ion-input type="text" [(ngModel)]="renter.email"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Password</ion-label>
+            <ion-label fixed>Contraseña</ion-label>
             <ion-input type="text" [(ngModel)]="renter.password"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Blood Type</ion-label>
+            <ion-label fixed>Tipo de sangre</ion-label>
             <ion-input type="text" [(ngModel)]="renter.blood_type"></ion-input>
         </ion-item>
     </ion-list>

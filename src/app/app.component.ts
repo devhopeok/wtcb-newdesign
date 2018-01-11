@@ -8,7 +8,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { MaintenanceViewPage } from '../pages/maintenance-view/maintenance-view';
 import { BuildingListPage } from '../pages/building-list/building-list';
-
+import { NotificationPage } from '../pages/notification/notification';
 import { Storage } from '@ionic/storage';
 import {Push, PushToken} from '@ionic/cloud-angular';
 import { Badge } from '@ionic-native/badge';
@@ -31,6 +31,7 @@ export class MyApp {
       { title: 'Home', component: HomePage },
       { title: 'Mantenimiento', component: MaintenanceViewPage },
       { title: 'Edificios', component: BuildingListPage},
+      { title: 'Notificaciones', component: NotificationPage},
       { title: 'Sign Out', component: null}
     ];
 
