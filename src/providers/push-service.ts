@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, RequestOptions, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {UserService} from './user-service';
-
+import { OneSignal } from '@ionic-native/onesignal';
 /*
  Generated class for the PushServiceProvider provider.
 
@@ -15,7 +15,7 @@ export class PushServiceProvider {
     public authOpt: RequestOptions;
     private PUSH_CREATE_URL = 'https://api.ionic.io/push/notifications';
 
-    constructor(public http: Http, public userService: UserService) {
+    constructor(public http: Http, public userService: UserService, public oneSignal: OneSignal) {
         //console.log('Hello PushServiceProvider Provider');
 
         let myHeaders: Headers = new Headers;
@@ -42,28 +42,39 @@ export class PushServiceProvider {
 
                         if (userDevices.length == data.length){
                             console.log("requestid and message", requestId, message, userDevices);
-                            let pushData = {
-                                "tokens": userDevices,
-                                "profile": "prod",
-                                "notification": {
-                                    "message": message,
-                                    "payload": {
-                                        "type": "request",
-                                        "typeKey": requestId
-                                    }
-                                }
-                            };
 
-                            console.log("push Data", pushData);
-                            this.http.post(this.PUSH_CREATE_URL, pushData, this.authOpt).map(res => res.json()).subscribe(
-                                data => {
-                                    console.log('Notification sent successfully!');
+                            let notificationObj = { contents: {en: message}, include_player_ids: userDevices};
+                            
+                            this.oneSignal.postNotification(notificationObj).then(
+                                (successResponse) => {
+                                    console.log("Notification Post Success:", successResponse);
                                 },
-                                err => {
-                                    console.log('Notification sending error!');
-                                },
-                                () => console.log('Create Notification')
-                            );
+                                (failedResponse) => {
+                                    console.log("Notification Post Failed: ", failedResponse);
+                                });
+                            
+                            // let pushData = {
+                            //     "tokens": userDevices,
+                            //     "profile": "prod",
+                            //     "notification": {
+                            //         "message": message,
+                            //         "payload": {
+                            //             "type": "request",
+                            //             "typeKey": requestId
+                            //         }
+                            //     }
+                            // };
+
+                            // console.log("push Data", pushData);
+                            // this.http.post(this.PUSH_CREATE_URL, pushData, this.authOpt).map(res => res.json()).subscribe(
+                            //     data => {
+                            //         console.log('Notification sent successfully!');
+                            //     },
+                            //     err => {
+                            //         console.log('Notification sending error!');
+                            //     },
+                            //     () => console.log('Create Notification')
+                            // );
                         }
                     },
                     (data1)=>{

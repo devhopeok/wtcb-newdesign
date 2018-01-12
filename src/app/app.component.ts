@@ -46,7 +46,7 @@ export class MyApp {
                 //     return this.push.saveToken(t);
                 // }).then((t: PushToken) => {
                 //     console.log('Token saved:', t.token);
-                //     this.storage.set('device_token', t.token);
+                //     //this.storage.set('device_token', t.token);
                 // });
 
                 // this.push.rx.notification()
@@ -132,6 +132,11 @@ export class MyApp {
     this.oneSignal.handleNotificationOpened().subscribe(() => {
       // do something when a notification is opened
       
+    });
+
+    this.oneSignal.getIds().then((ids)=> {
+      console.log("Push Subscription state changed: ", ids);
+      this.storage.set('device_token', ids.userId);
     });
 
     this.oneSignal.endInit();

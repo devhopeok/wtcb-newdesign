@@ -5,6 +5,7 @@ import { SignupPage } from '../signup/signup';
 import { UserService } from '../../providers/user-service';
 import { Storage } from '@ionic/storage';
 import { MaintenanceViewPage } from '../maintenance-view/maintenance-view';
+import { OneSignal } from '@ionic-native/onesignal';
 
 @Component({
   selector: 'page-login',
@@ -19,7 +20,7 @@ export class LoginPage {
 
   device_token = "1";
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public loadingCtrl: LoadingController,
-    public userService: UserService, public storage: Storage, public events: Events) {
+    public userService: UserService, public storage: Storage, public events: Events, public oneSignal: OneSignal) {
 
   }
 

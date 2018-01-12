@@ -61,7 +61,7 @@
                         </ion-item>
                         <ion-item *ngIf="showQuote">
                             <div>
-                                <textarea placeholder="Your comments" class="textarea-style" [(ngModel)]="quote.comment"></textarea>
+                                <textarea placeholder="Sus comentarios" class="textarea-style" [(ngModel)]="quote.comment"></textarea>
                             </div>
 
                         </ion-item>
@@ -69,12 +69,12 @@
                         <h2 class="header-style" style="text-align: center;">Visita Técnica</h2>
 
                         <ion-item *ngIf="showQuote">
-                            <ion-label>Date</ion-label>
-                            <ion-datetime placeholder="Select appointment date." displayFormat="MMM DD YYYY" [(ngModel)]="quote.date"></ion-datetime>
+                            <ion-label>Fecha</ion-label>
+                            <ion-datetime placeholder="Seleccione una fecha." displayFormat="MMM DD YYYY" [(ngModel)]="quote.date"></ion-datetime>
                         </ion-item>
                         <ion-item *ngIf="showQuote">
-                            <ion-label>Time</ion-label>
-                            <ion-datetime placeholder="Select appointment time." displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="quote.time"></ion-datetime>
+                            <ion-label>Hora</ion-label>
+                            <ion-datetime placeholder="Seleccione una hora." displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="quote.time"></ion-datetime>
                         </ion-item>
                     </ion-list>
 
@@ -104,11 +104,11 @@
                         </ion-item>
 
                         <ion-item>
-                            <ion-label>Date</ion-label>
+                            <ion-label>Fecha</ion-label>
                             <ion-input type="text" [readonly]="true" [(ngModel)]="requestDetail.quote.date"></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-label>Time</ion-label>
+                            <ion-label>Hora</ion-label>
                             <ion-input type="text" [readonly]="true" [(ngModel)]="requestDetail.quote.time"></ion-input>
                         </ion-item>
 
@@ -169,30 +169,30 @@
                         <ion-item *ngIf="quoteAccept">
                             <ion-toggle color="custom" [(ngModel)]="showSchedule"></ion-toggle>
                             <ion-label>
-                                Schedule Appointment
+                                Programar visita
                             </ion-label>
                         </ion-item>
                     </ion-list>
 
                     <ion-list no-lines *ngIf="showSchedule">
                         <ion-item>
-                            <ion-label>Date</ion-label>
+                            <ion-label>Fecha</ion-label>
                             <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="technician_date"></ion-datetime>
                         </ion-item>
                         <ion-item>
-                            <ion-label>Time</ion-label>
+                            <ion-label>Hora</ion-label>
                             <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="technician_time"></ion-datetime>
                         </ion-item>
                         <ion-item>
-                            <ion-label>Technician Name</ion-label>
+                            <ion-label>Nombre del técnico</ion-label>
                             <ion-input type="text" [(ngModel)]="technician_name"></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-label>Company Name</ion-label>
+                            <ion-label>Nombre del cliente</ion-label>
                             <ion-input type="text" [(ngModel)]="technician_company"></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-label>Telephone</ion-label>
+                            <ion-label>Teléfono</ion-label>
                             <ion-input type="text" [(ngModel)]="technician_phone"></ion-input>
                         </ion-item>
                     </ion-list>
@@ -216,23 +216,23 @@
                             <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'h:mm a'}}</ion-note>
                         </ion-item> -->
                         <ion-item>
-                            <ion-label>Date</ion-label>
+                            <ion-label>Fecha</ion-label>
                             <ion-input type="text" [(ngModel)]="requestDetail.technician_info.date" [readonly]="true"></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-label>Technician Time</ion-label>
+                            <ion-label>Hora</ion-label>
                             <ion-input type="text" [(ngModel)]="requestDetail.technician_info.time" [readonly]="true"></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-label>Technician Name</ion-label>
+                            <ion-label>Nombre del técnico</ion-label>
                             <ion-input type="text" [(ngModel)]="requestDetail.technician_info.name" [readonly]="true"></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-label>Company Name</ion-label>
+                            <ion-label>Nombre del cliente</ion-label>
                             <ion-input type="text" [(ngModel)]="requestDetail.technician_info.company" [readonly]="true"></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-label>Telephone</ion-label>
+                            <ion-label>Teléfono</ion-label>
                             <ion-input type="text" [(ngModel)]="requestDetail.technician_info.phone" [readonly]="true"></ion-input>
                         </ion-item>
 
@@ -272,7 +272,7 @@
 
                     <button ion-button block class="main-btn" (click)="goToStep4()"
                             *ngIf="(authUser.level == 7 || authUser.level == 8) && scheduleAccept">
-                        Job Complete
+                        Trabajo finalizado
                     </button>
                 </div>
             </li>
@@ -291,7 +291,7 @@
                         <ion-item>
                             <ion-toggle color="custom" [(ngModel)]="requestDetail.is_completed" disabled="true"></ion-toggle>
                             <ion-label>
-                                Job Complete
+                                Trabajo finalizado
                             </ion-label>
                         </ion-item>
                     </ion-list>
@@ -314,7 +314,7 @@
                             <ion-icon class="icon-style" ios="ios-calendar" md="md-calendar"></ion-icon>
                             FACTURA
                             <ion-note class="icon-style" *ngIf="!is_paid" item-end>EN ESPERA</ion-note>
-                            <ion-note class="icon-style" *ngIf="is_paid" item-end>PAID</ion-note>
+                            <ion-note class="icon-style" *ngIf="is_paid" item-end>PAGADO</ion-note>
                         </ion-item>
                     </ion-list>
 
@@ -324,7 +324,7 @@
 
                     <button ion-button block class="main-btn" icon-left *ngIf="is_paid && (authUser.level == 7 || authUser.level == 8)" (click)="paidInvoice()">
                         <ion-icon ios="ios-card" md="md-card"></ion-icon>
-                        FACTURA PAGADA
+                        Factura Pagada
                     </button>
                 </div>
             </li>
@@ -351,7 +351,7 @@
                         </ion-item>
                         <ion-item>
                             <div>
-                                <textarea placeholder="Your comments" class="textarea-style" [(ngModel)]="comment"></textarea>
+                                <textarea placeholder="Sus comentarios" class="textarea-style" [(ngModel)]="comment"></textarea>
                             </div>
                         </ion-item>
                     </ion-list>
@@ -365,8 +365,8 @@
                     <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 5">
                         <ion-item *ngIf="requestDetail.status5 == 0">
                             <ion-icon class="icon-style" ios="ios-calendar" md="md-calendar"></ion-icon>
-                            Complete
-                            <ion-note class="icon-style" item-end>Pending Review</ion-note>
+                            Finalizado
+                            <ion-note class="icon-style" item-end>Evaluación Pendiente</ion-note>
                         </ion-item>
                         <ion-item *ngIf="requestDetail.status5 == 1">
                             
