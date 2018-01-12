@@ -34,6 +34,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Badge } from '@ionic-native/badge';
 import { MomentModule } from 'angular2-moment';
 import { Ionic2RatingModule } from 'ionic2-rating';
+import { OneSignal } from '@ionic-native/onesignal';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDzuNnzZXieJMFnG9C2-VRjPN3IfuJ_EoI",
@@ -117,6 +118,7 @@ const cloudSettings: CloudSettings = {
     DatePicker,
     InAppBrowser,
     Badge,
+    OneSignal,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -40,7 +40,7 @@
                         <ion-item>
                             <ion-toggle color="custom" checked="true" disabled="true"></ion-toggle>
                             <ion-label class="icon-style">
-                                Request Sent
+                                Su cotización ha sido enviada
                             </ion-label>
                         </ion-item>
                     </ion-list>
@@ -124,10 +124,10 @@
                     </ion-list>
 
                     <button ion-button block (click)="acceptQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == '3.1' || authUser.level == '3.2') && (!quoteAccept || !quoteDeny)">
-                        Accept Quote
+                        Aceptar Cotización
                     </button>
                     <button ion-button block (click)="denyQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == '3.1' || authUser.level == '3.2') && (!quoteAccept || !quoteDeny)">
-                        Deny Quote
+                        Rechazar Cotización
                     </button>
                 
                     <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 2">

@@ -10,8 +10,10 @@ import { MaintenanceViewPage } from '../pages/maintenance-view/maintenance-view'
 import { BuildingListPage } from '../pages/building-list/building-list';
 import { NotificationPage } from '../pages/notification/notification';
 import { Storage } from '@ionic/storage';
-import {Push, PushToken} from '@ionic/cloud-angular';
+import {Push} from '@ionic/cloud-angular';
 import { Badge } from '@ionic-native/badge';
+import { OneSignal } from '@ionic-native/onesignal';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -23,7 +25,8 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-    public storage: Storage, public push : Push, public events: Events, public toastCtrl: ToastController, public badge:Badge) {
+    public storage: Storage, public push : Push, public events: Events, public toastCtrl: ToastController, public badge:Badge,
+    public oneSignal: OneSignal) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -39,47 +42,44 @@ export class MyApp {
             //push configuration
             platform.ready().then(() => {
 
-                this.push.register().then((t: PushToken) => {
-                    return this.push.saveToken(t);
-                }).then((t: PushToken) => {
-                    console.log('Token saved:', t.token);
-                    // this.auth.setDeviceToken(t.token).then(res => {
-                    //     this.auth.registerDeviceToken();
-                    // });
-                    this.storage.set('device_token', t.token);
-                });
+                // this.push.register().then((t: PushToken) => {
+                //     return this.push.saveToken(t);
+                // }).then((t: PushToken) => {
+                //     console.log('Token saved:', t.token);
+                //     this.storage.set('device_token', t.token);
+                // });
 
-                this.push.rx.notification()
-                    .subscribe((msg) => {
-                      this.badge.increase(1);
-//                        //console.log(msg);
-                        alert(msg.title + ': ' + msg.text);
-                        let duration:number = 4000;
+                // this.push.rx.notification()
+                //     .subscribe((msg) => {
+                //       this.badge.increase(1);
+                //         alert(msg.title + ': ' + msg.text);
+                //         let duration:number = 4000;
 
-                        let timeoutHandler = setTimeout( () => { toast.dismiss({autoclose:true}); },duration);
+                //         let timeoutHandler = setTimeout( () => { toast.dismiss({autoclose:true}); },duration);
 
-                        let toast = this.toastCtrl.create({
-                            message: msg.text,
-                            showCloseButton: true,
-                            closeButtonText: 'View',
-                            position: 'top'
-                        });
+                //         let toast = this.toastCtrl.create({
+                //             message: msg.text,
+                //             showCloseButton: true,
+                //             closeButtonText: 'View',
+                //             position: 'top'
+                //         });
 
 
-                        toast.onDidDismiss((data) => {
-                            clearTimeout(timeoutHandler);
-//                            //console.log('time elapsed',data);
-                            if(!data || !data.autoclose) {
-                                if (msg.payload['type'] == "request") {
-                                    this.nav.setRoot(MaintenanceViewPage).then(() => {
-                                        this.events.publish('noti:request', msg.payload['typeKey']);
-                                    });
-                                }
-                            }
-                        });
-                        toast.present();
+                //         toast.onDidDismiss((data) => {
+                //             clearTimeout(timeoutHandler);
+                //             if(!data || !data.autoclose) {
+                //                 if (msg.payload['type'] == "request") {
+                //                     this.nav.setRoot(MaintenanceViewPage).then(() => {
+                //                         this.events.publish('noti:request', msg.payload['typeKey']);
+                //                     });
+                //                 }
+                //             }
+                //         });
+                //         toast.present();
 
-                    });
+                //     });
+
+
             });
         }
 
@@ -115,7 +115,26 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.configOnesignal();
     });
+  }
+
+  configOnesignal() {
+    this.oneSignal.startInit('ae60cbd3-3a45-469c-b6c7-bcb6104c31b4', '348010185137');
+
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+
+    this.oneSignal.handleNotificationReceived().subscribe(() => {
+     // do something when notification is received
+       
+    });
+
+    this.oneSignal.handleNotificationOpened().subscribe(() => {
+      // do something when a notification is opened
+      
+    });
+
+    this.oneSignal.endInit();
   }
 
   openPage(page) {
