@@ -66,13 +66,15 @@
 
                         </ion-item>
 
+                        <h2 class="header-style" style="text-align: center;">Visita Técnica</h2>
+
                         <ion-item *ngIf="showQuote">
                             <ion-label>Date</ion-label>
-                            <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="quote.date"></ion-datetime>
+                            <ion-datetime placeholder="Select appointment date." displayFormat="MMM DD YYYY" [(ngModel)]="quote.date"></ion-datetime>
                         </ion-item>
                         <ion-item *ngIf="showQuote">
                             <ion-label>Time</ion-label>
-                            <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="quote.time"></ion-datetime>
+                            <ion-datetime placeholder="Select appointment time." displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="quote.time"></ion-datetime>
                         </ion-item>
                     </ion-list>
 
@@ -136,6 +138,12 @@
                             <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>
                             <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'h:mm a'}}</ion-note>
                         </ion-item> -->
+                        <ion-item *ngIf="!quoteAccept && !quoteDeny">
+                            <ion-toggle color="custom" [(ngModel)]="quoteAccept" disabled="true"></ion-toggle>
+                            <ion-label>
+                                COTIZACIÓN ACEPTADA
+                            </ion-label>
+                        </ion-item>
 
                         <ion-item *ngIf="quoteAccept">
                             <ion-toggle color="custom" [(ngModel)]="quoteAccept" disabled="true"></ion-toggle>

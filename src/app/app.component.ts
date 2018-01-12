@@ -100,7 +100,6 @@ export class MyApp {
               this.pages = [
                 
                 { title: 'Mantenimiento', component: MaintenanceViewPage },
-                { title: 'Edificios', component: BuildingListPage},
                 { title: 'Notificaciones', component: NotificationPage},
                 { title: 'Sign Out', component: null}
               ];
