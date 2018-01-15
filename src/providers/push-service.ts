@@ -13,14 +13,14 @@ import { OneSignal } from '@ionic-native/onesignal';
 export class PushServiceProvider {
 
     public authOpt: RequestOptions;
-    private PUSH_CREATE_URL = 'https://api.ionic.io/push/notifications';
+    private PUSH_CREATE_URL = 'https://onesignal.com/api/v1/notifications';
 
     constructor(public http: Http, public userService: UserService, public oneSignal: OneSignal) {
         //console.log('Hello PushServiceProvider Provider');
 
         let myHeaders: Headers = new Headers;
-        myHeaders.set('Authorization', "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmOWNiNWNkNC00NmE1LTRlODEtYTg3Yi01ZjZlNGFjZDI2OGMifQ.F7u4At0Uxv6qZaY6fYI0ud4khZyrlPoVZn9almiV1u0");
-        myHeaders.set('Content-Type', 'application/json');
+        myHeaders.set('Authorization', "Basic YTUzYzE2NmYtNDZjZC00M2Q4LThkMmYtMjY3ZTJiYTY1MWQy");
+        myHeaders.set('Content-Type', 'application/json; charset=utf-8');
         this.authOpt = new RequestOptions({
             headers: myHeaders,
         });
@@ -40,42 +40,38 @@ export class PushServiceProvider {
                         
                         userDevices.push(data1.device_token);
 
-                        if (userDevices.length == data.length){
+                        //if (userDevices.length == data.length){
                             console.log("requestid and message", requestId, message, userDevices);
 
-                            let notificationObj = { contents: {en: message}, include_player_ids: userDevices};
+                            // //let notificationObj: OSNotification = new OSNotification();
+                            // this.notificationObj.contents = {en: message};
+                            // this.notificationObj.include_player_ids = userDevices;
+                            // console.log("this.notificationObj", this.notificationObj);
+                            // this.oneSignal.postNotification(this.notificationObj).then(
+                            //     (successResponse) => {
+                            //         console.log("Notification Post Success:", successResponse);
+                            //     },
+                            //     (failedResponse) => {
+                            //         console.log("Notification Post Failed: ", failedResponse);
+                            //     });
                             
-                            this.oneSignal.postNotification(notificationObj).then(
-                                (successResponse) => {
-                                    console.log("Notification Post Success:", successResponse);
-                                },
-                                (failedResponse) => {
-                                    console.log("Notification Post Failed: ", failedResponse);
-                                });
-                            
-                            // let pushData = {
-                            //     "tokens": userDevices,
-                            //     "profile": "prod",
-                            //     "notification": {
-                            //         "message": message,
-                            //         "payload": {
-                            //             "type": "request",
-                            //             "typeKey": requestId
-                            //         }
-                            //     }
-                            // };
+                            let pushData = {
+                                "app_id": "ae60cbd3-3a45-469c-b6c7-bcb6104c31b4",
+                                "include_player_ids": userDevices,
+                                "contents": {'en': message}
+                            };
 
-                            // console.log("push Data", pushData);
-                            // this.http.post(this.PUSH_CREATE_URL, pushData, this.authOpt).map(res => res.json()).subscribe(
-                            //     data => {
-                            //         console.log('Notification sent successfully!');
-                            //     },
-                            //     err => {
-                            //         console.log('Notification sending error!');
-                            //     },
-                            //     () => console.log('Create Notification')
-                            // );
-                        }
+                            console.log("push Data", pushData);
+                            this.http.post(this.PUSH_CREATE_URL, pushData, this.authOpt).map(res => res.json()).subscribe(
+                                data => {
+                                    console.log('Notification sent successfully!');
+                                },
+                                err => {
+                                    console.log('Notification sending error!');
+                                },
+                                () => console.log('Create Notification')
+                            );
+                        //}
                     },
                     (data1)=>{
 
@@ -98,18 +94,18 @@ export class PushServiceProvider {
                     .subscribe(
                     (data1)=>{
                         let userDevice = data1;
+
                         let pushData = {
-                            "tokens": [userDevice['device_token']],
-                            "profile": "prod",
-                            "notification": {
-                                "message": message,
-                                "payload": {
+                                "app_id": "ae60cbd3-3a45-469c-b6c7-bcb6104c31b4",
+                                "include_player_ids": [userDevice['device_token']],
+                                "contents": {'en': message},
+                                "data": {
                                     "type": "request",
                                     "typeKey": requestId
                                 }
-                            }
-                        };
+                            };
 
+                        console.log("push Data", pushData);
                         this.http.post(this.PUSH_CREATE_URL, pushData, this.authOpt).map(res => res.json()).subscribe(
                             data => {
                                 console.log('Notification sent successfully!');
@@ -119,6 +115,27 @@ export class PushServiceProvider {
                             },
                             () => console.log('Create Notification')
                         );
+                        // let pushData = {
+                        //     "tokens": [userDevice['device_token']],
+                        //     "profile": "prod",
+                        //     "notification": {
+                        //         "message": message,
+                        //         "payload": {
+                        //             "type": "request",
+                        //             "typeKey": requestId
+                        //         }
+                        //     }
+                        // };
+
+                        // this.http.post(this.PUSH_CREATE_URL, pushData, this.authOpt).map(res => res.json()).subscribe(
+                        //     data => {
+                        //         console.log('Notification sent successfully!');
+                        //     },
+                        //     err => {
+                        //         console.log('Notification sending error!');
+                        //     },
+                        //     () => console.log('Create Notification')
+                        // );
                     },
                     (data1)=>{
 

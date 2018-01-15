@@ -75,6 +75,7 @@ export class LoginPage {
               this.userService.insertDeviceToken(params)
                 .subscribe(
                   (data1)=>{
+                    console.log("data1-success", data1);
                     if (data.user.level == 7 || data.user.level == 8){
                       this.navCtrl.setRoot(HomePage);
                     }
@@ -84,6 +85,7 @@ export class LoginPage {
                     this.events.publish("user:changed");
                   },
                   (data1)=>{
+                    console.log("data1-failure", data1);
                     if (data.user.level == 7 || data.user.level == 8){
                       this.navCtrl.setRoot(HomePage);
                     }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController } from 'ionic-angular';
-import { HomePage } from '../home/home';
+import { MaintenanceViewPage } from '../maintenance-view/maintenance-view';
 import { UserService } from '../../providers/user-service';
 import { Storage } from '@ionic/storage';
 
@@ -62,10 +62,10 @@ export class SignupPage {
               this.userService.insertDeviceToken(params)
                 .subscribe(
                   (data1)=>{
-                    this.navCtrl.setRoot(HomePage);
+                    this.navCtrl.setRoot(MaintenanceViewPage);
                   },
                   (data1)=>{
-                    this.navCtrl.setRoot(HomePage);
+                    this.navCtrl.setRoot(MaintenanceViewPage);
                   });
               //this.navCtrl.setRoot(HomePage);
             } else{
