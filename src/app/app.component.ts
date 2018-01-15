@@ -131,7 +131,7 @@ export class MyApp {
 
     this.oneSignal.handleNotificationOpened().subscribe(() => {
       // do something when a notification is opened
-      
+      this.nav.setRoot(MaintenanceViewPage);
     });
 
     this.oneSignal.getIds().then((ids)=> {

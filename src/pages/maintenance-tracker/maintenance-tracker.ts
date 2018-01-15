@@ -390,8 +390,9 @@ export class MaintenanceTrackerPage {
             loading.dismiss();
           });
         console.log("aaaaaaaaaaaaaaaaaaaaaa", this.request._id);
-        this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager attached quote to your request - " + this.quote, this.token);
-        //this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your quote", this.token);
+        
+        // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled the time of first meeting for quote.", this.token);
+        this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha programado una visita inicial para hacerle una cotización.", this.token);
     }
 
     acceptQuote(){
@@ -410,7 +411,8 @@ export class MaintenanceTrackerPage {
           this.quoteAccept = false;
         });
       
-      this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your quote", this.token);
+      this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente acepto la cotización.", this.token);
+      // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your quote", this.token);
     }
 
     denyQuote(){
@@ -437,7 +439,8 @@ export class MaintenanceTrackerPage {
             this.quoteDeny = false;
           });
         
-        this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee denied your quote", this.token);
+        this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente rechazo la cotización.", this.token);
+        // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee denied your quote", this.token);
       });
 
       
@@ -501,7 +504,9 @@ export class MaintenanceTrackerPage {
                 (data) => {
                     loading.dismiss();
                     this.request.step = 3;
-                    this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled technician time to " + this.technician_date + " " + this.technician_time, this.token);
+                    this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG programó la visita del técnico para el día y hora a continuación: " + this.technician_date + " " + this.technician_time, this.token);
+                
+                    // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled technician time to " + this.technician_date + " " + this.technician_time, this.token);
                 },
                 (data) => {
                   loading.dismiss();
@@ -529,7 +534,8 @@ export class MaintenanceTrackerPage {
           this.scheduleAccept = false;
         });
       
-      this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
+      this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente acepó la visita programada.", this.token);
+      // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
     }
 
     public goToStep4() {
@@ -577,9 +583,9 @@ export class MaintenanceTrackerPage {
                 loading.dismiss();
               });
             
-             this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager completed your request", this.token);
-            // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager accepted your payment", this.token);
-         
+             this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha finalizado los trabajos correspondientes.", this.token);
+              // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager completed your request", this.token);
+            
     }
 
     public payInvoice() {
@@ -598,7 +604,8 @@ export class MaintenanceTrackerPage {
           this.is_paid = false;
         });
       
-      this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee paid to your invoice", this.token);
+      this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente pagó su factura", this.token);
+      // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee paid to your invoice", this.token);
       this.iab.create('https://www.pse.com.co/inicio');
 //         let step = this.db.object('/maintenance_steps/'+this.requestDetailKey+'/3');
 
@@ -692,7 +699,8 @@ export class MaintenanceTrackerPage {
             loading.dismiss();
           });
        
-        this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager accepted your payment", this.token);
+        this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG recibió su pago", this.token);
+        // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager accepted your payment", this.token);
     }
 
 
@@ -716,7 +724,8 @@ export class MaintenanceTrackerPage {
             loading.dismiss();
           });
         
-        this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee provided feedback", this.token);
+        this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente ha calificado el servicio", this.token);
+        // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee provided feedback", this.token);
     }
 
     public archiveRequest() {
@@ -736,7 +745,8 @@ export class MaintenanceTrackerPage {
                 loading.dismiss();
               });
         
-        this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager archived your request", this.token);
+        this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha archivado su solicitud", this.token);
+        // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager archived your request", this.token);
         
     }
 }

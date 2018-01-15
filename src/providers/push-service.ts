@@ -58,7 +58,7 @@ export class PushServiceProvider {
                             let pushData = {
                                 "app_id": "ae60cbd3-3a45-469c-b6c7-bcb6104c31b4",
                                 "include_player_ids": userDevices,
-                                "contents": {'en': message}
+                                "contents": {'sp': message}
                             };
 
                             console.log("push Data", pushData);
@@ -98,7 +98,7 @@ export class PushServiceProvider {
                         let pushData = {
                                 "app_id": "ae60cbd3-3a45-469c-b6c7-bcb6104c31b4",
                                 "include_player_ids": [userDevice['device_token']],
-                                "contents": {'en': message},
+                                "contents": {'sp': message},
                                 "data": {
                                     "type": "request",
                                     "typeKey": requestId

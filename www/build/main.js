@@ -720,7 +720,8 @@ var OtrsRequestPage = (function () {
                 if (data.message == "Success") {
                     var requestKey = data.data._id;
                     console.log("keys", _this.userKey, _this.officeKey, requestKey);
-                    _this.pushService.notiBuildingManagerForRequest(requestKey, "New request is created!", _this.token);
+                    _this.pushService.notiBuildingManagerForRequest(requestKey, "Nueva solicitud fue creada!", _this.token);
+                    // this.pushService.notiBuildingManagerForRequest(requestKey, "New request is created!", this.token);
                     var newSteps = {
                         token: _this.token,
                         request_id: requestKey,
@@ -861,7 +862,7 @@ var PushServiceProvider = (function () {
                     var pushData = {
                         "app_id": "ae60cbd3-3a45-469c-b6c7-bcb6104c31b4",
                         "include_player_ids": userDevices,
-                        "contents": { 'en': message }
+                        "contents": { 'sp': message }
                     };
                     console.log("push Data", pushData);
                     _this.http.post(_this.PUSH_CREATE_URL, pushData, _this.authOpt).map(function (res) { return res.json(); }).subscribe(function (data) {
@@ -886,7 +887,7 @@ var PushServiceProvider = (function () {
                 var pushData = {
                     "app_id": "ae60cbd3-3a45-469c-b6c7-bcb6104c31b4",
                     "include_player_ids": [userDevice['device_token']],
-                    "contents": { 'en': message },
+                    "contents": { 'sp': message },
                     "data": {
                         "type": "request",
                         "typeKey": requestId
@@ -1842,8 +1843,8 @@ var MaintenanceTrackerPage = (function () {
             loading.dismiss();
         });
         console.log("aaaaaaaaaaaaaaaaaaaaaa", this.request._id);
-        this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager attached quote to your request - " + this.quote, this.token);
-        //this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your quote", this.token);
+        // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled the time of first meeting for quote.", this.token);
+        this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha programado una visita inicial para hacerle una cotización.", this.token);
     };
     MaintenanceTrackerPage.prototype.acceptQuote = function () {
         var _this = this;
@@ -1859,7 +1860,8 @@ var MaintenanceTrackerPage = (function () {
             loading.dismiss();
             _this.quoteAccept = false;
         });
-        this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your quote", this.token);
+        this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente acepto la cotización.", this.token);
+        // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your quote", this.token);
     };
     MaintenanceTrackerPage.prototype.denyQuote = function () {
         var _this = this;
@@ -1880,7 +1882,8 @@ var MaintenanceTrackerPage = (function () {
                 loading.dismiss();
                 _this.quoteDeny = false;
             });
-            _this.pushService.notiBuildingManagerForRequest(_this.request._id, "Employee denied your quote", _this.token);
+            _this.pushService.notiBuildingManagerForRequest(_this.request._id, "El cliente rechazo la cotización.", _this.token);
+            // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee denied your quote", this.token);
         });
     };
     MaintenanceTrackerPage.prototype.goToStep3 = function () {
@@ -1934,7 +1937,8 @@ var MaintenanceTrackerPage = (function () {
                     .subscribe(function (data) {
                     loading_2.dismiss();
                     _this.request.step = 3;
-                    _this.pushService.notiUserForRequest(_this.request.userKey, _this.request._id, "Building manager scheduled technician time to " + _this.technician_date + " " + _this.technician_time, _this.token);
+                    _this.pushService.notiUserForRequest(_this.request.userKey, _this.request._id, "EG programó la visita del técnico para el día y hora a continuación: " + _this.technician_date + " " + _this.technician_time, _this.token);
+                    // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled technician time to " + this.technician_date + " " + this.technician_time, this.token);
                 }, function (data) {
                     loading_2.dismiss();
                 });
@@ -1957,7 +1961,8 @@ var MaintenanceTrackerPage = (function () {
             loading.dismiss();
             _this.scheduleAccept = false;
         });
-        this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
+        this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente acepó la visita programada.", this.token);
+        // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
     };
     MaintenanceTrackerPage.prototype.goToStep4 = function () {
         var _this = this;
@@ -1998,8 +2003,8 @@ var MaintenanceTrackerPage = (function () {
         }, function (data1) {
             loading.dismiss();
         });
-        this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager completed your request", this.token);
-        // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager accepted your payment", this.token);
+        this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha finalizado los trabajos correspondientes.", this.token);
+        // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager completed your request", this.token);
     };
     MaintenanceTrackerPage.prototype.payInvoice = function () {
         var _this = this;
@@ -2015,7 +2020,8 @@ var MaintenanceTrackerPage = (function () {
             loading.dismiss();
             _this.is_paid = false;
         });
-        this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee paid to your invoice", this.token);
+        this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente pagó su factura", this.token);
+        // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee paid to your invoice", this.token);
         this.iab.create('https://www.pse.com.co/inicio');
         //         let step = this.db.object('/maintenance_steps/'+this.requestDetailKey+'/3');
         //         let actionSheet = this.actionSheetCtrl.create({
@@ -2101,7 +2107,8 @@ var MaintenanceTrackerPage = (function () {
         }, function (data1) {
             loading.dismiss();
         });
-        this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager accepted your payment", this.token);
+        this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG recibió su pago", this.token);
+        // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager accepted your payment", this.token);
     };
     MaintenanceTrackerPage.prototype.viewInvoice = function () {
         this.showInvoice = !this.showInvoice;
@@ -2119,7 +2126,8 @@ var MaintenanceTrackerPage = (function () {
         }, function (data1) {
             loading.dismiss();
         });
-        this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee provided feedback", this.token);
+        this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente ha calificado el servicio", this.token);
+        // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee provided feedback", this.token);
     };
     MaintenanceTrackerPage.prototype.archiveRequest = function () {
         var _this = this;
@@ -2136,7 +2144,8 @@ var MaintenanceTrackerPage = (function () {
         }, function (data) {
             loading.dismiss();
         });
-        this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager archived your request", this.token);
+        this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha archivado su solicitud", this.token);
+        // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager archived your request", this.token);
     };
     return MaintenanceTrackerPage;
 }());
@@ -2988,6 +2997,7 @@ var MyApp = (function () {
         });
         this.oneSignal.handleNotificationOpened().subscribe(function () {
             // do something when a notification is opened
+            _this.nav.setRoot(__WEBPACK_IMPORTED_MODULE_6__pages_maintenance_view_maintenance_view__["a" /* MaintenanceViewPage */]);
         });
         this.oneSignal.getIds().then(function (ids) {
             console.log("Push Subscription state changed: ", ids);
