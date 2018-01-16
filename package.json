@@ -36,7 +36,6 @@
         "angularfire2": "^4.0.0-rc.1",
         "aws-sdk": "^2.161.0",
         "buffer": "^5.0.8",
-        "cordova-android": "^6.2.3",
         "cordova-ios": "^4.4.0",
         "cordova-plugin-badge": "^0.8.6",
         "cordova-plugin-camera": "^2.4.1",
@@ -93,7 +92,6 @@
             "onesignal-cordova-plugin": {}
         },
         "platforms": [
-            "android",
             "ios"
         ]
     }
