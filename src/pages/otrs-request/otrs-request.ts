@@ -279,7 +279,7 @@ export class OtrsRequestPage {
                         
                         
                           let alert = this.alertCtrl.create({
-                            title: "Success", subTitle: "Request is submitted successfully!", buttons: ['OK']
+                            title: "éxito", subTitle: "Su solicitud ha sido enviada exitosamente!", buttons: ['OK']
                           });
                           alert.present();
                           this.navCtrl.pop();
