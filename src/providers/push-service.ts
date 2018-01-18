@@ -58,7 +58,9 @@ export class PushServiceProvider {
                             let pushData = {
                                 "app_id": "ae60cbd3-3a45-469c-b6c7-bcb6104c31b4",
                                 "include_player_ids": userDevices,
-                                "contents": {'en': message}
+                                "contents": {'en': message},
+                                "ios_badgeType": "Increase",
+                                "ios_badgeCount": 1
                             };
 
                             console.log("push Data", pushData);
@@ -102,7 +104,9 @@ export class PushServiceProvider {
                                 "data": {
                                     "type": "request",
                                     "typeKey": requestId
-                                }
+                                },
+                                "ios_badgeType":"Increase",
+                                "ios_badgeCount": 1
                             };
 
                         console.log("push Data", pushData);
