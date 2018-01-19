@@ -59,7 +59,8 @@ export class MaintenanceViewPage {
 
     this.events.subscribe("noti2:changed", ()=>{
       this.storage.get('notification_count').then(val=>{
-      this.count = val;
+        this.count = val;
+      });
     });
   }
 
