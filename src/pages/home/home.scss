@@ -180,4 +180,14 @@ page-home {
             }
         }
     }
+
+    .badge{
+        width: 10px;
+        height: 10px;
+        background-color: #e69846;
+        border-radius: 5px;
+        position:absolute;
+        top:1px;
+        right:2px;
+    }
 }

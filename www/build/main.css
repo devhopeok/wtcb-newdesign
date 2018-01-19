@@ -28010,6 +28010,27 @@ ion-navbar.toolbar {
   color: white;
 }
 
+.notification-count {
+  background-color: #e69846;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  color: white;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  vertical-align: middle;
+}
+
 page-building-list ion-card {
   margin: 0px !important;
   margin-bottom: 15px !important;
@@ -28218,6 +28239,16 @@ page-home .menu-scroll ion-item-sliding ion-item .item-inner {
 
 page-home .menu-scroll ion-item-sliding ion-item h1 {
   font-size: 18px;
+}
+
+page-home .badge {
+  width: 10px;
+  height: 10px;
+  background-color: #e69846;
+  border-radius: 5px;
+  position: absolute;
+  top: 1px;
+  right: 2px;
 }
 
 page-maintenance-tracker .client-avatar {
@@ -28461,6 +28492,16 @@ page-maintenance-view .office-name {
 page-maintenance-view .building-name {
   color: gray;
   font-size: 4vw;
+}
+
+page-maintenance-view .badge {
+  width: 10px;
+  height: 10px;
+  background-color: #e69846;
+  border-radius: 5px;
+  position: absolute;
+  top: 1px;
+  right: 2px;
 }
 
 page-otrs-request ion-list {

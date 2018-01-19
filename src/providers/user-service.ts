@@ -200,4 +200,22 @@ export class UserService {
       .map((res:Response)=>res.json())
       .catch((error:any)=>Observable.throw(error.json().error || 'Server error'));
   }
+
+  addNotification(notification){
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.baseService.notificationUrl, JSON.stringify(notification), options)
+      .map((res:Response) => res.json())
+      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  getNotifications(token){
+    let headers = new Headers({'Content-Type': 'application/json'});
+    
+    let options = new RequestOptions({headers: headers});
+
+    return this.http.get(this.baseService.notificationUrl + '?token=' + token, options)
+      .map((res:Response)=>res.json())
+      .catch((error:any)=>Observable.throw(error.json().error || 'Server error'));
+  }
 }

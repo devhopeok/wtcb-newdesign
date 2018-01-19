@@ -43,18 +43,6 @@ export class PushServiceProvider {
                         //if (userDevices.length == data.length){
                             console.log("requestid and message", requestId, message, userDevices);
 
-                            // //let notificationObj: OSNotification = new OSNotification();
-                            // this.notificationObj.contents = {en: message};
-                            // this.notificationObj.include_player_ids = userDevices;
-                            // console.log("this.notificationObj", this.notificationObj);
-                            // this.oneSignal.postNotification(this.notificationObj).then(
-                            //     (successResponse) => {
-                            //         console.log("Notification Post Success:", successResponse);
-                            //     },
-                            //     (failedResponse) => {
-                            //         console.log("Notification Post Failed: ", failedResponse);
-                            //     });
-                            
                             let pushData = {
                                 "app_id": "ae60cbd3-3a45-469c-b6c7-bcb6104c31b4",
                                 "include_player_ids": userDevices,
@@ -73,6 +61,23 @@ export class PushServiceProvider {
                                 },
                                 () => console.log('Create Notification')
                             );
+
+                            let notification = {
+                                token: token,
+                                email: data[i].email,
+                                notification: message,
+                                requestId: requestId,
+                                read: false
+                            }
+
+                            this.userService.addNotification(notification)
+                            .subscribe(
+                              (data) => {
+                                console.log("notification Data:", data);
+                              },
+                              (data) => {
+                                
+                              });
                         //}
                     },
                     (data1)=>{
@@ -119,27 +124,23 @@ export class PushServiceProvider {
                             },
                             () => console.log('Create Notification')
                         );
-                        // let pushData = {
-                        //     "tokens": [userDevice['device_token']],
-                        //     "profile": "prod",
-                        //     "notification": {
-                        //         "message": message,
-                        //         "payload": {
-                        //             "type": "request",
-                        //             "typeKey": requestId
-                        //         }
-                        //     }
-                        // };
+                        
+                        let notification = {
+                                token: token,
+                                email: data.email,
+                                notification: message,
+                                requestId: requestId,
+                                read: false
+                            }
 
-                        // this.http.post(this.PUSH_CREATE_URL, pushData, this.authOpt).map(res => res.json()).subscribe(
-                        //     data => {
-                        //         console.log('Notification sent successfully!');
-                        //     },
-                        //     err => {
-                        //         console.log('Notification sending error!');
-                        //     },
-                        //     () => console.log('Create Notification')
-                        // );
+                            this.userService.addNotification(notification)
+                            .subscribe(
+                              (data) => {
+                                console.log("notification Data:", data);
+                              },
+                              (data) => {
+                                
+                              });
                     },
                     (data1)=>{
 

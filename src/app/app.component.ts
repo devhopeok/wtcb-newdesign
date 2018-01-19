@@ -13,6 +13,7 @@ import { Storage } from '@ionic/storage';
 import {Push} from '@ionic/cloud-angular';
 import { Badge } from '@ionic-native/badge';
 import { OneSignal } from '@ionic-native/onesignal';
+import { UserService } from '../providers/user-service';
 
 @Component({
   templateUrl: 'app.html'
@@ -23,10 +24,11 @@ export class MyApp {
   rootPage: any = LoginPage;
 
   pages: Array<{title: string, component: any}>;
-
+  count=0;
+  token: any;
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
     public storage: Storage, public push : Push, public events: Events, public toastCtrl: ToastController, public badge:Badge,
-    public oneSignal: OneSignal) {
+    public oneSignal: OneSignal, public userService: UserService) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -104,8 +106,40 @@ export class MyApp {
                 { title: 'Sign Out', component: null}
               ];
             }
+            this.token=val.token;
+            this.getNotifications(val.token);
           }
         });
+      });
+
+     this.events.subscribe("notification:changed", ()=>{
+       this.storage.get('userdata').then(val=>{
+          console.log("userdata", val);
+          if (val != null){
+            
+            this.token=val.token;
+            this.getNotifications(val.token);
+          }
+        });
+     });
+  }
+
+  getNotifications(token){
+    this.count = 0;
+    this.userService.getNotifications(token)
+    .subscribe(
+      (data) => {
+        for (let i=0; i<data.length; i++){
+          if (data[i].read == false){
+            this.count++;
+          }
+        }
+        this.storage.set("notification_count", this.count);
+        this.events.publish("noti1:changed");
+        this.events.publish("noti2:changed");
+      },
+      (data) => {
+       
       });
   }
 
@@ -126,7 +160,7 @@ export class MyApp {
 
     this.oneSignal.handleNotificationReceived().subscribe(() => {
      // do something when notification is received
-       
+       this.getNotifications(this.token);
     });
 
     this.oneSignal.handleNotificationOpened().subscribe(() => {
@@ -147,6 +181,7 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     if (page.component == undefined){
       this.storage.remove("userdata");
+      this.storage.remove("notification_count");
       this.nav.setRoot(LoginPage);
     }
     else{

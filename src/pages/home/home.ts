@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, Events } from 'ionic-angular';
 import {BuildingProvider} from '../../providers/building';
 import { UserService } from '../../providers/user-service';
 import { Storage } from '@ionic/storage';
@@ -17,8 +17,10 @@ export class HomePage {
     buildings: any;
     authUser: any;
     token: any;
+    count: any;
+
     constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public userService:UserService, 
-    	public buildingService: BuildingProvider, public storage: Storage) {
+    	public buildingService: BuildingProvider, public storage: Storage, public events: Events) {
     	this.offices = [];
         this.buildings = this.buildingService.list();
 
@@ -42,11 +44,22 @@ export class HomePage {
                 console.log("Getting All Offices:", data);
 
                 this.offices = data;
+                
               },
               (data) => {
                 loading.dismiss();
               });
         });
+
+        this.storage.get('notification_count').then(val=>{
+          this.count = val;
+          });
+
+        this.events.subscribe("noti1:changed", ()=>{
+         this.storage.get('notification_count').then(val=>{
+          this.count = val;
+          });
+       });
     }
 
     rentedOffices(buildingId) {

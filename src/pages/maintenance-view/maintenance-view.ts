@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, LoadingController, AlertController, Events } from 'ionic-angular';
 import { OtrsRequestPage } from '../otrs-request/otrs-request';
 import { MaintenanceTrackerPage } from '../maintenance-tracker/maintenance-tracker';
 import { Storage } from '@ionic/storage';
 import { UserService } from '../../providers/user-service';
+import { NotificationPage } from '../notification/notification';
 
 @Component({
   selector: 'page-maintenance-view',
@@ -18,8 +19,9 @@ export class MaintenanceViewPage {
   openedRequests: any;
   closedRequests: any;
   token: any;
+  count: any;
   constructor(public navCtrl: NavController, public storage: Storage, public userService: UserService, 
-    public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
+    public loadingCtrl: LoadingController, public alertCtrl: AlertController, public events: Events) {
       this.user = {
             level: 4
         };
@@ -50,7 +52,20 @@ export class MaintenanceViewPage {
         console.log("userdata", this.user);
       }
     });
+
+    this.storage.get('notification_count').then(val=>{
+      this.count = val;
+    });
+
+    this.events.subscribe("noti2:changed", ()=>{
+      this.storage.get('notification_count').then(val=>{
+      this.count = val;
+    });
   }
+
+  gotoNotification(){
+      this.navCtrl.setRoot(NotificationPage);
+    }
 
   delete(item){
     let loading = this.loadingCtrl.create();

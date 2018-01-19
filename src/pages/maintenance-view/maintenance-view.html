@@ -11,7 +11,15 @@
             <img class="menu-icon" src="assets/imgs/menu_icon.png" />
         </button>
         <ion-title>SOLICITUDES DE MANTENIMIENTO</ion-title>
+
+        <ion-buttons end>
+          <button ion-button icon-only style="color:white;" (click)="gotoNotification();">
+                <ion-icon name="md-notifications"></ion-icon>
+          </button>
+          <div class="badge" *ngIf="count>0"></div>
+        </ion-buttons>
     </ion-navbar>
+
 
 </ion-header>
 

@@ -19,7 +19,8 @@ export class BaseService {
   public stepUrl = this.baseUrl + "step";
   public getUserUrl = this.baseUrl + "getuser";
   public deviceTokenUrl = this.baseUrl + "device";
-
+  public notificationUrl = this.baseUrl + "notification";
+  
   constructor(public http: Http) {
     console.log('Hello BaseService Provider');
   }

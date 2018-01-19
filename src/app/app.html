@@ -6,10 +6,11 @@
   </ion-header>
 
   <ion-content>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+    <ion-list no-lines>
+      <ion-item menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
-      </button>
+        <div item-end *ngIf="p.title=='Notificaciones' && count>0" class="notification-count">{{count}}</div>
+      </ion-item>
     </ion-list>
   </ion-content>
 
