@@ -67,6 +67,24 @@ export class LoginPage {
             console.log("login Data:", data);
              if(data.message == 'user logged in!'){
               this.storage.set('userdata', data);
+              let count = 0;
+              this.userService.getNotifications(data.token)
+              .subscribe(
+                (data2) => {
+                  for (let i=0; i<data2.length; i++){
+                    if (data2[i].read == false){
+                      count++;
+                    }
+                  }
+                  console.log("notification_login_count", count);
+                  this.storage.set("notification_count", count);
+                  
+                },
+                (data2) => {
+                 
+                });
+
+
               let params = {
                 token : data.token,
                 device_token: this.device_token

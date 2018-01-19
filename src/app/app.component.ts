@@ -85,6 +85,9 @@ export class MyApp {
             });
         }
 
+    this.storage.get('notification_count').then(val=>{
+      this.count = val;
+    });
      this.events.subscribe("user:changed", ()=> {
         this.storage.get('userdata').then(val=>{
           console.log("userdata", val);
@@ -107,7 +110,9 @@ export class MyApp {
               ];
             }
             this.token=val.token;
-            this.getNotifications(val.token);
+            //this.getNotifications(val.token);
+            this.events.publish("noti1:changed");
+            this.events.publish("noti2:changed");
           }
         });
       });
@@ -125,6 +130,7 @@ export class MyApp {
   }
 
   getNotifications(token){
+    console.log("get Notification", token);
     this.count = 0;
     this.userService.getNotifications(token)
     .subscribe(

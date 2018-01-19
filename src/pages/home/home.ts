@@ -17,7 +17,7 @@ export class HomePage {
     buildings: any;
     authUser: any;
     token: any;
-    count: any;
+    count=0;
 
     constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public userService:UserService, 
     	public buildingService: BuildingProvider, public storage: Storage, public events: Events) {
@@ -29,7 +29,7 @@ export class HomePage {
         };
   	}
 
-  	ionViewDidEnter() {
+  	ionViewWillEnter() {
        
         this.storage.get('userdata').then(val=>{
           console.log("userdata", val);
@@ -56,8 +56,10 @@ export class HomePage {
           });
 
         this.events.subscribe("noti1:changed", ()=>{
+
          this.storage.get('notification_count').then(val=>{
           this.count = val;
+          console.log("noti1:changed", val, this.count);
           });
        });
     }

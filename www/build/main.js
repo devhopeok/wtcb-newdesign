@@ -427,13 +427,14 @@ var HomePage = (function () {
         this.buildingService = buildingService;
         this.storage = storage;
         this.events = events;
+        this.count = 0;
         this.offices = [];
         this.buildings = this.buildingService.list();
         this.authUser = {
             level: 4
         };
     }
-    HomePage.prototype.ionViewDidEnter = function () {
+    HomePage.prototype.ionViewWillEnter = function () {
         var _this = this;
         this.storage.get('userdata').then(function (val) {
             console.log("userdata", val);
@@ -456,6 +457,7 @@ var HomePage = (function () {
         this.events.subscribe("noti1:changed", function () {
             _this.storage.get('notification_count').then(function (val) {
                 _this.count = val;
+                console.log("noti1:changed", val, _this.count);
             });
         });
     };
@@ -2381,6 +2383,18 @@ var LoginPage = (function () {
                 console.log("login Data:", data);
                 if (data.message == 'user logged in!') {
                     _this.storage.set('userdata', data);
+                    var count_1 = 0;
+                    _this.userService.getNotifications(data.token)
+                        .subscribe(function (data2) {
+                        for (var i = 0; i < data2.length; i++) {
+                            if (data2[i].read == false) {
+                                count_1++;
+                            }
+                        }
+                        console.log("notification_login_count", count_1);
+                        _this.storage.set("notification_count", count_1);
+                    }, function (data2) {
+                    });
                     var params = {
                         token: data.token,
                         device_token: _this.device_token
@@ -3041,6 +3055,9 @@ var MyApp = (function () {
                 //     });
             });
         }
+        this.storage.get('notification_count').then(function (val) {
+            _this.count = val;
+        });
         this.events.subscribe("user:changed", function () {
             _this.storage.get('userdata').then(function (val) {
                 console.log("userdata", val);
@@ -3062,7 +3079,9 @@ var MyApp = (function () {
                         ];
                     }
                     _this.token = val.token;
-                    _this.getNotifications(val.token);
+                    //this.getNotifications(val.token);
+                    _this.events.publish("noti1:changed");
+                    _this.events.publish("noti2:changed");
                 }
             });
         });
@@ -3078,6 +3097,7 @@ var MyApp = (function () {
     }
     MyApp.prototype.getNotifications = function (token) {
         var _this = this;
+        console.log("get Notification", token);
         this.count = 0;
         this.userService.getNotifications(token)
             .subscribe(function (data) {
@@ -3217,6 +3237,7 @@ var MaintenanceViewPage = (function () {
             _this.count = val;
         });
         this.events.subscribe("noti2:changed", function () {
+            console.log("noti2:changed");
             _this.storage.get('notification_count').then(function (val) {
                 _this.count = val;
             });
