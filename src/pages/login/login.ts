@@ -51,7 +51,7 @@ export class LoginPage {
     if (this.user.email == "" || this.user.password==""){
        let alert = this.alertCtrl.create({
           title: '',
-          subTitle: 'Fill user email and password',
+          subTitle: 'Ingrese email y contraseńa',
           buttons: ['OK']
         });
         alert.present();
@@ -78,40 +78,40 @@ export class LoginPage {
                   }
                   console.log("notification_login_count", count);
                   this.storage.set("notification_count", count);
-                  
-                },
-                (data2) => {
-                 
-                });
+                  let params = {
+                    token : data.token,
+                    device_token: this.device_token
+                  };
+
+                  this.userService.insertDeviceToken(params)
+                    .subscribe(
+                      (data1)=>{
+                        console.log("data1-success", data1);
+                        if (data.user.level == 7 || data.user.level == 8){
+                          this.navCtrl.setRoot(HomePage);
+                        }
+                        else{
+                          this.navCtrl.setRoot(MaintenanceViewPage);
+                        }
+                        this.events.publish("user:changed");
+                      },
+                      (data1)=>{
+                        console.log("data1-failure", data1);
+                        if (data.user.level == 7 || data.user.level == 8){
+                          this.navCtrl.setRoot(HomePage);
+                        }
+                        else{
+                          this.navCtrl.setRoot(MaintenanceViewPage);
+                        }
+                        this.events.publish("user:changed");
+                      });
+                    },
+                    (data2) => {
+                     
+                    });
 
 
-              let params = {
-                token : data.token,
-                device_token: this.device_token
-              };
-
-              this.userService.insertDeviceToken(params)
-                .subscribe(
-                  (data1)=>{
-                    console.log("data1-success", data1);
-                    if (data.user.level == 7 || data.user.level == 8){
-                      this.navCtrl.setRoot(HomePage);
-                    }
-                    else{
-                      this.navCtrl.setRoot(MaintenanceViewPage);
-                    }
-                    this.events.publish("user:changed");
-                  },
-                  (data1)=>{
-                    console.log("data1-failure", data1);
-                    if (data.user.level == 7 || data.user.level == 8){
-                      this.navCtrl.setRoot(HomePage);
-                    }
-                    else{
-                      this.navCtrl.setRoot(MaintenanceViewPage);
-                    }
-                    this.events.publish("user:changed");
-                  });
+              
               if (data.user.level == 7 || data.user.level == 8){
                 this.navCtrl.setRoot(HomePage);
               }
@@ -120,7 +120,7 @@ export class LoginPage {
               }
             } else{
               let alert = this.alertCtrl.create({
-                title: "Error", subTitle: "Invalid Credential", buttons: ['OK']
+                title: "Error", subTitle: "Credencial Invalida", buttons: ['OK']
               });
               alert.present();
             }

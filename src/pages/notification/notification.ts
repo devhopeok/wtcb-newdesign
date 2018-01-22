@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Events } from 'ionic-angular';
 import { UserService } from '../../providers/user-service';
 import { Storage } from '@ionic/storage';
+import { MaintenanceTrackerPage } from '../maintenance-tracker/maintenance-tracker';
 
 @Component({
   selector: 'page-notification',
@@ -17,7 +18,8 @@ export class NotificationPage {
   	public navParams: NavParams,
   	public userService: UserService,
   	public loadingCtrl: LoadingController,
-  	public storage: Storage) {
+  	public storage: Storage,
+    public events: Events) {
 
   }
 
@@ -46,5 +48,24 @@ export class NotificationPage {
 	      loading.dismiss();
 	      
 	    });
+  }
+
+  gotoMaintenanceView(requestId){
+    let data = {
+      token: this.token,
+      read: true
+    }
+    console.log("update noti data", requestId, data);
+    this.userService.updateNotification(requestId, data)
+    .subscribe(
+      (data) => {
+        this.events.publish("noti1:changed");
+        this.events.publish("noti2:changed");
+        this.events.publish("notification:changed");
+        this.navCtrl.push(MaintenanceTrackerPage, {requestKey: requestId});
+      },
+      (data) => {
+
+      });
   }
 }

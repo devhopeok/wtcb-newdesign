@@ -110,6 +110,9 @@ export class MyApp {
               ];
             }
             this.token=val.token;
+            this.storage.get('notification_count').then(val=>{
+              this.count = val;
+            });
             //this.getNotifications(val.token);
             this.events.publish("noti1:changed");
             this.events.publish("noti2:changed");
@@ -171,7 +174,7 @@ export class MyApp {
 
     this.oneSignal.handleNotificationOpened().subscribe(() => {
       // do something when a notification is opened
-      this.nav.setRoot(MaintenanceViewPage);
+      this.nav.setRoot(NotificationPage);
     });
 
     this.oneSignal.getIds().then((ids)=> {

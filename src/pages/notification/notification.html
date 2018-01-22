@@ -8,5 +8,11 @@
 </ion-header>
 
 <ion-content>
-  Coming Soon!
+  	<ion-list no-lines *ngFor="let notification of notifications" (click)="gotoMaintenanceView(notification.requestId);">
+        <ion-card>
+            <p class="notification-content" [ngClass]="{'notification-content-bold' : notification.read == false}">
+            	{{notification.notification}}
+            </p>
+        </ion-card>
+    </ion-list>
 </ion-content>

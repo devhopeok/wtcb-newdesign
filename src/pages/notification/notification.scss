@@ -1,3 +1,16 @@
 page-notification {
+	.notification-content{
+		color: #1b4c5c;
+		font-size: 20px;
+		margin: 10px;
+		position: relative;
+	}
 
+	.notification-content-bold{
+		color: #1b4c5c;
+		font-size: 20px;
+		margin: 10px;
+		position: relative;
+		font-weight: bold;
+	}
 }

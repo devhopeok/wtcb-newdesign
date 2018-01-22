@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>ESTADO DE SU SOLICITUD</ion-title>
+        <ion-title>Estado de su Solicitud</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -56,7 +56,7 @@
                         <ion-item>
                             <ion-toggle color="custom" [(ngModel)]="showQuote"></ion-toggle>
                             <ion-label>
-                                CARGAR COTIZACIÓN
+                                Cargar Cotización
                             </ion-label>
                         </ion-item>
                         <ion-item *ngIf="showQuote">
@@ -79,7 +79,7 @@
                     </ion-list>
 
                     <button ion-button block (click)="goToStep2()" class="main-btn" style="margin-top:2vw;" *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1">
-                        ENVIAR COTIZACIÓN
+                        Enviar Cotización
                     </button>
                 </div>
             </li>
@@ -103,7 +103,7 @@
 
                         </ion-item>
 
-                        <h2 class="header-style" style="text-align: center;">Técnico con tilde</h2>
+                        <h2 class="header-style" style="text-align: center;">Técnico</h2>
 
                         <ion-item>
                             <ion-label>Fecha</ion-label>
@@ -114,9 +114,9 @@
                             <ion-input type="text" [readonly]="true" [(ngModel)]="requestDetail.quote.time"></ion-input>
                         </ion-item>
 
-                        <p class="icon-style" style="word-wrap: break-word;">Usted va a recibir un correo electrónico con su cotización.  Por favor revise su correo</p>
+                        <p class="icon-style" style="word-wrap: break-word;">Usted va a recibir un correo electrónico con su cotización.  Por favor revise su correo.</p>
                         
-                        <p class="icon-style" *ngIf = "quoteAccept" style="word-wrap: break-word;">Quote Accepted</p>
+                        <p class="icon-style" *ngIf = "quoteAccept" style="word-wrap: break-word;">Cotización Aceptada.</p>
                         <!-- <ion-item>
                             <ion-toggle [(ngModel)]="quoteAccept"></ion-toggle>
                             <ion-label>
@@ -143,21 +143,21 @@
                         <ion-item *ngIf="!quoteAccept && !quoteDeny">
                             <ion-toggle color="custom" [(ngModel)]="quoteAccept" disabled="true"></ion-toggle>
                             <ion-label>
-                                COTIZACIÓN ACEPTADA
+                                Cotización Aceptada
                             </ion-label>
                         </ion-item>
 
                         <ion-item *ngIf="quoteAccept">
                             <ion-toggle color="custom" [(ngModel)]="quoteAccept" disabled="true"></ion-toggle>
                             <ion-label>
-                                COTIZACIÓN ACEPTADA
+                                Cotización Aceptada
                             </ion-label>
                         </ion-item>
 
                         <ion-item *ngIf="quoteDeny">
                             <ion-toggle color="custom" [(ngModel)]="quoteDeny" disabled="true"></ion-toggle>
                             <ion-label>
-                                Quote Denied
+                                Cotización Rechazada
                             </ion-label>
                         </ion-item>
 
@@ -201,7 +201,7 @@
 
                     <button ion-button block class="main-btn" style="margin-top:2vw;" (click)="goToStep3()"
                             *ngIf="(authUser.level == 7 || authUser.level == 8) && quoteAccept">
-                        PROGRAMAR VISITA
+                        Programar Visita
                     </button>
                 </div>
             </li>
@@ -263,7 +263,7 @@
                         <ion-item>
                             <ion-toggle color="custom" [(ngModel)]="scheduleAccept" disabled="true"></ion-toggle>
                             <ion-label>
-                                PROGRAMACIÓN ACEPTADA
+                                Programación Aceptada
                             </ion-label>
                         </ion-item>
                         <!-- <ion-item *ngIf="scheduleAccept">
@@ -314,9 +314,9 @@
                         </ion-item> -->
                         <ion-item>
                             <ion-icon class="icon-style" ios="ios-calendar" md="md-calendar"></ion-icon>
-                            FACTURA
-                            <ion-note class="icon-style" *ngIf="!is_paid" item-end>EN ESPERA</ion-note>
-                            <ion-note class="icon-style" *ngIf="is_paid" item-end>PAGADO</ion-note>
+                            Factura
+                            <ion-note class="icon-style" *ngIf="!is_paid" item-end>En Espera</ion-note>
+                            <ion-note class="icon-style" *ngIf="is_paid" item-end>Pagado</ion-note>
                         </ion-item>
                     </ion-list>
 
@@ -384,7 +384,7 @@
 
                     <button ion-button block icon-left class="main-btn" *ngIf="requestDetail.status5 == 1 && ((authUser.level == 7 || authUser.level == 8))" (click)="archiveRequest()">
                         <ion-icon ios="ios-cloud-download" md="md-cloud-download"></ion-icon>
-                        Archivo de Ticket
+                        Archivo del Ticket
                     </button>
                 </div>
             </li>
@@ -393,7 +393,7 @@
 
     <ion-list no-lines style="margin-top: 20px;">
         <ion-list-header class="header-style">
-            INFORMACIÓN CLIENTE
+            Información del Cliente
         </ion-list-header>
 
         <ion-avatar class="client-avatar">
@@ -426,7 +426,7 @@
 
     <ion-list no-lines>
         <ion-list-header class="header-style">
-            SOLICITADO POR
+            Solicitado por
         </ion-list-header>
         <!-- <ion-item class="icon-style">
             <ion-icon  ios="ios-person" md="md-person"></ion-icon>
@@ -436,7 +436,7 @@
         <ion-item>
             <ion-toggle color="custom" [(ngModel)]="viewRequest"></ion-toggle>
             <ion-label class="icon-style">
-                VER DETALES DE LA SOLICITUD
+                Ver Detalles De La Solicitud
             </ion-label>
         </ion-item>
     </ion-list>

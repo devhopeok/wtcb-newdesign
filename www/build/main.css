@@ -28003,6 +28003,7 @@ ion-navbar.toolbar {
   background-color: #e69846;
   color: white;
   border: 1px solid #e69846;
+  text-transform: capitalize;
 }
 
 .main-btn:hover {
@@ -28502,6 +28503,21 @@ page-maintenance-view .badge {
   position: absolute;
   top: 1px;
   right: 2px;
+}
+
+page-notification .notification-content {
+  color: #1b4c5c;
+  font-size: 20px;
+  margin: 10px;
+  position: relative;
+}
+
+page-notification .notification-content-bold {
+  color: #1b4c5c;
+  font-size: 20px;
+  margin: 10px;
+  position: relative;
+  font-weight: bold;
 }
 
 page-otrs-request ion-list {
