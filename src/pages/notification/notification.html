@@ -8,11 +8,18 @@
 </ion-header>
 
 <ion-content>
-  	<ion-list no-lines *ngFor="let notification of notifications" (click)="gotoMaintenanceView(notification.requestId);">
-        <ion-card>
-            <p class="notification-content" [ngClass]="{'notification-content-bold' : notification.read == false}">
-            	{{notification.notification}}
-            </p>
-        </ion-card>
+	<ion-list no-lines>
+	  	<ion-item-sliding style="border-bottom: 1px solid gray;" *ngFor="let notification of notifications">
+	        <ion-item (click)="gotoMaintenanceView(notification.requestId);" class="notification-content" [ngClass]="{'notification-content-bold' : notification.read == false}">
+	          	{{notification.notification}}
+	        </ion-item>
+
+	        <ion-item-options side="right">
+	        	<button ion-button color="danger" (click)="delete(notification._id)">
+		            <ion-icon name="ios-trash"></ion-icon>
+		            Delete
+		        </button>
+	        </ion-item-options>
+	    </ion-item-sliding>
     </ion-list>
 </ion-content>

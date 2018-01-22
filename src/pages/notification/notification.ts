@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, Events } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Events, AlertController } from 'ionic-angular';
 import { UserService } from '../../providers/user-service';
 import { Storage } from '@ionic/storage';
 import { MaintenanceTrackerPage } from '../maintenance-tracker/maintenance-tracker';
@@ -19,7 +19,8 @@ export class NotificationPage {
   	public userService: UserService,
   	public loadingCtrl: LoadingController,
   	public storage: Storage,
-    public events: Events) {
+    public events: Events,
+    public alertCtrl: AlertController) {
 
   }
 
@@ -66,6 +67,24 @@ export class NotificationPage {
       },
       (data) => {
 
+      });
+  }
+
+  delete(id){
+    let loading = this.loadingCtrl.create();
+    loading.present();
+    this.userService.deleteNotification(id, this.token)
+    .subscribe(
+      (data) => {
+        loading.dismiss();
+        let alert = this.alertCtrl.create({
+          title: "", subTitle: "La notificación ha sido eliminada con éxito.", buttons: ['OK']
+        });
+        alert.present();
+        this.getNotifications(this.token);
+      },
+      (data) => {
+        loading.dismiss();
       });
   }
 }
