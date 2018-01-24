@@ -36,6 +36,7 @@ export class MaintenanceTrackerPage {
     showQuote: any;
     quote = {date: '', time: '', comment: ''};
 
+    scheduleAccept1: any;
     //step 2
     quoteAccept: any;
     quoteDeny: any;
@@ -85,10 +86,14 @@ export class MaintenanceTrackerPage {
                 quote: {
                   date: '',
                   time: '',
+                  name: '',
+                  company: '',
+                  phone: '',
                   comment: ''
                 },
                 updated_at1: '',
             
+                statue1_5: 0,
             
                 status2: 0,
                 technician_info:{
@@ -125,7 +130,7 @@ export class MaintenanceTrackerPage {
 
         //step1
         this.showQuote = true;
-
+        this.scheduleAccept1 = false;
         //step2
         this.quoteAccept = false;
         this.showSchedule = false;
@@ -185,7 +190,7 @@ export class MaintenanceTrackerPage {
                    ];
 
                    this.request = data[0];
-                   if (this.request.step == 1){
+                   if (this.request.step == 1 || this.request.step == 1.5){
                      this.show1 = true;
                      this.show2 = false;
                      this.show3 = false;
@@ -224,10 +229,10 @@ export class MaintenanceTrackerPage {
                     console.log("this.request", this.request);
                     this.request.stepText = 'Step ' + this.request.step;
 
-                    if (this.authUser['level'] != 4) {
-                        this.request.stepText += ' - ' + steps[this.request.step - 1].current;
-                        this.request.stepNext = steps[this.request.step - 1].next;
-                    }
+                    // if (this.authUser['level'] != 4) {
+                    //     this.request.stepText += ' - ' + steps[this.request.step - 1].current;
+                    //     this.request.stepNext = steps[this.request.step - 1].next;
+                    // }
 
                     this.loadStepDetail();
                     this.loadUser();
@@ -280,6 +285,10 @@ export class MaintenanceTrackerPage {
 
                 if (this.requestDetail['status1'] == 2) {
                     this.quoteDeny = true;
+                }
+
+                if (this.requestDetail['status1_5'] == 1){
+                  this.scheduleAccept1 = true;
                 }
 
                 if (this.requestDetail['status2'] == 1) {
@@ -339,6 +348,63 @@ export class MaintenanceTrackerPage {
             });
     }
     
+    public goToStep1_5(){
+      this.requestDetail.token = this.token;
+        this.requestDetail.quote = this.quote;
+        this.requestDetail.step = 1.5;
+        let loading = this.loadingCtrl.create();
+        loading.present();
+     
+        this.userService.updateStep(this.requestDetailKey, this.requestDetail)
+        .subscribe(
+          (data1) => {
+            let params = {
+                token: this.token,
+                step: 1.5
+            }
+            this.userService.updateRequest(this.requestKey, params)
+            .subscribe(
+              (data) => {
+                  loading.dismiss();
+                  this.request.step = 1.5;
+                  let alert = this.alertCtrl.create({
+                    title: "", subTitle: "Enviaste el tiempo de visita con éxito.", buttons: ['OK']
+                  });
+                  alert.present();
+              },
+              (data) => {
+                loading.dismiss();
+              });
+          },
+          (data1) => {
+            loading.dismiss();
+          });
+        console.log("aaaaaaaaaaaaaaaaaaaaaa", this.request._id);
+        
+        // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled the time of first meeting for quote.", this.token);
+        this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha programado una visita inicial para hacerle una cotización.", this.token);
+    }
+
+    acceptSchedule1(){
+      this.requestDetail.status1_5 = 1;
+      this.requestDetail.token = this.token;
+      let loading = this.loadingCtrl.create();
+      loading.present();
+      this.userService.updateStep(this.requestDetailKey, this.requestDetail)
+      .subscribe(
+        (data1) => {
+          loading.dismiss();
+          this.scheduleAccept1 = true;
+        },
+        (data1) => {
+          loading.dismiss();
+          this.scheduleAccept1 = false;
+        });
+      
+      this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente acepó la visita programada.", this.token);
+      // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
+    }
+
     public goToStep2() {
         this.show1=false;
         this.show2=true;
@@ -605,8 +671,8 @@ export class MaintenanceTrackerPage {
                 loading.dismiss();
               });
             
-             this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha finalizado los trabajos correspondientes.", this.token);
-              // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager completed your request", this.token);
+             this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha finalizado los trabajos correspondientes. Tienes que pagar", this.token);
+             // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager completed your request", this.token);
             
     }
 
@@ -731,6 +797,7 @@ export class MaintenanceTrackerPage {
     }
 
     public leaveReview() {
+        this.show5 = false;
         this.requestDetail.token = this.token;
         this.requestDetail.star = this.rate;
         this.requestDetail.comment = this.comment;
@@ -751,6 +818,7 @@ export class MaintenanceTrackerPage {
     }
 
     public archiveRequest() {
+      this.show5 = false;
         let loading = this.loadingCtrl.create();
         loading.present();
         let params = {

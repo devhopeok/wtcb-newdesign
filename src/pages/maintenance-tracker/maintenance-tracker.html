@@ -29,14 +29,6 @@
 
                 <div *ngIf="show1">
                     <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 1">
-                        <!-- <ion-item>
-                            <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>
-                            <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY'}}</ion-note>
-                            -
-                            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>
-                            <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'h:mm a'}}</ion-note>
-                        </ion-item> -->
-                        
                         <ion-item>
                             <ion-toggle color="custom" checked="true" disabled="true"></ion-toggle>
                             <ion-label class="icon-style">
@@ -45,14 +37,64 @@
                         </ion-item>
                     </ion-list>
 
-                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1">
-                        <!-- <ion-item>
-                            <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>
-                            <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY'}}</ion-note>
-                            -
-                            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>
-                            <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'h:mm a'}}</ion-note>
-                        </ion-item> -->
+                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1 && !scheduleAccept1">
+                        <h2 class="header-style" style="text-align: center;">Visita Técnica</h2>
+
+                        <ion-item>
+                            <ion-label>Fecha</ion-label>
+                            <ion-datetime placeholder="Seleccione una fecha." displayFormat="MMM DD YYYY" [(ngModel)]="quote.date"></ion-datetime>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Hora</ion-label>
+                            <ion-datetime placeholder="Seleccione una hora." displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="quote.time"></ion-datetime>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Nombre del técnico</ion-label>
+                            <ion-input type="text" [(ngModel)]="quote.name"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Nombre del cliente</ion-label>
+                            <ion-input type="text" [(ngModel)]="quote.company"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Teléfono</ion-label>
+                            <ion-input type="text" [(ngModel)]="quote.phone"></ion-input>
+                        </ion-item>
+                    </ion-list>
+                    <button ion-button block (click)="goToStep1_5()" class="main-btn" style="margin-top:2vw;" *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1 && !scheduleAccept1">
+                        Programar Visita
+                    </button>
+
+                    <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 1.5">
+                        <h2 class="header-style" style="text-align: center;">Técnico</h2>
+
+                        <ion-item>
+                            <ion-label>Fecha</ion-label>
+                            <ion-input type="text" [readonly]="true" [(ngModel)]="requestDetail.quote.date"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Hora</ion-label>
+                            <ion-input type="text" [readonly]="true" [(ngModel)]="requestDetail.quote.time"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Nombre del técnico</ion-label>
+                            <ion-input type="text" [(ngModel)]="requestDetail.quote.name"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Nombre del cliente</ion-label>
+                            <ion-input type="text" [(ngModel)]="requestDetail.quote.company"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Teléfono</ion-label>
+                            <ion-input type="text" [(ngModel)]="requestDetail.quote.phone"></ion-input>
+                        </ion-item>
+                    </ion-list>
+
+                    <button ion-button block (click)="acceptSchedule1()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 1.5 && (authUser.level == '3.1' || authUser.level == '3.2') && !scheduleAccept1">
+                        Aceptar Horario
+                    </button>
+
+                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && (request.step >= 1.5) && scheduleAccept1">
                         <ion-item>
                             <ion-toggle color="custom" [(ngModel)]="showQuote"></ion-toggle>
                             <ion-label>
@@ -66,19 +108,10 @@
 
                         </ion-item>
 
-                        <h2 class="header-style" style="text-align: center;">Visita Técnica</h2>
-
-                        <ion-item *ngIf="showQuote">
-                            <ion-label>Fecha</ion-label>
-                            <ion-datetime placeholder="Seleccione una fecha." displayFormat="MMM DD YYYY" [(ngModel)]="quote.date"></ion-datetime>
-                        </ion-item>
-                        <ion-item *ngIf="showQuote">
-                            <ion-label>Hora</ion-label>
-                            <ion-datetime placeholder="Seleccione una hora." displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="quote.time"></ion-datetime>
-                        </ion-item>
                     </ion-list>
+                    
 
-                    <button ion-button block (click)="goToStep2()" class="main-btn" style="margin-top:2vw;" *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1">
+                    <button ion-button block (click)="goToStep2()" class="main-btn" style="margin-top:2vw;" *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1.5 && scheduleAccept1">
                         Enviar Cotización
                     </button>
                 </div>
@@ -88,13 +121,7 @@
                 
                 <div *ngIf="show2">
                     <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 2">
-                        <!-- <ion-item>
-                            <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>
-                            <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY'}}</ion-note>
-                            -
-                            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>
-                            <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'h:mm a'}}</ion-note>
-                        </ion-item> -->
+                        
                         
                         <ion-item>
                             <div>
@@ -103,43 +130,23 @@
 
                         </ion-item>
 
-                        <h2 class="header-style" style="text-align: center;">Técnico</h2>
-
-                        <ion-item>
-                            <ion-label>Fecha</ion-label>
-                            <ion-input type="text" [readonly]="true" [(ngModel)]="requestDetail.quote.date"></ion-input>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label>Hora</ion-label>
-                            <ion-input type="text" [readonly]="true" [(ngModel)]="requestDetail.quote.time"></ion-input>
-                        </ion-item>
+                        
 
                         <p class="icon-style" style="word-wrap: break-word;">Usted va a recibir un correo electrónico con su cotización.  Por favor revise su correo.</p>
                         
                         <p class="icon-style" *ngIf = "quoteAccept" style="word-wrap: break-word;">Cotización Aceptada.</p>
-                        <!-- <ion-item>
-                            <ion-toggle [(ngModel)]="quoteAccept"></ion-toggle>
-                            <ion-label>
-                                Accept Quote
-                            </ion-label>
-                        </ion-item> -->
+                        
                     </ion-list>
 
-                    <button ion-button block (click)="acceptQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == '3.1' || authUser.level == '3.2') && (!quoteAccept || !quoteDeny)">
+                    <button ion-button block (click)="acceptQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == '3.1' || authUser.level == '3.2') && (!quoteAccept && !quoteDeny)">
                         Aceptar Cotización
                     </button>
-                    <button ion-button block (click)="denyQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == '3.1' || authUser.level == '3.2') && (!quoteAccept || !quoteDeny)">
+                    <button ion-button block (click)="denyQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == '3.1' || authUser.level == '3.2') && (!quoteAccept && !quoteDeny)">
                         Rechazar Cotización
                     </button>
                 
                     <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 2">
-                        <!-- <ion-item>
-                            <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>
-                            <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY'}}</ion-note>
-                            -
-                            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>
-                            <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'h:mm a'}}</ion-note>
-                        </ion-item> -->
+                        
                         <ion-item *ngIf="!quoteAccept && !quoteDeny">
                             <ion-toggle color="custom" [(ngModel)]="quoteAccept" disabled="true"></ion-toggle>
                             <ion-label>
@@ -298,7 +305,7 @@
                         </ion-item>
                     </ion-list>
 
-                    <button ion-button block icon-left class="main-btn" *ngIf="request.step == 4 && (authUser.level == '3.1' || authUser.level == '3.2')" (click)="payInvoice()">
+                    <button ion-button block icon-left class="main-btn" *ngIf="request.step == 4 && (authUser.level == '3.1' || authUser.level == '3.2') && !is_paid" (click)="payInvoice()">
                         <ion-icon ios="ios-card" md="md-card"></ion-icon>
                         Pago de Factura
                     </button>
