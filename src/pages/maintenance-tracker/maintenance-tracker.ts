@@ -167,27 +167,27 @@ export class MaintenanceTrackerPage {
               .subscribe(
                 (data) => {
                   loading.dismiss();
-                  let steps = [
-                    {
-                        current: 'Received',
-                        next: 'SEND QUOTE'
-                    }, {
-                        current: 'Quote',
-                        next: 'TECHNICIAN'
-                    }, {
-                        current: 'Tech',
-                        next: 'COMPLETED'
-                    }, {
-                        current: 'Completed',
-                        next: 'INVOICE'
-                    }, {
-                        current: 'Paid',
-                        next: 'CLOSE'
-                    }, {
-                        current: 'Closed',
-                        next: ''
-                    }
-                   ];
+                  // let steps = [
+                  //   {
+                  //       current: 'Received',
+                  //       next: 'SEND QUOTE'
+                  //   }, {
+                  //       current: 'Quote',
+                  //       next: 'TECHNICIAN'
+                  //   }, {
+                  //       current: 'Tech',
+                  //       next: 'COMPLETED'
+                  //   }, {
+                  //       current: 'Completed',
+                  //       next: 'INVOICE'
+                  //   }, {
+                  //       current: 'Paid',
+                  //       next: 'CLOSE'
+                  //   }, {
+                  //       current: 'Closed',
+                  //       next: ''
+                  //   }
+                  //  ];
 
                    this.request = data[0];
                    if (this.request.step == 1 || this.request.step == 1.5){

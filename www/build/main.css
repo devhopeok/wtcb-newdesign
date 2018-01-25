@@ -28032,6 +28032,11 @@ ion-navbar.toolbar {
   vertical-align: middle;
 }
 
+.picker-md .picker-opt {
+  font-size: 20px !important;
+  max-width: 50px !important;
+}
+
 page-building-list ion-card {
   margin: 0px !important;
   margin-bottom: 15px !important;

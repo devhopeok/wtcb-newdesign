@@ -81,6 +81,9 @@ export class NotificationPage {
           title: "", subTitle: "La notificación ha sido eliminada con éxito.", buttons: ['OK']
         });
         alert.present();
+        this.events.publish("noti1:changed");
+        this.events.publish("noti2:changed");
+        this.events.publish("notification:changed");
         this.getNotifications(this.token);
       },
       (data) => {
