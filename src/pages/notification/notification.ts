@@ -51,19 +51,20 @@ export class NotificationPage {
 	    });
   }
 
-  gotoMaintenanceView(requestId){
+  gotoMaintenanceView(notification){
+    notification.read = true;
     let data = {
       token: this.token,
       read: true
     }
-    console.log("update noti data", requestId, data);
-    this.userService.updateNotification(requestId, data)
+    console.log("update noti data", notification.requestId, data);
+    this.userService.updateNotification(notification.requestId, data)
     .subscribe(
       (data) => {
         this.events.publish("noti1:changed");
         this.events.publish("noti2:changed");
         this.events.publish("notification:changed");
-        this.navCtrl.push(MaintenanceTrackerPage, {requestKey: requestId});
+        this.navCtrl.push(MaintenanceTrackerPage, {requestKey: notification.requestId});
       },
       (data) => {
 

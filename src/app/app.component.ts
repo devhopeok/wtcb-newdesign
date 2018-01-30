@@ -37,6 +37,7 @@ export class MyApp {
       { title: 'Mantenimiento', component: MaintenanceViewPage },
       { title: 'Edificios', component: BuildingListPage},
       { title: 'Notificaciones', component: NotificationPage},
+      { title: 'Analytics', component: AnalyticsPage},
       { title: 'Sign Out', component: null}
     ];
 
@@ -98,6 +99,7 @@ export class MyApp {
                 { title: 'Mantenimiento', component: MaintenanceViewPage },
                 { title: 'Edificios', component: BuildingListPage},
                 { title: 'Notificaciones', component: NotificationPage},
+                { title: 'Analytics', component: AnalyticsPage},
                 { title: 'Sign Out', component: null}
               ];
             }

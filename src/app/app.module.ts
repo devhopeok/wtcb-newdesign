@@ -15,6 +15,7 @@ import { BuildingListPage } from '../pages/building-list/building-list';
 import { CreateOfficePage } from '../pages/create-office/create-office';
 import { BuildingProfilePage } from '../pages/building-profile/building-profile';
 import { NotificationPage } from '../pages/notification/notification';
+import { AnalyticsPage } from '../pages/analytics/analytics';
 import { PopupPage } from '../pages/popup/popup';
 
 import { UserService } from '../providers/user-service';
@@ -77,7 +78,8 @@ const cloudSettings: CloudSettings = {
     BuildingProfilePage,
     MaintenanceTrackerPage,
     PopupPage,
-    NotificationPage
+    NotificationPage,
+    AnalyticsPage
   ],
   imports: [
     BrowserModule,
@@ -104,7 +106,8 @@ const cloudSettings: CloudSettings = {
     BuildingProfilePage,
     MaintenanceTrackerPage,
     PopupPage,
-    NotificationPage
+    NotificationPage,
+    AnalyticsPage
   ],
   providers: [
     StatusBar,
