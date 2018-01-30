@@ -95,6 +95,16 @@ export class UserService {
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  getSteps(token){
+    let headers = new Headers({'Content-Type': 'application/json'});
+    
+    let options = new RequestOptions({headers: headers});
+
+    return this.http.get(this.baseService.stepUrl + "?token=" + token, options)
+      .map((res:Response)=>res.json())
+      .catch((error:any)=>Observable.throw(error.json().error || 'Server error'));
+  }
+
   getRequestsByOffice(officeKey, token){
     let headers = new Headers({'Content-Type': 'application/json'});
     

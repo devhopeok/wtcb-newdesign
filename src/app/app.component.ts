@@ -9,6 +9,7 @@ import { LoginPage } from '../pages/login/login';
 import { MaintenanceViewPage } from '../pages/maintenance-view/maintenance-view';
 import { BuildingListPage } from '../pages/building-list/building-list';
 import { NotificationPage } from '../pages/notification/notification';
+import { AnalyticsPage } from '../pages/analytics/analytics';
 import { Storage } from '@ionic/storage';
 import {Push} from '@ionic/cloud-angular';
 import { Badge } from '@ionic-native/badge';

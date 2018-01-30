@@ -29,7 +29,19 @@ export class AnalyticsPage {
       if (val != null){
         this.authUser = val.user;
         this.token = val.token;
-        
+
+        let loading = this.loadingCtrl.create();
+        loading.present();
+        this.userService.getSteps(this.token)
+          .subscribe(
+            (data) => {
+              loading.dismiss();
+              console.log("steps", data);
+            },
+            (data) => {
+              loading.dismiss();
+              
+            });
       }
     });
   }
