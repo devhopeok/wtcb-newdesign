@@ -185,6 +185,16 @@ export class UserService {
       .catch((error:any)=>Observable.throw(error.json().error || 'Server error'));
   }
 
+  getUserByEmail(email){
+    let headers = new Headers({'Content-Type': 'application/json'});
+    
+    let options = new RequestOptions({headers: headers});
+
+    return this.http.get(this.baseService.getUserUrl + 'byemail/' + email, options)
+      .map((res:Response)=>res.json())
+      .catch((error:any)=>Observable.throw(error.json().error || 'Server error'));
+  }
+
   updateRequest(id, request){
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
