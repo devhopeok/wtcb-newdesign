@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, LoadingController, Events, AlertController } from 'ionic-angular';
 import { UserService } from '../../providers/user-service';
 import { Storage } from '@ionic/storage';
+import { Chart } from 'chart.js';
 // import { MaintenanceTrackerPage } from '../maintenance-tracker/maintenance-tracker';
 
 @Component({
@@ -9,11 +10,19 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'analytics.html'
 })
 export class AnalyticsPage {
-  
+  @ViewChild('doughnutCanvas') doughnutCanvas;
+  doughnutChart: any;
+
   token: any;
   authUser: any;
   closedSteps: any;
   stars: any;
+
+  five_stars = [];
+  four_stars = [];
+  three_stars = [];
+  two_stars = [];
+  one_star = [];
   constructor(public navCtrl: NavController,
   	public navParams: NavParams,
   	public userService: UserService,
@@ -22,6 +31,35 @@ export class AnalyticsPage {
     public events: Events,
     public alertCtrl: AlertController) {
 
+  }
+
+  ionViewDidLoad(){
+    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+ 
+            type: 'doughnut',
+            data: {
+                labels: ["Open Tickets", "Closed Tickets", "Rejected Tickets", "Payed Tickets"],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                        
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        "#FF6384"
+                        
+                    ]
+                }]
+            }
+ 
+        });
   }
 
   ionViewWillEnter(){
@@ -59,9 +97,9 @@ export class AnalyticsPage {
                   ave += xxx[key][j].star / xxx[key].length;
                 }
                 this.stars.push({email: key, star: ave});
-
-                this.getStarReview();
               }
+
+              this.getStarReview();
               console.log("closed request steps", this.stars);
             },
             (data) => {
@@ -78,7 +116,13 @@ export class AnalyticsPage {
   }
 
   getStarReview(){
-    let count=0;
+    
+    this.five_stars = [];
+    this.four_stars = [];
+    this.three_stars = [];
+    this.two_stars = [];
+    this.one_star = [];
+    console.log(this.stars.length, "this.stars.length");
      for (let i=0; i< this.stars.length; i++){
        let loading = this.loadingCtrl.create();
         loading.present();
@@ -89,7 +133,22 @@ export class AnalyticsPage {
               
               this.userService.getOfficesById(data.officeKey, this.token).subscribe(
                 (data1)=>{
-                    console.log(this.stars[i].email, data1[0].name, this.stars[i].star);
+                    
+                    if (this.stars[i].star >= 4.5){
+                      this.five_stars.push(data1[0].name);
+                    }
+                    else if (this.stars[i].star >= 3.5){
+                      this.four_stars.push(data1[0].name);
+                    }
+                    else if (this.stars[i].star >= 2.5){
+                      this.three_stars.push(data1[0].name);
+                    }
+                    else if (this.stars[i].star > 1.5){
+                      this.two_stars.push(data1[0].name);
+                    }
+                    else{
+                      this.one_star.push(data1[0].name);
+                    }
                 },
                 (data1)=>{
                     

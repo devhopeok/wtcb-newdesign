@@ -36,6 +36,7 @@ import { Badge } from '@ionic-native/badge';
 import { MomentModule } from 'angular2-moment';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { OneSignal } from '@ionic-native/onesignal';
+import { ChartsModule } from 'ng2-charts';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDzuNnzZXieJMFnG9C2-VRjPN3IfuJ_EoI",
@@ -87,6 +88,7 @@ const cloudSettings: CloudSettings = {
     TextMaskModule,
     MomentModule,
     Ionic2RatingModule,
+    ChartsModule,
     IonicModule.forRoot(MyApp),
     // AngularFireModule.initializeApp(firebaseConfig),
     IonicStorageModule.forRoot(),
