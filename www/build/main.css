@@ -28533,6 +28533,13 @@ page-maintenance-view .width-10 img {
   width: 12vw;
 }
 
+page-maintenance-view .width-10.request-id {
+  color: #1b4c5c;
+  font-size: 3vw;
+  display: block !important;
+  margin: auto 0;
+}
+
 page-maintenance-view .width-20 {
   max-width: 30%;
   display: block !important;
@@ -28562,7 +28569,7 @@ page-maintenance-view .header-style {
 page-maintenance-view .office-name {
   color: #1b4c5c;
   font-size: 5vw;
-  margin-top: 2vw;
+  margin-top: 1vw;
 }
 
 page-maintenance-view .building-name {

@@ -58,9 +58,10 @@ export class NotificationPage {
       read: true
     }
     console.log("update noti data", notification.requestId, data);
-    this.userService.updateNotification(notification.requestId, data)
+    this.userService.updateNotification(notification._id, data)
     .subscribe(
       (data) => {
+        console.log("updated read data", data);
         this.events.publish("noti1:changed");
         this.events.publish("noti2:changed");
         this.events.publish("notification:changed");

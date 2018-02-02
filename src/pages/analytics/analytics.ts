@@ -15,7 +15,10 @@ export class AnalyticsPage {
 
   token: any;
   authUser: any;
-  closedSteps: any;
+  openedSteps = [];
+  closedSteps = [];
+  rejectedSteps = [];
+  paidSteps = [];
   stars: any;
 
   five_stars = [];
@@ -34,32 +37,7 @@ export class AnalyticsPage {
   }
 
   ionViewDidLoad(){
-    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
- 
-            type: 'doughnut',
-            data: {
-                labels: ["Open Tickets", "Closed Tickets", "Rejected Tickets", "Payed Tickets"],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)'
-                        
-                    ],
-                    hoverBackgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56",
-                        "#FF6384"
-                        
-                    ]
-                }]
-            }
- 
-        });
+    
   }
 
   ionViewWillEnter(){
@@ -81,11 +59,19 @@ export class AnalyticsPage {
         this.userService.getSteps(this.token)
           .subscribe(
             (data) => {
+              console.log("steps", data);
               loading.dismiss();
               this.stars = [];
               for (let i=0; i<data.length; i++){
                 if (data[i].status5 == 1){
                   this.closedSteps.push(data[i]);
+                }
+                else if(data[i].status1 == 2){
+                  this.rejectedSteps.push(data[i]);
+                }
+
+                if (data[i].step>=5){
+                  this.paidSteps.push(data[i]);
                 }
               }
               
@@ -101,6 +87,51 @@ export class AnalyticsPage {
 
               this.getStarReview();
               console.log("closed request steps", this.stars);
+
+              let loading1 = this.loadingCtrl.create();
+              loading1.present();
+              this.userService.getAllRequests(this.token)
+                .subscribe(
+                  (data) => {
+                    loading1.dismiss();
+                    for (let i=0; i<data.length; i++){
+                      if (data[i].step > 5) {
+                        // this.closedRequests.push(data[i]);
+                      }else {
+                        this.openedSteps.push(data[i]);
+
+                      }
+                    }
+
+                    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ["Open Tickets", "Closed Tickets", "Rejected Tickets", "Payed Tickets"],
+                            datasets: [{
+                                label: '# of Votes',
+                                data: [this.openedSteps.length, this.closedSteps.length, this.rejectedSteps.length, this.paidSteps.length],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.5)',
+                                    'rgba(54, 162, 235, 0.5)',
+                                    'rgba(255, 206, 86, 0.5)',
+                                    'rgba(75, 192, 192, 0.5)'
+                                ],
+                                hoverBackgroundColor: [
+                                    "#FF6384",
+                                    "#36A2EB",
+                                    "#FFCE56",
+                                    "#FF6384"
+                                ]
+                            }]
+                        }
+             
+                    });
+                  },
+                  (data) => {
+                    loading1.dismiss();
+                    
+                  });
+              
             },
             (data) => {
               loading.dismiss();

@@ -57,6 +57,13 @@ page-maintenance-view {
 		img{
 			width: 12vw;
 		}
+
+		&.request-id{
+			color:#1b4c5c; 
+			font-size: 3vw; 
+			display: block !important; 
+			margin: auto 0;
+		}
 	}
 
 	.width-20 {
@@ -88,7 +95,7 @@ page-maintenance-view {
 	.office-name{
 		color:#1b4c5c;
 		font-size: 5vw;
-		margin-top: 2vw;
+		margin-top: 1vw;
 	}
 
 	.building-name{
