@@ -26,6 +26,17 @@ export class AnalyticsPage {
   three_stars = [];
   two_stars = [];
   one_star = [];
+
+  avg_time1 : any;
+  avg_time2: any;
+  avg_time3: any;
+  avg_time4: any;
+
+  update_time_array1 : any;
+  update_time_array2: any;
+  update_time_array3: any;
+  update_time_array4: any;
+
   constructor(public navCtrl: NavController,
   	public navParams: NavParams,
   	public userService: UserService,
@@ -62,6 +73,16 @@ export class AnalyticsPage {
               console.log("steps", data);
               loading.dismiss();
               this.stars = [];
+              this.avg_time1 = 0;
+              this.avg_time2 = 0;
+              this.avg_time3 = 0;
+              this.avg_time4 = 0;
+
+              this.update_time_array1 = [];
+              this.update_time_array2 = [];
+              this.update_time_array3 = [];
+              this.update_time_array4 = [];
+
               for (let i=0; i<data.length; i++){
                 if (data[i].status5 == 1){
                   this.closedSteps.push(data[i]);
@@ -73,8 +94,57 @@ export class AnalyticsPage {
                 if (data[i].step>=5){
                   this.paidSteps.push(data[i]);
                 }
+
+                if (data[i].updated_at5){
+                  let start_date: any = new Date(data[i].updated_at5);
+                  if (data[i].updated_at4){
+                    let date4: any = new Date(data[i].updated_at4);
+                    this.update_time_array4.push(date4 - start_date);
+                  }
+
+                  if (data[i].updated_at3){
+                    let date3: any = new Date(data[i].updated_at3);
+                    this.update_time_array3.push(date3 - start_date);
+                  }
+                  
+                  if (data[i].updated_at2){
+                    let date2: any = new Date(data[i].updated_at2);
+                    this.update_time_array2.push(date2 - start_date);
+                  }
+                  
+                  if (data[i].updated_at1){
+                    let date1: any = new Date(data[i].updated_at1);
+                    this.update_time_array1.push(date1 - start_date);
+                  }
+                }
               }
-              
+
+              for (let i1=0; i1<this.update_time_array1.length; i1++){
+                this.avg_time1 += this.update_time_array1[i1]/this.update_time_array1.length;
+              }
+
+              for (let i2=0; i2<this.update_time_array2.length; i2++){
+                this.avg_time2 += this.update_time_array2[i2]/this.update_time_array2.length;
+              }
+
+              for (let i3=0; i3<this.update_time_array3.length; i3++){
+                this.avg_time3 += this.update_time_array3[i3]/this.update_time_array3.length;
+              }
+
+              for (let i4=0; i4<this.update_time_array4.length; i4++){
+                this.avg_time4 += this.update_time_array4[i4]/this.update_time_array4.length;
+              }
+
+              this.avg_time4 = this.timeConversion(this.avg_time4);
+              this.avg_time3 = this.timeConversion(this.avg_time3);
+              this.avg_time2 = this.timeConversion(this.avg_time2);
+              this.avg_time1 = this.timeConversion(this.avg_time1);
+              console.log("444444", this.avg_time4);
+              console.log("333333", this.avg_time3);
+              console.log("222222", this.avg_time2);
+              console.log("111111", this.avg_time1);
+
+
               let xxx = this.groupBy(this.closedSteps, 'email');
               for (let key in xxx){
                 console.log("key", key);
@@ -138,6 +208,27 @@ export class AnalyticsPage {
               
             });
   }
+
+  timeConversion(millisec) {
+
+        var seconds = (millisec / 1000);
+
+        var minutes = (millisec / (1000 * 60));
+
+        var hours = (millisec / (1000 * 60 * 60));
+
+        var days = (millisec / (1000 * 60 * 60 * 24));
+
+        if (seconds < 60) {
+            return seconds.toFixed(0) + " Secs";
+        } else if (minutes < 60) {
+            return minutes.toFixed(0) + " Mins";
+        } else if (hours < 24) {
+            return hours.toFixed(0) + " Hrs";
+        } else {
+            return days.toFixed(0) + " Days"
+        }
+    }
 
   groupBy(xs, key) {
     return xs.reduce(function(rv, x) {

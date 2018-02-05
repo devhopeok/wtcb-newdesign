@@ -223,6 +223,7 @@ export class OtrsRequestPage {
         this.otrsRequest.officeKey = this.officeKey;
         this.otrsRequest.token = this.token;
         this.otrsRequest.officeName = this.office.name;
+        this.otrsRequest.created_at = new Date();
 
         this.otrsRequest.buildingName = this.building_name;
         this.otrsRequest.floorName = this.floor_name;
@@ -270,7 +271,7 @@ export class OtrsRequestPage {
                        
                         star: '',
                         comment: '',
-                        updated_at5: ''
+                        updated_at5: this.otrsRequest.created_at
                     };
 
                     this.userService.createStep(newSteps)

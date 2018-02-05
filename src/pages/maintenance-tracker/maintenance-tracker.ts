@@ -34,7 +34,7 @@ export class MaintenanceTrackerPage {
 
     //step 1
     showQuote: any;
-    quote = {date: '', time: '', comment: ''};
+    quote = {date: '', time: '', comment: '', company: '', name: '', phone: ''};
 
     scheduleAccept1: any;
     //step 2
@@ -349,40 +349,52 @@ export class MaintenanceTrackerPage {
     }
     
     public goToStep1_5(){
-      this.requestDetail.token = this.token;
-        this.requestDetail.quote = this.quote;
-        this.requestDetail.step = 1.5;
-        let loading = this.loadingCtrl.create();
-        loading.present();
-     
-        this.userService.updateStep(this.requestDetailKey, this.requestDetail)
-        .subscribe(
-          (data1) => {
-            let params = {
-                token: this.token,
-                step: 1.5
-            }
-            this.userService.updateRequest(this.requestKey, params)
-            .subscribe(
-              (data) => {
-                  loading.dismiss();
-                  this.request.step = 1.5;
-                  let alert = this.alertCtrl.create({
-                    title: "", subTitle: "Enviaste el tiempo de visita con éxito.", buttons: ['OK']
-                  });
-                  alert.present();
-              },
-              (data) => {
-                loading.dismiss();
-              });
-          },
-          (data1) => {
-            loading.dismiss();
+
+      if (this.quote.company == '' || this.quote.date == '' || this.quote.name == '' || 
+           this.quote.phone == '' || this.quote.time == ''){
+          let alert = this.alertCtrl.create({
+            title: "Error", subTitle: "Please fill in the blanks", buttons: ['OK']
           });
-        console.log("aaaaaaaaaaaaaaaaaaaaaa", this.request._id);
-        
-        // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled the time of first meeting for quote.", this.token);
-        this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha programado una visita inicial para hacerle una cotización.", this.token);
+          alert.present();
+        }
+      else{
+          this.requestDetail.token = this.token;
+          this.requestDetail.quote = this.quote;
+          this.requestDetail.step = 1.5;
+          this.requestDetail.updated_at1 = new Date();
+          let loading = this.loadingCtrl.create();
+          loading.present();
+       
+          this.userService.updateStep(this.requestDetailKey, this.requestDetail)
+          .subscribe(
+            (data1) => {
+              let params = {
+                  token: this.token,
+                  step: 1.5
+              }
+              this.userService.updateRequest(this.requestKey, params)
+              .subscribe(
+                (data) => {
+                    loading.dismiss();
+                    this.request.step = 1.5;
+                    let alert = this.alertCtrl.create({
+                      title: "", subTitle: "Enviaste el tiempo de visita con éxito.", buttons: ['OK']
+                    });
+                    alert.present();
+                },
+                (data) => {
+                  loading.dismiss();
+                });
+            },
+            (data1) => {
+              loading.dismiss();
+            });
+          console.log("aaaaaaaaaaaaaaaaaaaaaa", this.request._id);
+          
+          // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled the time of first meeting for quote.", this.token);
+          this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha programado una visita inicial para hacerle una cotización.", this.token);
+    
+      }
     }
 
     acceptSchedule1(){
@@ -432,6 +444,7 @@ export class MaintenanceTrackerPage {
         this.requestDetail.token = this.token;
         this.requestDetail.quote = this.quote;
         this.requestDetail.step = 2;
+
         let loading = this.loadingCtrl.create();
         loading.present();
         console.log("this.requestDeatialasdfadsfadsfa", this.requestDetailKey);
@@ -464,6 +477,7 @@ export class MaintenanceTrackerPage {
     acceptQuote(){
       this.requestDetail.status1 = 1;
       this.requestDetail.token = this.token;
+
       let loading = this.loadingCtrl.create();
       loading.present();
       this.userService.updateStep(this.requestDetailKey, this.requestDetail)
@@ -609,6 +623,7 @@ export class MaintenanceTrackerPage {
     acceptSchedule(){
       this.requestDetail.status2 = 1;
       this.requestDetail.token = this.token;
+      this.requestDetail.updated_at2 = new Date();
       let loading = this.loadingCtrl.create();
       loading.present();
       this.userService.updateStep(this.requestDetailKey, this.requestDetail)
@@ -648,6 +663,8 @@ export class MaintenanceTrackerPage {
             this.requestDetail.token = this.token;
             this.requestDetail.is_completed = true;
             this.requestDetail.step = 4;
+            this.requestDetail.updated_at3 = new Date();
+
             let loading = this.loadingCtrl.create();
             loading.present();
             this.userService.updateStep(this.requestDetailKey, this.requestDetail)
@@ -763,6 +780,7 @@ export class MaintenanceTrackerPage {
         
         this.requestDetail.token = this.token;
         this.requestDetail.is_paid = true;
+        this.requestDetail.updated_at4 = new Date();
         this.requestDetail.step = 5;
         let loading = this.loadingCtrl.create();
         loading.present();

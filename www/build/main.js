@@ -833,6 +833,7 @@ var OtrsRequestPage = (function () {
         this.otrsRequest.officeKey = this.officeKey;
         this.otrsRequest.token = this.token;
         this.otrsRequest.officeName = this.office.name;
+        this.otrsRequest.created_at = new Date();
         this.otrsRequest.buildingName = this.building_name;
         this.otrsRequest.floorName = this.floor_name;
         console.log("this.otrsRequest", this.otrsRequest);
@@ -869,7 +870,7 @@ var OtrsRequestPage = (function () {
                         updated_at4: '',
                         star: '',
                         comment: '',
-                        updated_at5: ''
+                        updated_at5: _this.otrsRequest.created_at
                     };
                     _this.userService.createStep(newSteps)
                         .subscribe(function (data1) {
@@ -1136,7 +1137,7 @@ var MaintenanceTrackerPage = (function () {
         this.iab = iab;
         this.alertCtrl = alertCtrl;
         this.modalCtrl = modalCtrl;
-        this.quote = { date: '', time: '', comment: '' };
+        this.quote = { date: '', time: '', comment: '', company: '', name: '', phone: '' };
         this.show1 = false;
         this.show2 = false;
         this.show3 = false;
@@ -1372,34 +1373,44 @@ var MaintenanceTrackerPage = (function () {
     };
     MaintenanceTrackerPage.prototype.goToStep1_5 = function () {
         var _this = this;
-        this.requestDetail.token = this.token;
-        this.requestDetail.quote = this.quote;
-        this.requestDetail.step = 1.5;
-        var loading = this.loadingCtrl.create();
-        loading.present();
-        this.userService.updateStep(this.requestDetailKey, this.requestDetail)
-            .subscribe(function (data1) {
-            var params = {
-                token: _this.token,
-                step: 1.5
-            };
-            _this.userService.updateRequest(_this.requestKey, params)
-                .subscribe(function (data) {
-                loading.dismiss();
-                _this.request.step = 1.5;
-                var alert = _this.alertCtrl.create({
-                    title: "", subTitle: "Enviaste el tiempo de visita con éxito.", buttons: ['OK']
-                });
-                alert.present();
-            }, function (data) {
-                loading.dismiss();
+        if (this.quote.company == '' || this.quote.date == '' || this.quote.name == '' ||
+            this.quote.phone == '' || this.quote.time == '') {
+            var alert_1 = this.alertCtrl.create({
+                title: "Error", subTitle: "Please fill in the blanks", buttons: ['OK']
             });
-        }, function (data1) {
-            loading.dismiss();
-        });
-        console.log("aaaaaaaaaaaaaaaaaaaaaa", this.request._id);
-        // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled the time of first meeting for quote.", this.token);
-        this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha programado una visita inicial para hacerle una cotización.", this.token);
+            alert_1.present();
+        }
+        else {
+            this.requestDetail.token = this.token;
+            this.requestDetail.quote = this.quote;
+            this.requestDetail.step = 1.5;
+            this.requestDetail.updated_at1 = new Date();
+            var loading_2 = this.loadingCtrl.create();
+            loading_2.present();
+            this.userService.updateStep(this.requestDetailKey, this.requestDetail)
+                .subscribe(function (data1) {
+                var params = {
+                    token: _this.token,
+                    step: 1.5
+                };
+                _this.userService.updateRequest(_this.requestKey, params)
+                    .subscribe(function (data) {
+                    loading_2.dismiss();
+                    _this.request.step = 1.5;
+                    var alert = _this.alertCtrl.create({
+                        title: "", subTitle: "Enviaste el tiempo de visita con éxito.", buttons: ['OK']
+                    });
+                    alert.present();
+                }, function (data) {
+                    loading_2.dismiss();
+                });
+            }, function (data1) {
+                loading_2.dismiss();
+            });
+            console.log("aaaaaaaaaaaaaaaaaaaaaa", this.request._id);
+            // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled the time of first meeting for quote.", this.token);
+            this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha programado una visita inicial para hacerle una cotización.", this.token);
+        }
     };
     MaintenanceTrackerPage.prototype.acceptSchedule1 = function () {
         var _this = this;
@@ -1562,15 +1573,15 @@ var MaintenanceTrackerPage = (function () {
         console.log("this.requestDetail.technician_info", this.requestDetail.technician_info);
         if (this.requestDetail.technician_info.company == '' || this.requestDetail.technician_info.date == '' || this.requestDetail.technician_info.name == '' ||
             this.requestDetail.technician_info.phone == '' || this.requestDetail.technician_info.time == '') {
-            var alert_1 = this.alertCtrl.create({
+            var alert_2 = this.alertCtrl.create({
                 title: "Error", subTitle: "Please fill in the blanks", buttons: ['OK']
             });
-            alert_1.present();
+            alert_2.present();
         }
         else {
             this.requestDetail.step = 3;
-            var loading_2 = this.loadingCtrl.create();
-            loading_2.present();
+            var loading_3 = this.loadingCtrl.create();
+            loading_3.present();
             this.userService.updateStep(this.requestDetailKey, this.requestDetail)
                 .subscribe(function (data1) {
                 var params = {
@@ -1579,15 +1590,15 @@ var MaintenanceTrackerPage = (function () {
                 };
                 _this.userService.updateRequest(_this.requestKey, params)
                     .subscribe(function (data) {
-                    loading_2.dismiss();
+                    loading_3.dismiss();
                     _this.request.step = 3;
                     _this.pushService.notiUserForRequest(_this.request.userKey, _this.request._id, "EG programó la visita del técnico para el día y hora a continuación: " + _this.technician_date + " " + _this.technician_time, _this.token);
                     // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled technician time to " + this.technician_date + " " + this.technician_time, this.token);
                 }, function (data) {
-                    loading_2.dismiss();
+                    loading_3.dismiss();
                 });
             }, function (data1) {
-                loading_2.dismiss();
+                loading_3.dismiss();
             });
         }
     };
@@ -1595,6 +1606,7 @@ var MaintenanceTrackerPage = (function () {
         var _this = this;
         this.requestDetail.status2 = 1;
         this.requestDetail.token = this.token;
+        this.requestDetail.updated_at2 = new Date();
         var loading = this.loadingCtrl.create();
         loading.present();
         this.userService.updateStep(this.requestDetailKey, this.requestDetail)
@@ -1629,6 +1641,7 @@ var MaintenanceTrackerPage = (function () {
         this.requestDetail.token = this.token;
         this.requestDetail.is_completed = true;
         this.requestDetail.step = 4;
+        this.requestDetail.updated_at3 = new Date();
         var loading = this.loadingCtrl.create();
         loading.present();
         this.userService.updateStep(this.requestDetailKey, this.requestDetail)
@@ -1732,6 +1745,7 @@ var MaintenanceTrackerPage = (function () {
         this.show5 = true;
         this.requestDetail.token = this.token;
         this.requestDetail.is_paid = true;
+        this.requestDetail.updated_at4 = new Date();
         this.requestDetail.step = 5;
         var loading = this.loadingCtrl.create();
         loading.present();
@@ -2768,6 +2782,14 @@ var AnalyticsPage = (function () {
             console.log("steps", data);
             loading.dismiss();
             _this.stars = [];
+            _this.avg_time1 = 0;
+            _this.avg_time2 = 0;
+            _this.avg_time3 = 0;
+            _this.avg_time4 = 0;
+            _this.update_time_array1 = [];
+            _this.update_time_array2 = [];
+            _this.update_time_array3 = [];
+            _this.update_time_array4 = [];
             for (var i = 0; i < data.length; i++) {
                 if (data[i].status5 == 1) {
                     _this.closedSteps.push(data[i]);
@@ -2778,7 +2800,46 @@ var AnalyticsPage = (function () {
                 if (data[i].step >= 5) {
                     _this.paidSteps.push(data[i]);
                 }
+                if (data[i].updated_at5) {
+                    var start_date = new Date(data[i].updated_at5);
+                    if (data[i].updated_at4) {
+                        var date4 = new Date(data[i].updated_at4);
+                        _this.update_time_array4.push(date4 - start_date);
+                    }
+                    if (data[i].updated_at3) {
+                        var date3 = new Date(data[i].updated_at3);
+                        _this.update_time_array3.push(date3 - start_date);
+                    }
+                    if (data[i].updated_at2) {
+                        var date2 = new Date(data[i].updated_at2);
+                        _this.update_time_array2.push(date2 - start_date);
+                    }
+                    if (data[i].updated_at1) {
+                        var date1 = new Date(data[i].updated_at1);
+                        _this.update_time_array1.push(date1 - start_date);
+                    }
+                }
             }
+            for (var i1 = 0; i1 < _this.update_time_array1.length; i1++) {
+                _this.avg_time1 += _this.update_time_array1[i1] / _this.update_time_array1.length;
+            }
+            for (var i2 = 0; i2 < _this.update_time_array2.length; i2++) {
+                _this.avg_time2 += _this.update_time_array2[i2] / _this.update_time_array2.length;
+            }
+            for (var i3 = 0; i3 < _this.update_time_array3.length; i3++) {
+                _this.avg_time3 += _this.update_time_array3[i3] / _this.update_time_array3.length;
+            }
+            for (var i4 = 0; i4 < _this.update_time_array4.length; i4++) {
+                _this.avg_time4 += _this.update_time_array4[i4] / _this.update_time_array4.length;
+            }
+            _this.avg_time4 = _this.timeConversion(_this.avg_time4);
+            _this.avg_time3 = _this.timeConversion(_this.avg_time3);
+            _this.avg_time2 = _this.timeConversion(_this.avg_time2);
+            _this.avg_time1 = _this.timeConversion(_this.avg_time1);
+            console.log("444444", _this.avg_time4);
+            console.log("333333", _this.avg_time3);
+            console.log("222222", _this.avg_time2);
+            console.log("111111", _this.avg_time1);
             var xxx = _this.groupBy(_this.closedSteps, 'email');
             for (var key in xxx) {
                 console.log("key", key);
@@ -2831,6 +2892,24 @@ var AnalyticsPage = (function () {
         }, function (data) {
             loading.dismiss();
         });
+    };
+    AnalyticsPage.prototype.timeConversion = function (millisec) {
+        var seconds = (millisec / 1000);
+        var minutes = (millisec / (1000 * 60));
+        var hours = (millisec / (1000 * 60 * 60));
+        var days = (millisec / (1000 * 60 * 60 * 24));
+        if (seconds < 60) {
+            return seconds.toFixed(0) + " Secs";
+        }
+        else if (minutes < 60) {
+            return minutes.toFixed(0) + " Mins";
+        }
+        else if (hours < 24) {
+            return hours.toFixed(0) + " Hrs";
+        }
+        else {
+            return days.toFixed(0) + " Days";
+        }
     };
     AnalyticsPage.prototype.groupBy = function (xs, key) {
         return xs.reduce(function (rv, x) {
@@ -2886,7 +2965,7 @@ __decorate([
 ], AnalyticsPage.prototype, "doughnutCanvas", void 0);
 AnalyticsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-analytics',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/analytics/analytics.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n    </button>\n    <ion-title>ANALYTICS</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n	<ion-list no-lines>\n\n        <ion-list-header class="header-style">\n            Review Evaluation\n        </ion-list-header>\n\n        <ion-item class="star-item">\n            <div>\n                Five Stars Review\n            </div>\n            <div item-end>\n                {{five_stars.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{five_stars.join(\', \')}}\n        </ion-item>\n        \n        <ion-item class="star-item">\n            <div>\n                Four Stars Review\n            </div>\n            <div item-end>\n                {{four_stars.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{four_stars.join(\', \')}}\n        </ion-item>\n\n        <ion-item class="star-item">\n            <div>\n                Three Stars Review\n            </div>\n            <div item-end>\n                {{three_stars.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{three_stars.join(\', \')}}\n        </ion-item>\n\n        <ion-item class="star-item">\n            <div>\n                Two Stars Review\n            </div>\n            <div item-end>\n                {{two_stars.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{two_stars.join(\', \')}}\n        </ion-item>\n\n        <ion-item class="star-item">\n            <div>\n                One Star Review\n            </div>\n            <div item-end>\n                {{one_star.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{one_star.join(\', \')}}\n        </ion-item>\n    </ion-list>\n\n    <ion-list no-lines>\n\n        <ion-list-header class="header-style">\n            Avg Time Evaluation\n        </ion-list-header>\n\n        <div class="average-time-div">\n        	<div class="average-label">\n            	Avg Time for Ticket Payment\n            </div>\n            <div class="average-time">\n                0 Days\n            </div>\n        </div>\n        \n        <div class="average-time-div">\n        	<div class="average-label">\n            	Avg Time of Finalized Work\n            </div>\n            <div class="average-time">\n                0 Days\n            </div>\n        </div>\n\n        <div class="average-time-div">\n        	<div class="average-label">\n            	Avg Time of Schedule Final Work\n            </div>\n            <div class="average-time">\n                0 Days\n            </div>\n        </div>\n\n        <div class="average-time-div">\n        	<div class="average-label">\n            	Avg Time Admin Answers Initial Request\n            </div>\n            <div class="average-time">\n                0 Days\n            </div>\n        </div>\n    </ion-list>\n\n    <!-- <ion-list no-lines>\n\n        <ion-list-header class="header-style">\n            Tickets Evaluation\n        </ion-list-header>\n\n	    <div class="ticket-indicator-div">\n	    	<div class="open-div" style="background-color: rgb(50, 170, 230);"></div>\n	    	<div class="open-text">OPEN TICKETS</div>\n	    	<div class="open-div" style="background-color: rgb(105, 100, 170);"></div>\n	    	<div class="open-text">CLOSED TICKETS</div>\n	    </div>\n\n	    <div class="ticket-indicator-div">\n	    	<div class="open-div" style="background-color: rgb(110, 160, 200);"></div>\n	    	<div class="open-text">REJECTED TICKETS</div>\n	    	<div class="open-div" style="background-color: rgb(140, 90, 150);"></div>\n	    	<div class="open-text">PAYED TICKETS</div>\n	    </div>\n	</ion-list> -->\n\n	<ion-card>\n      <ion-card-header>\n       	Tickets Evaluation\n      </ion-card-header>\n      <ion-card-content>\n        <canvas #doughnutCanvas></canvas>\n      </ion-card-content>\n    </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/analytics/analytics.html"*/
+        selector: 'page-analytics',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/analytics/analytics.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n    </button>\n    <ion-title>ANALYTICS</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n	<ion-list no-lines>\n\n        <ion-list-header class="header-style">\n            Review Evaluation\n        </ion-list-header>\n\n        <ion-item class="star-item">\n            <div>\n                Five Stars Review\n            </div>\n            <div item-end>\n                {{five_stars.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{five_stars.join(\', \')}}\n        </ion-item>\n        \n        <ion-item class="star-item">\n            <div>\n                Four Stars Review\n            </div>\n            <div item-end>\n                {{four_stars.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{four_stars.join(\', \')}}\n        </ion-item>\n\n        <ion-item class="star-item">\n            <div>\n                Three Stars Review\n            </div>\n            <div item-end>\n                {{three_stars.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{three_stars.join(\', \')}}\n        </ion-item>\n\n        <ion-item class="star-item">\n            <div>\n                Two Stars Review\n            </div>\n            <div item-end>\n                {{two_stars.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{two_stars.join(\', \')}}\n        </ion-item>\n\n        <ion-item class="star-item">\n            <div>\n                One Star Review\n            </div>\n            <div item-end>\n                {{one_star.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{one_star.join(\', \')}}\n        </ion-item>\n    </ion-list>\n\n    <ion-list no-lines>\n\n        <ion-list-header class="header-style">\n            Avg Time Evaluation\n        </ion-list-header>\n\n        <div class="average-time-div">\n        	<div class="average-label">\n            	Avg Time for Ticket Payment\n            </div>\n            <div class="average-time">\n                {{avg_time4}}\n            </div>\n        </div>\n        \n        <div class="average-time-div">\n        	<div class="average-label">\n            	Avg Time of Finalized Work\n            </div>\n            <div class="average-time">\n                {{avg_time3}}\n            </div>\n        </div>\n\n        <div class="average-time-div">\n        	<div class="average-label">\n            	Avg Time of Schedule Final Work\n            </div>\n            <div class="average-time">\n                {{avg_time2}}\n            </div>\n        </div>\n\n        <div class="average-time-div">\n        	<div class="average-label">\n            	Avg Time Admin Answers Initial Request\n            </div>\n            <div class="average-time">\n                {{avg_time1}}\n            </div>\n        </div>\n    </ion-list>\n\n    <!-- <ion-list no-lines>\n\n        <ion-list-header class="header-style">\n            Tickets Evaluation\n        </ion-list-header>\n\n	    <div class="ticket-indicator-div">\n	    	<div class="open-div" style="background-color: rgb(50, 170, 230);"></div>\n	    	<div class="open-text">OPEN TICKETS</div>\n	    	<div class="open-div" style="background-color: rgb(105, 100, 170);"></div>\n	    	<div class="open-text">CLOSED TICKETS</div>\n	    </div>\n\n	    <div class="ticket-indicator-div">\n	    	<div class="open-div" style="background-color: rgb(110, 160, 200);"></div>\n	    	<div class="open-text">REJECTED TICKETS</div>\n	    	<div class="open-div" style="background-color: rgb(140, 90, 150);"></div>\n	    	<div class="open-text">PAYED TICKETS</div>\n	    </div>\n	</ion-list> -->\n\n	<ion-card>\n      <ion-card-header>\n       	Tickets Evaluation\n      </ion-card-header>\n      <ion-card-content>\n        <canvas #doughnutCanvas></canvas>\n      </ion-card-content>\n    </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/analytics/analytics.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */],
