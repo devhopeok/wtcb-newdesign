@@ -840,14 +840,25 @@ export class MaintenanceTrackerPage {
         let loading = this.loadingCtrl.create();
         loading.present();
         let params = {
-                token: this.token,
-                step: 6
-            }
+            token: this.token,
+            step: 6
+        }
+
+        this.requestDetail.token = this.token;
+        this.requestDetail.step = 6;       
             this.userService.updateRequest(this.requestKey, params)
             .subscribe(
               (data) => {
                   loading.dismiss();
                 this.request.step = 6;
+                this.userService.updateStep(this.requestDetailKey, this.requestDetail)
+                  .subscribe(
+                    (data1) => {
+                      //this.request.step = 6;
+                    },
+                    (data1) => {
+                      
+                    });
               },
               (data) => {
                 loading.dismiss();

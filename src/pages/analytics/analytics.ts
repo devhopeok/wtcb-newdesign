@@ -19,6 +19,7 @@ export class AnalyticsPage {
   closedSteps = [];
   rejectedSteps = [];
   paidSteps = [];
+  starSteps = [];
   stars: any;
 
   five_stars = [];
@@ -37,6 +38,9 @@ export class AnalyticsPage {
   update_time_array3: any;
   update_time_array4: any;
 
+
+  fromDate: any;
+  toDate: any;
   constructor(public navCtrl: NavController,
   	public navParams: NavParams,
   	public userService: UserService,
@@ -45,6 +49,11 @@ export class AnalyticsPage {
     public events: Events,
     public alertCtrl: AlertController) {
 
+  }
+
+  go(){
+    console.log("date", this.fromDate, this.toDate);
+    this.getSteps();
   }
 
   ionViewDidLoad(){
@@ -65,6 +74,21 @@ export class AnalyticsPage {
   }
 
   getSteps(){
+    let from_date: any;
+    let to_date: any;
+    if (this.fromDate){
+      from_date = new Date(this.fromDate);
+    }
+    else{
+      from_date = new Date("2017-01-01");
+    }
+
+    if (this.toDate){
+      to_date = new Date(this.toDate);
+    }
+    else{
+      to_date = new Date("2100-01-01");
+    }
     let loading = this.loadingCtrl.create();
         loading.present();
         this.userService.getSteps(this.token)
@@ -84,38 +108,51 @@ export class AnalyticsPage {
               this.update_time_array4 = [];
 
               for (let i=0; i<data.length; i++){
-                if (data[i].status5 == 1){
-                  this.closedSteps.push(data[i]);
-                }
-                else if(data[i].status1 == 2){
-                  this.rejectedSteps.push(data[i]);
-                }
-
-                if (data[i].step>=5){
-                  this.paidSteps.push(data[i]);
-                }
 
                 if (data[i].updated_at5){
                   let start_date: any = new Date(data[i].updated_at5);
-                  if (data[i].updated_at4){
-                    let date4: any = new Date(data[i].updated_at4);
-                    this.update_time_array4.push(date4 - start_date);
-                  }
+                  let start_difference = start_date - from_date;
+                  let to_difference = to_date - start_date;
+                  console.log("start-to-difference", start_difference, to_difference);
+                  if (start_difference >= 0 && to_difference >=0){
 
-                  if (data[i].updated_at3){
-                    let date3: any = new Date(data[i].updated_at3);
-                    this.update_time_array3.push(date3 - start_date);
+                      if (data[i].status5 == 1){
+                        this.starSteps.push(data[i]);
+                      }
+
+                      if (data[i].step == 6){
+                        this.closedSteps.push(data[i]);
+                      }
+                      else if(data[i].status1 == 2){
+                        this.rejectedSteps.push(data[i]);
+                      }
+
+                      if (data[i].step>=5){
+                        this.paidSteps.push(data[i]);
+                      }
+
+                      
+                      if (data[i].updated_at4){
+                        let date4: any = new Date(data[i].updated_at4);
+                        this.update_time_array4.push(date4 - start_date);
+                      }
+
+                      if (data[i].updated_at3){
+                        let date3: any = new Date(data[i].updated_at3);
+                        this.update_time_array3.push(date3 - start_date);
+                      }
+                      
+                      if (data[i].updated_at2){
+                        let date2: any = new Date(data[i].updated_at2);
+                        this.update_time_array2.push(date2 - start_date);
+                      }
+                      
+                      if (data[i].updated_at1){
+                        let date1: any = new Date(data[i].updated_at1);
+                        this.update_time_array1.push(date1 - start_date);
+                      }
                   }
                   
-                  if (data[i].updated_at2){
-                    let date2: any = new Date(data[i].updated_at2);
-                    this.update_time_array2.push(date2 - start_date);
-                  }
-                  
-                  if (data[i].updated_at1){
-                    let date1: any = new Date(data[i].updated_at1);
-                    this.update_time_array1.push(date1 - start_date);
-                  }
                 }
               }
 
@@ -145,7 +182,7 @@ export class AnalyticsPage {
               console.log("111111", this.avg_time1);
 
 
-              let xxx = this.groupBy(this.closedSteps, 'email');
+              let xxx = this.groupBy(this.starSteps, 'email');
               for (let key in xxx){
                 console.log("key", key);
                 let ave = 0;
@@ -165,12 +202,18 @@ export class AnalyticsPage {
                   (data) => {
                     loading1.dismiss();
                     for (let i=0; i<data.length; i++){
-                      if (data[i].step > 5) {
-                        // this.closedRequests.push(data[i]);
-                      }else {
-                        this.openedSteps.push(data[i]);
+                       if (data[i].updated_at5 && data[i].step<=5){
+                          let start_date: any = new Date(data[i].updated_at5);
+                          let start_difference = start_date - from_date;
+                          let to_difference = to_date - start_date;
+                          console.log("start-to-difference", start_difference, to_difference);
+                          if (start_difference >= 0 && to_difference >=0){
+                     
+                            this.openedSteps.push(data[i]);
+                          }
+                        }
 
-                      }
+                      
                     }
 
                     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {

@@ -8,6 +8,22 @@
 </ion-header>
 
 <ion-content>
+
+    <ion-list no-lines>
+        <ion-item>
+            <ion-label>From: </ion-label>
+            <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="fromDate"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>To: </ion-label>
+            <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="toDate"></ion-datetime>
+        </ion-item>
+
+        <button class="main-btn" ion-button block (click)="go();">Go</button>
+    </ion-list>
+
+    
 	<ion-list no-lines>
 
         <ion-list-header class="header-style">
