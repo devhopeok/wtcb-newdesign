@@ -280,7 +280,7 @@ export class OtrsRequestPage {
                         
                         
                           let alert = this.alertCtrl.create({
-                            title: "éxito", subTitle: "Su solicitud ha sido enviada exitosamente!", buttons: ['OK']
+                            title: "Genial", subTitle: "Su solicitud ha sido enviada exitosamente.", buttons: ['OK']
                           });
                           alert.present();
                           this.navCtrl.pop();

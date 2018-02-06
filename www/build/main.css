@@ -28558,15 +28558,16 @@ page-maintenance-view .width-10.request-id {
 }
 
 page-maintenance-view .width-20 {
-  max-width: 30%;
+  max-width: 20%;
   display: block !important;
-  font-size: 7vw;
+  font-size: 5vw;
   color: #1b4c5c;
+  margin-top: 1vw;
 }
 
 page-maintenance-view .width-20 .created-date {
   color: gray;
-  font-size: 4vw;
+  font-size: 3vw;
 }
 
 page-maintenance-view .width-15 {
@@ -28585,13 +28586,13 @@ page-maintenance-view .header-style {
 
 page-maintenance-view .office-name {
   color: #1b4c5c;
-  font-size: 5vw;
+  font-size: 4vw;
   margin-top: 1vw;
 }
 
 page-maintenance-view .building-name {
   color: gray;
-  font-size: 4vw;
+  font-size: 3.5vw;
 }
 
 page-maintenance-view .badge {

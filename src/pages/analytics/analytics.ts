@@ -66,7 +66,7 @@ export class AnalyticsPage {
       if (val != null){
         this.authUser = val.user;
         this.token = val.token;
-        this.closedSteps = [];
+        
 
         this.getSteps();
       }
@@ -74,6 +74,12 @@ export class AnalyticsPage {
   }
 
   getSteps(){
+    this.closedSteps = [];
+    this.openedSteps = [];
+    this.starSteps = [];
+    this.paidSteps = [];
+    this.rejectedSteps = [];
+    
     let from_date: any;
     let to_date: any;
     if (this.fromDate){
@@ -113,7 +119,7 @@ export class AnalyticsPage {
                   let start_date: any = new Date(data[i].updated_at5);
                   let start_difference = start_date - from_date;
                   let to_difference = to_date - start_date;
-                  console.log("start-to-difference", start_difference, to_difference);
+                  //console.log("start-to-difference", start_difference, to_difference);
                   if (start_difference >= 0 && to_difference >=0){
 
                       if (data[i].status5 == 1){
@@ -127,6 +133,9 @@ export class AnalyticsPage {
                         this.rejectedSteps.push(data[i]);
                       }
 
+                      if (data[i].step <=5){
+                        this.openedSteps.push(data[i]);
+                      }
                       if (data[i].step>=5){
                         this.paidSteps.push(data[i]);
                       }
@@ -195,26 +204,26 @@ export class AnalyticsPage {
               this.getStarReview();
               console.log("closed request steps", this.stars);
 
-              let loading1 = this.loadingCtrl.create();
-              loading1.present();
-              this.userService.getAllRequests(this.token)
-                .subscribe(
-                  (data) => {
-                    loading1.dismiss();
-                    for (let i=0; i<data.length; i++){
-                       if (data[i].updated_at5 && data[i].step<=5){
-                          let start_date: any = new Date(data[i].updated_at5);
-                          let start_difference = start_date - from_date;
-                          let to_difference = to_date - start_date;
-                          console.log("start-to-difference", start_difference, to_difference);
-                          if (start_difference >= 0 && to_difference >=0){
+              // let loading1 = this.loadingCtrl.create();
+              // loading1.present();
+              // this.userService.getAllRequests(this.token)
+              //   .subscribe(
+              //     (data) => {
+              //       loading1.dismiss();
+              //       for (let i=0; i<data.length; i++){
+              //          if (data[i].updated_at5 && data[i].step<=5){
+              //             let start_date: any = new Date(data[i].updated_at5);
+              //             let start_difference = start_date - from_date;
+              //             let to_difference = to_date - start_date;
+              //             console.log("start-to-difference", start_difference, to_difference);
+              //             if (start_difference >= 0 && to_difference >=0){
                      
-                            this.openedSteps.push(data[i]);
-                          }
-                        }
+              //               this.openedSteps.push(data[i]);
+              //             }
+              //           }
 
                       
-                    }
+              //       }
 
                     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
                         type: 'doughnut',
@@ -239,11 +248,11 @@ export class AnalyticsPage {
                         }
              
                     });
-                  },
-                  (data) => {
-                    loading1.dismiss();
+                  // },
+                  // (data) => {
+                  //   loading1.dismiss();
                     
-                  });
+                  // });
               
             },
             (data) => {

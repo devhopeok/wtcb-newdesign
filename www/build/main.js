@@ -875,7 +875,7 @@ var OtrsRequestPage = (function () {
                     _this.userService.createStep(newSteps)
                         .subscribe(function (data1) {
                         var alert = _this.alertCtrl.create({
-                            title: "éxito", subTitle: "Su solicitud ha sido enviada exitosamente!", buttons: ['OK']
+                            title: "Genial", subTitle: "Su solicitud ha sido enviada exitosamente!", buttons: ['OK']
                         });
                         alert.present();
                         _this.navCtrl.pop();
@@ -2780,13 +2780,17 @@ var AnalyticsPage = (function () {
             if (val != null) {
                 _this.authUser = val.user;
                 _this.token = val.token;
-                _this.closedSteps = [];
                 _this.getSteps();
             }
         });
     };
     AnalyticsPage.prototype.getSteps = function () {
         var _this = this;
+        this.closedSteps = [];
+        this.openedSteps = [];
+        this.starSteps = [];
+        this.paidSteps = [];
+        this.rejectedSteps = [];
         var from_date;
         var to_date;
         if (this.fromDate) {
@@ -2821,7 +2825,7 @@ var AnalyticsPage = (function () {
                     var start_date = new Date(data[i].updated_at5);
                     var start_difference = start_date - from_date;
                     var to_difference = to_date - start_date;
-                    console.log("start-to-difference", start_difference, to_difference);
+                    //console.log("start-to-difference", start_difference, to_difference);
                     if (start_difference >= 0 && to_difference >= 0) {
                         if (data[i].status5 == 1) {
                             _this.starSteps.push(data[i]);
@@ -2831,6 +2835,9 @@ var AnalyticsPage = (function () {
                         }
                         else if (data[i].status1 == 2) {
                             _this.rejectedSteps.push(data[i]);
+                        }
+                        if (data[i].step <= 5) {
+                            _this.openedSteps.push(data[i]);
                         }
                         if (data[i].step >= 5) {
                             _this.paidSteps.push(data[i]);
@@ -2885,47 +2892,49 @@ var AnalyticsPage = (function () {
             }
             _this.getStarReview();
             console.log("closed request steps", _this.stars);
-            var loading1 = _this.loadingCtrl.create();
-            loading1.present();
-            _this.userService.getAllRequests(_this.token)
-                .subscribe(function (data) {
-                loading1.dismiss();
-                for (var i = 0; i < data.length; i++) {
-                    if (data[i].updated_at5 && data[i].step <= 5) {
-                        var start_date = new Date(data[i].updated_at5);
-                        var start_difference = start_date - from_date;
-                        var to_difference = to_date - start_date;
-                        console.log("start-to-difference", start_difference, to_difference);
-                        if (start_difference >= 0 && to_difference >= 0) {
-                            _this.openedSteps.push(data[i]);
-                        }
-                    }
+            // let loading1 = this.loadingCtrl.create();
+            // loading1.present();
+            // this.userService.getAllRequests(this.token)
+            //   .subscribe(
+            //     (data) => {
+            //       loading1.dismiss();
+            //       for (let i=0; i<data.length; i++){
+            //          if (data[i].updated_at5 && data[i].step<=5){
+            //             let start_date: any = new Date(data[i].updated_at5);
+            //             let start_difference = start_date - from_date;
+            //             let to_difference = to_date - start_date;
+            //             console.log("start-to-difference", start_difference, to_difference);
+            //             if (start_difference >= 0 && to_difference >=0){
+            //               this.openedSteps.push(data[i]);
+            //             }
+            //           }
+            //       }
+            _this.doughnutChart = new __WEBPACK_IMPORTED_MODULE_4_chart_js__["Chart"](_this.doughnutCanvas.nativeElement, {
+                type: 'doughnut',
+                data: {
+                    labels: ["Open Tickets", "Closed Tickets", "Rejected Tickets", "Payed Tickets"],
+                    datasets: [{
+                            label: '# of Votes',
+                            data: [_this.openedSteps.length, _this.closedSteps.length, _this.rejectedSteps.length, _this.paidSteps.length],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.5)',
+                                'rgba(54, 162, 235, 0.5)',
+                                'rgba(255, 206, 86, 0.5)',
+                                'rgba(75, 192, 192, 0.5)'
+                            ],
+                            hoverBackgroundColor: [
+                                "#FF6384",
+                                "#36A2EB",
+                                "#FFCE56",
+                                "#FF6384"
+                            ]
+                        }]
                 }
-                _this.doughnutChart = new __WEBPACK_IMPORTED_MODULE_4_chart_js__["Chart"](_this.doughnutCanvas.nativeElement, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ["Open Tickets", "Closed Tickets", "Rejected Tickets", "Payed Tickets"],
-                        datasets: [{
-                                label: '# of Votes',
-                                data: [_this.openedSteps.length, _this.closedSteps.length, _this.rejectedSteps.length, _this.paidSteps.length],
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.5)',
-                                    'rgba(54, 162, 235, 0.5)',
-                                    'rgba(255, 206, 86, 0.5)',
-                                    'rgba(75, 192, 192, 0.5)'
-                                ],
-                                hoverBackgroundColor: [
-                                    "#FF6384",
-                                    "#36A2EB",
-                                    "#FFCE56",
-                                    "#FF6384"
-                                ]
-                            }]
-                    }
-                });
-            }, function (data) {
-                loading1.dismiss();
             });
+            // },
+            // (data) => {
+            //   loading1.dismiss();
+            // });
         }, function (data) {
             loading.dismiss();
         });
@@ -3002,17 +3011,12 @@ __decorate([
 ], AnalyticsPage.prototype, "doughnutCanvas", void 0);
 AnalyticsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-analytics',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/analytics/analytics.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n    </button>\n    <ion-title>ANALYTICS</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-list no-lines>\n        <ion-item>\n            <ion-label>From: </ion-label>\n            <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="fromDate"></ion-datetime>\n        </ion-item>\n\n        <ion-item>\n            <ion-label>To: </ion-label>\n            <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="toDate"></ion-datetime>\n        </ion-item>\n\n        <button class="main-btn" ion-button block (click)="go();">Go</button>\n    </ion-list>\n\n    \n	<ion-list no-lines>\n\n        <ion-list-header class="header-style">\n            Review Evaluation\n        </ion-list-header>\n\n        <ion-item class="star-item">\n            <div>\n                Five Stars Review\n            </div>\n            <div item-end>\n                {{five_stars.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{five_stars.join(\', \')}}\n        </ion-item>\n        \n        <ion-item class="star-item">\n            <div>\n                Four Stars Review\n            </div>\n            <div item-end>\n                {{four_stars.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{four_stars.join(\', \')}}\n        </ion-item>\n\n        <ion-item class="star-item">\n            <div>\n                Three Stars Review\n            </div>\n            <div item-end>\n                {{three_stars.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{three_stars.join(\', \')}}\n        </ion-item>\n\n        <ion-item class="star-item">\n            <div>\n                Two Stars Review\n            </div>\n            <div item-end>\n                {{two_stars.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{two_stars.join(\', \')}}\n        </ion-item>\n\n        <ion-item class="star-item">\n            <div>\n                One Star Review\n            </div>\n            <div item-end>\n                {{one_star.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{one_star.join(\', \')}}\n        </ion-item>\n    </ion-list>\n\n    <ion-list no-lines>\n\n        <ion-list-header class="header-style">\n            Avg Time Evaluation\n        </ion-list-header>\n\n        <div class="average-time-div">\n        	<div class="average-label">\n            	Avg Time for Ticket Payment\n            </div>\n            <div class="average-time">\n                {{avg_time4}}\n            </div>\n        </div>\n        \n        <div class="average-time-div">\n        	<div class="average-label">\n            	Avg Time of Finalized Work\n            </div>\n            <div class="average-time">\n                {{avg_time3}}\n            </div>\n        </div>\n\n        <div class="average-time-div">\n        	<div class="average-label">\n            	Avg Time of Schedule Final Work\n            </div>\n            <div class="average-time">\n                {{avg_time2}}\n            </div>\n        </div>\n\n        <div class="average-time-div">\n        	<div class="average-label">\n            	Avg Time Admin Answers Initial Request\n            </div>\n            <div class="average-time">\n                {{avg_time1}}\n            </div>\n        </div>\n    </ion-list>\n\n    <!-- <ion-list no-lines>\n\n        <ion-list-header class="header-style">\n            Tickets Evaluation\n        </ion-list-header>\n\n	    <div class="ticket-indicator-div">\n	    	<div class="open-div" style="background-color: rgb(50, 170, 230);"></div>\n	    	<div class="open-text">OPEN TICKETS</div>\n	    	<div class="open-div" style="background-color: rgb(105, 100, 170);"></div>\n	    	<div class="open-text">CLOSED TICKETS</div>\n	    </div>\n\n	    <div class="ticket-indicator-div">\n	    	<div class="open-div" style="background-color: rgb(110, 160, 200);"></div>\n	    	<div class="open-text">REJECTED TICKETS</div>\n	    	<div class="open-div" style="background-color: rgb(140, 90, 150);"></div>\n	    	<div class="open-text">PAYED TICKETS</div>\n	    </div>\n	</ion-list> -->\n\n	<ion-card>\n      <ion-card-header>\n       	Tickets Evaluation\n      </ion-card-header>\n      <ion-card-content>\n        <canvas #doughnutCanvas></canvas>\n      </ion-card-content>\n    </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/analytics/analytics.html"*/
+        selector: 'page-analytics',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/analytics/analytics.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n    </button>\n    <ion-title>Indicadores de Gestión</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-list no-lines>\n        <ion-item>\n            <ion-label>From: </ion-label>\n            <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="fromDate"></ion-datetime>\n        </ion-item>\n\n        <ion-item>\n            <ion-label>To: </ion-label>\n            <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="toDate"></ion-datetime>\n        </ion-item>\n\n        <button class="main-btn" ion-button block (click)="go();" style="margin-top:3vw; margin-bottom: 2vw;">Go</button>\n    </ion-list>\n\n    \n	<ion-list no-lines>\n\n        <ion-list-header class="header-style">\n            Review Evaluation\n        </ion-list-header>\n\n        <ion-item class="star-item">\n            <div>\n                Five Stars Review\n            </div>\n            <div item-end>\n                {{five_stars.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{five_stars.join(\', \')}}\n        </ion-item>\n        \n        <ion-item class="star-item">\n            <div>\n                Four Stars Review\n            </div>\n            <div item-end>\n                {{four_stars.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{four_stars.join(\', \')}}\n        </ion-item>\n\n        <ion-item class="star-item">\n            <div>\n                Three Stars Review\n            </div>\n            <div item-end>\n                {{three_stars.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{three_stars.join(\', \')}}\n        </ion-item>\n\n        <ion-item class="star-item">\n            <div>\n                Two Stars Review\n            </div>\n            <div item-end>\n                {{two_stars.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{two_stars.join(\', \')}}\n        </ion-item>\n\n        <ion-item class="star-item">\n            <div>\n                One Star Review\n            </div>\n            <div item-end>\n                {{one_star.length}}\n            </div>\n        </ion-item>\n        <ion-item>\n        	{{one_star.join(\', \')}}\n        </ion-item>\n    </ion-list>\n\n    <ion-list no-lines>\n\n        <ion-list-header class="header-style">\n            Avg Time Evaluation\n        </ion-list-header>\n\n        <div class="average-time-div">\n        	<div class="average-label">\n            	Avg Time for Ticket Payment\n            </div>\n            <div class="average-time">\n                {{avg_time4}}\n            </div>\n        </div>\n        \n        <div class="average-time-div">\n        	<div class="average-label">\n            	Avg Time of Finalized Work\n            </div>\n            <div class="average-time">\n                {{avg_time3}}\n            </div>\n        </div>\n\n        <div class="average-time-div">\n        	<div class="average-label">\n            	Avg Time of Schedule Final Work\n            </div>\n            <div class="average-time">\n                {{avg_time2}}\n            </div>\n        </div>\n\n        <div class="average-time-div">\n        	<div class="average-label">\n            	Avg Time Admin Answers Initial Request\n            </div>\n            <div class="average-time">\n                {{avg_time1}}\n            </div>\n        </div>\n    </ion-list>\n\n    <!-- <ion-list no-lines>\n\n        <ion-list-header class="header-style">\n            Tickets Evaluation\n        </ion-list-header>\n\n	    <div class="ticket-indicator-div">\n	    	<div class="open-div" style="background-color: rgb(50, 170, 230);"></div>\n	    	<div class="open-text">OPEN TICKETS</div>\n	    	<div class="open-div" style="background-color: rgb(105, 100, 170);"></div>\n	    	<div class="open-text">CLOSED TICKETS</div>\n	    </div>\n\n	    <div class="ticket-indicator-div">\n	    	<div class="open-div" style="background-color: rgb(110, 160, 200);"></div>\n	    	<div class="open-text">REJECTED TICKETS</div>\n	    	<div class="open-div" style="background-color: rgb(140, 90, 150);"></div>\n	    	<div class="open-text">PAYED TICKETS</div>\n	    </div>\n	</ion-list> -->\n\n	<ion-card>\n      <ion-card-header>\n       	Tickets Evaluation\n      </ion-card-header>\n      <ion-card-content>\n        <canvas #doughnutCanvas></canvas>\n      </ion-card-content>\n    </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/analytics/analytics.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_2__providers_user_service__["a" /* UserService */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
-        __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* Events */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_user_service__["a" /* UserService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* Events */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]) === "function" && _g || Object])
 ], AnalyticsPage);
 
+var _a, _b, _c, _d, _e, _f, _g;
 //# sourceMappingURL=analytics.js.map
 
 /***/ }),
@@ -3470,12 +3474,12 @@ var MyApp = (function () {
         this.initializeApp();
         // used for an example of ngFor and navigation
         this.pages = [
-            { title: 'Home', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */] },
+            { title: 'Inicio', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */] },
             { title: 'Mantenimiento', component: __WEBPACK_IMPORTED_MODULE_6__pages_maintenance_view_maintenance_view__["a" /* MaintenanceViewPage */] },
             { title: 'Edificios', component: __WEBPACK_IMPORTED_MODULE_7__pages_building_list_building_list__["a" /* BuildingListPage */] },
             { title: 'Notificaciones', component: __WEBPACK_IMPORTED_MODULE_8__pages_notification_notification__["a" /* NotificationPage */] },
-            { title: 'Analytics', component: __WEBPACK_IMPORTED_MODULE_9__pages_analytics_analytics__["a" /* AnalyticsPage */] },
-            { title: 'Sign Out', component: null }
+            { title: 'Indicadores de Gestión', component: __WEBPACK_IMPORTED_MODULE_9__pages_analytics_analytics__["a" /* AnalyticsPage */] },
+            { title: 'Cerrar Sesión', component: null }
         ];
         if (!this.platform.is('core')) {
             //push configuration
@@ -3521,19 +3525,19 @@ var MyApp = (function () {
                 if (val != null) {
                     if (val.user.level == 7 || val.user.level == 8) {
                         _this.pages = [
-                            { title: 'Home', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */] },
+                            { title: 'Inicio', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */] },
                             { title: 'Mantenimiento', component: __WEBPACK_IMPORTED_MODULE_6__pages_maintenance_view_maintenance_view__["a" /* MaintenanceViewPage */] },
                             { title: 'Edificios', component: __WEBPACK_IMPORTED_MODULE_7__pages_building_list_building_list__["a" /* BuildingListPage */] },
                             { title: 'Notificaciones', component: __WEBPACK_IMPORTED_MODULE_8__pages_notification_notification__["a" /* NotificationPage */] },
-                            { title: 'Analytics', component: __WEBPACK_IMPORTED_MODULE_9__pages_analytics_analytics__["a" /* AnalyticsPage */] },
-                            { title: 'Sign Out', component: null }
+                            { title: 'Indicadores de Gestión', component: __WEBPACK_IMPORTED_MODULE_9__pages_analytics_analytics__["a" /* AnalyticsPage */] },
+                            { title: 'Cerrar Sesión', component: null }
                         ];
                     }
                     else {
                         _this.pages = [
                             { title: 'Mantenimiento', component: __WEBPACK_IMPORTED_MODULE_6__pages_maintenance_view_maintenance_view__["a" /* MaintenanceViewPage */] },
                             { title: 'Notificaciones', component: __WEBPACK_IMPORTED_MODULE_8__pages_notification_notification__["a" /* NotificationPage */] },
-                            { title: 'Sign Out', component: null }
+                            { title: 'Cerrar Sesión', component: null }
                         ];
                     }
                     _this.token = val.token;
