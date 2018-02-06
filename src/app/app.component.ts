@@ -34,12 +34,12 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
+      { title: 'Inicio', component: HomePage },
       { title: 'Mantenimiento', component: MaintenanceViewPage },
       { title: 'Edificios', component: BuildingListPage},
       { title: 'Notificaciones', component: NotificationPage},
-      { title: 'Analytics', component: AnalyticsPage},
-      { title: 'Sign Out', component: null}
+      { title: 'Indicadores de Gestión', component: AnalyticsPage},
+      { title: 'Cerrar Sesión', component: null}
     ];
 
     if (!this.platform.is('core')) {
@@ -96,12 +96,12 @@ export class MyApp {
           if (val != null){
             if (val.user.level == 7 || val.user.level == 8){
               this.pages = [
-                { title: 'Home', component: HomePage },
+                { title: 'Inicio', component: HomePage },
                 { title: 'Mantenimiento', component: MaintenanceViewPage },
                 { title: 'Edificios', component: BuildingListPage},
                 { title: 'Notificaciones', component: NotificationPage},
-                { title: 'Analytics', component: AnalyticsPage},
-                { title: 'Sign Out', component: null}
+                { title: 'Indicadores de Gestión', component: AnalyticsPage},
+                { title: 'Cerrar Sesión', component: null}
               ];
             }
             else{
@@ -109,7 +109,7 @@ export class MyApp {
                 
                 { title: 'Mantenimiento', component: MaintenanceViewPage },
                 { title: 'Notificaciones', component: NotificationPage},
-                { title: 'Sign Out', component: null}
+                { title: 'Cerrar Sesión', component: null}
               ];
             }
             this.token=val.token;
