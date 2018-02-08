@@ -41,6 +41,9 @@ export class AnalyticsPage {
 
   fromDate: any;
   toDate: any;
+
+  renter_email = '';
+
   constructor(public navCtrl: NavController,
   	public navParams: NavParams,
   	public userService: UserService,
@@ -71,6 +74,10 @@ export class AnalyticsPage {
         this.getSteps();
       }
     });
+  }
+
+  onChange(event){
+    this.renter_email = event;
   }
 
   getSteps(){
@@ -115,7 +122,7 @@ export class AnalyticsPage {
 
               for (let i=0; i<data.length; i++){
 
-                if (data[i].updated_at5){
+                if (data[i].updated_at5 && (data[i].email == this.renter_email || this.renter_email== '')){
                   let start_date: any = new Date(data[i].updated_at5);
                   let start_difference = start_date - from_date;
                   let to_difference = to_date - start_date;

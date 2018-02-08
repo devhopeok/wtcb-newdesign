@@ -20,6 +20,15 @@
             <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="toDate"></ion-datetime>
         </ion-item>
 
+        <ion-item>
+            <ion-label>Renter</ion-label>
+            <ion-select (ionChange)="onChange($event)">
+                <ion-option *ngFor="let star of stars; let i = index" value="{{star.email}}">
+                    {{star.email}}
+                </ion-option> 
+            </ion-select>
+        </ion-item>
+
         <button class="main-btn" ion-button block (click)="go();" style="margin-top:3vw; margin-bottom: 2vw;">Go</button>
     </ion-list>
 
