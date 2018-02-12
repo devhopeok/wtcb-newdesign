@@ -5,7 +5,7 @@ import {LoadingController, Loading} from 'ionic-angular';
 
 import { UserService } from '../../providers/user-service';
 import { Storage } from '@ionic/storage';
-
+import { CreateOfficePage } from '../create-office/create-office';
 /**
  * Generated class for the BuildingProfilePage page.
  *
@@ -79,11 +79,12 @@ export class BuildingProfilePage {
     }
 
     public viewOffice(office) {
-        //this.navCtrl.push('OfficeProfilePage', {officeId: office.$id});
+        
     }
 
-    public editOffice(office, slidingItem: ItemSliding) {
+    public editOffice(office) {
         // slidingItem.close();
         // this.navCtrl.push('EditOfficePage', {officeId: office.$id});
+        this.navCtrl.push(CreateOfficePage, {office: office});
     }
 }

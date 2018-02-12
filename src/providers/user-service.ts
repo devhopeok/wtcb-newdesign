@@ -80,6 +80,16 @@ export class UserService {
       .catch((error:any)=>Observable.throw(error.json().error || 'Server error'));
   }
 
+  updateOffice(office){
+    let headers = new Headers({'Content-Type': 'application/json'});
+    console.log(this.baseService.officeUrl + "/" + office._id);
+    let options = new RequestOptions({headers: headers});
+
+    return this.http.patch(this.baseService.officeUrl + "/" + office._id, JSON.stringify(office), options)
+      .map((res:Response)=>res.json())
+      .catch((error:any)=>Observable.throw(error.json().error || 'Server error'));
+  }
+
   createRequest(request){
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });

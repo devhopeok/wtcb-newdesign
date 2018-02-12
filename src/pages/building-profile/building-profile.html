@@ -19,7 +19,7 @@
             Office List
         </ion-list-header>
         <ion-item-sliding *ngFor="let item of offices" #slidingItem>
-            <ion-item (click)="viewOffice(item)">
+            <ion-item (click)="editOffice(item)">
                 <ion-avatar item-start>
                     <img src="assets/imgs/working-icon.png">
                 </ion-avatar>
@@ -27,7 +27,7 @@
                 <p>{{item.name}}</p>
             </ion-item>
             <ion-item-options>
-                <button ion-button color="primary" (click)="editOffice(item, slidingItem)">Edit</button>
+                <button ion-button color="primary" (click)="editOffice(item)">Edit</button>
             </ion-item-options>
         </ion-item-sliding>
     </ion-list>
