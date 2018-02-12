@@ -60,6 +60,16 @@ export class UserService {
       .catch((error:any)=>Observable.throw(error.json().error || 'Server error'));
   }
 
+  getOfficeByEmail(token){
+    let headers = new Headers({'Content-Type': 'application/json'});
+    console.log(this.baseService.officeUrl + "/by/email?token=" + token);
+    let options = new RequestOptions({headers: headers});
+
+    return this.http.get(this.baseService.officeUrl + "/by/email?token=" + token, options)
+      .map((res:Response)=>res.json())
+      .catch((error:any)=>Observable.throw(error.json().error || 'Server error'));
+  }
+
   getAllOffices(token){
     let headers = new Headers({'Content-Type': 'application/json'});
     

@@ -25,9 +25,11 @@
         </ion-item>
 
         <ion-item>
-            <ion-select [(ngModel)]="user.level" interface="popover" placeholder="Access Level">
-                <ion-option value="3">Oficina Arrendatario (Owner)</ion-option>
-                <ion-option value="5">Vendor / Técnico</ion-option>
+            <ion-select [(ngModel)]="user.level" interface="popover" placeholder="Access Level" style="width: 90%;">
+                <ion-option value="7" selected>Administrator</ion-option>
+                <ion-option value="3">Renter/Client</ion-option>
+                <!-- <ion-option value="3">Oficina Arrendatario (Owner)</ion-option>
+                <ion-option value="5">Vendor / Técnico</ion-option> -->
             </ion-select>
         </ion-item>
 

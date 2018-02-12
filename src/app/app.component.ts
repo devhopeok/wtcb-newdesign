@@ -10,6 +10,7 @@ import { MaintenanceViewPage } from '../pages/maintenance-view/maintenance-view'
 import { BuildingListPage } from '../pages/building-list/building-list';
 import { NotificationPage } from '../pages/notification/notification';
 import { AnalyticsPage } from '../pages/analytics/analytics';
+import { ProfilePage } from '../pages/profile/profile';
 import { Storage } from '@ionic/storage';
 import {Push} from '@ionic/cloud-angular';
 import { Badge } from '@ionic-native/badge';
@@ -39,6 +40,7 @@ export class MyApp {
       { title: 'Edificios', component: BuildingListPage},
       { title: 'Notificaciones', component: NotificationPage},
       { title: 'Indicadores de Gestión', component: AnalyticsPage},
+      { title: 'Profile', component: ProfilePage},
       { title: 'Cerrar Sesión', component: null}
     ];
 
@@ -101,6 +103,15 @@ export class MyApp {
                 { title: 'Edificios', component: BuildingListPage},
                 { title: 'Notificaciones', component: NotificationPage},
                 { title: 'Indicadores de Gestión', component: AnalyticsPage},
+                { title: 'Cerrar Sesión', component: null}
+              ];
+            }
+            else if (val.user.level == 3){
+              this.pages = [
+                
+                { title: 'Mantenimiento', component: MaintenanceViewPage },
+                { title: 'Notificaciones', component: NotificationPage},
+                { title: 'Profile', component: ProfilePage},
                 { title: 'Cerrar Sesión', component: null}
               ];
             }

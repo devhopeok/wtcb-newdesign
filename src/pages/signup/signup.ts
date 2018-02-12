@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController } from 'ionic-angular';
+import { NavController, AlertController, LoadingController, Events } from 'ionic-angular';
 import { MaintenanceViewPage } from '../maintenance-view/maintenance-view';
+import { HomePage } from '../home/home';
 import { UserService } from '../../providers/user-service';
 import { Storage } from '@ionic/storage';
 
@@ -10,17 +11,17 @@ import { Storage } from '@ionic/storage';
 })
 export class SignupPage {
 
-  user = {
-        username: 'aaa',
-        email: '',
-        password: '',
-        level: 3
-    };
+  user:any;
   device_token = "1";
   
   constructor(public navCtrl: NavController, public alertCtrl:AlertController, public loadingCtrl: LoadingController,
-    public userService: UserService, public storage: Storage) {
-
+    public userService: UserService, public storage: Storage, public events: Events) {
+      this.user = {
+          username: 'aaa',
+          email: '',
+          password: '',
+          level: 7
+      };
   }
 
   ionViewWillEnter(){
@@ -62,10 +63,22 @@ export class SignupPage {
               this.userService.insertDeviceToken(params)
                 .subscribe(
                   (data1)=>{
-                    this.navCtrl.setRoot(MaintenanceViewPage);
+                    if (data.user.level == 7 || data.user.level == 8){
+                      this.navCtrl.setRoot(HomePage);
+                    }
+                    else{
+                      this.navCtrl.setRoot(MaintenanceViewPage);
+                    }
+                    this.events.publish("user:changed");
                   },
                   (data1)=>{
-                    this.navCtrl.setRoot(MaintenanceViewPage);
+                    if (data.uesr.level == 7 || data.uesr.level == 8){
+                      this.navCtrl.setRoot(HomePage);
+                    }
+                    else{
+                      this.navCtrl.setRoot(MaintenanceViewPage);
+                    }
+                    this.events.publish("user:changed");
                   });
               //this.navCtrl.setRoot(HomePage);
             } else{

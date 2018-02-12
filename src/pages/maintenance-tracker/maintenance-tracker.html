@@ -28,7 +28,7 @@
                 <strong class="subheader-style" (click)="onShow1()">FASE 1 - Solicitud</strong>
 
                 <div *ngIf="show1">
-                    <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 1">
+                    <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3') && request.step == 1">
                         <ion-item>
                             <ion-toggle color="custom" checked="true" disabled="true"></ion-toggle>
                             <ion-label class="icon-style">
@@ -65,7 +65,7 @@
                         Programar Visita
                     </button>
 
-                    <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 1.5">
+                    <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3') && request.step == 1.5">
                         <h2 class="header-style" style="text-align: center;">Técnico</h2>
 
                         <ion-item>
@@ -90,7 +90,7 @@
                         </ion-item>
                     </ion-list>
 
-                    <button ion-button block (click)="acceptSchedule1()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 1.5 && (authUser.level == '3.1' || authUser.level == '3.2') && !scheduleAccept1">
+                    <button ion-button block (click)="acceptSchedule1()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 1.5 && (authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3') && !scheduleAccept1">
                         Aceptar Horario
                     </button>
 
@@ -120,7 +120,7 @@
                 <strong class="subheader-style" (click)="onShow2()">FASE 2 - Cotización</strong>
                 
                 <div *ngIf="show2">
-                    <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 2">
+                    <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3') && request.step == 2">
                         
                         
                         <ion-item>
@@ -138,10 +138,10 @@
                         
                     </ion-list>
 
-                    <button ion-button block (click)="acceptQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == '3.1' || authUser.level == '3.2') && (!quoteAccept && !quoteDeny)">
+                    <button ion-button block (click)="acceptQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3') && (!quoteAccept && !quoteDeny)">
                         Aceptar Cotización
                     </button>
-                    <button ion-button block (click)="denyQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == '3.1' || authUser.level == '3.2') && (!quoteAccept && !quoteDeny)">
+                    <button ion-button block (click)="denyQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3') && (!quoteAccept && !quoteDeny)">
                         Rechazar Cotización
                     </button>
                 
@@ -216,7 +216,7 @@
                 <strong class="subheader-style" (click)="onShow3()">FASE 3 - Inicio & Finalización trabajo</strong>
 
                 <div *ngIf="show3">
-                    <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 3">
+                    <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3') && request.step == 3">
                         <!-- <ion-item>
                             <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>
                             <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY'}}</ion-note>
@@ -254,7 +254,7 @@
                         </ion-item> -->
                     </ion-list>
 
-                    <button ion-button block (click)="acceptSchedule()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 3 && (authUser.level == '3.1' || authUser.level == '3.2') && !scheduleAccept">
+                    <button ion-button block (click)="acceptSchedule()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 3 && (authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3') && !scheduleAccept">
                         Aceptar Horario
                     </button>
 
@@ -289,7 +289,7 @@
                 <strong class="subheader-style" (click)="onShow4()">FASE 4 - Facturación</strong>
 
                 <div *ngIf="show4">
-                    <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 4">
+                    <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3') && request.step == 4">
                         <!-- <ion-item>
                             <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>
                             <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY'}}</ion-note>
@@ -305,7 +305,7 @@
                         </ion-item>
                     </ion-list>
 
-                    <button ion-button block icon-left class="main-btn" *ngIf="request.step == 4 && (authUser.level == '3.1' || authUser.level == '3.2') && !is_paid" (click)="payInvoice()">
+                    <button ion-button block icon-left class="main-btn" *ngIf="request.step == 4 && (authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3') && !is_paid" (click)="payInvoice()">
                         <ion-icon ios="ios-card" md="md-card"></ion-icon>
                         Pago de Factura
                     </button>
@@ -353,7 +353,7 @@
                         <img src="{{requestDetail.invoice}}"/>
                     </ion-card> -->
 
-                    <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2') && request.step == 5">
+                    <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3') && request.step == 5">
                         <ion-item>
                             
                             <rating [(ngModel)]="rate" class="rating"></rating>
@@ -365,7 +365,7 @@
                         </ion-item>
                     </ion-list>
 
-                    <button ion-button block icon-left class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 5 && (authUser.level == '3.1' || authUser.level == '3.2')" (click)="leaveReview()">
+                    <button ion-button block icon-left class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 5 && (authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3')" (click)="leaveReview()">
                         <ion-icon ios="ios-star" md="md-star"></ion-icon>
                         Por favor calificanos
                     </button>

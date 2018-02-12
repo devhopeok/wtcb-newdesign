@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <img class="menu-icon" src="assets/imgs/menu_icon.png" />
+        </button>
+        <ion-title>Profile</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-label>Seleccione Edificio</ion-label>
+            <ion-select [(ngModel)]="office.buildingId" interface="popover" (ngModelChange)="updateFloors()">
+                <ion-option value="{{item.id}}" *ngFor="let item of buildings">{{item.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>Seleccione Piso</ion-label>
+            <ion-select interface="popover" [(ngModel)]="office.floorId">
+                <ion-option value="{{item.id}}" *ngFor="let item of floors">{{item.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Oficina No.</ion-label>
+            <ion-input type="text" [(ngModel)]="office.name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Compañia</ion-label>
+            <ion-input type="text" [(ngModel)]="office.company"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Area Mts</ion-label>
+            <ion-input type="text" [(ngModel)]="office.area"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Garages</ion-label>
+            <ion-input type="text" [(ngModel)]="office.garages"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Co-Pago</ion-label>
+            <ion-input type="text" [(ngModel)]="office.coPay"></ion-input>
+        </ion-item>
+    </ion-list>
+
+    <button ion-button class="main-btn" (click)="createOffice()">Submit</button>
+</ion-content>

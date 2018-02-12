@@ -28702,3 +28702,7 @@ page-popup .modal_content .textarea-style {
   border: 2px solid #d2dcf5;
   /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
 }
+
+page-signup ion-select {
+  max-width: 90% !important;
+}
