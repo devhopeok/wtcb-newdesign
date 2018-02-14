@@ -4,6 +4,13 @@
             <img class="menu-icon" src="assets/imgs/menu_icon.png" />
         </button>
         <ion-title>Profile</ion-title>
+
+        <ion-buttons end *ngIf="create_or_update == 1 && edit_or_save == 0">
+          <button ion-button style="color:white;" (click)="onEdit();">
+            Editar
+          </button>
+          <!-- <div class="badge" *ngIf="count>0"></div> -->
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
@@ -43,5 +50,5 @@
         </ion-item>
     </ion-list>
 
-    <button ion-button class="main-btn" (click)="createOffice()">Submit</button>
+    <button *ngIf="create_or_update == 0 || edit_or_save == 1" ion-button class="main-btn" (click)="createOffice()">Guardar</button>
 </ion-content>

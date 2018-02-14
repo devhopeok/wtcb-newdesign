@@ -3,7 +3,7 @@ import { NavController, NavParams, LoadingController, AlertController } from 'io
 import { Storage } from '@ionic/storage';
 import {BuildingProvider} from '../../providers/building';
 import { UserService } from '../../providers/user-service';
-
+import { MaintenanceViewPage } from '../maintenance-view/maintenance-view';
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html'
@@ -16,6 +16,8 @@ export class ProfilePage {
 
   token: any;
   loading: any;
+  create_or_update = 0;
+  edit_or_save = 0;
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage,
     public buildingService: BuildingProvider, public loadingCtrl: LoadingController, public userService: UserService,
     public alertCtrl: AlertController) {
@@ -61,9 +63,13 @@ export class ProfilePage {
             this.loading.dismiss();
             console.log("office Data:", data);
             this.office = data;
+            this.office.token=this.token;
+            this.create_or_update = 1;
           },
           (data) => {
+            console.log("office data: failure", data);
             this.loading.dismiss();
+            this.create_or_update = 0;
           });
   }
   
@@ -79,20 +85,63 @@ export class ProfilePage {
   public createOffice() {
       this.loading = this.loadingCtrl.create();
       this.loading.present();
-      this.userService.createOffice(this.office)
-      .subscribe(
-        (data) => {
-          this.loading.dismiss();
-          console.log("office Data:", data);
-          if(data.message == 'Success'){
-              let alert = this.alertCtrl.create({
-                  title: "Success", subTitle: "Office has been created successfully.", buttons: ['OK']
-              });
-              alert.present();
-          }
-        },
-        (data) => {
-          this.loading.dismiss();
-        });
+      console.log("param", this.office);
+
+      if (this.create_or_update == 0){
+        this.userService.createOffice(this.office)
+        .subscribe(
+          (data) => {
+            this.loading.dismiss();
+            console.log("office Data:", data);
+            if(data.message == 'Success'){
+                let alert = this.alertCtrl.create({
+                    title: "Success", subTitle: "Office has been created successfully.", 
+                    buttons: [
+                      { 
+                        text: 'OK',
+                        handler: ()=>{
+                          this.navCtrl.setRoot(MaintenanceViewPage);
+                        }
+                      }
+                    ]
+                });
+                alert.present();
+            }
+          },
+          (data) => {
+            this.loading.dismiss();
+          });
+      }
+      else if(this.edit_or_save == 1){
+        this.userService.updateOffice(this.office)
+        .subscribe(
+          (data) => {
+            this.loading.dismiss();
+            console.log("office Data:", data);
+            if(data == 'Success'){
+                let alert = this.alertCtrl.create({
+                    title: "Success", subTitle: "Office has been updated successfully.", 
+                    buttons: [
+                      { 
+                        text: 'OK',
+                        handler: ()=>{
+                          this.navCtrl.setRoot(MaintenanceViewPage);
+                        }
+                      }
+                    ]
+                });
+                alert.present();
+            }
+          },
+          (data) => {
+            this.loading.dismiss();
+          });
+      }
+      
+  }
+
+  onEdit(){
+    this.edit_or_save = 1;
+    console.log("this.edit_or_save", this.edit_or_save);
   }
 }

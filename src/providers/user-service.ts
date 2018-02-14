@@ -21,7 +21,7 @@ export class UserService {
     let options = new RequestOptions({ headers: headers });
     return this.http.post(this.baseService.signUpUrl, JSON.stringify(user), options)
       .map((res:Response) => res.json())
-      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+      .catch((error:any) => Observable.throw(error));
   }
 
   login(user){

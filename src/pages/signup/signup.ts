@@ -46,6 +46,8 @@ export class SignupPage {
       let loading = this.loadingCtrl.create();
       loading.present();
       this.user.email = this.user.email.toLowerCase();
+
+      console.log("user param", this.user);
       this.userService.signUp(this.user)
         .subscribe(
           (data) => {
@@ -91,11 +93,20 @@ export class SignupPage {
           },
           (data) => {
             loading.dismiss();
-            console.log("SignupError");
-            let alert = this.alertCtrl.create({
-              title: "Error", subTitle: "Signup Error", buttons: ['OK']
-            });
-            alert.present();
+            console.log(data, "data");
+            
+            if (data.status == 403){
+              let alert = this.alertCtrl.create({
+                title: "Error", subTitle: "User already exists.", buttons: ['OK']
+              });
+              alert.present();
+            }
+            else{
+              let alert = this.alertCtrl.create({
+                title: "Error", subTitle: "Server Error", buttons: ['OK']
+              });
+              alert.present();
+            }
             this.navCtrl.pop();
           });
     }
