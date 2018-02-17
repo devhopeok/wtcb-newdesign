@@ -7,7 +7,8 @@
 
   <ion-content>
     <ion-list no-lines>
-      <ion-item menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+      <ion-item menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" style="color: rgb(70, 95, 110);">
+        <ion-icon name="{{p.icon}}"></ion-icon>
         {{p.title}}
         <div item-end *ngIf="p.title=='Notificaciones' && count>0" class="notification-count">{{count}}</div>
       </ion-item>

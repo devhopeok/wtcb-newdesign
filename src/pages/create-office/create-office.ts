@@ -83,6 +83,7 @@ export class CreateOfficePage {
 
         this.office.token = this.token;
         let nav_office = this.navParams.get('office');
+        console.log("nav_office", nav_office);
         if (nav_office){
             this.office._id = nav_office._id;
             this.office.name = nav_office.name;
@@ -94,13 +95,16 @@ export class CreateOfficePage {
             this.office.coPay = nav_office.coPay;
             this.office.is_rented = nav_office.is_rented;
 
-            if (nav_office.employees.employee){
-                this.office.employees.employee = nav_office.employees.employee;
-            }
+            if (nav_office.employees){
+                if (nav_office.employees.employee){
+                    this.office.employees.employee = nav_office.employees.employee;
+                }
 
-            if (nav_office.employees.outsourcing){
-                this.office.employees.outsourcing = nav_office.employees.outsourcing;
+                if (nav_office.employees.outsourcing){
+                    this.office.employees.outsourcing = nav_office.employees.outsourcing;
+                }
             }
+            
         }
         
     }
@@ -145,8 +149,10 @@ export class CreateOfficePage {
                     
                 });
                 alert.present();
-                this.office.employees.employee.officeKey = data.office_id;
-                this.office.employees.outsourcing.officeKey = data.office_id;
+                this.office.employees.employee.officeKey = this.office._id;
+                this.office.employees.outsourcing.officeKey = this.office._id;
+
+                console.log("office key", this.office._id, this.office.employees.outsourcing);
                 this.userService.signUp(this.office.employees.employee)
                 .subscribe(
                   (data) => {

@@ -199,6 +199,22 @@ export class MaintenanceViewPage {
               //loading.dismiss();
             });
       }
+
+      else if (request.opened3 == false && this.user.level == 3){
+          let params = {
+              token: this.token,
+              opened3: true
+          }
+          this.userService.updateRequest(request._id, params)
+          .subscribe(
+            (data) => {
+                //loading.dismiss();
+              this.navCtrl.push(MaintenanceTrackerPage, {requestKey: request._id});
+            },
+            (data) => {
+              //loading.dismiss();
+            });
+      }
       else{
         // this.firebaseAnalytics.logEvent('page_view', {page: "dashboard"})
         //   .then((res: any) => console.log("firebase analytics -success ", res))

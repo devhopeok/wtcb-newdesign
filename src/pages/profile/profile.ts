@@ -18,6 +18,8 @@ export class ProfilePage {
   loading: any;
   create_or_update = 0;
   edit_or_save = 0;
+  officeKey:any;
+  user:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage,
     public buildingService: BuildingProvider, public loadingCtrl: LoadingController, public userService: UserService,
     public alertCtrl: AlertController) {
@@ -29,6 +31,8 @@ export class ProfilePage {
         console.log("userdata", val);
         this.token = val.token;
         this.office.token = this.token;
+        this.officeKey = val.user.officeKey;
+        this.user = val.user;
         this.getOffice();
 
       });
@@ -100,7 +104,9 @@ export class ProfilePage {
                       { 
                         text: 'OK',
                         handler: ()=>{
-                          this.navCtrl.setRoot(MaintenanceViewPage);
+                          this.officeKey = data.office_id;
+                          this.updateUser();
+                          
                         }
                       }
                     ]
@@ -120,12 +126,13 @@ export class ProfilePage {
             console.log("office Data:", data);
             if(data == 'Success'){
                 let alert = this.alertCtrl.create({
-                    title: "Success", subTitle: "Office has been updated successfully.", 
+                    title: "éxito", subTitle: "¡Genial! El perfil ha sido creado con éxito.", 
                     buttons: [
                       { 
                         text: 'OK',
                         handler: ()=>{
-                          this.navCtrl.setRoot(MaintenanceViewPage);
+                          this.officeKey = this.office._id;
+                          this.updateUser();
                         }
                       }
                     ]
@@ -143,5 +150,31 @@ export class ProfilePage {
   onEdit(){
     this.edit_or_save = 1;
     console.log("this.edit_or_save", this.edit_or_save);
+  }
+
+  updateUser(){
+
+    let params = {
+      token: this.token,
+      officeKey: this.officeKey,
+      _id: this.user._id
+    }
+
+    console.log("update user", params);
+    this.userService.updateUser(params)
+        .subscribe(
+          (data) => {
+              console.log("result update user", data);
+              this.storage.get('userdata').then(val=>{
+                val.user.officeKey = data.officeKey;
+                this.storage.set('userdata', val);
+
+              });
+              this.navCtrl.setRoot(MaintenanceViewPage);
+            }
+           ,
+          (data) => {
+             this.navCtrl.setRoot(MaintenanceViewPage);
+          });
   }
 }

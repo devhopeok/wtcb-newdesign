@@ -1,0 +1,24 @@
+<ion-header>
+
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <img class="menu-icon" src="assets/imgs/menu_icon.png" />
+        </button>
+        <ion-title>Técnico</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card *ngFor="let item of technicians1;">
+        <ion-item>
+            <ion-avatar item-start>
+                <img src="assets/imgs/building.jpg">
+            </ion-avatar>
+            <h2>{{item.first_name}} {{item.last_name}}</h2>
+            <p>Email: {{item.email}}</p>
+            <p>Phone: {{item.phone_number}}</p>
+        </ion-item>
+    </ion-card>
+</ion-content>

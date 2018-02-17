@@ -109,6 +109,28 @@
                 </ion-item>
             </ion-item-sliding>
         </div>
+
+        <div *ngIf="user.level == 3">
+            <ion-item-sliding *ngFor="let item of openedRequests">
+                <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{'row-content-bold' : item.opened3 == false}">
+                    <div class="col width-10">
+                        <img src="assets/imgs/working-icon.png" />
+                    </div>
+                    <div class="col width-10 request-id">
+                        {{item._id}}
+                    </div>
+                    <div class="col width-30">
+                        <div class="office-name">{{item.officeName}}</div>
+                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>
+                    </div>
+
+                    <div class="col width-20">
+                        <ion-icon name="md-calendar"></ion-icon>
+                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>
+                    </div>
+                </ion-item>
+            </ion-item-sliding>
+        </div>
     </ion-list>
 
     <ion-list style="margin-top: 20px;" *ngIf="closedRequests.length > 0">

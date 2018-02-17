@@ -6,6 +6,7 @@ import { PushServiceProvider } from '../../providers/push-service';
 import { Storage } from '@ionic/storage';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {BuildingProvider} from '../../providers/building';
+import { ProfilePage } from '../profile/profile';
 import * as AWS from "aws-sdk/global";
 import S3 from "aws-sdk/clients/s3";
 
@@ -67,52 +68,66 @@ export class OtrsRequestPage {
             this.officeKey = val.user.officeKey;
             this.userKey = val.user._id;
 
+
             if (this.officeKey == null){
               this.officeKey = this.otrsRequest.officeKey;
+              let alert = this.alertCtrl.create({
+                title: "Advertencia", subTitle: "¡Alto! Por favor cree su perfil para tramitar solicitudes.", 
+                buttons: [{
+                  text: 'OK',
+                  handler: ()=>{
+                    this.navCtrl.setRoot(ProfilePage);
+                  }
+                }]
+              });
+              alert.present();
+              
             }
+            else{
+                let loading = this.loadingCtrl.create();
+                loading.present();
+                this.userService.getOfficesById(this.officeKey, this.token)
+                .subscribe(
+                  (data) => {
+                    loading.dismiss();
+                    console.log("Getting Offices:", data);
 
-            let loading = this.loadingCtrl.create();
-            loading.present();
-            this.userService.getOfficesById(this.officeKey, this.token)
-            .subscribe(
-              (data) => {
-                loading.dismiss();
-                console.log("Getting Offices:", data);
+                    this.office = data[0];
 
-                this.office = data[0];
-
-                let buildingId = this.office.buildingId;
-                let floorId = this.office.floorId;
-                let buildings = this.buildingService.list();
-                let building = {
-                    name: '',
-                    floors: []
-                };
-                let floor = {
-                    name: ''
-                };
-                for (let i = 0; i < buildings.length; i ++) {
-                    if (buildings[i].id.toString() == buildingId) {
-                        building = buildings[i];
-                        break;
-                    }
-                }
-                if (floorId) {
-                    for (let j = 0; j < building.floors.length; j ++) {
-                        if (building.floors[j].id.toString() == floorId) {
-                            floor = building.floors[j];
-                            console.log("floor", floor);
+                    let buildingId = this.office.buildingId;
+                    let floorId = this.office.floorId;
+                    let buildings = this.buildingService.list();
+                    let building = {
+                        name: '',
+                        floors: []
+                    };
+                    let floor = {
+                        name: ''
+                    };
+                    for (let i = 0; i < buildings.length; i ++) {
+                        if (buildings[i].id.toString() == buildingId) {
+                            building = buildings[i];
                             break;
                         }
                     }
-                }
+                    if (floorId) {
+                        for (let j = 0; j < building.floors.length; j ++) {
+                            if (building.floors[j].id.toString() == floorId) {
+                                floor = building.floors[j];
+                                console.log("floor", floor);
+                                break;
+                            }
+                        }
+                    }
 
-                this.building_name = building.name;
-                this.floor_name = floor.name;
-              },
-              (data) => {
-                loading.dismiss();
-              });
+                    this.building_name = building.name;
+                    this.floor_name = floor.name;
+                  },
+                  (data) => {
+                    loading.dismiss();
+                  });
+                }
+            
           }
         });
       }

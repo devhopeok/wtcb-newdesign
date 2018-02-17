@@ -18,7 +18,7 @@ import { NotificationPage } from '../pages/notification/notification';
 import { AnalyticsPage } from '../pages/analytics/analytics';
 import { PopupPage } from '../pages/popup/popup';
 import { ProfilePage } from '../pages/profile/profile';
-
+import { TechnicianPage } from '../pages/technician/technician';
 import { UserService } from '../providers/user-service';
 import { BaseService } from '../providers/base-service';
 import { BuildingProvider } from '../providers/building';
@@ -82,7 +82,8 @@ const cloudSettings: CloudSettings = {
     PopupPage,
     NotificationPage,
     AnalyticsPage,
-    ProfilePage
+    ProfilePage,
+    TechnicianPage
   ],
   imports: [
     BrowserModule,
@@ -112,7 +113,8 @@ const cloudSettings: CloudSettings = {
     PopupPage,
     NotificationPage,
     AnalyticsPage,
-    ProfilePage
+    ProfilePage,
+    TechnicianPage
   ],
   providers: [
     StatusBar,

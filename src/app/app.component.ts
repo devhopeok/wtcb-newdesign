@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-
+import { TechnicianPage } from '../pages/technician/technician';
 import { LoginPage } from '../pages/login/login';
 import { MaintenanceViewPage } from '../pages/maintenance-view/maintenance-view';
 import { BuildingListPage } from '../pages/building-list/building-list';
@@ -25,7 +25,7 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, icon: any}>;
   count=0;
   token: any;
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
@@ -35,13 +35,14 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Inicio', component: HomePage },
-      { title: 'Mantenimiento', component: MaintenanceViewPage },
-      { title: 'Edificios', component: BuildingListPage},
-      { title: 'Notificaciones', component: NotificationPage},
-      { title: 'Indicadores de Gestión', component: AnalyticsPage},
-      { title: 'Profile', component: ProfilePage},
-      { title: 'Cerrar Sesión', component: null}
+      { title: 'Inicio', component: HomePage, icon: 'md-home' },
+      { title: 'Mantenimiento', component: MaintenanceViewPage, icon: 'md-paper' },
+      { title: 'Edificios', component: BuildingListPage, icon: 'md-easel'},
+      { title: 'Notificaciones', component: NotificationPage, icon: 'md-notifications'},
+      { title: 'Indicadores de Gestión', component: AnalyticsPage, icon: 'md-analytics'},
+      { title: 'Profile', component: ProfilePage, icon: 'md-person'},
+      { title: 'Técnico', component: TechnicianPage, icon: 'md-calculator'},
+      { title: 'Cerrar Sesión', component: null, icon: 'md-log-out'}
     ];
 
     if (!this.platform.is('core')) {
@@ -98,29 +99,29 @@ export class MyApp {
           if (val != null){
             if (val.user.level == 7 || val.user.level == 8){
               this.pages = [
-                { title: 'Inicio', component: HomePage },
-                { title: 'Mantenimiento', component: MaintenanceViewPage },
-                { title: 'Edificios', component: BuildingListPage},
-                { title: 'Notificaciones', component: NotificationPage},
-                { title: 'Indicadores de Gestión', component: AnalyticsPage},
-                { title: 'Cerrar Sesión', component: null}
+                { title: 'Inicio', component: HomePage, icon: 'md-home' },
+                { title: 'Mantenimiento', component: MaintenanceViewPage, icon: 'md-paper' },
+                { title: 'Edificios', component: BuildingListPage, icon: 'md-easel'},
+                { title: 'Notificaciones', component: NotificationPage, icon: 'md-notifications'},
+                { title: 'Indicadores de Gestión', component: AnalyticsPage, icon: 'md-analytics'},
+                { title: 'Técnico', component: TechnicianPage, icon: 'md-calculator'},
+                { title: 'Cerrar Sesión', component: null, icon: 'md-log-out'}
               ];
             }
             else if (val.user.level == 3){
               this.pages = [
                 
-                { title: 'Mantenimiento', component: MaintenanceViewPage },
-                { title: 'Notificaciones', component: NotificationPage},
-                { title: 'Profile', component: ProfilePage},
-                { title: 'Cerrar Sesión', component: null}
+                { title: 'Mantenimiento', component: MaintenanceViewPage, icon: 'md-paper' },
+                { title: 'Notificaciones', component: NotificationPage, icon: 'md-notifications'},
+                { title: 'Profile', component: ProfilePage, icon: 'md-person'},
+                { title: 'Cerrar Sesión', component: null, icon: 'md-log-out'}
               ];
             }
             else{
               this.pages = [
-                
-                { title: 'Mantenimiento', component: MaintenanceViewPage },
-                { title: 'Notificaciones', component: NotificationPage},
-                { title: 'Cerrar Sesión', component: null}
+                { title: 'Mantenimiento', component: MaintenanceViewPage, icon: 'md-paper' },
+                { title: 'Notificaciones', component: NotificationPage, icon: 'md-notifications'},
+                { title: 'Cerrar Sesión', component: null, icon: 'md-log-out'}
               ];
             }
             this.token=val.token;
