@@ -19,7 +19,17 @@ export class ProfilePage {
   create_or_update = 0;
   edit_or_save = 0;
   officeKey:any;
-  user:any;
+  user = {
+    _id: '',
+    level: 1,
+    first_name: '',
+    last_name: '',
+    phone_number: '',
+    email: '',
+    blood_type: '',
+    officeKey: ''
+  };
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage,
     public buildingService: BuildingProvider, public loadingCtrl: LoadingController, public userService: UserService,
     public alertCtrl: AlertController) {
@@ -33,7 +43,39 @@ export class ProfilePage {
         this.office.token = this.token;
         this.officeKey = val.user.officeKey;
         this.user = val.user;
-        this.getOffice();
+
+        if (this.user.level == 3){
+            this.getOffice();
+        }
+        else{
+          console.log(this.user, "Technician info");
+          let loading = this.loadingCtrl.create();
+          loading.present();
+          this.userService.getOfficesById(this.user.officeKey, this.token)
+            .subscribe(
+              (data) => {
+                loading.dismiss();
+                this.office = data[0];
+
+                  let buildings = this.buildingService.list();
+                  for (let i = 0; i < buildings.length; i ++) {
+                      if (buildings[i].id == this.office.buildingId) {
+                          this.office.buildingName = buildings[i].name;
+
+                          for (let j = 0; j < buildings[i].floors.length; j ++) {
+                              if (this.office.floorId == buildings[i].floors[j].id) {
+                                  this.office.floorName = buildings[i].floors[j].name;
+                              }
+                          }
+                      }
+                  }
+              },
+              (data) => {
+                loading.dismiss();
+                
+              });
+          this.create_or_update = 1;
+        }
 
       });
   }
@@ -87,6 +129,8 @@ export class ProfilePage {
   }
   
   public createOffice() {
+
+    if (this.user.level == 3){
       this.loading = this.loadingCtrl.create();
       this.loading.present();
       console.log("param", this.office);
@@ -144,12 +188,43 @@ export class ProfilePage {
             this.loading.dismiss();
           });
       }
-      
+    }
+    else{
+      this.updateTechnician();
+    }
   }
 
   onEdit(){
     this.edit_or_save = 1;
     console.log("this.edit_or_save", this.edit_or_save);
+  }
+
+  updateTechnician(){
+    let params = {
+      token: this.token,
+      first_name: this.user.first_name,
+      last_name: this.user.last_name,
+      phone_number: this.user.phone_number,
+      blood_type: this.user.blood_type,
+      _id: this.user._id
+    }
+
+    console.log("update user", params);
+    this.userService.updateUser(params)
+        .subscribe(
+          (data) => {
+              console.log("result update user", data);
+              this.storage.get('userdata').then(val=>{
+                val.user = data.user;
+                this.storage.set('userdata', val);
+
+              });
+              this.navCtrl.setRoot(MaintenanceViewPage);
+            }
+           ,
+          (data) => {
+             this.navCtrl.setRoot(MaintenanceViewPage);
+          });
   }
 
   updateUser(){
