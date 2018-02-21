@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>Create Office</ion-title>
+        <ion-title>Crear oficina</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -15,13 +15,13 @@
 
 <ion-content padding>
     <ion-list>
-        <ion-item>
+        <ion-item class="opt">
             <ion-label>Seleccione Edificio</ion-label>
             <ion-select [(ngModel)]="office.buildingId" interface="popover" (ngModelChange)="updateFloors()">
                 <ion-option value="{{item.id}}" *ngFor="let item of buildings">{{item.name}}</ion-option>
             </ion-select>
         </ion-item>
-        <ion-item>
+        <ion-item class="opt">
             <ion-label>Seleccione Piso</ion-label>
             <ion-select interface="popover" [(ngModel)]="office.floorId">
                 <ion-option value="{{item.id}}" *ngFor="let item of floors">{{item.name}}</ion-option>
@@ -50,9 +50,11 @@
     </ion-list>
 
     <ion-list>
-        <ion-list-header>
+        <!-- <ion-list-header>
             Information del dueño
-        </ion-list-header>
+        </ion-list-header> -->
+
+        <h4>Information del dueño</h4>
         <ion-item>
             <ion-label fixed>Nombre</ion-label>
             <ion-input type="text" [(ngModel)]="office.employees.employee.first_name"></ion-input>
@@ -74,15 +76,17 @@
             <ion-input type="text" [(ngModel)]="office.employees.employee.password"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Job Speciality</ion-label>
+            <ion-label fixed>Tipo de sangre</ion-label>
             <ion-input type="text" [(ngModel)]="office.employees.employee.blood_type"></ion-input>
         </ion-item>
     </ion-list>
 
     <ion-list>
-        <ion-list-header>
+        <!-- <ion-list-header>
             Información del rentatario
-        </ion-list-header>
+        </ion-list-header> -->
+
+        <h4>Información del rentatario</h4>
         <ion-item>
             <ion-label fixed>Nombre</ion-label>
             <ion-input type="text" [(ngModel)]="office.employees.outsourcing.first_name"></ion-input>
@@ -104,10 +108,10 @@
             <ion-input type="text" [(ngModel)]="office.employees.outsourcing.password"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Job Speciality</ion-label>
+            <ion-label fixed>Tipo de sangre</ion-label>
             <ion-input type="text" [(ngModel)]="office.employees.outsourcing.blood_type"></ion-input>
         </ion-item>
     </ion-list>
 
-    <button ion-button class="main-btn" (click)="createOffice()" [disabled]="!isConnected">Submit</button>
+    <button ion-button class="main-btn" (click)="createOffice()" [disabled]="!isConnected">Guardar</button>
 </ion-content>

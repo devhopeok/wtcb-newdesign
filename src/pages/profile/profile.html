@@ -15,7 +15,7 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-list *ngIf="user.level == 3">
+    <ion-list>
         <ion-item>
             <ion-label>Seleccione Edificio</ion-label>
             <ion-select [(ngModel)]="office.buildingId" interface="popover" (ngModelChange)="updateFloors()">
@@ -47,38 +47,6 @@
         <ion-item>
             <ion-label fixed>Co-Pago</ion-label>
             <ion-input type="text" [(ngModel)]="office.coPay"></ion-input>
-        </ion-item>
-    </ion-list>
-
-    <ion-list *ngIf="user.level != 3">
-    
-        <ion-item>
-            <ion-label fixed>Compañia</ion-label>
-            <ion-input type="text" [(ngModel)]="office.company"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label fixed>First Name</ion-label>
-            <ion-input type="text" [(ngModel)]="user.first_name"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label fixed>Last Name</ion-label>
-            <ion-input type="text" [(ngModel)]="user.last_name"></ion-input>
-        </ion-item>
-
-       
-        <ion-item>
-            <ion-label fixed>Phone No.</ion-label>
-            <ion-input type="text" [(ngModel)]="user.phone_number"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label fixed>Email</ion-label>
-            <ion-input type="text" [(ngModel)]="user.email"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label fixed>Job Speciality</ion-label>
-            <ion-input type="text" [(ngModel)]="user.blood_type"></ion-input>
         </ion-item>
     </ion-list>
 

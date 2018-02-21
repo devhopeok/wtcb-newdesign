@@ -28,6 +28,8 @@ export class AnalyticsPage {
   two_stars = [];
   one_star = [];
 
+  star_flags: any = [false, false, false, false, false ]
+
   avg_time1 : any;
   avg_time2: any;
   avg_time3: any;
@@ -52,6 +54,8 @@ export class AnalyticsPage {
     public events: Events,
     public alertCtrl: AlertController) {
 
+      this.star_flags = [false, false, false, false, false ]
+  
   }
 
   go(){
@@ -234,11 +238,11 @@ export class AnalyticsPage {
 
                     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
                         type: 'doughnut',
-                        data: {
-                            labels: ["Open Tickets", "Closed Tickets", "Rejected Tickets", "Payed Tickets"],
+                        data: {       
                             datasets: [{
-                                label: '# of Votes',
+                                
                                 data: [this.openedSteps.length, this.closedSteps.length, this.rejectedSteps.length, this.paidSteps.length],
+                                label: '# of Votes',
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.5)',
                                     'rgba(54, 162, 235, 0.5)',
@@ -251,7 +255,8 @@ export class AnalyticsPage {
                                     "#FFCE56",
                                     "#FF6384"
                                 ]
-                            }]
+                            }],
+                            labels: ["Open Tickets", "Closed Tickets", "Rejected Tickets", "Payed Tickets"]
                         }
              
                     });
@@ -314,9 +319,10 @@ export class AnalyticsPage {
               
               this.userService.getOfficesById(data.officeKey, this.token).subscribe(
                 (data1)=>{
-                    
+                  console.log('stars', data1);
                     if (this.stars[i].star >= 4.5){
                       this.five_stars.push(data1[0].name);
+                      
                     }
                     else if (this.stars[i].star >= 3.5){
                       this.four_stars.push(data1[0].name);
@@ -339,5 +345,10 @@ export class AnalyticsPage {
               loading.dismiss();
           });
      }
+  }
+
+  itemShow(event, index){
+    this.star_flags[index] = !this.star_flags[index];
+    
   }
 }

@@ -13,18 +13,18 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+    <h4>Lista de oficinas</h4>
     <ion-list>
-        <ion-list-header>
-            Office List
-        </ion-list-header>
         <ion-item-sliding *ngFor="let item of offices" #slidingItem>
             <ion-item (click)="editOffice(item)">
                 <ion-avatar item-start>
                     <img src="assets/imgs/working-icon.png">
                 </ion-avatar>
                 <h2>{{item.company}}</h2>
-                <p>{{item.name}}</p>
+                <div><ion-icon name="contact"></ion-icon><p>{{item.name}}</p></div>
+                <div><ion-icon name="ios-mail"></ion-icon><p>{{item.email}}</p></div>
+                <ion-icon name="ios-arrow-forward-outline" item-end></ion-icon>
             </ion-item>
             <ion-item-options>
                 <button ion-button color="primary" (click)="editOffice(item)">Edit</button>

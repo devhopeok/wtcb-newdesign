@@ -7,33 +7,162 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
 
-    <ion-list no-lines>
-        <ion-item>
-            <ion-label>From: </ion-label>
-            <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="fromDate"></ion-datetime>
-        </ion-item>
+    <div class="renter">
+        <ion-list>
+            <ion-item>
+                <ion-label>From: </ion-label>
+                <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="YYYY/MMM/DD" [(ngModel)]="fromDate"></ion-datetime>
+            </ion-item>
+    
+            <ion-item>
+                <ion-label>To: </ion-label>
+                <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="YYYY/MMM/DD" [(ngModel)]="toDate"></ion-datetime>
+            </ion-item>
+    
+            <ion-item>
+                <ion-label>Renter</ion-label>
+                <ion-select (ionChange)="onChange($event)">
+                    <ion-option *ngFor="let star of stars; let i = index" value="{{star.email}}">
+                        {{star.email}}
+                    </ion-option> 
+                </ion-select>
+            </ion-item>
+        </ion-list>
 
-        <ion-item>
-            <ion-label>To: </ion-label>
-            <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="toDate"></ion-datetime>
-        </ion-item>
-
-        <ion-item>
-            <ion-label>Renter</ion-label>
-            <ion-select (ionChange)="onChange($event)">
-                <ion-option *ngFor="let star of stars; let i = index" value="{{star.email}}">
-                    {{star.email}}
-                </ion-option> 
-            </ion-select>
-        </ion-item>
-
-        <button class="main-btn" ion-button block (click)="go();" style="margin-top:3vw; margin-bottom: 2vw;">Go</button>
-    </ion-list>
+        <button class="main-btn gobtn" ion-button block (click)="go();">Go</button>
+    </div>
 
     
-	<ion-list no-lines>
+
+    <div class="review_list">
+        <h3>Review Evaluation</h3>
+        <!-- Star 5 -->
+        <ion-list>
+            <ion-item (click)="itemShow($event, 0)">
+                <ion-avatar item-start>
+                    <img src="assets/imgs/star-5.png">
+                </ion-avatar>
+                <h2>Five Stars Review</h2>
+                <p item-end>{{five_stars.length}}</p>
+            </ion-item>
+            <div *ngIf="star_flags[0]" class="review_name">
+                <ion-item [hidden]="five_stars.length == 0">
+                    <ion-icon name="md-thumbs-up" item-start></ion-icon>
+                        {{five_stars.join(', ')}}
+                </ion-item>
+            </div>
+        </ion-list>
+
+        <!-- Star 4 -->
+
+        <ion-list>
+            <ion-item (click)="itemShow($event, 1)">
+                <ion-avatar item-start>
+                    <img src="assets/imgs/star-4.png">
+                </ion-avatar>
+                <h2>Four Stars Review</h2>
+                <p item-end>{{four_stars.length}}</p>
+            </ion-item>
+            <div *ngIf="star_flags[1]" class="review_name">
+                <ion-item [hidden]="four_stars.length == 0">
+                    <ion-icon name="ios-thumbs-up" item-start></ion-icon>
+                    {{four_stars.join(', ')}}
+                </ion-item>
+            </div>
+        </ion-list>
+
+        <!-- Star 3 -->
+
+        <ion-list>
+            <ion-item (click)="itemShow($event, 2)">
+                <ion-avatar item-start>
+                    <img src="assets/imgs/star-3.png">
+                </ion-avatar>
+                <h2>Three Stars Review</h2>
+                <p item-end>{{three_stars.length}}</p>
+            </ion-item>
+            <div *ngIf="star_flags[2]" class="review_name">
+                <ion-item [hidden]="three_stars.length == 0">
+                    <ion-icon name="ios-thumbs-up-outline" item-start></ion-icon>
+                    {{three_stars.join(', ')}}
+                </ion-item>
+            </div>
+        </ion-list>
+
+        <!-- Star 2 -->
+
+        <ion-list>
+            <ion-item (click)="itemShow($event, 3)">
+                <ion-avatar item-start>
+                    <img src="assets/imgs/star-2.png">
+                </ion-avatar>
+                <h2>Two Stars Review</h2>
+                <p item-end>{{two_stars.length}}</p>
+            </ion-item>
+            <div *ngIf="star_flags[3]" class="review_name">
+                <ion-item [hidden]="two_stars.length == 0">
+                    <ion-icon name="ios-thumbs-down-outline" item-start></ion-icon>
+                    {{two_stars.join(', ')}}
+                </ion-item>
+            </div>
+        </ion-list>
+
+        <!-- Star 1 -->
+
+        <ion-list>
+            <ion-item (click)="itemShow($event, 4)">
+                <ion-avatar item-start>
+                    <img src="assets/imgs/star-1.png">
+                </ion-avatar>
+                <h2>One Star Review</h2>
+                <p item-end>{{one_star.length}}</p>
+            </ion-item>
+            <div *ngIf="star_flags[4]" class="review_name">
+                <ion-item [hidden]="one_star.length == 0">
+                    <ion-icon name="md-thumbs-down" item-start></ion-icon>
+                    {{one_star.join(', ')}}
+                </ion-item>
+            </div>
+        </ion-list>
+
+    </div>
+
+    
+    <div class="avg_list">
+        <h3>Avg Time Evaluation</h3>
+        <ion-list>
+            <ion-item>
+                <p class="name" item-start>Avg Time for Ticket Payment</p>
+                <p class="timer" item-end>{{avg_time4}}</p>
+            </ion-item>
+        </ion-list>
+
+        <ion-list>
+            <ion-item>
+                <p class="name" item-start>Avg Time of Finalized Work</p>
+                <p class="timer" item-end>{{avg_time3}}</p>
+            </ion-item>
+        </ion-list>
+
+        <ion-list>
+            <ion-item>
+                <p class="name" item-start>Avg Time of Schedule Final Work</p>
+                <p class="timer" item-end>{{avg_time2}}</p>
+            </ion-item>
+        </ion-list>
+
+        <ion-list>
+            <ion-item>
+                <p class="name" item-start>Avg Time Admin Answers Initial Request</p>
+                <p class="timer" item-end>{{avg_time1}}</p>
+            </ion-item>
+        </ion-list>
+    </div>
+
+
+	<!-- <ion-list>
 
         <ion-list-header class="header-style">
             Review Evaluation
@@ -98,9 +227,12 @@
         <ion-item>
         	{{one_star.join(', ')}}
         </ion-item>
-    </ion-list>
+    </ion-list> -->
 
-    <ion-list no-lines>
+    
+
+
+    <!-- <ion-list no-lines>
 
         <ion-list-header class="header-style">
             Avg Time Evaluation
@@ -141,7 +273,7 @@
                 {{avg_time1}}
             </div>
         </div>
-    </ion-list>
+    </ion-list> -->
 
     <!-- <ion-list no-lines>
 

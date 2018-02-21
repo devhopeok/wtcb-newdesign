@@ -5,6 +5,71 @@ page-analytics {
     	margin: 0;
 	}
 
+	.renter{
+		box-shadow: 0 0 5px gray;
+		display: grid;
+		margin-bottom: 3vw;
+		.list{
+		  margin-bottom: 20px;
+		  padding-right: 10px;
+		}
+		.gobtn{
+			margin-top:3vw; 
+			margin-bottom: 4vw;
+		}
+	}
+
+	.review_list{
+		box-shadow: 0 0 5px gray;
+		padding: 10px;
+		margin-bottom: 3vw;
+		h3{
+			font-weight: 400;
+			font-size: 20px;
+			margin: 20px !important;
+		}
+		.list{
+			margin-bottom: 0px;
+		}
+		.review_name{
+			padding-left: 40px;
+		}
+	}
+
+	.avg_list{
+		box-shadow: 0 0 5px gray;
+		padding: 10px;
+		margin-bottom: 3vw;
+		h3{
+			font-weight: 400;
+			font-size: 20px;
+			margin: 20px !important;
+		}
+		.list{
+			margin-bottom: 0px;
+			.item{
+				background-color: #e0f4fa
+			}
+			.name{
+				color: #3296c8;
+				font-size: 18px;
+				width: calc(100% - 100px);
+			}
+			.timer{
+				font-size: 16px;
+			}
+		}
+	}
+
+	.card{
+		margin: 0;
+		width: 100%;
+		.card-header{
+			font-size: 20px;
+			font-weight: 400;
+		}
+	}
+
 	.star-item{
 	    background-color: gray;
     	color: white;
