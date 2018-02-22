@@ -37,10 +37,10 @@ export class MyApp {
     this.pages = [
       { title: 'Inicio', component: HomePage, icon: 'md-home' },
       { title: 'Mantenimiento', component: MaintenanceViewPage, icon: 'md-paper' },
-      { title: 'Edificios', component: BuildingListPage, icon: 'md-easel'},
+      { title: 'Torres', component: BuildingListPage, icon: 'md-easel'},
       { title: 'Notificaciones', component: NotificationPage, icon: 'md-notifications'},
       { title: 'Indicadores de Gestión', component: AnalyticsPage, icon: 'md-analytics'},
-      { title: 'Profile', component: ProfilePage, icon: 'md-person'},
+      { title: 'Perfil', component: ProfilePage, icon: 'md-person'},
       { title: 'Técnico', component: TechnicianPage, icon: 'md-calculator'},
       { title: 'Cerrar Sesión', component: null, icon: 'md-log-out'}
     ];
@@ -101,7 +101,7 @@ export class MyApp {
               this.pages = [
                 { title: 'Inicio', component: HomePage, icon: 'md-home' },
                 { title: 'Mantenimiento', component: MaintenanceViewPage, icon: 'md-paper' },
-                { title: 'Edificios', component: BuildingListPage, icon: 'md-easel'},
+                { title: 'Torres', component: BuildingListPage, icon: 'md-easel'},
                 { title: 'Notificaciones', component: NotificationPage, icon: 'md-notifications'},
                 { title: 'Indicadores de Gestión', component: AnalyticsPage, icon: 'md-analytics'},
                 { title: 'Técnico', component: TechnicianPage, icon: 'md-calculator'},
@@ -113,7 +113,7 @@ export class MyApp {
                 
                 { title: 'Mantenimiento', component: MaintenanceViewPage, icon: 'md-paper' },
                 { title: 'Notificaciones', component: NotificationPage, icon: 'md-notifications'},
-                { title: 'Profile', component: ProfilePage, icon: 'md-person'},
+                { title: 'Perfil', component: ProfilePage, icon: 'md-person'},
                 { title: 'Cerrar Sesión', component: null, icon: 'md-log-out'}
               ];
             }

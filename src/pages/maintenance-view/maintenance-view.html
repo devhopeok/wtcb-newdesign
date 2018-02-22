@@ -25,8 +25,7 @@
 
 
 <ion-content class="main-bg">
-    <button class="main-btn" ion-button block (click)="createNewRequest()" *ngIf="user.level == '3.1' || user.level =='3.2' || user.level=='3'">ENVIAR NUEVA SOLICITUD</button>
-
+    <button class="main-btn" ion-button block (click)="createNewRequest()" *ngIf="user.level == '3.1' || user.level =='3.2' || user.level=='3'">Enviar Nueva Solicitud</button>
     <ion-list style="margin-top: 20px;" *ngIf="openedRequests.length > 0">
 
         <ion-list-header class="header-style">
@@ -37,9 +36,10 @@
             <ion-item-sliding *ngFor="let item of openedRequests">
                 <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{'row-content-bold' : item.opened7 == false}">
                     <div class="col width-10">
-                        <img src="assets/imgs/working-icon.png" />
+                        <img *ngIf="!item.photos.length" src="assets/imgs/working-icon.png" />
+                        <img *ngIf="item.photos.length" [src]="item.photos[0]" alt="">
                     </div>
-                    <div class="col width-10 request-id">
+                    <div class="col width-10 request-id" maxlength="10">
                         {{item._id}}
                     </div>
                     <div class="col width-30">
@@ -70,7 +70,8 @@
             <ion-item-sliding *ngFor="let item of openedRequests">
                 <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{'row-content-bold' : item.opened3_1 == false}">
                     <div class="col width-10">
-                        <img src="assets/imgs/working-icon.png" />
+                        <img *ngIf="!item.photos.length" src="assets/imgs/working-icon.png" />
+                        <img *ngIf="item.photos.length" [src]="item.photos[0]" alt="">
                     </div>
                     <div class="col width-10 request-id">
                         {{item._id}}
@@ -92,7 +93,8 @@
             <ion-item-sliding *ngFor="let item of openedRequests">
                 <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{'row-content-bold' : item.opened3_2 == false}">
                     <div class="col width-10">
-                        <img src="assets/imgs/working-icon.png" />
+                        <img *ngIf="!item.photos.length" src="assets/imgs/working-icon.png" />
+                        <img *ngIf="item.photos.length" [src]="item.photos[0]" alt="">
                     </div>
                     <div class="col width-10 request-id">
                         {{item._id}}
@@ -114,7 +116,8 @@
             <ion-item-sliding *ngFor="let item of openedRequests">
                 <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{'row-content-bold' : item.opened3 == false}">
                     <div class="col width-10">
-                        <img src="assets/imgs/working-icon.png" />
+                        <img *ngIf="!item.photos.length" src="assets/imgs/working-icon.png" />
+                        <img *ngIf="item.photos.length" [src]="item.photos[0]" alt="">
                     </div>
                     <div class="col width-10 request-id">
                         {{item._id}}
@@ -141,7 +144,8 @@
             <ion-item-sliding *ngFor="let item of closedRequests">
                 <ion-item  (click)="viewRequest(item)" class="row row-content">
                     <div class="col width-10">
-                        <img src="assets/imgs/working-icon.png" />
+                        <img *ngIf="!item.photos.length" src="assets/imgs/working-icon.png" />
+                        <img *ngIf="item.photos.length" [src]="item.photos[0]" alt="">
                     </div>
                     <div class="col width-10 request-id">
                         {{item._id}}
@@ -170,7 +174,8 @@
             <ion-item-sliding *ngFor="let item of closedRequests">
                 <ion-item  (click)="viewRequest(item)" class="row row-content">
                     <div class="col width-10">
-                        <img src="assets/imgs/working-icon.png" />
+                        <img *ngIf="!item.photos.length" [src]="assets/imgs/working-icon.png" />
+                        <img *ngIf="item.photos.length" [src]="item.photos[0]" alt="">
                     </div>
                     <div class="col width-10 request-id">
                         {{item._id}}

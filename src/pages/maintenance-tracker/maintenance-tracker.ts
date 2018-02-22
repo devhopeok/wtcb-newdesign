@@ -413,7 +413,7 @@ export class MaintenanceTrackerPage {
           this.scheduleAccept1 = false;
         });
       
-      this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente acepó la visita programada.", this.token);
+      this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente aceptó la visita programada.", this.token);
       // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
     }
 
@@ -491,7 +491,7 @@ export class MaintenanceTrackerPage {
           this.quoteAccept = false;
         });
       
-      this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente acepto la cotización.", this.token);
+      this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente aceptó la cotización.", this.token);
       // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your quote", this.token);
     }
 
@@ -637,7 +637,7 @@ export class MaintenanceTrackerPage {
           this.scheduleAccept = false;
         });
       
-      this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente acepó la visita programada.", this.token);
+      this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente aceptó la visita programada.", this.token);
       // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
     }
 
@@ -688,7 +688,7 @@ export class MaintenanceTrackerPage {
                 loading.dismiss();
               });
             
-             this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha finalizado los trabajos correspondientes. Tienes que pagar", this.token);
+             this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha finalizado los trabajos. Su factura està disponible para pago.", this.token);
              // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager completed your request", this.token);
             
     }

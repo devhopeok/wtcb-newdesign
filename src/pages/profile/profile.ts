@@ -126,7 +126,7 @@ export class ProfilePage {
             console.log("office Data:", data);
             if(data == 'Success'){
                 let alert = this.alertCtrl.create({
-                    title: "éxito", subTitle: "¡Genial! El perfil ha sido creado con éxito.", 
+                    title: "¡Genial!", subTitle: "El perfil ha sido creado.", 
                     buttons: [
                       { 
                         text: 'OK',

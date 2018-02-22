@@ -64,8 +64,12 @@ export class BuildingProvider {
                     },
                     {
                         id: 11,
-                        name: 'Administration'
+                        name: 'Administración'
                     },
+                    {
+                        id: 12,
+                        name: 'No aplica'
+                    }
                 ]
             },
             {
@@ -104,6 +108,10 @@ export class BuildingProvider {
                     {
                         id: 8,
                         name: 'Piso 11'
+                    },
+                    {
+                        id: 9,
+                        name: 'No aplica'
                     }
                 ]
             },
@@ -156,8 +164,20 @@ export class BuildingProvider {
                         id: 11,
                         name: 'Restaurante La Fragata'
                     },
+                    {
+                        id: 12,
+                        name: 'No aplica'
+                    }
                 ]
-            }
+            },
+            {
+                id: 4,
+                name: 'No aplica',
+                description: '',
+                floors: [
+                    
+                ]
+            },
         ];
     }
 }

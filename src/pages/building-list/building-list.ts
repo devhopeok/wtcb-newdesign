@@ -13,6 +13,7 @@ export class BuildingListPage {
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private buildingService: BuildingProvider) {
        this.buildings = this.buildingService.list();
+       console.log(this.buildings);
     }
 
     ionViewDidLoad() {

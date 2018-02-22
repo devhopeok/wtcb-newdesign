@@ -12,17 +12,17 @@
     <div class="renter">
         <ion-list>
             <ion-item>
-                <ion-label>From: </ion-label>
+                <ion-label>Desde: </ion-label>
                 <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="YYYY/MMM/DD" [(ngModel)]="fromDate"></ion-datetime>
             </ion-item>
     
             <ion-item>
-                <ion-label>To: </ion-label>
+                <ion-label>Hasta: </ion-label>
                 <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="YYYY/MMM/DD" [(ngModel)]="toDate"></ion-datetime>
             </ion-item>
     
             <ion-item>
-                <ion-label>Renter</ion-label>
+                <ion-label>Clientes: </ion-label>
                 <ion-select (ionChange)="onChange($event)">
                     <ion-option *ngFor="let star of stars; let i = index" value="{{star.email}}">
                         {{star.email}}
@@ -37,14 +37,14 @@
     
 
     <div class="review_list">
-        <h3>Review Evaluation</h3>
+        <h3>Evaluaciones de desempeño</h3>
         <!-- Star 5 -->
         <ion-list>
             <ion-item (click)="itemShow($event, 0)">
                 <ion-avatar item-start>
                     <img src="assets/imgs/star-5.png">
                 </ion-avatar>
-                <h2>Five Stars Review</h2>
+                <h2>5 Estrella</h2>
                 <p item-end>{{five_stars.length}}</p>
             </ion-item>
             <div *ngIf="star_flags[0]" class="review_name">
@@ -62,7 +62,7 @@
                 <ion-avatar item-start>
                     <img src="assets/imgs/star-4.png">
                 </ion-avatar>
-                <h2>Four Stars Review</h2>
+                <h2>4 Estrella</h2>
                 <p item-end>{{four_stars.length}}</p>
             </ion-item>
             <div *ngIf="star_flags[1]" class="review_name">
@@ -80,7 +80,7 @@
                 <ion-avatar item-start>
                     <img src="assets/imgs/star-3.png">
                 </ion-avatar>
-                <h2>Three Stars Review</h2>
+                <h2>3 Estrella</h2>
                 <p item-end>{{three_stars.length}}</p>
             </ion-item>
             <div *ngIf="star_flags[2]" class="review_name">
@@ -98,7 +98,7 @@
                 <ion-avatar item-start>
                     <img src="assets/imgs/star-2.png">
                 </ion-avatar>
-                <h2>Two Stars Review</h2>
+                <h2>2 Estrella</h2>
                 <p item-end>{{two_stars.length}}</p>
             </ion-item>
             <div *ngIf="star_flags[3]" class="review_name">
@@ -116,7 +116,7 @@
                 <ion-avatar item-start>
                     <img src="assets/imgs/star-1.png">
                 </ion-avatar>
-                <h2>One Star Review</h2>
+                <h2>1 Estrella</h2>
                 <p item-end>{{one_star.length}}</p>
             </ion-item>
             <div *ngIf="star_flags[4]" class="review_name">
@@ -131,174 +131,39 @@
 
     
     <div class="avg_list">
-        <h3>Avg Time Evaluation</h3>
+        <h3>Promedio tiempos de gestion</h3>
         <ion-list>
             <ion-item>
-                <p class="name" item-start>Avg Time for Ticket Payment</p>
+                <p class="name" item-start>Tiempo de pago</p>
                 <p class="timer" item-end>{{avg_time4}}</p>
             </ion-item>
         </ion-list>
 
         <ion-list>
             <ion-item>
-                <p class="name" item-start>Avg Time of Finalized Work</p>
+                <p class="name" item-start>Tiempo de finalizacion</p>
                 <p class="timer" item-end>{{avg_time3}}</p>
             </ion-item>
         </ion-list>
 
         <ion-list>
             <ion-item>
-                <p class="name" item-start>Avg Time of Schedule Final Work</p>
+                <p class="name" item-start>Tiempo de para inicio de trabajo</p>
                 <p class="timer" item-end>{{avg_time2}}</p>
             </ion-item>
         </ion-list>
 
         <ion-list>
             <ion-item>
-                <p class="name" item-start>Avg Time Admin Answers Initial Request</p>
+                <p class="name" item-start>Tiempo para inicio de trabajo</p>
                 <p class="timer" item-end>{{avg_time1}}</p>
             </ion-item>
         </ion-list>
     </div>
 
-
-	<!-- <ion-list>
-
-        <ion-list-header class="header-style">
-            Review Evaluation
-        </ion-list-header>
-
-        <ion-item class="star-item">
-            <div>
-                Five Stars Review
-            </div>
-            <div item-end>
-                {{five_stars.length}}
-            </div>
-        </ion-item>
-        <ion-item>
-        	{{five_stars.join(', ')}}
-        </ion-item>
-        
-        <ion-item class="star-item">
-            <div>
-                Four Stars Review
-            </div>
-            <div item-end>
-                {{four_stars.length}}
-            </div>
-        </ion-item>
-        <ion-item>
-        	{{four_stars.join(', ')}}
-        </ion-item>
-
-        <ion-item class="star-item">
-            <div>
-                Three Stars Review
-            </div>
-            <div item-end>
-                {{three_stars.length}}
-            </div>
-        </ion-item>
-        <ion-item>
-        	{{three_stars.join(', ')}}
-        </ion-item>
-
-        <ion-item class="star-item">
-            <div>
-                Two Stars Review
-            </div>
-            <div item-end>
-                {{two_stars.length}}
-            </div>
-        </ion-item>
-        <ion-item>
-        	{{two_stars.join(', ')}}
-        </ion-item>
-
-        <ion-item class="star-item">
-            <div>
-                One Star Review
-            </div>
-            <div item-end>
-                {{one_star.length}}
-            </div>
-        </ion-item>
-        <ion-item>
-        	{{one_star.join(', ')}}
-        </ion-item>
-    </ion-list> -->
-
-    
-
-
-    <!-- <ion-list no-lines>
-
-        <ion-list-header class="header-style">
-            Avg Time Evaluation
-        </ion-list-header>
-
-        <div class="average-time-div">
-        	<div class="average-label">
-            	Avg Time for Ticket Payment
-            </div>
-            <div class="average-time">
-                {{avg_time4}}
-            </div>
-        </div>
-        
-        <div class="average-time-div">
-        	<div class="average-label">
-            	Avg Time of Finalized Work
-            </div>
-            <div class="average-time">
-                {{avg_time3}}
-            </div>
-        </div>
-
-        <div class="average-time-div">
-        	<div class="average-label">
-            	Avg Time of Schedule Final Work
-            </div>
-            <div class="average-time">
-                {{avg_time2}}
-            </div>
-        </div>
-
-        <div class="average-time-div">
-        	<div class="average-label">
-            	Avg Time Admin Answers Initial Request
-            </div>
-            <div class="average-time">
-                {{avg_time1}}
-            </div>
-        </div>
-    </ion-list> -->
-
-    <!-- <ion-list no-lines>
-
-        <ion-list-header class="header-style">
-            Tickets Evaluation
-        </ion-list-header>
-
-	    <div class="ticket-indicator-div">
-	    	<div class="open-div" style="background-color: rgb(50, 170, 230);"></div>
-	    	<div class="open-text">OPEN TICKETS</div>
-	    	<div class="open-div" style="background-color: rgb(105, 100, 170);"></div>
-	    	<div class="open-text">CLOSED TICKETS</div>
-	    </div>
-
-	    <div class="ticket-indicator-div">
-	    	<div class="open-div" style="background-color: rgb(110, 160, 200);"></div>
-	    	<div class="open-text">REJECTED TICKETS</div>
-	    	<div class="open-div" style="background-color: rgb(140, 90, 150);"></div>
-	    	<div class="open-text">PAYED TICKETS</div>
-	    </div>
-	</ion-list> -->
-
 	<ion-card>
       <ion-card-header>
-       	Tickets Evaluation
+       	Resumen solicitudes
       </ion-card-header>
       <ion-card-content>
         <canvas #doughnutCanvas></canvas>

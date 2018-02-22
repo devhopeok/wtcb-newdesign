@@ -143,6 +143,7 @@ export class MaintenanceViewPage {
                   this.closedRequests.push(data[i]);
                 }else {
                   this.openedRequests.push(data[i]);
+                  console.log(this.openedRequests);
                 }
               }
             },

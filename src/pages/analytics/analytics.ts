@@ -256,7 +256,7 @@ export class AnalyticsPage {
                                     "#FF6384"
                                 ]
                             }],
-                            labels: ["Open Tickets", "Closed Tickets", "Rejected Tickets", "Payed Tickets"]
+                            labels: ["Ablertas", "Cerradas", "Rechazadas", "Pagadas"]
                         }
              
                     });

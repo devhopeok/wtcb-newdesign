@@ -20,7 +20,7 @@ export class SignupPage {
           username: 'aaa',
           email: '',
           password: '',
-          level: 7
+          level: 3
       };
   }
 

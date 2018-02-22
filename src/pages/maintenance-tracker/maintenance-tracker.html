@@ -91,7 +91,7 @@
                     </ion-list>
 
                     <button ion-button block (click)="acceptSchedule1()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 1.5 && (authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3') && !scheduleAccept1">
-                        Aceptar Horario
+                        Teléfono del técnico
                     </button>
 
                     <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && (request.step >= 1.5) && scheduleAccept1">
@@ -255,7 +255,7 @@
                     </ion-list>
 
                     <button ion-button block (click)="acceptSchedule()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 3 && (authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3') && !scheduleAccept">
-                        Aceptar Horario
+                        Teléfono del técnico
                     </button>
 
                     <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >=3">

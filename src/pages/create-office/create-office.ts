@@ -138,8 +138,8 @@ export class CreateOfficePage {
             console.log("office Data:", data);
             if(data == 'Success'){
                 let alert = this.alertCtrl.create({
-                    title: "Success", 
-                    subTitle: "Office has been submitted successfully.", 
+                    title: "!Genial!", 
+                    subTitle: "La información ha sido guardada.", 
                     buttons: [{
                         text: 'OK',
                         handler: () => {
