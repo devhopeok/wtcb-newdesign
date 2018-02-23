@@ -27,7 +27,8 @@ export class ProfilePage {
     phone_number: '',
     email: '',
     blood_type: '',
-    officeKey: ''
+    officeKey: '',
+    company: ''
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage,
@@ -210,6 +211,7 @@ export class ProfilePage {
       last_name: this.user.last_name,
       phone_number: this.user.phone_number,
       blood_type: this.user.blood_type,
+      company: this.user.company,
       _id: this.user._id
     }
 

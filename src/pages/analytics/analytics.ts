@@ -256,7 +256,7 @@ export class AnalyticsPage {
                                     "#FF6384"
                                 ]
                             }],
-                            labels: ["Ablertas", "Cerradas", "Rechazadas", "Pagadas"]
+                            labels: ["Abiertas", "Cerradas", "Rechazadas", "Pagadas"]
                         }
              
                     });

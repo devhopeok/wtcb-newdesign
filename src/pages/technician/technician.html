@@ -11,24 +11,49 @@
 
 
 <ion-content padding>
-    <ion-card *ngFor="let item of technicians1;">
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/imgs/building.jpg">
-            </ion-avatar>
-            <h2>{{item.first_name}} {{item.last_name}}</h2>
-            <p>Email: {{item.email}}</p>
-            <p>Phone: {{item.phone_number}}</p>
-        </ion-item>
-    </ion-card>
-    <ion-card *ngFor="let item of technicians2;">
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/imgs/building.jpg">
-            </ion-avatar>
-            <h2>{{item.first_name}} {{item.last_name}}</h2>
-            <p>Email: {{item.email}}</p>
-            <p>Phone: {{item.phone_number}}</p>
-        </ion-item>
-    </ion-card>
+    <ion-list style="margin-top: 20px;">
+        <ion-item-sliding *ngFor="let item of technicians1;">
+            <ion-item>
+                <ion-avatar item-start>
+                    <img src="assets/imgs/building.jpg">
+                </ion-avatar>
+                <h2>{{item.first_name}} {{item.last_name}}</h2>
+                <p>Email: {{item.email}}</p>
+                <p>Phone: {{item.phone_number}}</p>
+            </ion-item>
+
+            <ion-item-options side="right">
+             <!--  <button ion-button (click)="edit(item)">
+                <ion-icon name="ios-create"></ion-icon>
+                Edit
+              </button> -->
+              <button ion-button color="danger" (click)="delete(item)">
+                <ion-icon name="ios-trash"></ion-icon>
+                Delete
+              </button>
+            </ion-item-options>
+        </ion-item-sliding>
+
+        <ion-item-sliding *ngFor="let item of technicians2;">
+            <ion-item>
+                <ion-avatar item-start>
+                    <img src="assets/imgs/building.jpg">
+                </ion-avatar>
+                <h2>{{item.first_name}} {{item.last_name}}</h2>
+                <p>Email: {{item.email}}</p>
+                <p>Phone: {{item.phone_number}}</p>
+            </ion-item>
+
+            <ion-item-options side="right">
+              <!-- <button ion-button (click)="edit(item)">
+                <ion-icon name="ios-create"></ion-icon>
+                Edit
+              </button> -->
+              <button ion-button color="danger" (click)="delete(item)">
+                <ion-icon name="ios-trash"></ion-icon>
+                Delete
+              </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
 </ion-content>

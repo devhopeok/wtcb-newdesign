@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { NavController, NavParams} from 'ionic-angular';
+import { NavController, NavParams, LoadingController} from 'ionic-angular';
 import { UserService } from '../../providers/user-service';
 import { Storage } from '@ionic/storage';
 
@@ -14,8 +14,16 @@ export class TechnicianPage {
     authUser: any;
     token: any;
     constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserService,
-        public storage: Storage) {
-       this.userService.getUsersByLevel("3.1")
+        public storage: Storage, public loadingCtrl: LoadingController) {
+       this.getTechnicians();
+    }
+
+    ionViewDidLoad() {
+
+    }
+
+    getTechnicians(){
+        this.userService.getUsersByLevel("3.1")
           .subscribe(
             (data) => {
                 console.log("technicians", data);
@@ -36,10 +44,6 @@ export class TechnicianPage {
             });
     }
 
-    ionViewDidLoad() {
-
-    }
-
     ionViewWillEnter(){
         this.storage.get('userdata').then(val=>{
           console.log("userdata", val);
@@ -48,5 +52,23 @@ export class TechnicianPage {
             this.token = val.token;
           }
         });
+    }
+
+    edit(item){
+        console.log(item);
+    }
+
+    delete(item){
+        let loading = this.loadingCtrl.create();
+        loading.present();
+        this.userService.deleteUser(item._id)
+          .subscribe(
+            (data) => {
+                loading.dismiss();
+                this.getTechnicians();
+            },
+            (data) => {
+                  loading.dismiss();
+            });
     }
 }

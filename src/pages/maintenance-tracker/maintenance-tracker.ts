@@ -529,7 +529,7 @@ export class MaintenanceTrackerPage {
     denyQuote(){
       let alert = this.alertCtrl.create({
         title: '',
-        message: 'Esta seguro que desea cancelar su ticket?',
+        message: '¿Esta seguro que desea cancelar su ticket?',
         buttons: [
           {
             text: 'Cancel',

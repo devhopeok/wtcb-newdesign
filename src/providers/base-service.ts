@@ -14,6 +14,7 @@ export class BaseService {
   public baseUrl = "https://polar-scrubland-87428.herokuapp.com/api/";
   public signUpUrl = this.baseUrl + "signup";
   public loginUrl = this.baseUrl + "login";
+  public deleteUrl = this.baseUrl + "delete";
   public officeUrl = this.baseUrl + "office";
   public requestUrl = this.baseUrl + "request";
   public stepUrl = this.baseUrl + "step";
