@@ -25,7 +25,8 @@
 
 
 <ion-content class="main-bg">
-    <button class="main-btn" ion-button block (click)="createNewRequest()" *ngIf="user.level == '3.1' || user.level =='3.2' || user.level=='3'">Enviar Nueva Solicitud</button>
+    <button class="main-btn" ion-button block (click)="createNewRequest()" *ngIf="user.level=='3'">Enviar Nueva Solicitud</button>
+    <button class="main-btn" ion-button block (click)="gotoMyProfile()" *ngIf="user.level=='3.1' || user.level=='3.2'">Mi Perfil</button>
     <ion-list style="margin-top: 20px;" *ngIf="openedRequests.length > 0">
 
         <ion-list-header class="header-style">

@@ -5,6 +5,7 @@ import { MaintenanceTrackerPage } from '../maintenance-tracker/maintenance-track
 import { Storage } from '@ionic/storage';
 import { UserService } from '../../providers/user-service';
 import { NotificationPage } from '../notification/notification';
+import { ProfilePage } from '../profile/profile';
 
 @Component({
   selector: 'page-maintenance-view',
@@ -63,6 +64,10 @@ export class MaintenanceViewPage {
         this.count = val;
       });
     });
+  }
+
+  gotoMyProfile(){
+    this.navCtrl.setRoot(ProfilePage);
   }
 
   gotoNotification(){

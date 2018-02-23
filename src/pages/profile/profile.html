@@ -3,7 +3,7 @@
         <button ion-button menuToggle>
             <img class="menu-icon" src="assets/imgs/menu_icon.png" />
         </button>
-        <ion-title>Perfil</ion-title>
+        <ion-title>Profile</ion-title>
 
         <ion-buttons end *ngIf="create_or_update == 1 && edit_or_save == 0">
           <button ion-button style="color:white;" (click)="onEdit();">
@@ -15,14 +15,14 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-list>
+    <ion-list *ngIf="user.level == 3">
         <ion-item>
-            <ion-label>Seleccione Torre</ion-label>
+            <ion-label>Seleccione Edificio</ion-label>
             <ion-select [(ngModel)]="office.buildingId" interface="popover" (ngModelChange)="updateFloors()">
                 <ion-option value="{{item.id}}" *ngFor="let item of buildings">{{item.name}}</ion-option>
             </ion-select>
         </ion-item>
-        <ion-item *ngIf="floors.length">
+        <ion-item>
             <ion-label>Seleccione Piso</ion-label>
             <ion-select interface="popover" [(ngModel)]="office.floorId">
                 <ion-option value="{{item.id}}" *ngFor="let item of floors">{{item.name}}</ion-option>
@@ -44,10 +44,42 @@
             <ion-label fixed>Garages</ion-label>
             <ion-input type="text" [(ngModel)]="office.garages"></ion-input>
         </ion-item>
-        <!-- <ion-item>
+        <ion-item>
             <ion-label fixed>Co-Pago</ion-label>
             <ion-input type="text" [(ngModel)]="office.coPay"></ion-input>
-        </ion-item> -->
+        </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="user.level != 3">
+    
+        <ion-item>
+            <ion-label fixed>Compañia</ion-label>
+            <ion-input type="text" [(ngModel)]="office.company"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label fixed>Nombre</ion-label>
+            <ion-input type="text" [(ngModel)]="user.first_name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label fixed>Apellido</ion-label>
+            <ion-input type="text" [(ngModel)]="user.last_name"></ion-input>
+        </ion-item>
+
+       
+        <ion-item>
+            <ion-label fixed>Telefono</ion-label>
+            <ion-input type="text" [(ngModel)]="user.phone_number"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Email</ion-label>
+            <ion-input type="text" [(ngModel)]="user.email"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Especialidad de Trabajo</ion-label>
+            <ion-input type="text" [(ngModel)]="user.blood_type"></ion-input>
+        </ion-item>
     </ion-list>
 
     <button *ngIf="create_or_update == 0 || edit_or_save == 1" ion-button class="main-btn" (click)="createOffice()">Guardar</button>

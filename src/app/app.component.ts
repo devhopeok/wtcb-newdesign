@@ -121,6 +121,7 @@ export class MyApp {
               this.pages = [
                 { title: 'Mantenimiento', component: MaintenanceViewPage, icon: 'md-paper' },
                 { title: 'Notificaciones', component: NotificationPage, icon: 'md-notifications'},
+                { title: 'Perfil', component: ProfilePage, icon: 'md-person'},
                 { title: 'Cerrar Sesión', component: null, icon: 'md-log-out'}
               ];
             }
