@@ -83,7 +83,28 @@ export class TechnicianPage {
     }
 
     selectTech(item){
-        console.log("adfasdadsaf");
+      let alert = this.alertCtrl.create({
+        title: "", subTitle: "¿Seguro que quieres compartir el ticket con este técnico?", 
+        buttons: [
+          { 
+            text: 'OK',
+            handler: ()=>{
+              this.selectTech1(item);
+            }
+          },
+          {
+            text: 'Cancel',
+            handler: ()=>{
+              this.navCtrl.pop();
+            }
+          }
+        ]
+      });
+      alert.present();
+    }
+
+    selectTech1(item){
+        
         if (this.request){
             let params = {
               token: this.token,

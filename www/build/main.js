@@ -2368,7 +2368,27 @@ var TechnicianPage = (function () {
     };
     TechnicianPage.prototype.selectTech = function (item) {
         var _this = this;
-        console.log("adfasdadsaf");
+        var alert = this.alertCtrl.create({
+            title: "", subTitle: "¿Seguro que quieres compartir el ticket con este técnico?",
+            buttons: [
+                {
+                    text: 'OK',
+                    handler: function () {
+                        _this.selectTech1(item);
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    handler: function () {
+                        _this.navCtrl.pop();
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    TechnicianPage.prototype.selectTech1 = function (item) {
+        var _this = this;
         if (this.request) {
             var params = {
                 token: this.token,
