@@ -12,8 +12,8 @@
 
 <ion-content padding>
     <ion-list style="margin-top: 20px;">
-        <ion-item-sliding *ngFor="let item of technicians1;">
-            <ion-item>
+        <ion-item-sliding *ngFor="let item of technicians1;" #slidingItem (click)="selectTech(item);">
+            <ion-item (click)="selectTech(item);">
                 <ion-avatar item-start>
                     <img src="assets/imgs/building.jpg">
                 </ion-avatar>
@@ -23,10 +23,10 @@
             </ion-item>
 
             <ion-item-options side="right">
-             <!--  <button ion-button (click)="edit(item)">
+              <button ion-button (click)="edit(item, slidingItem)">
                 <ion-icon name="ios-create"></ion-icon>
                 Edit
-              </button> -->
+              </button>
               <button ion-button color="danger" (click)="delete(item)">
                 <ion-icon name="ios-trash"></ion-icon>
                 Delete
@@ -34,8 +34,8 @@
             </ion-item-options>
         </ion-item-sliding>
 
-        <ion-item-sliding *ngFor="let item of technicians2;">
-            <ion-item>
+        <ion-item-sliding *ngFor="let item of technicians2;" #slidingItem (click)="selectTech(item);">
+            <ion-item >
                 <ion-avatar item-start>
                     <img src="assets/imgs/building.jpg">
                 </ion-avatar>
@@ -45,10 +45,10 @@
             </ion-item>
 
             <ion-item-options side="right">
-              <!-- <button ion-button (click)="edit(item)">
+              <button ion-button (click)="edit(item, slidingItem)">
                 <ion-icon name="ios-create"></ion-icon>
                 Edit
-              </button> -->
+              </button>
               <button ion-button color="danger" (click)="delete(item)">
                 <ion-icon name="ios-trash"></ion-icon>
                 Delete

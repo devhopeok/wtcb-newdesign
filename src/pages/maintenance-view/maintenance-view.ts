@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { UserService } from '../../providers/user-service';
 import { NotificationPage } from '../notification/notification';
 import { ProfilePage } from '../profile/profile';
+import { TechnicianPage } from '../technician/technician';
 
 @Component({
   selector: 'page-maintenance-view',
@@ -99,6 +100,11 @@ export class MaintenanceViewPage {
 
   edit(item){
     this.navCtrl.push(OtrsRequestPage, {requestItem: item});
+  }
+
+  assign(item){
+    console.log("Assign office key", item);
+    this.navCtrl.push(TechnicianPage, {request: item});
   }
 
   createNewRequest(){

@@ -28851,3 +28851,9 @@ page-technician ion-card {
   margin-bottom: 15px !important;
   width: 100% !important;
 }
+
+page-technician-detail ion-card {
+  margin: 0px !important;
+  margin-bottom: 15px !important;
+  width: 100% !important;
+}

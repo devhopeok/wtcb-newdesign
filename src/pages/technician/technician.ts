@@ -1,7 +1,10 @@
 import {Component} from '@angular/core';
-import { NavController, NavParams, LoadingController} from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController} from 'ionic-angular';
 import { UserService } from '../../providers/user-service';
 import { Storage } from '@ionic/storage';
+import { TechnicianDetailPage } from '../technician-detail/technician-detail';
+import { ItemSliding } from 'ionic-angular';
+import { PushServiceProvider } from '../../providers/push-service';
 
 @Component({
     selector: 'page-technician',
@@ -13,8 +16,14 @@ export class TechnicianPage {
     technicians2: any;
     authUser: any;
     token: any;
+    request ={
+        officeKey: '',
+        _id: ''
+    };
     constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserService,
-        public storage: Storage, public loadingCtrl: LoadingController) {
+        public storage: Storage, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
+        public pushService: PushServiceProvider) {
+       this.request = this.navParams.get('request');
        this.getTechnicians();
     }
 
@@ -54,8 +63,9 @@ export class TechnicianPage {
         });
     }
 
-    edit(item){
-        console.log(item);
+    edit(item, slidingItem){
+        slidingItem.close();
+        this.navCtrl.push(TechnicianDetailPage, {tech_data: item});
     }
 
     delete(item){
@@ -70,5 +80,46 @@ export class TechnicianPage {
             (data) => {
                   loading.dismiss();
             });
+    }
+
+    selectTech(item){
+        console.log("adfasdadsaf");
+        if (this.request){
+            let params = {
+              token: this.token,
+              officeKey: this.request.officeKey,
+              _id: item._id
+            }
+
+            let loading = this.loadingCtrl.create();
+            loading.present();
+
+            console.log("update user", params);
+            this.userService.updateUser(params)
+                .subscribe(
+                  (data) => {
+                      console.log("result update user", data);
+                      loading.dismiss();
+                      let alert = this.alertCtrl.create({
+                        title: "Éxito", subTitle: "El ticket ha sido asignado a este técnico con éxito", 
+                        buttons: [
+                          { 
+                            text: 'OK',
+                            handler: ()=>{
+                                this.pushService.notiUserForRequest(item._id, this.request._id, "El administrador del edificio le asignó el boleto.", this.token);
+                                this.navCtrl.pop();
+                            }
+                          }
+                        ]
+                      });
+                      alert.present();
+                      
+                    }
+                   ,
+                  (data) => {
+                     //this.navCtrl.setRoot(MaintenanceViewPage);
+                     loading.dismiss();
+                  });
+            }
     }
 }
