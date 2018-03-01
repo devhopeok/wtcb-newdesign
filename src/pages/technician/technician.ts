@@ -83,24 +83,27 @@ export class TechnicianPage {
     }
 
     selectTech(item){
-      let alert = this.alertCtrl.create({
-        title: "", subTitle: "¿Seguro que quieres compartir el ticket con este técnico?", 
-        buttons: [
-          { 
-            text: 'OK',
-            handler: ()=>{
-              this.selectTech1(item);
-            }
-          },
-          {
-            text: 'Cancel',
-            handler: ()=>{
-              this.navCtrl.pop();
-            }
-          }
-        ]
-      });
-      alert.present();
+      if (this.request){
+          let alert = this.alertCtrl.create({
+            title: "", subTitle: "¿Seguro que quieres compartir el ticket con este técnico?", 
+            buttons: [
+              { 
+                text: 'OK',
+                handler: ()=>{
+                  this.selectTech1(item);
+                }
+              },
+              {
+                text: 'Cancel',
+                handler: ()=>{
+                  this.navCtrl.pop();
+                }
+              }
+            ]
+          });
+          alert.present();
+      }
+      
     }
 
     selectTech1(item){

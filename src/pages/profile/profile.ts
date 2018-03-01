@@ -26,7 +26,7 @@ export class ProfilePage {
     last_name: '',
     phone_number: '',
     email: '',
-    blood_type: '',
+    job_speciality: '',
     officeKey: '',
     company: ''
   };
@@ -210,7 +210,7 @@ export class ProfilePage {
       first_name: this.user.first_name,
       last_name: this.user.last_name,
       phone_number: this.user.phone_number,
-      blood_type: this.user.blood_type,
+      job_speciality: this.user.job_speciality,
       company: this.user.company,
       _id: this.user._id
     }
