@@ -83,7 +83,7 @@ export class LoginPage {
                     device_token: this.device_token
                   };
 
-                  this.userService.insertDeviceToken(params)
+                  this.userService.updateDeviceToken(params)
                     .subscribe(
                       (data1)=>{
                         console.log("data1-success", data1);

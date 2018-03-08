@@ -711,7 +711,8 @@ export class MaintenanceTrackerPage {
       
       this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente pagó su factura", this.token);
       // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee paid to your invoice", this.token);
-      this.iab.create('https://www.pse.com.co/inicio');
+      this.iab.create('https://www.mipagoamigo.com/MPA_WebSite/');
+      // this.iab.create('https://www.pse.com.co/inicio');
 //         let step = this.db.object('/maintenance_steps/'+this.requestDetailKey+'/3');
 
 //         let actionSheet = this.actionSheetCtrl.create({
