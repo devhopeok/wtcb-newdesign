@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, Events, ToastController } from 'ionic-angular';
+import { Nav, Platform, Events, ToastController, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -30,7 +30,7 @@ export class MyApp {
   token: any;
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
     public storage: Storage, public push : Push, public events: Events, public toastCtrl: ToastController, public badge:Badge,
-    public oneSignal: OneSignal, public userService: UserService) {
+    public oneSignal: OneSignal, public userService: UserService, public loadingCtrl: LoadingController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -207,7 +207,23 @@ export class MyApp {
     if (page.component == undefined){
       this.storage.remove("userdata");
       this.storage.remove("notification_count");
-      this.nav.setRoot(LoginPage);
+      let params = {
+        token : this.token,
+        device_token: "2",
+      };
+      let loading = this.loadingCtrl.create();
+      loading.present();
+      this.userService.updateDeviceToken(params)
+        .subscribe(
+          (data1)=>{
+            console.log("data1-success", data1);
+            loading.dismiss();
+            this.nav.setRoot(LoginPage);
+          },
+          (data1)=>{
+            loading.dismiss();
+            this.nav.setRoot(LoginPage);
+          });
     }
     else{
       this.nav.setRoot(page.component);
