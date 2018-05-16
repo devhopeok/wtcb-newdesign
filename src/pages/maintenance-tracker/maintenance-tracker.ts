@@ -156,7 +156,6 @@ export class MaintenanceTrackerPage {
     ionViewWillEnter(){
 
         this.storage.get('userdata').then(val=>{
-          console.log("userdata", val);
           if (val != null){
             this.authUser = val.user;
             this.token = val.token;
@@ -226,7 +225,7 @@ export class MaintenanceTrackerPage {
                      this.show5 = true;
                    }
 
-                    console.log("this.request", this.request);
+                    
                     this.request.stepText = 'Step ' + this.request.step;
 
                     // if (this.authUser['level'] != 4) {
@@ -247,7 +246,6 @@ export class MaintenanceTrackerPage {
     }
 
     ionViewDidLoad() {
-//        //console.log('ionViewDidLoad MaintenanceTrackerPage');
     }
 
     onShow1(){
@@ -329,18 +327,20 @@ export class MaintenanceTrackerPage {
               loading.dismiss();
               this.office = data[0];
 
-                let buildings = this.buildingService.list();
-                for (let i = 0; i < buildings.length; i ++) {
-                    if (buildings[i].id == this.office.buildingId) {
-                        this.office.buildingName = buildings[i].name;
+              let buildings = this.buildingService.list();
+              for (let i = 0; i < buildings.length; i ++) {
+                  if (buildings[i].id == this.office.buildingId) {
+                      this.office.buildingName = buildings[i].name;
 
-                        for (let j = 0; j < buildings[i].floors.length; j ++) {
-                            if (this.office.floorId == buildings[i].floors[j].id) {
-                                this.office.floorName = buildings[i].floors[j].name;
-                            }
-                        }
-                    }
-                }
+                      for (let j = 0; j < buildings[i].floors.length; j ++) {
+                          if (this.office.floorId == buildings[i].floors[j].id) {
+                              this.office.floorName = buildings[i].floors[j].name;
+                          }
+                      }
+                  }
+              }
+
+              console.log("this.officeeeeeeee", this.office);
             },
             (data) => {
               loading.dismiss();
@@ -389,7 +389,6 @@ export class MaintenanceTrackerPage {
             (data1) => {
               loading.dismiss();
             });
-          console.log("aaaaaaaaaaaaaaaaaaaaaa", this.request._id);
           
           // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled the time of first meeting for quote.", this.token);
           this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha programado una visita inicial para hacerle una cotización.", this.token);
@@ -413,7 +412,7 @@ export class MaintenanceTrackerPage {
           this.scheduleAccept1 = false;
         });
       
-      this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente aceptó la visita programada.", this.token);
+      this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " aceptó la visita programada.", this.token);
       // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
     }
 
@@ -447,7 +446,7 @@ export class MaintenanceTrackerPage {
 
         let loading = this.loadingCtrl.create();
         loading.present();
-        console.log("this.requestDeatialasdfadsfadsfa", this.requestDetailKey);
+        
         this.userService.updateStep(this.requestDetailKey, this.requestDetail)
         .subscribe(
           (data1) => {
@@ -468,7 +467,6 @@ export class MaintenanceTrackerPage {
           (data1) => {
             loading.dismiss();
           });
-        console.log("aaaaaaaaaaaaaaaaaaaaaa", this.request._id);
         
         // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled the time of first meeting for quote.", this.token);
         this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha programado una visita inicial para hacerle una cotización.", this.token);
@@ -491,7 +489,7 @@ export class MaintenanceTrackerPage {
           this.quoteAccept = false;
         });
       
-      this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente aceptó la cotización.", this.token);
+      this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " aceptó la cotización.", this.token);
       // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your quote", this.token);
     }
 
@@ -519,7 +517,7 @@ export class MaintenanceTrackerPage {
             this.quoteDeny = false;
           });
         
-        this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente rechazo la cotización.", this.token);
+        this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " rechazo la cotización.", this.token);
         // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee denied your quote", this.token);
       });
 
@@ -535,7 +533,7 @@ export class MaintenanceTrackerPage {
             text: 'Cancel',
             role: 'cancel',
             handler: () => {
-              console.log('Cancel clicked');
+              
             }
           },
           {
@@ -580,8 +578,6 @@ export class MaintenanceTrackerPage {
             phone : this.technician_phone,
             time : this.technician_time
         }
-
-        console.log("this.requestDetail.technician_info", this.requestDetail.technician_info);
 
         if (this.requestDetail.technician_info.company == '' || this.requestDetail.technician_info.date == '' || this.requestDetail.technician_info.name == '' || 
            this.requestDetail.technician_info.phone == '' || this.requestDetail.technician_info.time == ''){
@@ -637,7 +633,7 @@ export class MaintenanceTrackerPage {
           this.scheduleAccept = false;
         });
       
-      this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente aceptó la visita programada.", this.token);
+      this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " aceptó la visita programada.", this.token);
       // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
     }
 
@@ -709,67 +705,10 @@ export class MaintenanceTrackerPage {
           this.is_paid = false;
         });
       
-      this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente pagó su factura", this.token);
+      this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " pagó su factura", this.token);
       // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee paid to your invoice", this.token);
       this.iab.create('https://www.mipagoamigo.com/MPA_WebSite/');
-      // this.iab.create('https://www.pse.com.co/inicio');
-//         let step = this.db.object('/maintenance_steps/'+this.requestDetailKey+'/3');
-
-//         let actionSheet = this.actionSheetCtrl.create({
-//             buttons: [
-//                 {
-//                     text: 'Take Photo',
-//                     handler: () => {
-//                         Camera.getPicture({
-//                             destinationType: Camera.DestinationType.DATA_URL,
-//                             sourceType: Camera.PictureSourceType.CAMERA,
-//                             allowEdit: true,
-//                             encodingType: Camera.EncodingType.JPEG,
-//                             saveToPhotoAlbum: false
-//                         }).then((imageData) => {
-//                             let imgData = "data:image/jpeg;base64," + imageData;
-//                             step.update({
-//                                 status: 1,
-//                                 invoice: imgData
-//                             });
-//                             this.pushService.notiBuildingManagerForRequest(this.request.$id, "Employee paid to your invoice");
-//                         }, (err) => {
-
-//                         })
-//                     }
-//                 },
-//                 {
-//                     text: 'Choose Photo',
-//                     handler: () => {
-//                         Camera.getPicture({
-//                             destinationType: Camera.DestinationType.DATA_URL,
-//                             sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-//                             allowEdit: true,
-//                             encodingType: Camera.EncodingType.JPEG,
-//                             saveToPhotoAlbum: false
-//                         }).then((imageData) => {
-//                             let imgData = "data:image/jpeg;base64," + imageData;
-// //                            //console.log(imgData);
-//                             step.update({
-//                                 status: 1,
-//                                 invoice: imgData
-//                             });
-//                             this.pushService.notiBuildingManagerForRequest(this.request.$id, "Employee paid to your invoice");
-//                         }, (err) => {
-// //                            //console.log(err);
-//                         })
-//                     }
-//                 },
-//                 {
-//                     text: 'Cancel',
-//                     role: 'cancel',
-//                     handler:() => {
-// //                        //console.log('Cancel clicked');
-//                     }
-//                 }
-//             ]
-//         });
-//         actionSheet.present();
+     
     }
 
     public paidInvoice() {
@@ -832,7 +771,7 @@ export class MaintenanceTrackerPage {
             loading.dismiss();
           });
         
-        this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente ha calificado el servicio", this.token);
+        this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " ha calificado el servicio", this.token);
         // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee provided feedback", this.token);
     }
 

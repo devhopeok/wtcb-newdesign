@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 115:
+/***/ 117:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10,9 +10,9 @@ webpackJsonp([0],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_building__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_user_service__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__building_list_building_list__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__building_list_building_list__ = __webpack_require__(203);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__maintenance_view_maintenance_view__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__notification_notification__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__notification_notification__ = __webpack_require__(140);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -117,7 +117,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n        </button>\n\n        <ion-buttons end>\n              <button ion-button icon-only style="color:white;" (click)="gotoNotification();">\n                    <ion-icon name="md-notifications"></ion-icon>\n              </button>\n              <div class="badge" *ngIf="count>0"></div>\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-grid ion-fixed style="height: 100vh">\n        <ion-row class="notice-header">\n            <ion-col style="background-color:black;color:white;">\n                <ion-slides pager="true" class="superfill">\n                    <ion-slide class="dashboard">\n                        <!-- <h1 class="bold" style="color: #1b4c5c;">EG</h1> -->\n                    </ion-slide>\n                    <!-- <ion-slide class="alerts">\n                        <h1>Alertas</h1>\n                    </ion-slide>\n                    <ion-slide class="news">\n                        <h1>Noticias</h1>\n                    </ion-slide> -->\n                </ion-slides>\n            </ion-col>\n        </ion-row>\n\n        <ion-row class="wtc-container">\n            <ion-col col-8 style="background-color:orange;color:white;">\n                <ion-slides pager="true" class="superfill">\n                    <ion-slide class="torreA">\n\n                        <h1 class="light-font-header">TORRE A</h1>\n                        <ion-list>\n                            <ion-item *ngFor="let item of buildings[0].floors" (click)="viewFloorOfffice(1, item.id)">\n                                {{item.name}}\n                            </ion-item>\n                        </ion-list>\n\n                        <ion-row class="building-info" *ngIf="authUser.level == 7 || authUser.level == 8">\n                            <ion-col>\n                                Rented Offices\n                                <p>\n                                    {{rentedOffices(1)}}\n                                </p>\n                            </ion-col>\n                            <ion-col>\n                                Occupancy\n                                <p>{{occupancyOffices(1).toFixed(2)}}%</p>\n                            </ion-col>\n                            <ion-col>\n                                Vacant Offices\n                                <p>{{vacantOffices(1)}}</p>\n                            </ion-col>\n                        </ion-row>\n                    </ion-slide>\n                    <ion-slide class="torreB">\n                        <h1 class="light-font-header">TORRE B</h1>\n\n                        <ion-list>\n                            <ion-item *ngFor="let item of buildings[1].floors" (click)="viewFloorOfffice(2, item.id)">\n                                {{item.name}}\n                            </ion-item>\n                        </ion-list>\n\n                        <ion-row class="building-info" *ngIf="authUser.level == 7 || authUser.level == 8">\n                            <ion-col>\n                                Rented Offices\n                                <p>\n                                    {{rentedOffices(2)}}\n                                </p>\n                            </ion-col>\n                            <ion-col>\n                                Occupancy\n                                <p>{{occupancyOffices(2).toFixed(2)}}%</p>\n                            </ion-col>\n                            <ion-col>\n                                Vacant Offices\n                                <p>{{vacantOffices(2)}}</p>\n                            </ion-col>\n                        </ion-row>\n                    </ion-slide>\n                    <ion-slide class="torreC">\n                        <h1 class="light-font-header">TORRE C</h1>\n\n                        <ion-list>\n                            <ion-item *ngFor="let item of buildings[2].floors" (click)="viewFloorOfffice(3, item.id)">\n                                {{item.name}}\n                            </ion-item>\n                        </ion-list>\n\n                        <ion-row class="building-info" *ngIf="authUser.level == 7 || authUser.level == 8">\n                            <ion-col>\n                                Rented Offices\n                                <p>\n                                    {{rentedOffices(3)}}\n                                </p>\n                            </ion-col>\n                            <ion-col>\n                                Occupancy\n                                <p>{{occupancyOffices(3).toFixed(2)}}%</p>\n                            </ion-col>\n                            <ion-col>\n                                Vacant Offices\n                                <p>{{vacantOffices(3)}}</p>\n                            </ion-col>\n                        </ion-row>\n                    </ion-slide>\n                </ion-slides>\n            </ion-col>\n            <ion-scroll scrollY="true" col-4 style="background-color:rgba(239, 239, 239, 0);color:white;border:0;" class="menu-scroll">\n                <ion-list >\n                    <!-- Sliding item -->\n                    <ion-item-sliding menuToggle>\n                        <ion-item>\n                            <ion-icon name="ios-menu-outline"></ion-icon>\n                        </ion-item>\n                        \n                    </ion-item-sliding>\n\n                    <!-- Sliding item -->\n                    <ion-item-sliding>\n                        <ion-item (click)="viewBuildingList()">\n                            TORRES\n                        </ion-item>\n                        \n                    </ion-item-sliding>\n\n\n                    <!-- Sliding item -->\n                    <ion-item-sliding>\n                        <ion-item (click)="gotoMaintenance()">\n                            MANTENIMIENTO\n                        </ion-item>\n                        \n                    </ion-item-sliding>\n\n                    <!-- Sliding item -->\n                    <ion-item-sliding>\n                        <ion-item (click)="gotoNotification()">\n                            CENTRO DE <br/>NOTIFICACIONES\n                        </ion-item>\n                        \n                    </ion-item-sliding>\n\n                    <!-- Sliding item -->\n                    <ion-item-sliding>\n                        <ion-item>\n                            CORREOS\n                        </ion-item>\n                        \n                    </ion-item-sliding>\n\n                </ion-list>\n            </ion-scroll>\n\n        </ion-row>\n\n\n    </ion-grid>\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n        </button>\n\n        <ion-buttons end>\n              <button ion-button icon-only style="color:white;" (click)="gotoNotification();">\n                    <ion-icon name="md-notifications"></ion-icon>\n              </button>\n              <div class="badge" *ngIf="count>0"></div>\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-grid ion-fixed style="height: 100vh">\n        <ion-row class="notice-header">\n            <ion-col style="background-color:black;color:white;">\n                <ion-slides pager="true" class="superfill">\n                    <ion-slide class="dashboard">\n                        <!-- <h1 class="bold" style="color: #1b4c5c;">EG</h1> -->\n                    </ion-slide>\n                    <!-- <ion-slide class="alerts">\n                        <h1>Alertas</h1>\n                    </ion-slide>\n                    <ion-slide class="news">\n                        <h1>Noticias</h1>\n                    </ion-slide> -->\n                </ion-slides>\n            </ion-col>\n        </ion-row>\n\n        <ion-row class="wtc-container">\n            <ion-col col-8 style="background-color:orange;color:white;">\n                <ion-slides pager="true" class="superfill">\n                    <ion-slide class="torreA">\n\n                        <h1 class="light-font-header">TORRE A</h1>\n                        <ion-list>\n                            <ion-item *ngFor="let item of buildings[0].floors" (click)="viewFloorOfffice(1, item.id)">\n                                {{item.name}}\n                            </ion-item>\n                        </ion-list>\n\n                        <ion-row class="building-info" *ngIf="authUser.level == 7 || authUser.level == 8">\n                            <ion-col>\n                                Rented Offices\n                                <p>\n                                    {{rentedOffices(1)}}\n                                </p>\n                            </ion-col>\n                            <ion-col>\n                                Occupancy\n                                <p>{{occupancyOffices(1).toFixed(2)}}%</p>\n                            </ion-col>\n                            <ion-col>\n                                Vacant Offices\n                                <p>{{vacantOffices(1)}}</p>\n                            </ion-col>\n                        </ion-row>\n                    </ion-slide>\n                    <ion-slide class="torreB">\n                        <h1 class="light-font-header">TORRE B</h1>\n\n                        <ion-list>\n                            <ion-item *ngFor="let item of buildings[1].floors" (click)="viewFloorOfffice(2, item.id)">\n                                {{item.name}}\n                            </ion-item>\n                        </ion-list>\n\n                        <ion-row class="building-info" *ngIf="authUser.level == 7 || authUser.level == 8">\n                            <ion-col>\n                                Rented Offices\n                                <p>\n                                    {{rentedOffices(2)}}\n                                </p>\n                            </ion-col>\n                            <ion-col>\n                                Occupancy\n                                <p>{{occupancyOffices(2).toFixed(2)}}%</p>\n                            </ion-col>\n                            <ion-col>\n                                Vacant Offices\n                                <p>{{vacantOffices(2)}}</p>\n                            </ion-col>\n                        </ion-row>\n                    </ion-slide>\n                    <ion-slide class="torreC">\n                        <h1 class="light-font-header">TORRE C</h1>\n\n                        <ion-list>\n                            <ion-item *ngFor="let item of buildings[2].floors" (click)="viewFloorOfffice(3, item.id)">\n                                {{item.name}}\n                            </ion-item>\n                        </ion-list>\n\n                        <ion-row class="building-info" *ngIf="authUser.level == 7 || authUser.level == 8">\n                            <ion-col>\n                                Rented Offices\n                                <p>\n                                    {{rentedOffices(3)}}\n                                </p>\n                            </ion-col>\n                            <ion-col>\n                                Occupancy\n                                <p>{{occupancyOffices(3).toFixed(2)}}%</p>\n                            </ion-col>\n                            <ion-col>\n                                Vacant Offices\n                                <p>{{vacantOffices(3)}}</p>\n                            </ion-col>\n                        </ion-row>\n                    </ion-slide>\n                </ion-slides>\n            </ion-col>\n            <ion-scroll scrollY="true" col-4 style="background-color:rgba(239, 239, 239, 0);color:white;border:0;" class="menu-scroll">\n                <ion-list >\n                    <!-- Sliding item -->\n                    <ion-item-sliding menuToggle>\n                        <ion-item>\n                            <ion-icon name="ios-menu-outline"></ion-icon>\n                        </ion-item>\n                        \n                    </ion-item-sliding>\n\n                    <!-- Sliding item -->\n                    <ion-item-sliding>\n                        <ion-item (click)="viewBuildingList()">\n                            TORRES\n                        </ion-item>\n                        \n                    </ion-item-sliding>\n\n\n                    <!-- Sliding item -->\n                    <ion-item-sliding>\n                        <ion-item (click)="gotoMaintenance()">\n                            MANTENIMIENTO\n                        </ion-item>\n                        \n                    </ion-item-sliding>\n\n                    <!-- Sliding item -->\n                    <ion-item-sliding>\n                        <ion-item (click)="gotoNotification()">\n                            CENTRO DE <br/>NOTIFICACIONES\n                        </ion-item>\n                        \n                    </ion-item-sliding>\n\n                    <!-- Sliding item -->\n                    <ion-item-sliding>\n                        <ion-item>\n                            CORREOS\n                        </ion-item>\n                        \n                    </ion-item-sliding>\n\n                </ion-list>\n            </ion-scroll>\n\n        </ion-row>\n\n\n    </ion-grid>\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/home/home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3__providers_user_service__["a" /* UserService */],
         __WEBPACK_IMPORTED_MODULE_2__providers_building__["a" /* BuildingProvider */], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* Events */]])
@@ -127,7 +127,7 @@ HomePage = __decorate([
 
 /***/ }),
 
-/***/ 1218:
+/***/ 1221:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -191,184 +191,192 @@ var map = {
 	"./en-gb.js": 461,
 	"./en-ie": 462,
 	"./en-ie.js": 462,
-	"./en-nz": 463,
-	"./en-nz.js": 463,
-	"./eo": 464,
-	"./eo.js": 464,
-	"./es": 465,
-	"./es-do": 466,
-	"./es-do.js": 466,
-	"./es-us": 467,
-	"./es-us.js": 467,
-	"./es.js": 465,
-	"./et": 468,
-	"./et.js": 468,
-	"./eu": 469,
-	"./eu.js": 469,
-	"./fa": 470,
-	"./fa.js": 470,
-	"./fi": 471,
-	"./fi.js": 471,
-	"./fo": 472,
-	"./fo.js": 472,
-	"./fr": 473,
-	"./fr-ca": 474,
-	"./fr-ca.js": 474,
-	"./fr-ch": 475,
-	"./fr-ch.js": 475,
-	"./fr.js": 473,
-	"./fy": 476,
-	"./fy.js": 476,
-	"./gd": 477,
-	"./gd.js": 477,
-	"./gl": 478,
-	"./gl.js": 478,
-	"./gom-latn": 479,
-	"./gom-latn.js": 479,
-	"./gu": 480,
-	"./gu.js": 480,
-	"./he": 481,
-	"./he.js": 481,
-	"./hi": 482,
-	"./hi.js": 482,
-	"./hr": 483,
-	"./hr.js": 483,
-	"./hu": 484,
-	"./hu.js": 484,
-	"./hy-am": 485,
-	"./hy-am.js": 485,
-	"./id": 486,
-	"./id.js": 486,
-	"./is": 487,
-	"./is.js": 487,
-	"./it": 488,
-	"./it.js": 488,
-	"./ja": 489,
-	"./ja.js": 489,
-	"./jv": 490,
-	"./jv.js": 490,
-	"./ka": 491,
-	"./ka.js": 491,
-	"./kk": 492,
-	"./kk.js": 492,
-	"./km": 493,
-	"./km.js": 493,
-	"./kn": 494,
-	"./kn.js": 494,
-	"./ko": 495,
-	"./ko.js": 495,
-	"./ky": 496,
-	"./ky.js": 496,
-	"./lb": 497,
-	"./lb.js": 497,
-	"./lo": 498,
-	"./lo.js": 498,
-	"./lt": 499,
-	"./lt.js": 499,
-	"./lv": 500,
-	"./lv.js": 500,
-	"./me": 501,
-	"./me.js": 501,
-	"./mi": 502,
-	"./mi.js": 502,
-	"./mk": 503,
-	"./mk.js": 503,
-	"./ml": 504,
-	"./ml.js": 504,
-	"./mr": 505,
-	"./mr.js": 505,
-	"./ms": 506,
-	"./ms-my": 507,
-	"./ms-my.js": 507,
-	"./ms.js": 506,
-	"./mt": 508,
-	"./mt.js": 508,
-	"./my": 509,
-	"./my.js": 509,
-	"./nb": 510,
-	"./nb.js": 510,
-	"./ne": 511,
-	"./ne.js": 511,
-	"./nl": 512,
-	"./nl-be": 513,
-	"./nl-be.js": 513,
-	"./nl.js": 512,
-	"./nn": 514,
-	"./nn.js": 514,
-	"./pa-in": 515,
-	"./pa-in.js": 515,
-	"./pl": 516,
-	"./pl.js": 516,
-	"./pt": 517,
-	"./pt-br": 518,
-	"./pt-br.js": 518,
-	"./pt.js": 517,
-	"./ro": 519,
-	"./ro.js": 519,
-	"./ru": 520,
-	"./ru.js": 520,
-	"./sd": 521,
-	"./sd.js": 521,
-	"./se": 522,
-	"./se.js": 522,
-	"./si": 523,
-	"./si.js": 523,
-	"./sk": 524,
-	"./sk.js": 524,
-	"./sl": 525,
-	"./sl.js": 525,
-	"./sq": 526,
-	"./sq.js": 526,
-	"./sr": 527,
-	"./sr-cyrl": 528,
-	"./sr-cyrl.js": 528,
-	"./sr.js": 527,
-	"./ss": 529,
-	"./ss.js": 529,
-	"./sv": 530,
-	"./sv.js": 530,
-	"./sw": 531,
-	"./sw.js": 531,
-	"./ta": 532,
-	"./ta.js": 532,
-	"./te": 533,
-	"./te.js": 533,
-	"./tet": 534,
-	"./tet.js": 534,
-	"./th": 535,
-	"./th.js": 535,
-	"./tl-ph": 536,
-	"./tl-ph.js": 536,
-	"./tlh": 537,
-	"./tlh.js": 537,
-	"./tr": 538,
-	"./tr.js": 538,
-	"./tzl": 539,
-	"./tzl.js": 539,
-	"./tzm": 540,
-	"./tzm-latn": 541,
-	"./tzm-latn.js": 541,
-	"./tzm.js": 540,
-	"./uk": 542,
-	"./uk.js": 542,
-	"./ur": 543,
-	"./ur.js": 543,
-	"./uz": 544,
-	"./uz-latn": 545,
-	"./uz-latn.js": 545,
-	"./uz.js": 544,
-	"./vi": 546,
-	"./vi.js": 546,
-	"./x-pseudo": 547,
-	"./x-pseudo.js": 547,
-	"./yo": 548,
-	"./yo.js": 548,
-	"./zh-cn": 549,
-	"./zh-cn.js": 549,
-	"./zh-hk": 550,
-	"./zh-hk.js": 550,
-	"./zh-tw": 551,
-	"./zh-tw.js": 551
+	"./en-il": 463,
+	"./en-il.js": 463,
+	"./en-nz": 464,
+	"./en-nz.js": 464,
+	"./eo": 465,
+	"./eo.js": 465,
+	"./es": 466,
+	"./es-do": 467,
+	"./es-do.js": 467,
+	"./es-us": 468,
+	"./es-us.js": 468,
+	"./es.js": 466,
+	"./et": 469,
+	"./et.js": 469,
+	"./eu": 470,
+	"./eu.js": 470,
+	"./fa": 471,
+	"./fa.js": 471,
+	"./fi": 472,
+	"./fi.js": 472,
+	"./fo": 473,
+	"./fo.js": 473,
+	"./fr": 474,
+	"./fr-ca": 475,
+	"./fr-ca.js": 475,
+	"./fr-ch": 476,
+	"./fr-ch.js": 476,
+	"./fr.js": 474,
+	"./fy": 477,
+	"./fy.js": 477,
+	"./gd": 478,
+	"./gd.js": 478,
+	"./gl": 479,
+	"./gl.js": 479,
+	"./gom-latn": 480,
+	"./gom-latn.js": 480,
+	"./gu": 481,
+	"./gu.js": 481,
+	"./he": 482,
+	"./he.js": 482,
+	"./hi": 483,
+	"./hi.js": 483,
+	"./hr": 484,
+	"./hr.js": 484,
+	"./hu": 485,
+	"./hu.js": 485,
+	"./hy-am": 486,
+	"./hy-am.js": 486,
+	"./id": 487,
+	"./id.js": 487,
+	"./is": 488,
+	"./is.js": 488,
+	"./it": 489,
+	"./it.js": 489,
+	"./ja": 490,
+	"./ja.js": 490,
+	"./jv": 491,
+	"./jv.js": 491,
+	"./ka": 492,
+	"./ka.js": 492,
+	"./kk": 493,
+	"./kk.js": 493,
+	"./km": 494,
+	"./km.js": 494,
+	"./kn": 495,
+	"./kn.js": 495,
+	"./ko": 496,
+	"./ko.js": 496,
+	"./ky": 497,
+	"./ky.js": 497,
+	"./lb": 498,
+	"./lb.js": 498,
+	"./lo": 499,
+	"./lo.js": 499,
+	"./lt": 500,
+	"./lt.js": 500,
+	"./lv": 501,
+	"./lv.js": 501,
+	"./me": 502,
+	"./me.js": 502,
+	"./mi": 503,
+	"./mi.js": 503,
+	"./mk": 504,
+	"./mk.js": 504,
+	"./ml": 505,
+	"./ml.js": 505,
+	"./mn": 506,
+	"./mn.js": 506,
+	"./mr": 507,
+	"./mr.js": 507,
+	"./ms": 508,
+	"./ms-my": 509,
+	"./ms-my.js": 509,
+	"./ms.js": 508,
+	"./mt": 510,
+	"./mt.js": 510,
+	"./my": 511,
+	"./my.js": 511,
+	"./nb": 512,
+	"./nb.js": 512,
+	"./ne": 513,
+	"./ne.js": 513,
+	"./nl": 514,
+	"./nl-be": 515,
+	"./nl-be.js": 515,
+	"./nl.js": 514,
+	"./nn": 516,
+	"./nn.js": 516,
+	"./pa-in": 517,
+	"./pa-in.js": 517,
+	"./pl": 518,
+	"./pl.js": 518,
+	"./pt": 519,
+	"./pt-br": 520,
+	"./pt-br.js": 520,
+	"./pt.js": 519,
+	"./ro": 521,
+	"./ro.js": 521,
+	"./ru": 522,
+	"./ru.js": 522,
+	"./sd": 523,
+	"./sd.js": 523,
+	"./se": 524,
+	"./se.js": 524,
+	"./si": 525,
+	"./si.js": 525,
+	"./sk": 526,
+	"./sk.js": 526,
+	"./sl": 527,
+	"./sl.js": 527,
+	"./sq": 528,
+	"./sq.js": 528,
+	"./sr": 529,
+	"./sr-cyrl": 530,
+	"./sr-cyrl.js": 530,
+	"./sr.js": 529,
+	"./ss": 531,
+	"./ss.js": 531,
+	"./sv": 532,
+	"./sv.js": 532,
+	"./sw": 533,
+	"./sw.js": 533,
+	"./ta": 534,
+	"./ta.js": 534,
+	"./te": 535,
+	"./te.js": 535,
+	"./tet": 536,
+	"./tet.js": 536,
+	"./tg": 537,
+	"./tg.js": 537,
+	"./th": 538,
+	"./th.js": 538,
+	"./tl-ph": 539,
+	"./tl-ph.js": 539,
+	"./tlh": 540,
+	"./tlh.js": 540,
+	"./tr": 541,
+	"./tr.js": 541,
+	"./tzl": 542,
+	"./tzl.js": 542,
+	"./tzm": 543,
+	"./tzm-latn": 544,
+	"./tzm-latn.js": 544,
+	"./tzm.js": 543,
+	"./ug-cn": 545,
+	"./ug-cn.js": 545,
+	"./uk": 546,
+	"./uk.js": 546,
+	"./ur": 547,
+	"./ur.js": 547,
+	"./uz": 548,
+	"./uz-latn": 549,
+	"./uz-latn.js": 549,
+	"./uz.js": 548,
+	"./vi": 550,
+	"./vi.js": 550,
+	"./x-pseudo": 551,
+	"./x-pseudo.js": 551,
+	"./yo": 552,
+	"./yo.js": 552,
+	"./zh-cn": 553,
+	"./zh-cn.js": 553,
+	"./zh-hk": 554,
+	"./zh-hk.js": 554,
+	"./zh-tw": 555,
+	"./zh-tw.js": 555
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -384,21 +392,21 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 1218;
+webpackContext.id = 1221;
 
 /***/ }),
 
-/***/ 122:
+/***/ 124:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PushServiceProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user_service__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_onesignal__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_onesignal__ = __webpack_require__(125);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -542,7 +550,7 @@ PushServiceProvider = __decorate([
 
 /***/ }),
 
-/***/ 124:
+/***/ 126:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -784,7 +792,7 @@ var ProfilePage = (function () {
 }());
 ProfilePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-profile',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/profile/profile.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n        </button>\n        <ion-title>Perfil</ion-title>\n\n        <ion-buttons end *ngIf="create_or_update == 1 && edit_or_save == 0">\n          <button ion-button style="color:white;" (click)="onEdit();">\n            Editar\n          </button>\n          <!-- <div class="badge" *ngIf="count>0"></div> -->\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <ion-list *ngIf="user.level == 3">\n        <ion-item>\n            <ion-label>Seleccione Edificio</ion-label>\n            <ion-select [(ngModel)]="office.buildingId" interface="popover" (ngModelChange)="updateFloors()">\n                <ion-option value="{{item.id}}" *ngFor="let item of buildings">{{item.name}}</ion-option>\n            </ion-select>\n        </ion-item>\n        <ion-item>\n            <ion-label>Seleccione Piso</ion-label>\n            <ion-select interface="popover" [(ngModel)]="office.floorId">\n                <ion-option value="{{item.id}}" *ngFor="let item of floors">{{item.name}}</ion-option>\n            </ion-select>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Oficina No.</ion-label>\n            <ion-input type="text" [(ngModel)]="office.name"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Compañia</ion-label>\n            <ion-input type="text" [(ngModel)]="office.company"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Area Mts</ion-label>\n            <ion-input type="text" [(ngModel)]="office.area"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Garages</ion-label>\n            <ion-input type="text" [(ngModel)]="office.garages"></ion-input>\n        </ion-item>\n        <!-- <ion-item>\n            <ion-label fixed>Co-Pago</ion-label>\n            <ion-input type="text" [(ngModel)]="office.coPay"></ion-input>\n        </ion-item> -->\n    </ion-list>\n\n    <ion-list *ngIf="user.level != 3">\n    \n        <ion-item>\n            <ion-label fixed>Compañia</ion-label>\n            <ion-input type="text" [(ngModel)]="user.company"></ion-input>\n        </ion-item>\n\n        <ion-item>\n            <ion-label fixed>Nombre</ion-label>\n            <ion-input type="text" [(ngModel)]="user.first_name"></ion-input>\n        </ion-item>\n\n        <ion-item>\n            <ion-label fixed>Apellido</ion-label>\n            <ion-input type="text" [(ngModel)]="user.last_name"></ion-input>\n        </ion-item>\n\n       \n        <ion-item>\n            <ion-label fixed>Telefono</ion-label>\n            <ion-input type="text" [(ngModel)]="user.phone_number"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Email</ion-label>\n            <ion-input type="text" [(ngModel)]="user.email"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Especialidad de Trabajo</ion-label>\n            <ion-input type="text" [(ngModel)]="user.job_speciality"></ion-input>\n        </ion-item>\n    </ion-list>\n\n    <button *ngIf="create_or_update == 0 || edit_or_save == 1" ion-button class="main-btn" (click)="createOffice()">Guardar</button>\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/profile/profile.html"*/
+        selector: 'page-profile',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/profile/profile.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n        </button>\n        <ion-title>Perfil</ion-title>\n\n        <ion-buttons end *ngIf="create_or_update == 1 && edit_or_save == 0">\n          <button ion-button style="color:white;" (click)="onEdit();">\n            Editar\n          </button>\n          <!-- <div class="badge" *ngIf="count>0"></div> -->\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <ion-list *ngIf="user.level == 3">\n        <ion-item>\n            <ion-label>Seleccione Edificio</ion-label>\n            <ion-select [(ngModel)]="office.buildingId" interface="popover" (ngModelChange)="updateFloors()">\n                <ion-option value="{{item.id}}" *ngFor="let item of buildings">{{item.name}}</ion-option>\n            </ion-select>\n        </ion-item>\n        <ion-item>\n            <ion-label>Seleccione Piso</ion-label>\n            <ion-select interface="popover" [(ngModel)]="office.floorId">\n                <ion-option value="{{item.id}}" *ngFor="let item of floors">{{item.name}}</ion-option>\n            </ion-select>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Oficina No.</ion-label>\n            <ion-input type="text" [(ngModel)]="office.name"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Compañia</ion-label>\n            <ion-input type="text" [(ngModel)]="office.company"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Area Mts</ion-label>\n            <ion-input type="text" [(ngModel)]="office.area"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Garages</ion-label>\n            <ion-input type="text" [(ngModel)]="office.garages"></ion-input>\n        </ion-item>\n        <!-- <ion-item>\n            <ion-label fixed>Co-Pago</ion-label>\n            <ion-input type="text" [(ngModel)]="office.coPay"></ion-input>\n        </ion-item> -->\n    </ion-list>\n\n    <ion-list *ngIf="user.level != 3">\n    \n        <ion-item>\n            <ion-label fixed>Compañia</ion-label>\n            <ion-input type="text" [(ngModel)]="user.company"></ion-input>\n        </ion-item>\n\n        <ion-item>\n            <ion-label fixed>Nombre</ion-label>\n            <ion-input type="text" [(ngModel)]="user.first_name"></ion-input>\n        </ion-item>\n\n        <ion-item>\n            <ion-label fixed>Apellido</ion-label>\n            <ion-input type="text" [(ngModel)]="user.last_name"></ion-input>\n        </ion-item>\n\n       \n        <ion-item>\n            <ion-label fixed>Telefono</ion-label>\n            <ion-input type="text" [(ngModel)]="user.phone_number"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Email</ion-label>\n            <ion-input type="text" [(ngModel)]="user.email"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Especialidad de Trabajo</ion-label>\n            <ion-input type="text" [(ngModel)]="user.job_speciality"></ion-input>\n        </ion-item>\n    </ion-list>\n\n    <button *ngIf="create_or_update == 0 || edit_or_save == 1" ion-button class="main-btn" (click)="createOffice()">Guardar</button>\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/profile/profile.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
         __WEBPACK_IMPORTED_MODULE_3__providers_building__["a" /* BuildingProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_4__providers_user_service__["a" /* UserService */],
@@ -795,7 +803,7 @@ ProfilePage = __decorate([
 
 /***/ }),
 
-/***/ 1300:
+/***/ 1304:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -841,7 +849,7 @@ var ListPage = ListPage_1 = (function () {
 }());
 ListPage = ListPage_1 = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-list',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/list/list.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>List</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">\n      <ion-icon [name]="item.icon" item-start></ion-icon>\n      {{item.title}}\n      <div class="item-note" item-end>\n        {{item.note}}\n      </div>\n    </button>\n  </ion-list>\n  <div *ngIf="selectedItem" padding>\n    You navigated here from <b>{{selectedItem.title}}</b>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/list/list.html"*/
+        selector: 'page-list',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/list/list.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>List</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">\n      <ion-icon [name]="item.icon" item-start></ion-icon>\n      {{item.title}}\n      <div class="item-note" item-end>\n        {{item.note}}\n      </div>\n    </button>\n  </ion-list>\n  <div *ngIf="selectedItem" padding>\n    You navigated here from <b>{{selectedItem.title}}</b>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/list/list.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
 ], ListPage);
@@ -851,7 +859,7 @@ var ListPage_1;
 
 /***/ }),
 
-/***/ 137:
+/***/ 140:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -860,7 +868,7 @@ var ListPage_1;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_user_service__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__maintenance_tracker_maintenance_tracker__ = __webpack_require__(220);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__maintenance_tracker_maintenance_tracker__ = __webpack_require__(222);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -951,7 +959,7 @@ var NotificationPage = (function () {
 }());
 NotificationPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-notification',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/notification/notification.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n    </button>\n    <ion-title>NOTIFICACIONES</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n	<ion-list no-lines>\n	  	<ion-item-sliding style="border-bottom: 1px solid gray;" *ngFor="let notification of notifications">\n	        <ion-item (click)="gotoMaintenanceView(notification);" class="notification-content" [ngClass]="{\'notification-content-bold\' : notification.read == false}">\n	          	{{notification.notification}}\n	        </ion-item>\n\n	        <ion-item-options side="right">\n	        	<button ion-button color="danger" (click)="delete(notification._id)">\n		            <ion-icon name="ios-trash"></ion-icon>\n		            Delete\n		        </button>\n	        </ion-item-options>\n	    </ion-item-sliding>\n    </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/notification/notification.html"*/
+        selector: 'page-notification',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/notification/notification.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n    </button>\n    <ion-title>NOTIFICACIONES</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n	<ion-list no-lines>\n	  	<ion-item-sliding style="border-bottom: 1px solid gray;" *ngFor="let notification of notifications">\n	        <ion-item (click)="gotoMaintenanceView(notification);" class="notification-content" [ngClass]="{\'notification-content-bold\' : notification.read == false}">\n	          	{{notification.notification}}\n	        </ion-item>\n\n	        <ion-item-options side="right">\n	        	<button ion-button color="danger" (click)="delete(notification._id)">\n		            <ion-icon name="ios-trash"></ion-icon>\n		            Delete\n		        </button>\n	        </ion-item-options>\n	    </ion-item-sliding>\n    </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/notification/notification.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */],
@@ -966,16 +974,16 @@ NotificationPage = __decorate([
 
 /***/ }),
 
-/***/ 199:
+/***/ 203:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BuildingListPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__create_office_create_office__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__create_office_create_office__ = __webpack_require__(204);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_building__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__building_profile_building_profile__ = __webpack_require__(378);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__building_profile_building_profile__ = __webpack_require__(379);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1010,7 +1018,7 @@ var BuildingListPage = (function () {
 }());
 BuildingListPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-building-list',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/building-list/building-list.html"*/'<!--\n  Generated template for the BuildingListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n        </button>\n        <ion-title>Torres</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-card *ngFor="let item of buildings; let i = index;">\n        <ion-item (click)="viewBuilding(item)">\n            <ion-avatar item-start>\n                <img src="assets/imgs/ticket.png">\n            </ion-avatar>\n            <h2>{{item.name}}</h2>\n            <p>{{item.description}}</p>\n        </ion-item>\n    </ion-card>\n    <!-- <button ion-button class="main-btn" (click)="createOffice()">Create Office</button> -->\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/building-list/building-list.html"*/,
+        selector: 'page-building-list',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/building-list/building-list.html"*/'<!--\n  Generated template for the BuildingListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n        </button>\n        <ion-title>Torres</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-card *ngFor="let item of buildings; let i = index;">\n        <ion-item (click)="viewBuilding(item)">\n            <ion-avatar item-start>\n                <img src="assets/imgs/ticket.png">\n            </ion-avatar>\n            <h2>{{item.name}}</h2>\n            <p>{{item.description}}</p>\n        </ion-item>\n    </ion-card>\n    <!-- <button ion-button class="main-btn" (click)="createOffice()">Create Office</button> -->\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/building-list/building-list.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__providers_building__["a" /* BuildingProvider */]])
 ], BuildingListPage);
@@ -1019,7 +1027,7 @@ BuildingListPage = __decorate([
 
 /***/ }),
 
-/***/ 200:
+/***/ 204:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1184,7 +1192,7 @@ var CreateOfficePage = (function () {
 }());
 CreateOfficePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-create-office',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/create-office/create-office.html"*/'<!--\n  Generated template for the CreateOfficePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>Crear oficina</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-list>\n        <ion-item class="opt">\n            <ion-label>Seleccione Edificio</ion-label>\n            <ion-select [(ngModel)]="office.buildingId" interface="popover" (ngModelChange)="updateFloors()">\n                <ion-option value="{{item.id}}" *ngFor="let item of buildings">{{item.name}}</ion-option>\n            </ion-select>\n        </ion-item>\n        <ion-item class="opt">\n            <ion-label>Seleccione Piso</ion-label>\n            <ion-select interface="popover" [(ngModel)]="office.floorId">\n                <ion-option value="{{item.id}}" *ngFor="let item of floors">{{item.name}}</ion-option>\n            </ion-select>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Oficina No.</ion-label>\n            <ion-input type="text" [(ngModel)]="office.name"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Compañia</ion-label>\n            <ion-input type="text" [(ngModel)]="office.company"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Area Mts</ion-label>\n            <ion-input type="text" [(ngModel)]="office.area"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Garages</ion-label>\n            <ion-input type="text" [(ngModel)]="office.garages"></ion-input>\n        </ion-item>\n        <!-- <ion-item>\n            <ion-label fixed>Co-Pago</ion-label>\n            <ion-input type="text" [(ngModel)]="office.coPay"></ion-input>\n        </ion-item> -->\n    </ion-list>\n\n    <ion-list>\n        <!-- <ion-list-header>\n            Information del dueño\n        </ion-list-header> -->\n\n        <h4>Information del dueño</h4>\n        <ion-item>\n            <ion-label fixed>Nombre</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.employee.first_name"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Apellido</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.employee.last_name"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Telefono</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.employee.phone_number" [textMask]="{mask: phoneMask, guide: true}"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Email</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.employee.email"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Contraseña</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.employee.password"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Tipo de sangre</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.employee.blood_type"></ion-input>\n        </ion-item>\n    </ion-list>\n\n    <ion-list>\n        <!-- <ion-list-header>\n            Información del rentatario\n        </ion-list-header> -->\n\n        <h4>Información del rentatario</h4>\n        <ion-item>\n            <ion-label fixed>Nombre</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.outsourcing.first_name"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Apellido</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.outsourcing.last_name"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Telefono</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.outsourcing.phone_number" [textMask]="{mask: phoneMask, guide: true}"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Email</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.outsourcing.email"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Contraseña</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.outsourcing.password"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Tipo de sangre</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.outsourcing.blood_type"></ion-input>\n        </ion-item>\n    </ion-list>\n\n    <button ion-button class="main-btn" (click)="createOffice()" [disabled]="!isConnected">Guardar</button>\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/create-office/create-office.html"*/,
+        selector: 'page-create-office',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/create-office/create-office.html"*/'<!--\n  Generated template for the CreateOfficePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>Crear oficina</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-list>\n        <ion-item class="opt">\n            <ion-label>Seleccione Edificio</ion-label>\n            <ion-select [(ngModel)]="office.buildingId" interface="popover" (ngModelChange)="updateFloors()">\n                <ion-option value="{{item.id}}" *ngFor="let item of buildings">{{item.name}}</ion-option>\n            </ion-select>\n        </ion-item>\n        <ion-item class="opt">\n            <ion-label>Seleccione Piso</ion-label>\n            <ion-select interface="popover" [(ngModel)]="office.floorId">\n                <ion-option value="{{item.id}}" *ngFor="let item of floors">{{item.name}}</ion-option>\n            </ion-select>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Oficina No.</ion-label>\n            <ion-input type="text" [(ngModel)]="office.name"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Compañia</ion-label>\n            <ion-input type="text" [(ngModel)]="office.company"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Area Mts</ion-label>\n            <ion-input type="text" [(ngModel)]="office.area"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Garages</ion-label>\n            <ion-input type="text" [(ngModel)]="office.garages"></ion-input>\n        </ion-item>\n        <!-- <ion-item>\n            <ion-label fixed>Co-Pago</ion-label>\n            <ion-input type="text" [(ngModel)]="office.coPay"></ion-input>\n        </ion-item> -->\n    </ion-list>\n\n    <ion-list>\n        <!-- <ion-list-header>\n            Information del dueño\n        </ion-list-header> -->\n\n        <h4>Information del dueño</h4>\n        <ion-item>\n            <ion-label fixed>Nombre</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.employee.first_name"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Apellido</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.employee.last_name"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Telefono</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.employee.phone_number" [textMask]="{mask: phoneMask, guide: true}"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Email</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.employee.email"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Contraseña</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.employee.password"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Tipo de sangre</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.employee.blood_type"></ion-input>\n        </ion-item>\n    </ion-list>\n\n    <ion-list>\n        <!-- <ion-list-header>\n            Información del rentatario\n        </ion-list-header> -->\n\n        <h4>Información del rentatario</h4>\n        <ion-item>\n            <ion-label fixed>Nombre</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.outsourcing.first_name"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Apellido</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.outsourcing.last_name"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Telefono</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.outsourcing.phone_number" [textMask]="{mask: phoneMask, guide: true}"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Email</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.outsourcing.email"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Contraseña</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.outsourcing.password"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Tipo de sangre</ion-label>\n            <ion-input type="text" [(ngModel)]="office.employees.outsourcing.blood_type"></ion-input>\n        </ion-item>\n    </ion-list>\n\n    <button ion-button class="main-btn" (click)="createOffice()" [disabled]="!isConnected">Guardar</button>\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/create-office/create-office.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
         __WEBPACK_IMPORTED_MODULE_2__providers_building__["a" /* BuildingProvider */], __WEBPACK_IMPORTED_MODULE_3__providers_user_service__["a" /* UserService */], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */],
@@ -1195,7 +1203,7 @@ CreateOfficePage = __decorate([
 
 /***/ }),
 
-/***/ 201:
+/***/ 205:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1203,14 +1211,14 @@ CreateOfficePage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_user_service__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_push_service__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_push_service__ = __webpack_require__(124);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__ = __webpack_require__(379);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__ = __webpack_require__(380);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_building__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__profile_profile__ = __webpack_require__(124);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_aws_sdk_global__ = __webpack_require__(1024);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__profile_profile__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_aws_sdk_global__ = __webpack_require__(1028);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_aws_sdk_global___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_aws_sdk_global__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_aws_sdk_clients_s3__ = __webpack_require__(1184);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_aws_sdk_clients_s3__ = __webpack_require__(1188);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_aws_sdk_clients_s3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_aws_sdk_clients_s3__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1505,7 +1513,7 @@ var OtrsRequestPage = (function () {
 }());
 OtrsRequestPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-otrs-request',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/otrs-request/otrs-request.html"*/'<!--\n  Generated template for the OtrsRequestPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>NUEVA SOLICITUD</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-list>\n        <ion-list-header class="header-style">\n            <!-- DESCRIBA SU SOLICITUD -->\n            REQUERIMIENTO\n        </ion-list-header>\n\n        <ion-item>\n            \n            <textarea placeholder="DESCRIPCIÓN" class="textarea-style" [(ngModel)]="otrsRequest.comment"></textarea>\n            \n        </ion-item>\n\n        <ion-item>\n            <ion-toggle color="custom" [(ngModel)]="otrsRequest.is_urgent"></ion-toggle>\n            <ion-label style="color: gray;">\n                URGENTE (SUJETO T&C)\n            </ion-label>\n        </ion-item>\n    </ion-list>\n\n    <input type="file" name="file" id="file" class="inputfile" (change)="fileEvent($event)"/>\n    <label for="file" ion-button block class="main-btn">Cargar Foto</label>\n    <!-- <button ion-button icon-left block (click)="addPhoto()">\n        <ion-icon ios="ios-camera" md="md-camera"></ion-icon>\n        CARGAR FOTO \n    </button> -->\n\n    <ion-row *ngIf="otrsRequest.photos.length > 0">\n        <ion-col col-3 *ngFor="let item of otrsRequest.photos; let i = index;">\n            <img src="{{item}}"/>\n        </ion-col>\n    </ion-row>\n\n    <ion-list style="margin-top: 30px;">\n        <!-- <ion-list-header>\n            INFORMACIÓN CLIENTE\n        </ion-list-header> -->\n        \n        <ion-avatar class="client-avatar">\n            <img src="assets/imgs/ticket.jpeg">\n        </ion-avatar>\n        \n        <h2 class="header-style" style="text-align: center;">{{office.company}}</h2>\n        <p style="text-align:center; font-size: 15px; color:gray;">{{office.name}}</p>\n        <h2 class="header-style" style="text-align: center; opacity: 0.7; margin-top: 8vw;">{{building_name}} - {{floor_name}}</h2>\n        \n        <!-- <ion-item>\n            <ion-label fixed>Office #</ion-label>\n            <ion-note item-end>{{office._id}}</ion-note>\n        </ion-item> -->\n    </ion-list>\n\n    <button class="main-btn" ion-button block (click)="createNewRequest()">ENVIAR NUEVA SOLICITUD</button>\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/otrs-request/otrs-request.html"*/,
+        selector: 'page-otrs-request',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/otrs-request/otrs-request.html"*/'<!--\n  Generated template for the OtrsRequestPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>NUEVA SOLICITUD</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-list>\n        <ion-list-header class="header-style">\n            <!-- DESCRIBA SU SOLICITUD -->\n            REQUERIMIENTO\n        </ion-list-header>\n\n        <ion-item>\n            \n            <textarea placeholder="DESCRIPCIÓN" class="textarea-style" [(ngModel)]="otrsRequest.comment"></textarea>\n            \n        </ion-item>\n\n        <ion-item>\n            <ion-toggle color="custom" [(ngModel)]="otrsRequest.is_urgent"></ion-toggle>\n            <ion-label style="color: gray;">\n                URGENTE (SUJETO T&C)\n            </ion-label>\n        </ion-item>\n    </ion-list>\n\n    <input type="file" name="file" id="file" class="inputfile" (change)="fileEvent($event)"/>\n    <label for="file" ion-button block class="main-btn">Cargar Foto</label>\n    <!-- <button ion-button icon-left block (click)="addPhoto()">\n        <ion-icon ios="ios-camera" md="md-camera"></ion-icon>\n        CARGAR FOTO \n    </button> -->\n\n    <ion-row *ngIf="otrsRequest.photos.length > 0">\n        <ion-col col-3 *ngFor="let item of otrsRequest.photos; let i = index;">\n            <img src="{{item}}"/>\n        </ion-col>\n    </ion-row>\n\n    <ion-list style="margin-top: 30px;">\n        <!-- <ion-list-header>\n            INFORMACIÓN CLIENTE\n        </ion-list-header> -->\n        \n        <ion-avatar class="client-avatar">\n            <img src="assets/imgs/ticket.jpeg">\n        </ion-avatar>\n        \n        <h2 class="header-style" style="text-align: center;">{{office.company}}</h2>\n        <p style="text-align:center; font-size: 15px; color:gray;">{{office.name}}</p>\n        <h2 class="header-style" style="text-align: center; opacity: 0.7; margin-top: 8vw;">{{building_name}} - {{floor_name}}</h2>\n        \n        <!-- <ion-item>\n            <ion-label fixed>Office #</ion-label>\n            <ion-note item-end>{{office._id}}</ion-note>\n        </ion-item> -->\n    </ion-list>\n\n    <button class="main-btn" ion-button block (click)="createNewRequest()">ENVIAR NUEVA SOLICITUD</button>\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/otrs-request/otrs-request.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */], __WEBPACK_IMPORTED_MODULE_2__providers_user_service__["a" /* UserService */], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */],
@@ -1517,14 +1525,14 @@ OtrsRequestPage = __decorate([
 
 /***/ }),
 
-/***/ 217:
+/***/ 221:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 220:
+/***/ 222:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1532,14 +1540,14 @@ OtrsRequestPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_building__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_push_service__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_push_service__ = __webpack_require__(124);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_user_service__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_email_composer__ = __webpack_require__(419);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_date_picker__ = __webpack_require__(420);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_in_app_browser__ = __webpack_require__(421);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__popup_popup__ = __webpack_require__(422);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__otrs_request_otrs_request__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_email_composer__ = __webpack_require__(420);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_date_picker__ = __webpack_require__(421);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_in_app_browser__ = __webpack_require__(422);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__popup_popup__ = __webpack_require__(423);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__otrs_request_otrs_request__ = __webpack_require__(205);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1653,7 +1661,6 @@ var MaintenanceTrackerPage = (function () {
     MaintenanceTrackerPage.prototype.ionViewWillEnter = function () {
         var _this = this;
         this.storage.get('userdata').then(function (val) {
-            console.log("userdata", val);
             if (val != null) {
                 _this.authUser = val.user;
                 _this.token = val.token;
@@ -1719,7 +1726,6 @@ var MaintenanceTrackerPage = (function () {
                         _this.show4 = false;
                         _this.show5 = true;
                     }
-                    console.log("this.request", _this.request);
                     _this.request.stepText = 'Step ' + _this.request.step;
                     // if (this.authUser['level'] != 4) {
                     //     this.request.stepText += ' - ' + steps[this.request.step - 1].current;
@@ -1735,7 +1741,6 @@ var MaintenanceTrackerPage = (function () {
         });
     };
     MaintenanceTrackerPage.prototype.ionViewDidLoad = function () {
-        //        //console.log('ionViewDidLoad MaintenanceTrackerPage');
     };
     MaintenanceTrackerPage.prototype.onShow1 = function () {
         this.show1 = !this.show1;
@@ -1811,6 +1816,7 @@ var MaintenanceTrackerPage = (function () {
                     }
                 }
             }
+            console.log("this.officeeeeeeee", _this.office);
         }, function (data) {
             loading.dismiss();
         });
@@ -1819,10 +1825,10 @@ var MaintenanceTrackerPage = (function () {
         var _this = this;
         if (this.quote.company == '' || this.quote.date == '' || this.quote.name == '' ||
             this.quote.phone == '' || this.quote.time == '') {
-            var alert_1 = this.alertCtrl.create({
+            var alert = this.alertCtrl.create({
                 title: "Error", subTitle: "Please fill in the blanks", buttons: ['OK']
             });
-            alert_1.present();
+            alert.present();
         }
         else {
             this.requestDetail.token = this.token;
@@ -1851,7 +1857,6 @@ var MaintenanceTrackerPage = (function () {
             }, function (data1) {
                 loading_2.dismiss();
             });
-            console.log("aaaaaaaaaaaaaaaaaaaaaa", this.request._id);
             // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled the time of first meeting for quote.", this.token);
             this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha programado una visita inicial para hacerle una cotización.", this.token);
         }
@@ -1870,7 +1875,7 @@ var MaintenanceTrackerPage = (function () {
             loading.dismiss();
             _this.scheduleAccept1 = false;
         });
-        this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente aceptó la visita programada.", this.token);
+        this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " aceptó la visita programada.", this.token);
         // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
     };
     MaintenanceTrackerPage.prototype.goToStep2 = function () {
@@ -1901,7 +1906,6 @@ var MaintenanceTrackerPage = (function () {
         this.requestDetail.step = 2;
         var loading = this.loadingCtrl.create();
         loading.present();
-        console.log("this.requestDeatialasdfadsfadsfa", this.requestDetailKey);
         this.userService.updateStep(this.requestDetailKey, this.requestDetail)
             .subscribe(function (data1) {
             var params = {
@@ -1918,7 +1922,6 @@ var MaintenanceTrackerPage = (function () {
         }, function (data1) {
             loading.dismiss();
         });
-        console.log("aaaaaaaaaaaaaaaaaaaaaa", this.request._id);
         // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled the time of first meeting for quote.", this.token);
         this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha programado una visita inicial para hacerle una cotización.", this.token);
     };
@@ -1936,7 +1939,7 @@ var MaintenanceTrackerPage = (function () {
             loading.dismiss();
             _this.quoteAccept = false;
         });
-        this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente aceptó la cotización.", this.token);
+        this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " aceptó la cotización.", this.token);
         // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your quote", this.token);
     };
     MaintenanceTrackerPage.prototype.denyQuote1 = function () {
@@ -1958,7 +1961,7 @@ var MaintenanceTrackerPage = (function () {
                 loading.dismiss();
                 _this.quoteDeny = false;
             });
-            _this.pushService.notiBuildingManagerForRequest(_this.request._id, "El cliente rechazo la cotización.", _this.token);
+            _this.pushService.notiBuildingManagerForRequest(_this.request._id, _this.office.name + " rechazo la cotización.", _this.token);
             // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee denied your quote", this.token);
         });
     };
@@ -1972,7 +1975,6 @@ var MaintenanceTrackerPage = (function () {
                     text: 'Cancel',
                     role: 'cancel',
                     handler: function () {
-                        console.log('Cancel clicked');
                     }
                 },
                 {
@@ -2014,13 +2016,12 @@ var MaintenanceTrackerPage = (function () {
             phone: this.technician_phone,
             time: this.technician_time
         };
-        console.log("this.requestDetail.technician_info", this.requestDetail.technician_info);
         if (this.requestDetail.technician_info.company == '' || this.requestDetail.technician_info.date == '' || this.requestDetail.technician_info.name == '' ||
             this.requestDetail.technician_info.phone == '' || this.requestDetail.technician_info.time == '') {
-            var alert_2 = this.alertCtrl.create({
+            var alert = this.alertCtrl.create({
                 title: "Error", subTitle: "Please fill in the blanks", buttons: ['OK']
             });
-            alert_2.present();
+            alert.present();
         }
         else {
             this.requestDetail.step = 3;
@@ -2061,7 +2062,7 @@ var MaintenanceTrackerPage = (function () {
             loading.dismiss();
             _this.scheduleAccept = false;
         });
-        this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente aceptó la visita programada.", this.token);
+        this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " aceptó la visita programada.", this.token);
         // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
     };
     MaintenanceTrackerPage.prototype.goToStep4 = function () {
@@ -2121,65 +2122,9 @@ var MaintenanceTrackerPage = (function () {
             loading.dismiss();
             _this.is_paid = false;
         });
-        this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente pagó su factura", this.token);
+        this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " pagó su factura", this.token);
         // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee paid to your invoice", this.token);
         this.iab.create('https://www.mipagoamigo.com/MPA_WebSite/');
-        // this.iab.create('https://www.pse.com.co/inicio');
-        //         let step = this.db.object('/maintenance_steps/'+this.requestDetailKey+'/3');
-        //         let actionSheet = this.actionSheetCtrl.create({
-        //             buttons: [
-        //                 {
-        //                     text: 'Take Photo',
-        //                     handler: () => {
-        //                         Camera.getPicture({
-        //                             destinationType: Camera.DestinationType.DATA_URL,
-        //                             sourceType: Camera.PictureSourceType.CAMERA,
-        //                             allowEdit: true,
-        //                             encodingType: Camera.EncodingType.JPEG,
-        //                             saveToPhotoAlbum: false
-        //                         }).then((imageData) => {
-        //                             let imgData = "data:image/jpeg;base64," + imageData;
-        //                             step.update({
-        //                                 status: 1,
-        //                                 invoice: imgData
-        //                             });
-        //                             this.pushService.notiBuildingManagerForRequest(this.request.$id, "Employee paid to your invoice");
-        //                         }, (err) => {
-        //                         })
-        //                     }
-        //                 },
-        //                 {
-        //                     text: 'Choose Photo',
-        //                     handler: () => {
-        //                         Camera.getPicture({
-        //                             destinationType: Camera.DestinationType.DATA_URL,
-        //                             sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-        //                             allowEdit: true,
-        //                             encodingType: Camera.EncodingType.JPEG,
-        //                             saveToPhotoAlbum: false
-        //                         }).then((imageData) => {
-        //                             let imgData = "data:image/jpeg;base64," + imageData;
-        // //                            //console.log(imgData);
-        //                             step.update({
-        //                                 status: 1,
-        //                                 invoice: imgData
-        //                             });
-        //                             this.pushService.notiBuildingManagerForRequest(this.request.$id, "Employee paid to your invoice");
-        //                         }, (err) => {
-        // //                            //console.log(err);
-        //                         })
-        //                     }
-        //                 },
-        //                 {
-        //                     text: 'Cancel',
-        //                     role: 'cancel',
-        //                     handler:() => {
-        // //                        //console.log('Cancel clicked');
-        //                     }
-        //                 }
-        //             ]
-        //         });
-        //         actionSheet.present();
     };
     MaintenanceTrackerPage.prototype.paidInvoice = function () {
         var _this = this;
@@ -2230,7 +2175,7 @@ var MaintenanceTrackerPage = (function () {
         }, function (data1) {
             loading.dismiss();
         });
-        this.pushService.notiBuildingManagerForRequest(this.request._id, "El cliente ha calificado el servicio", this.token);
+        this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " ha calificado el servicio", this.token);
         // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee provided feedback", this.token);
     };
     MaintenanceTrackerPage.prototype.archiveRequest = function () {
@@ -2263,26 +2208,17 @@ var MaintenanceTrackerPage = (function () {
 }());
 MaintenanceTrackerPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-maintenance-tracker',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/maintenance-tracker/maintenance-tracker.html"*/'<!--\n  Generated template for the MaintenanceTrackerPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>Estado de su Solicitud</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n    <ion-list>\n        <ion-list-header class="header-style">\n            FASE\n        </ion-list-header>\n    </ion-list>\n\n    <div class="wrapper">\n        <ul class="StepProgress">\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 1, \'current\': request.step == 1}">\n\n                <strong class="subheader-style" (click)="onShow1()">FASE 1 - Solicitud</strong>\n\n                <div *ngIf="show1">\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 1">\n                        <ion-item>\n                            <ion-toggle color="custom" checked="true" disabled="true"></ion-toggle>\n                            <ion-label class="icon-style">\n                                Su cotización ha sido enviada\n                            </ion-label>\n                        </ion-item>\n                    </ion-list>\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1 && !scheduleAccept1">\n                        <h2 class="header-style" style="text-align: center;">Visita Técnica</h2>\n\n                        <ion-item>\n                            <ion-label>Fecha</ion-label>\n                            <ion-datetime placeholder="Seleccione una fecha." displayFormat="MMM DD YYYY" [(ngModel)]="quote.date"></ion-datetime>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Hora</ion-label>\n                            <ion-datetime placeholder="Seleccione una hora." displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="quote.time"></ion-datetime>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="quote.name"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del cliente</ion-label>\n                            <ion-input type="text" [(ngModel)]="quote.company"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Teléfono del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="quote.phone"></ion-input>\n                        </ion-item>\n                    </ion-list>\n                    <button ion-button block (click)="goToStep1_5()" class="main-btn" style="margin-top:2vw;" *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1 && !scheduleAccept1">\n                        Programar Visita\n                    </button>\n\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 1.5">\n                        <h2 class="header-style" style="text-align: center;">Técnico</h2>\n\n                        <ion-item>\n                            <ion-label>Fecha</ion-label>\n                            <ion-input type="text" [readonly]="true" [(ngModel)]="requestDetail.quote.date"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Hora</ion-label>\n                            <ion-input type="text" [readonly]="true" [(ngModel)]="requestDetail.quote.time"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.quote.name"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del cliente</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.quote.company"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Teléfono del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.quote.phone"></ion-input>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block (click)="acceptSchedule1()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 1.5 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && !scheduleAccept1">\n                        Acceptar Horario\n                    </button>\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && (request.step >= 1.5) && scheduleAccept1">\n                        <ion-item>\n                            <ion-toggle color="custom" [(ngModel)]="showQuote"></ion-toggle>\n                            <ion-label>\n                                Cargar Cotización\n                            </ion-label>\n                        </ion-item>\n                        <ion-item *ngIf="showQuote">\n                            <div>\n                                <textarea placeholder="Sus comentarios" class="textarea-style" [(ngModel)]="quote.comment"></textarea>\n                            </div>\n\n                        </ion-item>\n\n                    </ion-list>\n                    \n\n                    <button ion-button block (click)="goToStep2()" class="main-btn" style="margin-top:2vw;" *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1.5 && scheduleAccept1">\n                        Enviar Cotización\n                    </button>\n                </div>\n            </li>\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 2, \'current\': request.step == 2}">\n                <strong class="subheader-style" (click)="onShow2()">FASE 2 - Cotización</strong>\n                \n                <div *ngIf="show2">\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 2">\n                        \n                        \n                        <ion-item>\n                            <div>\n                                <textarea placeholder="Your comments" class="textarea-style" [readonly]="true" [(ngModel)]="requestDetail.quote.comment"></textarea>\n                            </div>\n\n                        </ion-item>\n\n                        \n\n                        <p class="icon-style" style="word-wrap: break-word;">Usted va a recibir un correo electrónico con su cotización.  Por favor revise su correo.</p>\n                        \n                        <p class="icon-style" *ngIf = "quoteAccept" style="word-wrap: break-word;">Cotización Aceptada.</p>\n                        \n                    </ion-list>\n\n                    <button ion-button block (click)="acceptQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && (!quoteAccept && !quoteDeny)">\n                        Aceptar Cotización\n                    </button>\n                    <button ion-button block (click)="denyQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && (!quoteAccept && !quoteDeny)">\n                        Rechazar Cotización\n                    </button>\n                \n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 2">\n                        \n                        <ion-item *ngIf="!quoteAccept && !quoteDeny">\n                            <ion-toggle color="custom" [(ngModel)]="quoteAccept" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Cotización Aceptada\n                            </ion-label>\n                        </ion-item>\n\n                        <ion-item *ngIf="quoteAccept">\n                            <ion-toggle color="custom" [(ngModel)]="quoteAccept" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Cotización Aceptada\n                            </ion-label>\n                        </ion-item>\n\n                        <ion-item *ngIf="quoteDeny">\n                            <ion-toggle color="custom" [(ngModel)]="quoteDeny" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Cotización Rechazada\n                            </ion-label>\n                        </ion-item>\n\n                        <ion-item *ngIf="quoteDeny">\n                            <div>\n                                <textarea class="textarea-style" [(ngModel)]="requestDetail.quote.comment" [readonly]="true"></textarea>\n                            </div>\n\n                        </ion-item>\n\n                        <ion-item *ngIf="quoteAccept">\n                            <ion-toggle color="custom" [(ngModel)]="showSchedule"></ion-toggle>\n                            <ion-label>\n                                Programar visita\n                            </ion-label>\n                        </ion-item>\n                    </ion-list>\n\n                    <ion-list no-lines *ngIf="showSchedule">\n                        <ion-item>\n                            <ion-label>Fecha</ion-label>\n                            <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="technician_date"></ion-datetime>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Hora</ion-label>\n                            <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="technician_time"></ion-datetime>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="technician_name"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del cliente</ion-label>\n                            <ion-input type="text" [(ngModel)]="technician_company"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Teléfono</ion-label>\n                            <ion-input type="text" [(ngModel)]="technician_phone"></ion-input>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block class="main-btn" style="margin-top:2vw;" (click)="goToStep3()"\n                            *ngIf="(authUser.level == 7 || authUser.level == 8) && quoteAccept">\n                        Programar Visita\n                    </button>\n                </div>\n            </li>\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 3, \'current\': request.step == 3}">\n                <strong class="subheader-style" (click)="onShow3()">FASE 3 - Inicio & Finalización trabajo</strong>\n\n                <div *ngIf="show3">\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 3">\n                        <!-- <ion-item>\n                            <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY\'}}</ion-note>\n                            -\n                            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'h:mm a\'}}</ion-note>\n                        </ion-item> -->\n                        <ion-item>\n                            <ion-label>Fecha</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.date" [readonly]="true"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Hora</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.time" [readonly]="true"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.name" [readonly]="true"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del cliente</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.company" [readonly]="true"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Teléfono</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.phone" [readonly]="true"></ion-input>\n                        </ion-item>\n\n                        <p class="icon-style" *ngIf = "scheduleAccept" style="word-wrap: break-word;">Schedule Accepted</p>\n                        <!-- <ion-item>\n                            <ion-toggle [(ngModel)]="scheduleAccept"></ion-toggle>\n                            <ion-label>\n                                Accept Schedule\n                            </ion-label>\n                        </ion-item> -->\n                    </ion-list>\n\n                    <button ion-button block (click)="acceptSchedule()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 3 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && !scheduleAccept">\n                        Acceptar Horario\n                    </button>\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >=3">\n                        <!-- <ion-item>\n                            <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY\'}}</ion-note>\n                            -\n                            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'h:mm a\'}}</ion-note>\n                        </ion-item> -->\n                        \n                        <ion-item>\n                            <ion-toggle color="custom" [(ngModel)]="scheduleAccept" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Programación Aceptada\n                            </ion-label>\n                        </ion-item>\n                        <!-- <ion-item *ngIf="scheduleAccept">\n                            <ion-label>Job Complete</ion-label>\n                            <ion-toggle color="custom" [(ngModel)]="is_completed"></ion-toggle>\n                        </ion-item> -->\n                    </ion-list>\n\n                    <button ion-button block class="main-btn" (click)="goToStep4()"\n                            *ngIf="(authUser.level == 7 || authUser.level == 8) && scheduleAccept">\n                        Trabajo Finalizado\n                    </button>\n                </div>\n            </li>\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 4, \'current\': request.step == 4}">\n                <strong class="subheader-style" (click)="onShow4()">FASE 4 - Facturación</strong>\n\n                <div *ngIf="show4">\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 4">\n                        <!-- <ion-item>\n                            <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY\'}}</ion-note>\n                            -\n                            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'h:mm a\'}}</ion-note>\n                        </ion-item> -->\n                        <ion-item>\n                            <ion-toggle color="custom" [(ngModel)]="requestDetail.is_completed" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Trabajo finalizado\n                            </ion-label>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block icon-left class="main-btn" *ngIf="request.step == 4 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && !is_paid" (click)="payInvoice()">\n                        <ion-icon ios="ios-card" md="md-card"></ion-icon>\n                        Pago de Factura\n                    </button>\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 4">\n                        <!-- <ion-item>\n                            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>\n                            FECHA DE SOLICITUD\n                            <ion-note item-end>{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY, h:mm:ss a\'}}</ion-note>\n                        </ion-item>\n                        <ion-item>\n                            {{office.buildingName}} | {{office.floorName}} | {{office.name}}\n                        </ion-item> -->\n                        <ion-item>\n                            <ion-icon class="icon-style" ios="ios-calendar" md="md-calendar"></ion-icon>\n                            Factura\n                            <ion-note class="icon-style" *ngIf="!is_paid" item-end>En Espera</ion-note>\n                            <ion-note class="icon-style" *ngIf="is_paid" item-end>Pagado</ion-note>\n                        </ion-item>\n                    </ion-list>\n\n                    <!-- <ion-card *ngIf="requestDetail.status3 && (authUser.level == 7 || authUser.level == 8)  && request.step == 4">\n                        <img src="{{requestDetail.invoice}}"/>\n                    </ion-card> -->\n\n                    <button ion-button block class="main-btn" icon-left *ngIf="is_paid && (authUser.level == 7 || authUser.level == 8)" (click)="paidInvoice()">\n                        <ion-icon ios="ios-card" md="md-card"></ion-icon>\n                        Factura Pagada\n                    </button>\n                </div>\n            </li>\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 5, \'current\': request.step == 5}">\n                <strong class="subheader-style" (click)="onShow5()">FASE 5 -  Pago</strong>\n\n                <div *ngIf="show5">\n                    <!-- <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\') && request.step == 5">\n                        <ion-item>\n                            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>\n                            Job Paid\n                            <ion-note item-end (click)="viewInvoice()">View</ion-note>\n                        </ion-item>\n                    </ion-list>\n\n                    <ion-card *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\') && request.step == 5 && showInvoice">\n                        <img src="{{requestDetail.invoice}}"/>\n                    </ion-card> -->\n\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 5">\n                        <ion-item>\n                            \n                            <rating [(ngModel)]="rate" class="rating"></rating>\n                        </ion-item>\n                        <ion-item>\n                            <div>\n                                <textarea placeholder="Sus comentarios" class="textarea-style" [(ngModel)]="comment"></textarea>\n                            </div>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block icon-left class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 5 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\')" (click)="leaveReview()">\n                        <ion-icon ios="ios-star" md="md-star"></ion-icon>\n                        Por favor calificanos\n                    </button>\n\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 5">\n                        <ion-item *ngIf="requestDetail.status5 == 0">\n                            <ion-icon class="icon-style" ios="ios-calendar" md="md-calendar"></ion-icon>\n                            Finalizado\n                            <ion-note class="icon-style" item-end>Evaluación Pendiente</ion-note>\n                        </ion-item>\n                        <ion-item *ngIf="requestDetail.status5 == 1">\n                            \n                            <rating [(ngModel)]="requestDetail.star" readOnly="true" class="rating"></rating>\n                            <!-- <ion-note class="icon-style" item-end>{{requestDetail.star}} stars</ion-note> -->\n                        </ion-item>\n                        <ion-item *ngIf="requestDetail.status5 == 1">\n                            <div>\n                                <textarea class="textarea-style" [(ngModel)]="requestDetail.comment" [readonly]="true"></textarea>\n                            </div>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block icon-left class="main-btn" *ngIf="requestDetail.status5 == 1 && ((authUser.level == 7 || authUser.level == 8))" (click)="archiveRequest()">\n                        <ion-icon ios="ios-cloud-download" md="md-cloud-download"></ion-icon>\n                        Archivo del Ticket\n                    </button>\n                </div>\n            </li>\n        </ul>\n    </div>\n\n    <ion-list no-lines style="margin-top: 20px;">\n        <ion-list-header class="header-style">\n            Información del Cliente\n        </ion-list-header>\n\n        <ion-avatar class="client-avatar">\n            <img src="assets/imgs/ticket.jpeg">\n        </ion-avatar>\n        <h2 class="header-style" style="text-align: center;">{{requestKey}}</h2>\n        <h2 class="header-style" style="text-align: center;">{{office.company}}</h2>\n        <p style="text-align:center; font-size: 15px; color:gray;">{{office.name}}</p>\n        <h2 class="header-style" style="text-align: center; opacity: 0.7;">{{office.buildingName}} - {{office.floorName}}</h2>\n        <ion-item style="opacity:0.7; text-align: center;">\n            <ion-icon class="icon-style" name="md-calendar"></ion-icon>\n            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY\'}}</ion-note>\n            -\n            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>\n            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'h:mm a\'}}</ion-note>\n        </ion-item>\n        <!-- <ion-item>\n            <ion-avatar item-start>\n                <img src="assets/imgs/working-icon.png">\n            </ion-avatar>\n            <h2>{{office.company}}</h2>\n            <p>{{office.name}}</p>\n        </ion-item>\n        <ion-item>\n            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>\n            FECHA DE SOLICITUD\n            <ion-note item-end *ngIf="authUser.level != 4">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY, h:mm:ss a\'}}</ion-note>\n        </ion-item> -->\n    </ion-list>\n\n    <ion-list no-lines>\n        <ion-list-header class="header-style">\n            Solicitado por\n        </ion-list-header>\n        <!-- <ion-item class="icon-style">\n            <ion-icon  ios="ios-person" md="md-person"></ion-icon>\n            {{user.first_name + \' \' + user.last_name}}\n        </ion-item> -->\n        <h2 class="header-style" style="text-align: center;">{{user.first_name}} {{user.last_name}}</h2>\n        <ion-item>\n            <ion-toggle color="custom" [(ngModel)]="viewRequest"></ion-toggle>\n            <ion-label class="icon-style">\n                Ver Detalles De La Solicitud\n            </ion-label>\n        </ion-item>\n    </ion-list>\n\n    <ion-card *ngIf="viewRequest">\n        <ion-card-content>\n            <p>{{request.comment}}</p>\n        </ion-card-content>\n\n        <ion-slides pager="true" *ngIf="request.photos && request.photos.length > 0">\n            <ion-slide *ngFor="let item of request.photos;">\n                <img src="{{item}}"/>\n            </ion-slide>\n        </ion-slides>\n    </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/maintenance-tracker/maintenance-tracker.html"*/,
+        selector: 'page-maintenance-tracker',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/maintenance-tracker/maintenance-tracker.html"*/'<!--\n  Generated template for the MaintenanceTrackerPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>Estado de su Solicitud</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n    <ion-list>\n        <ion-list-header class="header-style">\n            FASE\n        </ion-list-header>\n    </ion-list>\n\n    <div class="wrapper">\n        <ul class="StepProgress">\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 1, \'current\': request.step == 1}">\n\n                <strong class="subheader-style" (click)="onShow1()">FASE 1 - Solicitud</strong>\n\n                <div *ngIf="show1">\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 1">\n                        <ion-item>\n                            <ion-toggle color="custom" checked="true" disabled="true"></ion-toggle>\n                            <ion-label class="icon-style">\n                                Su cotización ha sido enviada\n                            </ion-label>\n                        </ion-item>\n                    </ion-list>\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1 && !scheduleAccept1">\n                        <h2 class="header-style" style="text-align: center;">Visita Técnica</h2>\n\n                        <ion-item>\n                            <ion-label>Fecha</ion-label>\n                            <ion-datetime placeholder="Seleccione una fecha." displayFormat="MMM DD YYYY" [(ngModel)]="quote.date"></ion-datetime>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Hora</ion-label>\n                            <ion-datetime placeholder="Seleccione una hora." displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="quote.time"></ion-datetime>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="quote.name"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del cliente</ion-label>\n                            <ion-input type="text" [(ngModel)]="quote.company"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Teléfono del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="quote.phone"></ion-input>\n                        </ion-item>\n                    </ion-list>\n                    <button ion-button block (click)="goToStep1_5()" class="main-btn" style="margin-top:2vw;" *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1 && !scheduleAccept1">\n                        Programar Visita\n                    </button>\n\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 1.5">\n                        <h2 class="header-style" style="text-align: center;">Técnico</h2>\n\n                        <ion-item>\n                            <ion-label>Fecha</ion-label>\n                            <ion-input type="text" [readonly]="true" [(ngModel)]="requestDetail.quote.date"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Hora</ion-label>\n                            <ion-input type="text" [readonly]="true" [(ngModel)]="requestDetail.quote.time"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.quote.name"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del cliente</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.quote.company"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Teléfono del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.quote.phone"></ion-input>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block (click)="acceptSchedule1()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 1.5 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && !scheduleAccept1">\n                        Acceptar Horario\n                    </button>\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && (request.step >= 1.5) && scheduleAccept1">\n                        <ion-item>\n                            <ion-toggle color="custom" [(ngModel)]="showQuote"></ion-toggle>\n                            <ion-label>\n                                Cargar Cotización\n                            </ion-label>\n                        </ion-item>\n                        <ion-item *ngIf="showQuote">\n                            <div>\n                                <textarea placeholder="Sus comentarios" class="textarea-style" [(ngModel)]="quote.comment"></textarea>\n                            </div>\n\n                        </ion-item>\n\n                    </ion-list>\n                    \n\n                    <button ion-button block (click)="goToStep2()" class="main-btn" style="margin-top:2vw;" *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1.5 && scheduleAccept1">\n                        Enviar Cotización\n                    </button>\n                </div>\n            </li>\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 2, \'current\': request.step == 2}">\n                <strong class="subheader-style" (click)="onShow2()">FASE 2 - Cotización</strong>\n                \n                <div *ngIf="show2">\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 2">\n                        \n                        \n                        <ion-item>\n                            <div>\n                                <textarea placeholder="Your comments" class="textarea-style" [readonly]="true" [(ngModel)]="requestDetail.quote.comment"></textarea>\n                            </div>\n\n                        </ion-item>\n\n                        \n\n                        <p class="icon-style" style="word-wrap: break-word;">Usted va a recibir un correo electrónico con su cotización.  Por favor revise su correo.</p>\n                        \n                        <p class="icon-style" *ngIf = "quoteAccept" style="word-wrap: break-word;">Cotización Aceptada.</p>\n                        \n                    </ion-list>\n\n                    <button ion-button block (click)="acceptQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && (!quoteAccept && !quoteDeny)">\n                        Aceptar Cotización\n                    </button>\n                    <button ion-button block (click)="denyQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && (!quoteAccept && !quoteDeny)">\n                        Rechazar Cotización\n                    </button>\n                \n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 2">\n                        \n                        <ion-item *ngIf="!quoteAccept && !quoteDeny">\n                            <ion-toggle color="custom" [(ngModel)]="quoteAccept" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Cotización Aceptada\n                            </ion-label>\n                        </ion-item>\n\n                        <ion-item *ngIf="quoteAccept">\n                            <ion-toggle color="custom" [(ngModel)]="quoteAccept" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Cotización Aceptada\n                            </ion-label>\n                        </ion-item>\n\n                        <ion-item *ngIf="quoteDeny">\n                            <ion-toggle color="custom" [(ngModel)]="quoteDeny" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Cotización Rechazada\n                            </ion-label>\n                        </ion-item>\n\n                        <ion-item *ngIf="quoteDeny">\n                            <div>\n                                <textarea class="textarea-style" [(ngModel)]="requestDetail.quote.comment" [readonly]="true"></textarea>\n                            </div>\n\n                        </ion-item>\n\n                        <ion-item *ngIf="quoteAccept">\n                            <ion-toggle color="custom" [(ngModel)]="showSchedule"></ion-toggle>\n                            <ion-label>\n                                Programar visita\n                            </ion-label>\n                        </ion-item>\n                    </ion-list>\n\n                    <ion-list no-lines *ngIf="showSchedule">\n                        <ion-item>\n                            <ion-label>Fecha</ion-label>\n                            <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="technician_date"></ion-datetime>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Hora</ion-label>\n                            <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="technician_time"></ion-datetime>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="technician_name"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del cliente</ion-label>\n                            <ion-input type="text" [(ngModel)]="technician_company"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Teléfono</ion-label>\n                            <ion-input type="text" [(ngModel)]="technician_phone"></ion-input>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block class="main-btn" style="margin-top:2vw;" (click)="goToStep3()"\n                            *ngIf="(authUser.level == 7 || authUser.level == 8) && quoteAccept">\n                        Programar Visita\n                    </button>\n                </div>\n            </li>\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 3, \'current\': request.step == 3}">\n                <strong class="subheader-style" (click)="onShow3()">FASE 3 - Inicio & Finalización trabajo</strong>\n\n                <div *ngIf="show3">\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 3">\n                        <!-- <ion-item>\n                            <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY\'}}</ion-note>\n                            -\n                            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'h:mm a\'}}</ion-note>\n                        </ion-item> -->\n                        <ion-item>\n                            <ion-label>Fecha</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.date" [readonly]="true"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Hora</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.time" [readonly]="true"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.name" [readonly]="true"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del cliente</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.company" [readonly]="true"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Teléfono</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.phone" [readonly]="true"></ion-input>\n                        </ion-item>\n\n                        <p class="icon-style" *ngIf = "scheduleAccept" style="word-wrap: break-word;">Horario Aceptado</p>\n                        <!-- <ion-item>\n                            <ion-toggle [(ngModel)]="scheduleAccept"></ion-toggle>\n                            <ion-label>\n                                Accept Schedule\n                            </ion-label>\n                        </ion-item> -->\n                    </ion-list>\n\n                    <button ion-button block (click)="acceptSchedule()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 3 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && !scheduleAccept">\n                        Acceptar Horario\n                    </button>\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >=3">\n                        <!-- <ion-item>\n                            <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY\'}}</ion-note>\n                            -\n                            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'h:mm a\'}}</ion-note>\n                        </ion-item> -->\n                        \n                        <ion-item>\n                            <ion-toggle color="custom" [(ngModel)]="scheduleAccept" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Programación Aceptada\n                            </ion-label>\n                        </ion-item>\n                        <!-- <ion-item *ngIf="scheduleAccept">\n                            <ion-label>Job Complete</ion-label>\n                            <ion-toggle color="custom" [(ngModel)]="is_completed"></ion-toggle>\n                        </ion-item> -->\n                    </ion-list>\n\n                    <button ion-button block class="main-btn" (click)="goToStep4()"\n                            *ngIf="(authUser.level == 7 || authUser.level == 8) && scheduleAccept">\n                        Trabajo Finalizado\n                    </button>\n                </div>\n            </li>\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 4, \'current\': request.step == 4}">\n                <strong class="subheader-style" (click)="onShow4()">FASE 4 - Facturación</strong>\n\n                <div *ngIf="show4">\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 4">\n                        <!-- <ion-item>\n                            <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY\'}}</ion-note>\n                            -\n                            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'h:mm a\'}}</ion-note>\n                        </ion-item> -->\n                        <ion-item>\n                            <ion-toggle color="custom" [(ngModel)]="requestDetail.is_completed" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Trabajo finalizado\n                            </ion-label>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block icon-left class="main-btn" *ngIf="request.step == 4 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && !is_paid" (click)="payInvoice()">\n                        <ion-icon ios="ios-card" md="md-card"></ion-icon>\n                        Pago de Factura\n                    </button>\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 4">\n                        <!-- <ion-item>\n                            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>\n                            FECHA DE SOLICITUD\n                            <ion-note item-end>{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY, h:mm:ss a\'}}</ion-note>\n                        </ion-item>\n                        <ion-item>\n                            {{office.buildingName}} | {{office.floorName}} | {{office.name}}\n                        </ion-item> -->\n                        <ion-item>\n                            <ion-icon class="icon-style" ios="ios-calendar" md="md-calendar"></ion-icon>\n                            Factura\n                            <ion-note class="icon-style" *ngIf="!is_paid" item-end>En Espera</ion-note>\n                            <ion-note class="icon-style" *ngIf="is_paid" item-end>Pagado</ion-note>\n                        </ion-item>\n                    </ion-list>\n\n                    <!-- <ion-card *ngIf="requestDetail.status3 && (authUser.level == 7 || authUser.level == 8)  && request.step == 4">\n                        <img src="{{requestDetail.invoice}}"/>\n                    </ion-card> -->\n\n                    <button ion-button block class="main-btn" icon-left *ngIf="is_paid && (authUser.level == 7 || authUser.level == 8)" (click)="paidInvoice()">\n                        <ion-icon ios="ios-card" md="md-card"></ion-icon>\n                        Factura Pagada\n                    </button>\n                </div>\n            </li>\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 5, \'current\': request.step == 5}">\n                <strong class="subheader-style" (click)="onShow5()">FASE 5 -  Pago</strong>\n\n                <div *ngIf="show5">\n                    <!-- <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\') && request.step == 5">\n                        <ion-item>\n                            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>\n                            Job Paid\n                            <ion-note item-end (click)="viewInvoice()">View</ion-note>\n                        </ion-item>\n                    </ion-list>\n\n                    <ion-card *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\') && request.step == 5 && showInvoice">\n                        <img src="{{requestDetail.invoice}}"/>\n                    </ion-card> -->\n\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 5">\n                        <ion-item>\n                            \n                            <rating [(ngModel)]="rate" class="rating"></rating>\n                        </ion-item>\n                        <ion-item>\n                            <div>\n                                <textarea placeholder="Sus comentarios" class="textarea-style" [(ngModel)]="comment"></textarea>\n                            </div>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block icon-left class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 5 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\')" (click)="leaveReview()">\n                        <ion-icon ios="ios-star" md="md-star"></ion-icon>\n                        Por favor calificanos\n                    </button>\n\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 5">\n                        <ion-item *ngIf="requestDetail.status5 == 0">\n                            <ion-icon class="icon-style" ios="ios-calendar" md="md-calendar"></ion-icon>\n                            Finalizado\n                            <ion-note class="icon-style" item-end>Evaluación Pendiente</ion-note>\n                        </ion-item>\n                        <ion-item *ngIf="requestDetail.status5 == 1">\n                            \n                            <rating [(ngModel)]="requestDetail.star" readOnly="true" class="rating"></rating>\n                            <!-- <ion-note class="icon-style" item-end>{{requestDetail.star}} stars</ion-note> -->\n                        </ion-item>\n                        <ion-item *ngIf="requestDetail.status5 == 1">\n                            <div>\n                                <textarea class="textarea-style" [(ngModel)]="requestDetail.comment" [readonly]="true"></textarea>\n                            </div>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block icon-left class="main-btn" *ngIf="requestDetail.status5 == 1 && ((authUser.level == 7 || authUser.level == 8))" (click)="archiveRequest()">\n                        <ion-icon ios="ios-cloud-download" md="md-cloud-download"></ion-icon>\n                        Archivo del Ticket\n                    </button>\n                </div>\n            </li>\n        </ul>\n    </div>\n\n    <ion-list no-lines style="margin-top: 20px;">\n        <ion-list-header class="header-style">\n            Información del Cliente\n        </ion-list-header>\n\n        <ion-avatar class="client-avatar">\n            <img src="assets/imgs/ticket.jpeg">\n        </ion-avatar>\n        <h2 class="header-style" style="text-align: center;">{{requestKey}}</h2>\n        <h2 class="header-style" style="text-align: center;">{{office.company}}</h2>\n        <p style="text-align:center; font-size: 15px; color:gray;">{{office.name}}</p>\n        <h2 class="header-style" style="text-align: center; opacity: 0.7;">{{office.buildingName}} - {{office.floorName}}</h2>\n        <ion-item style="opacity:0.7; text-align: center;">\n            <ion-icon class="icon-style" name="md-calendar"></ion-icon>\n            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY\'}}</ion-note>\n            -\n            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>\n            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'h:mm a\'}}</ion-note>\n        </ion-item>\n        <!-- <ion-item>\n            <ion-avatar item-start>\n                <img src="assets/imgs/working-icon.png">\n            </ion-avatar>\n            <h2>{{office.company}}</h2>\n            <p>{{office.name}}</p>\n        </ion-item>\n        <ion-item>\n            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>\n            FECHA DE SOLICITUD\n            <ion-note item-end *ngIf="authUser.level != 4">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY, h:mm:ss a\'}}</ion-note>\n        </ion-item> -->\n    </ion-list>\n\n    <ion-list no-lines>\n        <ion-list-header class="header-style">\n            Solicitado por\n        </ion-list-header>\n        <!-- <ion-item class="icon-style">\n            <ion-icon  ios="ios-person" md="md-person"></ion-icon>\n            {{user.first_name + \' \' + user.last_name}}\n        </ion-item> -->\n        <h2 class="header-style" style="text-align: center;">{{user.first_name}} {{user.last_name}}</h2>\n        <ion-item>\n            <ion-toggle color="custom" [(ngModel)]="viewRequest"></ion-toggle>\n            <ion-label class="icon-style">\n                Ver Detalles De La Solicitud\n            </ion-label>\n        </ion-item>\n    </ion-list>\n\n    <ion-card *ngIf="viewRequest">\n        <ion-card-content>\n            <p>{{request.comment}}</p>\n        </ion-card-content>\n\n        <ion-slides pager="true" *ngIf="request.photos && request.photos.length > 0">\n            <ion-slide *ngFor="let item of request.photos;">\n                <img src="{{item}}"/>\n            </ion-slide>\n        </ion-slides>\n    </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/maintenance-tracker/maintenance-tracker.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
-        __WEBPACK_IMPORTED_MODULE_2__providers_building__["a" /* BuildingProvider */],
-        __WEBPACK_IMPORTED_MODULE_3__providers_push_service__["a" /* PushServiceProvider */],
-        __WEBPACK_IMPORTED_MODULE_4__providers_user_service__["a" /* UserService */],
-        __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */],
-        __WEBPACK_IMPORTED_MODULE_6__ionic_native_email_composer__["a" /* EmailComposer */],
-        __WEBPACK_IMPORTED_MODULE_7__ionic_native_date_picker__["a" /* DatePicker */],
-        __WEBPACK_IMPORTED_MODULE_8__ionic_native_in_app_browser__["a" /* InAppBrowser */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_building__["a" /* BuildingProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_building__["a" /* BuildingProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__providers_push_service__["a" /* PushServiceProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_push_service__["a" /* PushServiceProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_4__providers_user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_user_service__["a" /* UserService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_email_composer__["a" /* EmailComposer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_email_composer__["a" /* EmailComposer */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_native_date_picker__["a" /* DatePicker */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_native_date_picker__["a" /* DatePicker */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_8__ionic_native_in_app_browser__["a" /* InAppBrowser */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__ionic_native_in_app_browser__["a" /* InAppBrowser */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */]) === "function" && _m || Object])
 ], MaintenanceTrackerPage);
 
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
 //# sourceMappingURL=maintenance-tracker.js.map
 
 /***/ }),
 
-/***/ 221:
+/***/ 223:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2291,8 +2227,8 @@ MaintenanceTrackerPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_user_service__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__technician_detail_technician_detail__ = __webpack_require__(423);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_push_service__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__technician_detail_technician_detail__ = __webpack_require__(424);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_push_service__ = __webpack_require__(124);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2428,7 +2364,7 @@ var TechnicianPage = (function () {
 }());
 TechnicianPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-technician',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/technician/technician.html"*/'<ion-header>\n\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n        </button>\n        <ion-title>Técnico</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-list style="margin-top: 20px;">\n        <ion-item-sliding *ngFor="let item of technicians1;" #slidingItem (click)="selectTech(item);">\n            <ion-item (click)="selectTech(item);">\n                <ion-avatar item-start>\n                    <img src="assets/imgs/building.jpg">\n                </ion-avatar>\n                <h2>{{item.first_name}} {{item.last_name}}</h2>\n                <p>Email: {{item.email}}</p>\n                <p>Phone: {{item.phone_number}}</p>\n            </ion-item>\n\n            <ion-item-options side="right">\n              <button ion-button (click)="edit(item, slidingItem)">\n                <ion-icon name="ios-create"></ion-icon>\n                Edit\n              </button>\n              <button ion-button color="danger" (click)="delete(item)">\n                <ion-icon name="ios-trash"></ion-icon>\n                Delete\n              </button>\n            </ion-item-options>\n        </ion-item-sliding>\n\n        <ion-item-sliding *ngFor="let item of technicians2;" #slidingItem (click)="selectTech(item);">\n            <ion-item >\n                <ion-avatar item-start>\n                    <img src="assets/imgs/building.jpg">\n                </ion-avatar>\n                <h2>{{item.first_name}} {{item.last_name}}</h2>\n                <p>Email: {{item.email}}</p>\n                <p>Phone: {{item.phone_number}}</p>\n            </ion-item>\n\n            <ion-item-options side="right">\n              <button ion-button (click)="edit(item, slidingItem)">\n                <ion-icon name="ios-create"></ion-icon>\n                Edit\n              </button>\n              <button ion-button color="danger" (click)="delete(item)">\n                <ion-icon name="ios-trash"></ion-icon>\n                Delete\n              </button>\n            </ion-item-options>\n        </ion-item-sliding>\n    </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/technician/technician.html"*/,
+        selector: 'page-technician',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/technician/technician.html"*/'<ion-header>\n\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n        </button>\n        <ion-title>Técnico</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-list style="margin-top: 20px;">\n        <ion-item-sliding *ngFor="let item of technicians1;" #slidingItem (click)="selectTech(item);">\n            <ion-item (click)="selectTech(item);">\n                <ion-avatar item-start>\n                    <img src="assets/imgs/building.jpg">\n                </ion-avatar>\n                <h2>{{item.first_name}} {{item.last_name}}</h2>\n                <p>Email: {{item.email}}</p>\n                <p>Phone: {{item.phone_number}}</p>\n            </ion-item>\n\n            <ion-item-options side="right">\n              <button ion-button (click)="edit(item, slidingItem)">\n                <ion-icon name="ios-create"></ion-icon>\n                Edit\n              </button>\n              <button ion-button color="danger" (click)="delete(item)">\n                <ion-icon name="ios-trash"></ion-icon>\n                Delete\n              </button>\n            </ion-item-options>\n        </ion-item-sliding>\n\n        <ion-item-sliding *ngFor="let item of technicians2;" #slidingItem (click)="selectTech(item);">\n            <ion-item >\n                <ion-avatar item-start>\n                    <img src="assets/imgs/building.jpg">\n                </ion-avatar>\n                <h2>{{item.first_name}} {{item.last_name}}</h2>\n                <p>Email: {{item.email}}</p>\n                <p>Phone: {{item.phone_number}}</p>\n            </ion-item>\n\n            <ion-item-options side="right">\n              <button ion-button (click)="edit(item, slidingItem)">\n                <ion-icon name="ios-create"></ion-icon>\n                Edit\n              </button>\n              <button ion-button color="danger" (click)="delete(item)">\n                <ion-icon name="ios-trash"></ion-icon>\n                Delete\n              </button>\n            </ion-item-options>\n        </ion-item-sliding>\n    </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/technician/technician.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_user_service__["a" /* UserService */],
         __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
@@ -2439,7 +2375,7 @@ TechnicianPage = __decorate([
 
 /***/ }),
 
-/***/ 247:
+/***/ 248:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -2452,7 +2388,7 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 247;
+webpackEmptyAsyncContext.id = 248;
 
 /***/ }),
 
@@ -2462,11 +2398,11 @@ webpackEmptyAsyncContext.id = 247;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__base_service__ = __webpack_require__(334);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__base_service__ = __webpack_require__(335);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs__ = __webpack_require__(193);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2726,7 +2662,7 @@ UserService = __decorate([
 
 /***/ }),
 
-/***/ 290:
+/***/ 291:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -2739,17 +2675,17 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 290;
+webpackEmptyAsyncContext.id = 291;
 
 /***/ }),
 
-/***/ 334:
+/***/ 335:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BaseService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2796,7 +2732,7 @@ BaseService = __decorate([
 
 /***/ }),
 
-/***/ 378:
+/***/ 379:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2806,7 +2742,7 @@ BaseService = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_building__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_user_service__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__create_office_create_office__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__create_office_create_office__ = __webpack_require__(204);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2893,7 +2829,7 @@ var BuildingProfilePage = (function () {
 }());
 BuildingProfilePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-building-profile',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/building-profile/building-profile.html"*/'<!--\n  Generated template for the BuildingProfilePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>{{building.name}}{{floorId ? \' - \' + floor.name : \'\'}}</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <h4>Lista de oficinas</h4>\n    <ion-list>\n        <ion-item-sliding *ngFor="let item of offices" #slidingItem>\n            <ion-item (click)="editOffice(item)">\n                <ion-avatar item-start>\n                    <img src="assets/imgs/working-icon.png">\n                </ion-avatar>\n                <h2>{{item.company}}</h2>\n                <div><ion-icon name="contact"></ion-icon><p>{{item.name}}</p></div>\n                <div><ion-icon name="ios-mail"></ion-icon><p>{{item.email}}</p></div>\n                <ion-icon name="ios-arrow-forward-outline" item-end></ion-icon>\n            </ion-item>\n            <ion-item-options>\n                <button ion-button color="primary" (click)="editOffice(item)">Edit</button>\n            </ion-item-options>\n        </ion-item-sliding>\n    </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/building-profile/building-profile.html"*/,
+        selector: 'page-building-profile',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/building-profile/building-profile.html"*/'<!--\n  Generated template for the BuildingProfilePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>{{building.name}}{{floorId ? \' - \' + floor.name : \'\'}}</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <h4>Lista de oficinas</h4>\n    <ion-list>\n        <ion-item-sliding *ngFor="let item of offices" #slidingItem>\n            <ion-item (click)="editOffice(item)">\n                <ion-avatar item-start>\n                    <img src="assets/imgs/working-icon.png">\n                </ion-avatar>\n                <h2>{{item.company}}</h2>\n                <div><ion-icon name="contact"></ion-icon><p>{{item.name}}</p></div>\n                <div><ion-icon name="ios-mail"></ion-icon><p>{{item.email}}</p></div>\n                <ion-icon name="ios-arrow-forward-outline" item-end></ion-icon>\n            </ion-item>\n            <ion-item-options>\n                <button ion-button color="primary" (click)="editOffice(item)">Edit</button>\n            </ion-item-options>\n        </ion-item-sliding>\n    </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/building-profile/building-profile.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_building__["a" /* BuildingProvider */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_3__providers_user_service__["a" /* UserService */]])
@@ -2903,7 +2839,7 @@ BuildingProfilePage = __decorate([
 
 /***/ }),
 
-/***/ 422:
+/***/ 423:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2936,7 +2872,7 @@ var PopupPage = (function () {
 }());
 PopupPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-popup',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/popup/popup.html"*/'<ion-content class="main-view">\n  <div class="overlay"></div>\n  <div class="modal_content">\n    <h2 class="header-content">Por favor comentenos por que rechazó la cotización.</h2>\n    <textarea class="textarea-style" [(ngModel)]="data.comment"></textarea>\n\n    <button ion-button block class="main-btn" style="margin-top:2vw;" (click)="sendNewTicket();">\n        Enviar\n    </button>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/popup/popup.html"*/
+        selector: 'page-popup',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/popup/popup.html"*/'<ion-content class="main-view">\n  <div class="overlay"></div>\n  <div class="modal_content">\n    <h2 class="header-content">Por favor comentenos por que rechazó la cotización.</h2>\n    <textarea class="textarea-style" [(ngModel)]="data.comment"></textarea>\n\n    <button ion-button block class="main-btn" style="margin-top:2vw;" (click)="sendNewTicket();">\n        Enviar\n    </button>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/popup/popup.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ViewController */]])
 ], PopupPage);
@@ -2945,7 +2881,7 @@ PopupPage = __decorate([
 
 /***/ }),
 
-/***/ 423:
+/***/ 424:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3029,7 +2965,7 @@ var TechnicianDetailPage = (function () {
 }());
 TechnicianDetailPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-technician-detail',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/technician-detail/technician-detail.html"*/'<ion-header>\n\n    <ion-navbar>\n        <!-- <button ion-button menuToggle>\n            <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n        </button> -->\n        <ion-title>Técnico</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n   <ion-list>\n    \n        <ion-item>\n            <ion-label fixed>Compañia</ion-label>\n            <ion-input type="text" [(ngModel)]="technician.company"></ion-input>\n        </ion-item>\n\n        <ion-item>\n            <ion-label fixed>Nombre</ion-label>\n            <ion-input type="text" [(ngModel)]="technician.first_name"></ion-input>\n        </ion-item>\n\n        <ion-item>\n            <ion-label fixed>Apellido</ion-label>\n            <ion-input type="text" [(ngModel)]="technician.last_name"></ion-input>\n        </ion-item>\n\n       \n        <ion-item>\n            <ion-label fixed>Telefono</ion-label>\n            <ion-input type="text" [(ngModel)]="technician.phone_number"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Email</ion-label>\n            <ion-input type="text" [(ngModel)]="technician.email"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Especialidad de Trabajo</ion-label>\n            <ion-input type="text" [(ngModel)]="technician.blood_type"></ion-input>\n        </ion-item>\n    </ion-list>\n\n    <button (click)="update()" ion-button class="main-btn">Guardar</button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/technician-detail/technician-detail.html"*/,
+        selector: 'page-technician-detail',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/technician-detail/technician-detail.html"*/'<ion-header>\n\n    <ion-navbar>\n        <!-- <button ion-button menuToggle>\n            <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n        </button> -->\n        <ion-title>Técnico</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n   <ion-list>\n    \n        <ion-item>\n            <ion-label fixed>Compañia</ion-label>\n            <ion-input type="text" [(ngModel)]="technician.company"></ion-input>\n        </ion-item>\n\n        <ion-item>\n            <ion-label fixed>Nombre</ion-label>\n            <ion-input type="text" [(ngModel)]="technician.first_name"></ion-input>\n        </ion-item>\n\n        <ion-item>\n            <ion-label fixed>Apellido</ion-label>\n            <ion-input type="text" [(ngModel)]="technician.last_name"></ion-input>\n        </ion-item>\n\n       \n        <ion-item>\n            <ion-label fixed>Telefono</ion-label>\n            <ion-input type="text" [(ngModel)]="technician.phone_number"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Email</ion-label>\n            <ion-input type="text" [(ngModel)]="technician.email"></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label fixed>Especialidad de Trabajo</ion-label>\n            <ion-input type="text" [(ngModel)]="technician.blood_type"></ion-input>\n        </ion-item>\n    </ion-list>\n\n    <button (click)="update()" ion-button class="main-btn">Guardar</button>\n\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/technician-detail/technician-detail.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_user_service__["a" /* UserService */],
         __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]])
@@ -3039,19 +2975,19 @@ TechnicianDetailPage = __decorate([
 
 /***/ }),
 
-/***/ 424:
+/***/ 425:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(115);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__signup_signup__ = __webpack_require__(425);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__signup_signup__ = __webpack_require__(426);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_user_service__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__maintenance_view_maintenance_view__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_onesignal__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_onesignal__ = __webpack_require__(125);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3191,7 +3127,7 @@ var LoginPage = (function () {
 }());
 LoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-login',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/login/login.html"*/'<!-- <ion-header>\n\n    <ion-navbar>\n        \n    </ion-navbar>\n\n</ion-header> -->\n\n\n<ion-content padding>\n\n    <ion-card style="margin-top: 30vw;">\n\n        <img src="assets/imgs/wtcb.jpg"/>\n\n        <ion-item>\n            <ion-label stacked>Email</ion-label>\n            <ion-input type="text" placeholder="correo@compania.com" [(ngModel)]="user.email"></ion-input>\n        </ion-item>\n\n        <ion-item>\n            <ion-label stacked>Contraseña</ion-label>\n            <ion-input type="password" placeholder="*******" [(ngModel)]="user.password"></ion-input>\n        </ion-item>\n        <div style="margin-bottom:20px;"></div>\n    </ion-card>\n\n    <button ion-button clear block class="main-btn" (click)="doLogin()">Entrar</button>\n\n    <button ion-button clear block (click)="signUp()">Crear una cuenta</button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/login/login.html"*/
+        selector: 'page-login',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/login/login.html"*/'<!-- <ion-header>\n\n    <ion-navbar>\n        \n    </ion-navbar>\n\n</ion-header> -->\n\n\n<ion-content padding>\n\n    <ion-card style="margin-top: 30vw;">\n\n        <img src="assets/imgs/wtcb.jpg"/>\n\n        <ion-item>\n            <ion-label stacked>Email</ion-label>\n            <ion-input type="text" placeholder="correo@compania.com" [(ngModel)]="user.email"></ion-input>\n        </ion-item>\n\n        <ion-item>\n            <ion-label stacked>Contraseña</ion-label>\n            <ion-input type="password" placeholder="*******" [(ngModel)]="user.password"></ion-input>\n        </ion-item>\n        <div style="margin-bottom:20px;"></div>\n    </ion-card>\n\n    <button ion-button clear block class="main-btn" (click)="doLogin()">Entrar</button>\n\n    <button ion-button clear block (click)="signUp()">Crear una cuenta</button>\n\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/login/login.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
         __WEBPACK_IMPORTED_MODULE_4__providers_user_service__["a" /* UserService */], __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* Events */], __WEBPACK_IMPORTED_MODULE_7__ionic_native_onesignal__["a" /* OneSignal */]])
@@ -3201,7 +3137,7 @@ LoginPage = __decorate([
 
 /***/ }),
 
-/***/ 425:
+/***/ 426:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3209,7 +3145,7 @@ LoginPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__maintenance_view_maintenance_view__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(117);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_user_service__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(27);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -3327,7 +3263,7 @@ var SignupPage = (function () {
 }());
 SignupPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-signup',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/signup/signup.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-title>Crear una cuenta</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-card>\n\n        <img src="assets/imgs/wtcb.jpg"/>\n\n        <!-- <ion-item>\n            <ion-input type="text" placeholder="Username" [(ngModel)]="user.username"></ion-input>\n        </ion-item> -->\n\n        <ion-item>\n            <ion-input type="email" placeholder="Email" [(ngModel)]="user.email"></ion-input>\n        </ion-item>\n\n        <ion-item>\n            <ion-input type="password" placeholder="Contraseña" [(ngModel)]="user.password"></ion-input>\n        </ion-item>\n\n        <ion-item>\n            <ion-select [(ngModel)]="user.level" interface="popover" placeholder="Access Level" style="width: 90%;">\n                <ion-option value="3" selected>Cliente</ion-option>\n                <ion-option value="3.2">Técnico</ion-option>\n                <ion-option value="7">Administrador</ion-option>\n                \n                <!-- <ion-option value="3">Oficina Arrendatario (Owner)</ion-option>\n                <ion-option value="5">Vendor / Técnico</ion-option> -->\n            </ion-select>\n        </ion-item>\n\n    </ion-card>\n\n    <button ion-button class="main-btn" (click)="doSignUp()">Regístrese</button>\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/signup/signup.html"*/
+        selector: 'page-signup',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/signup/signup.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-title>Crear una cuenta</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-card>\n\n        <img src="assets/imgs/wtcb.jpg"/>\n\n        <!-- <ion-item>\n            <ion-input type="text" placeholder="Username" [(ngModel)]="user.username"></ion-input>\n        </ion-item> -->\n\n        <ion-item>\n            <ion-input type="email" placeholder="Email" [(ngModel)]="user.email"></ion-input>\n        </ion-item>\n\n        <ion-item>\n            <ion-input type="password" placeholder="Contraseña" [(ngModel)]="user.password"></ion-input>\n        </ion-item>\n\n        <ion-item>\n            <ion-select [(ngModel)]="user.level" interface="popover" placeholder="Access Level" style="width: 90%;">\n                <ion-option value="3" selected>Cliente</ion-option>\n                <ion-option value="3.2">Técnico</ion-option>\n                <ion-option value="7">Administrador</ion-option>\n                \n                <!-- <ion-option value="3">Oficina Arrendatario (Owner)</ion-option>\n                <ion-option value="5">Vendor / Técnico</ion-option> -->\n            </ion-select>\n        </ion-item>\n\n    </ion-card>\n\n    <button ion-button class="main-btn" (click)="doSignUp()">Regístrese</button>\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/signup/signup.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
         __WEBPACK_IMPORTED_MODULE_4__providers_user_service__["a" /* UserService */], __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* Events */]])
@@ -3337,7 +3273,7 @@ SignupPage = __decorate([
 
 /***/ }),
 
-/***/ 426:
+/***/ 427:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3346,7 +3282,7 @@ SignupPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_user_service__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_chart_js__ = __webpack_require__(427);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_chart_js__ = __webpack_require__(428);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_chart_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_chart_js__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3637,7 +3573,7 @@ __decorate([
 ], AnalyticsPage.prototype, "doughnutCanvas", void 0);
 AnalyticsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-analytics',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/analytics/analytics.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n    </button>\n    <ion-title>Indicadores de Gestión</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n    <div class="renter">\n        <ion-list>\n            <ion-item>\n                <ion-label>Desde: </ion-label>\n                <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="YYYY/MMM/DD" [(ngModel)]="fromDate"></ion-datetime>\n            </ion-item>\n    \n            <ion-item>\n                <ion-label>Hasta: </ion-label>\n                <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="YYYY/MMM/DD" [(ngModel)]="toDate"></ion-datetime>\n            </ion-item>\n    \n            <ion-item>\n                <ion-label>Clientes: </ion-label>\n                <ion-select (ionChange)="onChange($event)">\n                    <ion-option *ngFor="let star of stars; let i = index" value="{{star.email}}">\n                        {{star.email}}\n                    </ion-option> \n                </ion-select>\n            </ion-item>\n        </ion-list>\n\n        <button class="main-btn gobtn" ion-button block (click)="go();">Go</button>\n    </div>\n\n    \n\n    <div class="review_list">\n        <h3>Evaluaciones de desempeño</h3>\n        <!-- Star 5 -->\n        <ion-list>\n            <ion-item (click)="itemShow($event, 0)">\n                <ion-avatar item-start>\n                    <img src="assets/imgs/star-5.png">\n                </ion-avatar>\n                <h2>5 Estrella</h2>\n                <p item-end>{{five_stars.length}}</p>\n            </ion-item>\n            <div *ngIf="star_flags[0]" class="review_name">\n                <ion-item [hidden]="five_stars.length == 0">\n                    <ion-icon name="md-thumbs-up" item-start></ion-icon>\n                        {{five_stars.join(\', \')}}\n                </ion-item>\n            </div>\n        </ion-list>\n\n        <!-- Star 4 -->\n\n        <ion-list>\n            <ion-item (click)="itemShow($event, 1)">\n                <ion-avatar item-start>\n                    <img src="assets/imgs/star-4.png">\n                </ion-avatar>\n                <h2>4 Estrella</h2>\n                <p item-end>{{four_stars.length}}</p>\n            </ion-item>\n            <div *ngIf="star_flags[1]" class="review_name">\n                <ion-item [hidden]="four_stars.length == 0">\n                    <ion-icon name="ios-thumbs-up" item-start></ion-icon>\n                    {{four_stars.join(\', \')}}\n                </ion-item>\n            </div>\n        </ion-list>\n\n        <!-- Star 3 -->\n\n        <ion-list>\n            <ion-item (click)="itemShow($event, 2)">\n                <ion-avatar item-start>\n                    <img src="assets/imgs/star-3.png">\n                </ion-avatar>\n                <h2>3 Estrella</h2>\n                <p item-end>{{three_stars.length}}</p>\n            </ion-item>\n            <div *ngIf="star_flags[2]" class="review_name">\n                <ion-item [hidden]="three_stars.length == 0">\n                    <ion-icon name="ios-thumbs-up-outline" item-start></ion-icon>\n                    {{three_stars.join(\', \')}}\n                </ion-item>\n            </div>\n        </ion-list>\n\n        <!-- Star 2 -->\n\n        <ion-list>\n            <ion-item (click)="itemShow($event, 3)">\n                <ion-avatar item-start>\n                    <img src="assets/imgs/star-2.png">\n                </ion-avatar>\n                <h2>2 Estrella</h2>\n                <p item-end>{{two_stars.length}}</p>\n            </ion-item>\n            <div *ngIf="star_flags[3]" class="review_name">\n                <ion-item [hidden]="two_stars.length == 0">\n                    <ion-icon name="ios-thumbs-down-outline" item-start></ion-icon>\n                    {{two_stars.join(\', \')}}\n                </ion-item>\n            </div>\n        </ion-list>\n\n        <!-- Star 1 -->\n\n        <ion-list>\n            <ion-item (click)="itemShow($event, 4)">\n                <ion-avatar item-start>\n                    <img src="assets/imgs/star-1.png">\n                </ion-avatar>\n                <h2>1 Estrella</h2>\n                <p item-end>{{one_star.length}}</p>\n            </ion-item>\n            <div *ngIf="star_flags[4]" class="review_name">\n                <ion-item [hidden]="one_star.length == 0">\n                    <ion-icon name="md-thumbs-down" item-start></ion-icon>\n                    {{one_star.join(\', \')}}\n                </ion-item>\n            </div>\n        </ion-list>\n\n    </div>\n\n    \n    <div class="avg_list">\n        <h3>Promedio tiempos de gestion</h3>\n        <ion-list>\n            <ion-item>\n                <p class="name" item-start>Tiempo de pago</p>\n                <p class="timer" item-end>{{avg_time4}}</p>\n            </ion-item>\n        </ion-list>\n\n        <ion-list>\n            <ion-item>\n                <p class="name" item-start>Tiempo de finalizacion</p>\n                <p class="timer" item-end>{{avg_time3}}</p>\n            </ion-item>\n        </ion-list>\n\n        <ion-list>\n            <ion-item>\n                <p class="name" item-start>Tiempo de para inicio de trabajo</p>\n                <p class="timer" item-end>{{avg_time2}}</p>\n            </ion-item>\n        </ion-list>\n\n        <ion-list>\n            <ion-item>\n                <p class="name" item-start>Tiempo de respuesta contacto inicial</p>\n                <p class="timer" item-end>{{avg_time1}}</p>\n            </ion-item>\n        </ion-list>\n    </div>\n\n	<ion-card>\n      <ion-card-header>\n       	Resumen solicitudes\n      </ion-card-header>\n      <ion-card-content>\n        <canvas #doughnutCanvas></canvas>\n      </ion-card-content>\n    </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/analytics/analytics.html"*/
+        selector: 'page-analytics',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/analytics/analytics.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n    </button>\n    <ion-title>Indicadores de Gestión</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n    <div class="renter">\n        <ion-list>\n            <ion-item>\n                <ion-label>Desde: </ion-label>\n                <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="YYYY/MMM/DD" [(ngModel)]="fromDate"></ion-datetime>\n            </ion-item>\n    \n            <ion-item>\n                <ion-label>Hasta: </ion-label>\n                <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="YYYY/MMM/DD" [(ngModel)]="toDate"></ion-datetime>\n            </ion-item>\n    \n            <ion-item>\n                <ion-label>Clientes: </ion-label>\n                <ion-select (ionChange)="onChange($event)">\n                    <ion-option *ngFor="let star of stars; let i = index" value="{{star.email}}">\n                        {{star.email}}\n                    </ion-option> \n                </ion-select>\n            </ion-item>\n        </ion-list>\n\n        <button class="main-btn gobtn" ion-button block (click)="go();">Seleccionar</button>\n    </div>\n\n    \n\n    <div class="review_list">\n        <h3>Evaluaciones de desempeño</h3>\n        <!-- Star 5 -->\n        <ion-list>\n            <ion-item (click)="itemShow($event, 0)">\n                <ion-avatar item-start>\n                    <img src="assets/imgs/star-5.png">\n                </ion-avatar>\n                <h2>5 Estrella</h2>\n                <p item-end>{{five_stars.length}}</p>\n            </ion-item>\n            <div *ngIf="star_flags[0]" class="review_name">\n                <ion-item [hidden]="five_stars.length == 0">\n                    <ion-icon name="md-thumbs-up" item-start></ion-icon>\n                        {{five_stars.join(\', \')}}\n                </ion-item>\n            </div>\n        </ion-list>\n\n        <!-- Star 4 -->\n\n        <ion-list>\n            <ion-item (click)="itemShow($event, 1)">\n                <ion-avatar item-start>\n                    <img src="assets/imgs/star-4.png">\n                </ion-avatar>\n                <h2>4 Estrella</h2>\n                <p item-end>{{four_stars.length}}</p>\n            </ion-item>\n            <div *ngIf="star_flags[1]" class="review_name">\n                <ion-item [hidden]="four_stars.length == 0">\n                    <ion-icon name="ios-thumbs-up" item-start></ion-icon>\n                    {{four_stars.join(\', \')}}\n                </ion-item>\n            </div>\n        </ion-list>\n\n        <!-- Star 3 -->\n\n        <ion-list>\n            <ion-item (click)="itemShow($event, 2)">\n                <ion-avatar item-start>\n                    <img src="assets/imgs/star-3.png">\n                </ion-avatar>\n                <h2>3 Estrella</h2>\n                <p item-end>{{three_stars.length}}</p>\n            </ion-item>\n            <div *ngIf="star_flags[2]" class="review_name">\n                <ion-item [hidden]="three_stars.length == 0">\n                    <ion-icon name="ios-thumbs-up-outline" item-start></ion-icon>\n                    {{three_stars.join(\', \')}}\n                </ion-item>\n            </div>\n        </ion-list>\n\n        <!-- Star 2 -->\n\n        <ion-list>\n            <ion-item (click)="itemShow($event, 3)">\n                <ion-avatar item-start>\n                    <img src="assets/imgs/star-2.png">\n                </ion-avatar>\n                <h2>2 Estrella</h2>\n                <p item-end>{{two_stars.length}}</p>\n            </ion-item>\n            <div *ngIf="star_flags[3]" class="review_name">\n                <ion-item [hidden]="two_stars.length == 0">\n                    <ion-icon name="ios-thumbs-down-outline" item-start></ion-icon>\n                    {{two_stars.join(\', \')}}\n                </ion-item>\n            </div>\n        </ion-list>\n\n        <!-- Star 1 -->\n\n        <ion-list>\n            <ion-item (click)="itemShow($event, 4)">\n                <ion-avatar item-start>\n                    <img src="assets/imgs/star-1.png">\n                </ion-avatar>\n                <h2>1 Estrella</h2>\n                <p item-end>{{one_star.length}}</p>\n            </ion-item>\n            <div *ngIf="star_flags[4]" class="review_name">\n                <ion-item [hidden]="one_star.length == 0">\n                    <ion-icon name="md-thumbs-down" item-start></ion-icon>\n                    {{one_star.join(\', \')}}\n                </ion-item>\n            </div>\n        </ion-list>\n\n    </div>\n\n    \n    <div class="avg_list">\n        <h3>Promedio tiempos de gestion</h3>\n        <ion-list>\n            <ion-item>\n                <p class="name" item-start>Tiempo de pago</p>\n                <p class="timer" item-end>{{avg_time4}}</p>\n            </ion-item>\n        </ion-list>\n\n        <ion-list>\n            <ion-item>\n                <p class="name" item-start>Tiempo de finalizacion</p>\n                <p class="timer" item-end>{{avg_time3}}</p>\n            </ion-item>\n        </ion-list>\n\n        <ion-list>\n            <ion-item>\n                <p class="name" item-start>Tiempo de para inicio de trabajo</p>\n                <p class="timer" item-end>{{avg_time2}}</p>\n            </ion-item>\n        </ion-list>\n\n        <ion-list>\n            <ion-item>\n                <p class="name" item-start>Tiempo de respuesta contacto inicial</p>\n                <p class="timer" item-end>{{avg_time1}}</p>\n            </ion-item>\n        </ion-list>\n    </div>\n\n	<ion-card>\n      <ion-card-header>\n       	Resumen solicitudes\n      </ion-card-header>\n      <ion-card-content>\n        <canvas #doughnutCanvas></canvas>\n      </ion-card-content>\n    </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/analytics/analytics.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */],
@@ -3658,7 +3594,7 @@ AnalyticsPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BuildingProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -3865,13 +3801,13 @@ BuildingProvider = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MaintenanceViewPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__otrs_request_otrs_request__ = __webpack_require__(201);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__maintenance_tracker_maintenance_tracker__ = __webpack_require__(220);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__otrs_request_otrs_request__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__maintenance_tracker_maintenance_tracker__ = __webpack_require__(222);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_user_service__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__notification_notification__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__profile_profile__ = __webpack_require__(124);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__technician_technician__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__notification_notification__ = __webpack_require__(140);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__profile_profile__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__technician_technician__ = __webpack_require__(223);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3898,6 +3834,7 @@ var MaintenanceViewPage = (function () {
         this.loadingCtrl = loadingCtrl;
         this.alertCtrl = alertCtrl;
         this.events = events;
+        this.temp_openedRequests = [];
         this.user = {
             level: 4
         };
@@ -3972,6 +3909,19 @@ var MaintenanceViewPage = (function () {
     MaintenanceViewPage.prototype.createNewRequest = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__otrs_request_otrs_request__["a" /* OtrsRequestPage */]);
     };
+    MaintenanceViewPage.prototype.onInput = function (ev) {
+        var val = ev.target.value;
+        if (val && val.trim() !== '') {
+            this.openedRequests = this.temp_openedRequests.filter(function (item) {
+                return (item.officeName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            });
+        }
+        else {
+            this.openedRequests = this.temp_openedRequests;
+        }
+    };
+    MaintenanceViewPage.prototype.onCancel = function ($event) {
+    };
     MaintenanceViewPage.prototype.loadRequestByOffice = function () {
         var _this = this;
         this.requests = [];
@@ -3991,6 +3941,7 @@ var MaintenanceViewPage = (function () {
                 }
             }
             console.log("openedRequests:", _this.officeKey, _this.openedRequests);
+            _this.temp_openedRequests = _this.openedRequests;
         }, function (data) {
             loading.dismiss();
         });
@@ -4011,9 +3962,9 @@ var MaintenanceViewPage = (function () {
                 }
                 else {
                     _this.openedRequests.push(data[i]);
-                    console.log(_this.openedRequests);
                 }
             }
+            _this.temp_openedRequests = _this.openedRequests;
         }, function (data) {
             loading.dismiss();
         });
@@ -4084,23 +4035,23 @@ var MaintenanceViewPage = (function () {
 }());
 MaintenanceViewPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-maintenance-view',template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/pages/maintenance-view/maintenance-view.html"*/'<!--\n  Generated template for the MaintenanceViewPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n        </button>\n        <ion-title>SOLICITUDES DE MANTENIMIENTO</ion-title>\n\n        <ion-buttons end>\n          <button ion-button icon-only style="color:white;" (click)="gotoNotification();">\n                <ion-icon name="md-notifications"></ion-icon>\n          </button>\n          <div class="badge" *ngIf="count>0"></div>\n        </ion-buttons>\n    </ion-navbar>\n\n\n</ion-header>\n\n\n<ion-content class="main-bg">\n    <button class="main-btn" ion-button block (click)="createNewRequest()" *ngIf="user.level==\'3\'">Enviar Nueva Solicitud</button>\n    <button class="main-btn" ion-button block (click)="gotoMyProfile()" *ngIf="user.level==\'3.1\' || user.level==\'3.2\'">Mi Perfil</button>\n    <ion-list style="margin-top: 20px;" *ngIf="openedRequests.length > 0">\n\n        <ion-list-header class="header-style">\n            SOLICITUDES ABIERTAS\n        </ion-list-header>\n\n        <div *ngIf="user.level == \'7\'">\n            <ion-item-sliding *ngFor="let item of openedRequests">\n                <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{\'row-content-bold\' : item.opened7 == false}">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id" maxlength="10">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                </ion-item>\n\n                <ion-item-options side="right">\n                  <button ion-button color="secondary" (click)="assign(item)">\n                    <ion-icon name="ios-construct"></ion-icon>\n                    Tech\n                  </button>\n                  <button ion-button (click)="edit(item)">\n                    <ion-icon name="ios-create"></ion-icon>\n                    Edit\n                  </button>\n                  <button ion-button color="danger" (click)="delete(item)">\n                    <ion-icon name="ios-trash"></ion-icon>\n                    Delete\n                  </button>\n                </ion-item-options>\n            </ion-item-sliding>\n        </div>\n\n        <div *ngIf="user.level == \'3.1\'">\n            <ion-item-sliding *ngFor="let item of openedRequests">\n                <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{\'row-content-bold\' : item.opened3_1 == false}">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                </ion-item>\n            </ion-item-sliding>\n        </div>\n\n        <div *ngIf="user.level == \'3.2\'">\n            <ion-item-sliding *ngFor="let item of openedRequests">\n                <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{\'row-content-bold\' : item.opened3_2 == false}">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                </ion-item>\n            </ion-item-sliding>\n        </div>\n\n        <div *ngIf="user.level == 3">\n            <ion-item-sliding *ngFor="let item of openedRequests">\n                <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{\'row-content-bold\' : item.opened3 == false}">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                </ion-item>\n            </ion-item-sliding>\n        </div>\n    </ion-list>\n\n    <ion-list style="margin-top: 20px;" *ngIf="closedRequests.length > 0">\n        <ion-list-header class="header-style">\n            SOLICITUDES CERRADAS\n        </ion-list-header>\n        <div *ngIf="user.level == \'7\'">\n            <ion-item-sliding *ngFor="let item of closedRequests">\n                <ion-item  (click)="viewRequest(item)" class="row row-content">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                </ion-item>\n\n                <ion-item-options side="right">\n                  <button ion-button color="danger" (click)="delete(item)">\n                    <ion-icon name="ios-trash"></ion-icon>\n                    Delete\n                  </button>\n                </ion-item-options>\n            </ion-item-sliding>\n        </div>\n\n        <div *ngIf="user.level != \'7\'">\n            <ion-item-sliding *ngFor="let item of closedRequests">\n                <ion-item  (click)="viewRequest(item)" class="row row-content">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                    \n                    <!-- <div class="col width-30">{{item.officeKey}}</div> -->\n                </ion-item>\n            </ion-item-sliding>\n        </div>\n    </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/pages/maintenance-view/maintenance-view.html"*/
+        selector: 'page-maintenance-view',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/maintenance-view/maintenance-view.html"*/'<!--\n  Generated template for the MaintenanceViewPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n        </button>\n        <ion-title>SOLICITUDES DE MANTENIMIENTO</ion-title>\n\n        <ion-buttons end>\n          <button ion-button icon-only style="color:white;" (click)="gotoNotification();">\n                <ion-icon name="md-notifications"></ion-icon>\n          </button>\n          <div class="badge" *ngIf="count>0"></div>\n        </ion-buttons>\n    </ion-navbar>\n\n\n</ion-header>\n\n\n<ion-content class="main-bg">\n\n    <button class="main-btn" ion-button block (click)="createNewRequest()" *ngIf="user.level==\'3\'">Enviar Nueva Solicitud</button>\n    <button class="main-btn" ion-button block (click)="gotoMyProfile()" *ngIf="user.level==\'3.1\' || user.level==\'3.2\'">Mi Perfil</button>\n\n    <ion-searchbar [(ngModel)]="myInput" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">\n   </ion-searchbar>\n\n    <ion-list style="margin-top: 20px;" *ngIf="openedRequests.length > 0">\n\n        <ion-list-header class="header-style">\n            SOLICITUDES ABIERTAS\n        </ion-list-header>\n\n        <div *ngIf="user.level == \'7\'">\n            <ion-item-sliding *ngFor="let item of openedRequests">\n                <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{\'row-content-bold\' : item.opened7 == false}">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id" maxlength="10">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                </ion-item>\n\n                <ion-item-options side="right">\n                  <button ion-button color="secondary" (click)="assign(item)">\n                    <ion-icon name="ios-construct"></ion-icon>\n                    Tech\n                  </button>\n                  <button ion-button (click)="edit(item)">\n                    <ion-icon name="ios-create"></ion-icon>\n                    Edit\n                  </button>\n                  <button ion-button color="danger" (click)="delete(item)">\n                    <ion-icon name="ios-trash"></ion-icon>\n                    Delete\n                  </button>\n                </ion-item-options>\n            </ion-item-sliding>\n        </div>\n\n        <div *ngIf="user.level == \'3.1\'">\n            <ion-item-sliding *ngFor="let item of openedRequests">\n                <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{\'row-content-bold\' : item.opened3_1 == false}">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                </ion-item>\n            </ion-item-sliding>\n        </div>\n\n        <div *ngIf="user.level == \'3.2\'">\n            <ion-item-sliding *ngFor="let item of openedRequests">\n                <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{\'row-content-bold\' : item.opened3_2 == false}">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                </ion-item>\n            </ion-item-sliding>\n        </div>\n\n        <div *ngIf="user.level == 3">\n            <ion-item-sliding *ngFor="let item of openedRequests">\n                <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{\'row-content-bold\' : item.opened3 == false}">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                </ion-item>\n            </ion-item-sliding>\n        </div>\n    </ion-list>\n\n    <ion-list style="margin-top: 20px;" *ngIf="closedRequests.length > 0">\n        <ion-list-header class="header-style">\n            SOLICITUDES CERRADAS\n        </ion-list-header>\n        <div *ngIf="user.level == \'7\'">\n            <ion-item-sliding *ngFor="let item of closedRequests">\n                <ion-item  (click)="viewRequest(item)" class="row row-content">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                </ion-item>\n\n                <ion-item-options side="right">\n                  <button ion-button color="danger" (click)="delete(item)">\n                    <ion-icon name="ios-trash"></ion-icon>\n                    Delete\n                  </button>\n                </ion-item-options>\n            </ion-item-sliding>\n        </div>\n\n        <div *ngIf="user.level != \'7\'">\n            <ion-item-sliding *ngFor="let item of closedRequests">\n                <ion-item  (click)="viewRequest(item)" class="row row-content">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                    \n                    <!-- <div class="col width-30">{{item.officeKey}}</div> -->\n                </ion-item>\n            </ion-item-sliding>\n        </div>\n    </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/maintenance-view/maintenance-view.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_5__providers_user_service__["a" /* UserService */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* Events */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__providers_user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_user_service__["a" /* UserService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* Events */]) === "function" && _f || Object])
 ], MaintenanceViewPage);
 
+var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=maintenance-view.js.map
 
 /***/ }),
 
-/***/ 733:
+/***/ 737:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(734);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(738);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(738);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(742);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -4108,7 +4059,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 738:
+/***/ 742:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4117,44 +4068,44 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(775);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(115);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_list_list__ = __webpack_require__(1300);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_login_login__ = __webpack_require__(424);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_signup_signup__ = __webpack_require__(425);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(779);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_list_list__ = __webpack_require__(1304);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_login_login__ = __webpack_require__(425);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_signup_signup__ = __webpack_require__(426);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_maintenance_view_maintenance_view__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_maintenance_tracker_maintenance_tracker__ = __webpack_require__(220);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_otrs_request_otrs_request__ = __webpack_require__(201);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_building_list_building_list__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_create_office_create_office__ = __webpack_require__(200);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_building_profile_building_profile__ = __webpack_require__(378);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_notification_notification__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_analytics_analytics__ = __webpack_require__(426);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_popup_popup__ = __webpack_require__(422);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_profile_profile__ = __webpack_require__(124);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_technician_technician__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_technician_detail_technician_detail__ = __webpack_require__(423);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_maintenance_tracker_maintenance_tracker__ = __webpack_require__(222);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_otrs_request_otrs_request__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_building_list_building_list__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_create_office_create_office__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_building_profile_building_profile__ = __webpack_require__(379);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_notification_notification__ = __webpack_require__(140);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_analytics_analytics__ = __webpack_require__(427);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_popup_popup__ = __webpack_require__(423);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_profile_profile__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_technician_technician__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_technician_detail_technician_detail__ = __webpack_require__(424);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_user_service__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__providers_base_service__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__providers_base_service__ = __webpack_require__(335);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__providers_building__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__providers_push_service__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__providers_push_service__ = __webpack_require__(124);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_storage__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26_angular2_text_mask__ = __webpack_require__(1301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26_angular2_text_mask__ = __webpack_require__(1305);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26_angular2_text_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_26_angular2_text_mask__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__ionic_native_status_bar__ = __webpack_require__(330);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__ionic_native_splash_screen__ = __webpack_require__(333);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__ionic_native_camera__ = __webpack_require__(379);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__ionic_cloud_angular__ = __webpack_require__(552);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__ionic_native_email_composer__ = __webpack_require__(419);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__ionic_native_date_picker__ = __webpack_require__(420);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__ionic_native_in_app_browser__ = __webpack_require__(421);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__ionic_native_badge__ = __webpack_require__(717);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35_angular2_moment__ = __webpack_require__(1302);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__ionic_native_status_bar__ = __webpack_require__(331);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__ionic_native_splash_screen__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__ionic_native_camera__ = __webpack_require__(380);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__ionic_cloud_angular__ = __webpack_require__(556);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__ionic_native_email_composer__ = __webpack_require__(420);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__ionic_native_date_picker__ = __webpack_require__(421);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__ionic_native_in_app_browser__ = __webpack_require__(422);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__ionic_native_badge__ = __webpack_require__(721);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35_angular2_moment__ = __webpack_require__(1306);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35_angular2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_35_angular2_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36_ionic2_rating__ = __webpack_require__(1304);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__ionic_native_onesignal__ = __webpack_require__(123);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38_ng2_charts__ = __webpack_require__(1306);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36_ionic2_rating__ = __webpack_require__(1308);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__ionic_native_onesignal__ = __webpack_require__(125);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38_ng2_charts__ = __webpack_require__(1310);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_38_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_38_ng2_charts__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4309,27 +4260,27 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 775:
+/***/ 779:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(330);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(333);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(115);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_technician_technician__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_login_login__ = __webpack_require__(424);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(331);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_technician_technician__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_login_login__ = __webpack_require__(425);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_maintenance_view_maintenance_view__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_building_list_building_list__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_notification_notification__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_analytics_analytics__ = __webpack_require__(426);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_profile_profile__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_building_list_building_list__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_notification_notification__ = __webpack_require__(140);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_analytics_analytics__ = __webpack_require__(427);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_profile_profile__ = __webpack_require__(126);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_storage__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_cloud_angular__ = __webpack_require__(552);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_badge__ = __webpack_require__(717);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_onesignal__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_cloud_angular__ = __webpack_require__(556);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_badge__ = __webpack_require__(721);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_onesignal__ = __webpack_require__(125);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_user_service__ = __webpack_require__(26);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4553,7 +4504,7 @@ __decorate([
     __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */])
 ], MyApp.prototype, "nav", void 0);
 MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"/Users/dodobal-PC/wtcb-new/src/app/app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menú</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list no-lines>\n      <ion-item menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" style="color: rgb(70, 95, 110);">\n        <ion-icon name="{{p.icon}}"></ion-icon>\n        {{p.title}}\n        <div item-end *ngIf="p.title==\'Notificaciones\' && count>0" class="notification-count">{{count}}</div>\n      </ion-item>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/Users/dodobal-PC/wtcb-new/src/app/app.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/app/app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menú</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list no-lines>\n      <ion-item menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" style="color: rgb(70, 95, 110);">\n        <ion-icon name="{{p.icon}}"></ion-icon>\n        {{p.title}}\n        <div item-end *ngIf="p.title==\'Notificaciones\' && count>0" class="notification-count">{{count}}</div>\n      </ion-item>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/app/app.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
         __WEBPACK_IMPORTED_MODULE_12__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_13__ionic_cloud_angular__["b" /* Push */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* Events */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */], __WEBPACK_IMPORTED_MODULE_14__ionic_native_badge__["a" /* Badge */],
@@ -4564,5 +4515,5 @@ MyApp = __decorate([
 
 /***/ })
 
-},[733]);
+},[737]);
 //# sourceMappingURL=main.js.map

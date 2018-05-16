@@ -19,6 +19,7 @@ export class MaintenanceViewPage {
   officeKey: any;
   requests: any;
   openedRequests: any;
+  temp_openedRequests: any = [];
   closedRequests: any;
   token: any;
   count: any;
@@ -111,6 +112,23 @@ export class MaintenanceViewPage {
       this.navCtrl.push(OtrsRequestPage);
   }
 
+  onInput(ev: any) {
+    let val = ev.target.value;
+   
+    if (val && val.trim() !== '') {
+      this.openedRequests = this.temp_openedRequests.filter(function(item) {
+        return (item.officeName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      });
+    }
+    else {
+      this.openedRequests = this.temp_openedRequests;
+    }
+  }
+
+  onCancel($event) {
+   
+  }
+
   loadRequestByOffice() {
         
         this.requests = [];
@@ -130,7 +148,8 @@ export class MaintenanceViewPage {
                   this.openedRequests.push(data[i]);
                 }
               }
-              console.log("openedRequests:", this.officeKey, this.openedRequests)
+              console.log("openedRequests:", this.officeKey, this.openedRequests);
+              this.temp_openedRequests = this.openedRequests;
             },
             (data) => {
               loading.dismiss();
@@ -154,9 +173,9 @@ export class MaintenanceViewPage {
                   this.closedRequests.push(data[i]);
                 }else {
                   this.openedRequests.push(data[i]);
-                  console.log(this.openedRequests);
                 }
               }
+              this.temp_openedRequests = this.openedRequests;
             },
             (data) => {
               loading.dismiss();
