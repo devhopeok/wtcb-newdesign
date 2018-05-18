@@ -40,6 +40,7 @@
 
         <div *ngIf="user.level == '7'">
             <ion-item-sliding *ngFor="let item of openedRequests">
+                <ion-item class="subject-item" *ngIf="item.subject">ASUNTO: {{item.subject}}</ion-item>
                 <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{'row-content-bold' : item.opened7 == false}">
                     <div class="col width-10">
                         <img src="assets/imgs/working-icon.png" />
@@ -77,6 +78,7 @@
 
         <div *ngIf="user.level == '3.1'">
             <ion-item-sliding *ngFor="let item of openedRequests">
+                <ion-item class="subject-item" *ngIf="item.subject">ASUNTO: {{item.subject}}</ion-item>
                 <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{'row-content-bold' : item.opened3_1 == false}">
                     <div class="col width-10">
                         <img src="assets/imgs/working-icon.png" />
@@ -99,6 +101,7 @@
 
         <div *ngIf="user.level == '3.2'">
             <ion-item-sliding *ngFor="let item of openedRequests">
+                <ion-item class="subject-item" *ngIf="item.subject">ASUNTO: {{item.subject}}</ion-item>
                 <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{'row-content-bold' : item.opened3_2 == false}">
                     <div class="col width-10">
                         <img src="assets/imgs/working-icon.png" />
@@ -121,6 +124,7 @@
 
         <div *ngIf="user.level == 3">
             <ion-item-sliding *ngFor="let item of openedRequests">
+                <ion-item class="subject-item" *ngIf="item.subject">ASUNTO: {{item.subject}}</ion-item>
                 <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{'row-content-bold' : item.opened3 == false}">
                     <div class="col width-10">
                         <img src="assets/imgs/working-icon.png" />
@@ -148,6 +152,7 @@
         </ion-list-header>
         <div *ngIf="user.level == '7'">
             <ion-item-sliding *ngFor="let item of closedRequests">
+                <ion-item class="subject-item" *ngIf="item.subject">ASUNTO: {{item.subject}}</ion-item>
                 <ion-item  (click)="viewRequest(item)" class="row row-content">
                     <div class="col width-10">
                         <img src="assets/imgs/working-icon.png" />
@@ -177,6 +182,7 @@
 
         <div *ngIf="user.level != '7'">
             <ion-item-sliding *ngFor="let item of closedRequests">
+                <ion-item class="subject-item" *ngIf="item.subject">ASUNTO: {{item.subject}}</ion-item>
                 <ion-item  (click)="viewRequest(item)" class="row row-content">
                     <div class="col width-10">
                         <img src="assets/imgs/working-icon.png" />

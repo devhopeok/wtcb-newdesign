@@ -31,6 +31,7 @@ export class OtrsRequestPage {
     otrsRequest = {
             _id: '',
             comment: '',
+            subject: '',
             is_urgent: true,
             photos: [],
             step: 1,

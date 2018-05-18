@@ -116,4 +116,22 @@ page-maintenance-view {
         top:1px;
         right:2px;
     }
+  .subject-item {
+
+  	color: #1b4c5c;
+  	
+  	.item-inner {
+  		border:none !important;
+  	}
+
+  	ion-label {
+		  margin: 0px;
+		  margin-top: 8px;
+		}
+  }
+
+  .subject-item.item {
+  	min-height: 0px;
+  	font-size: 13px;
+  }
 }

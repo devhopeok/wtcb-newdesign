@@ -28744,6 +28744,24 @@ page-maintenance-view .badge {
   right: 2px;
 }
 
+page-maintenance-view .subject-item {
+  color: #1b4c5c;
+}
+
+page-maintenance-view .subject-item .item-inner {
+  border: none !important;
+}
+
+page-maintenance-view .subject-item ion-label {
+  margin: 0px;
+  margin-top: 8px;
+}
+
+page-maintenance-view .subject-item.item {
+  min-height: 0px;
+  font-size: 13px;
+}
+
 page-notification .notification-content {
   color: #1b4c5c;
   font-size: 20px;
@@ -28783,6 +28801,10 @@ page-otrs-request .textarea-style {
   height: 220px;
   border: 2px solid #d2dcf5;
   /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+}
+
+page-otrs-request .subject-style {
+  border: 2px solid #d2dcf5;
 }
 
 page-otrs-request .client-avatar {

@@ -14,12 +14,15 @@
 
 
 <ion-content padding>
-    <ion-list>
+    <ion-list no-lines>
         <ion-list-header class="header-style">
             <!-- DESCRIBA SU SOLICITUD -->
             REQUERIMIENTO
         </ion-list-header>
 
+        <ion-item style="padding-right: 8px;">
+            <ion-input placeholder="ASUNTO DE SOLICITUD" class="subject-style" [(ngModel)]="otrsRequest.subject"></ion-input>
+        </ion-item>
         <ion-item>
             
             <textarea placeholder="DESCRIPCIÓN" class="textarea-style" [(ngModel)]="otrsRequest.comment"></textarea>
