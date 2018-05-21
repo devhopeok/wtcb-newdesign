@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, Events, AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Events, AlertController, ItemSliding } from 'ionic-angular';
 import { UserService } from '../../providers/user-service';
 import { Storage } from '@ionic/storage';
 import { MaintenanceTrackerPage } from '../maintenance-tracker/maintenance-tracker';
+import { PushServiceProvider } from '../../providers/push-service';
 
 @Component({
   selector: 'page-notification',
@@ -20,7 +21,8 @@ export class NotificationPage {
   	public loadingCtrl: LoadingController,
   	public storage: Storage,
     public events: Events,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public pushService: PushServiceProvider) {
 
   }
 
@@ -91,5 +93,14 @@ export class NotificationPage {
       (data) => {
         loading.dismiss();
       });
+  }
+
+  accept(notification, slidingItem) {
+    slidingItem.close();
+    let alert = this.alertCtrl.create({
+      title: "", subTitle: "You have accpeted the assignment of administrator.", buttons: ['OK']
+    });
+    alert.present();
+    this.pushService.notiBuildingManagerForRequest(notification.requestId, this.authUser.first_name + " " + this.authUser.last_name + "(Technician) accepted your assignment.", this.token);
   }
 }

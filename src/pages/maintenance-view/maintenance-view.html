@@ -39,41 +39,44 @@
         </ion-list-header>
 
         <div *ngIf="user.level == '7'">
-            <ion-item-sliding *ngFor="let item of openedRequests">
-                <ion-item class="subject-item" *ngIf="item.subject">ASUNTO: {{item.subject}}</ion-item>
-                <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{'row-content-bold' : item.opened7 == false}">
-                    <div class="col width-10">
-                        <img src="assets/imgs/working-icon.png" />
-                    </div>
-                    <div class="col width-10 request-id" maxlength="10">
-                        {{item._id}}
-                    </div>
-                    <div class="col width-30">
-                        <div class="office-name">{{item.officeName}}</div>
-                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>
-                    </div>
+            <div *ngFor="let item of openedRequests">
+                <ion-item class="subject-item" *ngIf="item.subject"><span style="font-weight:bold;">ASUNTO</span>: {{item.subject}}</ion-item>
 
-                    <div class="col width-20">
-                        <ion-icon name="md-calendar"></ion-icon>
-                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>
-                    </div>
-                </ion-item>
+                <ion-item-sliding>
+                    <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{'row-content-bold' : item.opened7 == false}">
+                        <div class="col width-10">
+                            <img src="assets/imgs/working-icon.png" />
+                        </div>
+                        <div class="col width-10 request-id" maxlength="10">
+                            {{item._id}}
+                        </div>
+                        <div class="col width-30">
+                            <div class="office-name">{{item.officeName}}</div>
+                            <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>
+                        </div>
 
-                <ion-item-options side="right">
-                  <button ion-button color="secondary" (click)="assign(item)">
-                    <ion-icon name="ios-construct"></ion-icon>
-                    Tech
-                  </button>
-                  <button ion-button (click)="edit(item)">
-                    <ion-icon name="ios-create"></ion-icon>
-                    Edit
-                  </button>
-                  <button ion-button color="danger" (click)="delete(item)">
-                    <ion-icon name="ios-trash"></ion-icon>
-                    Delete
-                  </button>
-                </ion-item-options>
-            </ion-item-sliding>
+                        <div class="col width-20">
+                            <ion-icon name="md-calendar"></ion-icon>
+                            <div class="created-date">{{item.created_at.substr(0, 10)}}</div>
+                        </div>
+                    </ion-item>
+
+                    <ion-item-options side="right">
+                      <button ion-button color="secondary" (click)="assign(item)">
+                        <ion-icon name="ios-construct"></ion-icon>
+                        Tech
+                      </button>
+                      <button ion-button (click)="edit(item)">
+                        <ion-icon name="ios-create"></ion-icon>
+                        Edit
+                      </button>
+                      <button ion-button color="danger" (click)="delete(item)">
+                        <ion-icon name="ios-trash"></ion-icon>
+                        Delete
+                      </button>
+                    </ion-item-options>
+                </ion-item-sliding>
+            </div>
         </div>
 
         <div *ngIf="user.level == '3.1'">
@@ -151,33 +154,36 @@
             SOLICITUDES CERRADAS
         </ion-list-header>
         <div *ngIf="user.level == '7'">
-            <ion-item-sliding *ngFor="let item of closedRequests">
+            <div *ngFor="let item of closedRequests">
                 <ion-item class="subject-item" *ngIf="item.subject">ASUNTO: {{item.subject}}</ion-item>
-                <ion-item  (click)="viewRequest(item)" class="row row-content">
-                    <div class="col width-10">
-                        <img src="assets/imgs/working-icon.png" />
-                    </div>
-                    <div class="col width-10 request-id">
-                        {{item._id}}
-                    </div>
-                    <div class="col width-30">
-                        <div class="office-name">{{item.officeName}}</div>
-                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>
-                    </div>
+                
+                <ion-item-sliding>
+                    <ion-item  (click)="viewRequest(item)" class="row row-content">
+                        <div class="col width-10">
+                            <img src="assets/imgs/working-icon.png" />
+                        </div>
+                        <div class="col width-10 request-id">
+                            {{item._id}}
+                        </div>
+                        <div class="col width-30">
+                            <div class="office-name">{{item.officeName}}</div>
+                            <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>
+                        </div>
 
-                    <div class="col width-20">
-                        <ion-icon name="md-calendar"></ion-icon>
-                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>
-                    </div>
-                </ion-item>
+                        <div class="col width-20">
+                            <ion-icon name="md-calendar"></ion-icon>
+                            <div class="created-date">{{item.created_at.substr(0, 10)}}</div>
+                        </div>
+                    </ion-item>
 
-                <ion-item-options side="right">
-                  <button ion-button color="danger" (click)="delete(item)">
-                    <ion-icon name="ios-trash"></ion-icon>
-                    Delete
-                  </button>
-                </ion-item-options>
-            </ion-item-sliding>
+                    <ion-item-options side="right">
+                      <button ion-button color="danger" (click)="delete(item)">
+                        <ion-icon name="ios-trash"></ion-icon>
+                        Delete
+                      </button>
+                    </ion-item-options>
+                </ion-item-sliding>
+            </div>
         </div>
 
         <div *ngIf="user.level != '7'">
