@@ -101,6 +101,6 @@ export class NotificationPage {
       title: "", subTitle: "You have accpeted the assignment of administrator.", buttons: ['OK']
     });
     alert.present();
-    this.pushService.notiBuildingManagerForRequest(notification.requestId, this.authUser.first_name + " " + this.authUser.last_name + "(Technician) accepted your assignment.", this.token);
+    this.pushService.notiBuildingManagerForRequest(notification.requestId, this.authUser.first_name + " " + this.authUser.last_name + "(Technician) accepted the assignment of administrator.", this.token);
   }
 }

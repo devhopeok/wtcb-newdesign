@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 117:
+/***/ 118:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -396,160 +396,6 @@ webpackContext.id = 1221;
 
 /***/ }),
 
-/***/ 124:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PushServiceProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(83);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user_service__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_onesignal__ = __webpack_require__(125);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-/*
- Generated class for the PushServiceProvider provider.
-
- See https://angular.io/docs/ts/latest/guide/dependency-injection.html
- for more info on providers and Angular DI.
- */
-var PushServiceProvider = (function () {
-    function PushServiceProvider(http, userService, oneSignal) {
-        //console.log('Hello PushServiceProvider Provider');
-        this.http = http;
-        this.userService = userService;
-        this.oneSignal = oneSignal;
-        this.PUSH_CREATE_URL = 'https://onesignal.com/api/v1/notifications';
-        var myHeaders = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */];
-        myHeaders.set('Authorization', "Basic YTUzYzE2NmYtNDZjZC00M2Q4LThkMmYtMjY3ZTJiYTY1MWQy");
-        myHeaders.set('Content-Type', 'application/json; charset=utf-8');
-        this.authOpt = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({
-            headers: myHeaders,
-        });
-    }
-    PushServiceProvider.prototype.notiBuildingManagerForRequest = function (requestId, message, token) {
-        var _this = this;
-        this.userService.getUsersByLevel(7)
-            .subscribe(function (data) {
-            var userDevices = [];
-            var _loop_1 = function (i) {
-                _this.userService.getDeviceById(data[i].email, token)
-                    .subscribe(function (data1) {
-                    userDevices.push(data1.device_token);
-                    //if (userDevices.length == data.length){
-                    console.log("requestid and message", requestId, message, userDevices);
-                    var pushData = {
-                        "app_id": "ae60cbd3-3a45-469c-b6c7-bcb6104c31b4",
-                        "include_player_ids": userDevices,
-                        "contents": { 'en': message },
-                        "ios_badgeType": "Increase",
-                        "ios_badgeCount": 1
-                    };
-                    console.log("push Data", pushData);
-                    _this.http.post(_this.PUSH_CREATE_URL, pushData, _this.authOpt).map(function (res) { return res.json(); }).subscribe(function (data) {
-                        console.log('Notification sent successfully!');
-                    }, function (err) {
-                        console.log('Notification sending error!');
-                    }, function () { return console.log('Create Notification'); });
-                    var notification = {
-                        token: token,
-                        email: data[i].email,
-                        notification: message,
-                        requestId: requestId,
-                        read: false
-                    };
-                    _this.userService.addNotification(notification)
-                        .subscribe(function (data) {
-                        console.log("notification Data:", data);
-                    }, function (data) {
-                    });
-                    //}
-                }, function (data1) {
-                });
-            };
-            for (var i = 0; i < data.length; i++) {
-                _loop_1(i);
-            }
-        }, function (data) {
-        });
-    };
-    PushServiceProvider.prototype.notiUserForRequest = function (userId, requestId, message, token) {
-        var _this = this;
-        this.userService.getUserById(userId)
-            .subscribe(function (data) {
-            _this.userService.getDeviceById(data.email, token)
-                .subscribe(function (data1) {
-                var userDevice = data1;
-                var pushData = {
-                    "app_id": "ae60cbd3-3a45-469c-b6c7-bcb6104c31b4",
-                    "include_player_ids": [userDevice['device_token']],
-                    "contents": { 'en': message },
-                    "data": {
-                        "type": "request",
-                        "typeKey": requestId
-                    },
-                    "ios_badgeType": "Increase",
-                    "ios_badgeCount": 1
-                };
-                console.log("push Data", pushData);
-                _this.http.post(_this.PUSH_CREATE_URL, pushData, _this.authOpt).map(function (res) { return res.json(); }).subscribe(function (data) {
-                    console.log('Notification sent successfully!');
-                }, function (err) {
-                    console.log('Notification sending error!');
-                }, function () { return console.log('Create Notification'); });
-                var notification = {
-                    token: token,
-                    email: data.email,
-                    notification: message,
-                    requestId: requestId,
-                    read: false
-                };
-                _this.userService.addNotification(notification)
-                    .subscribe(function (data) {
-                    console.log("notification Data:", data);
-                }, function (data) {
-                });
-            }, function (data1) {
-            });
-        }, function (data) {
-        });
-    };
-    PushServiceProvider.prototype.getNotifiactionList = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            _this.http.get(_this.PUSH_CREATE_URL, _this.authOpt).map(function (res) { return res.json(); }).subscribe(function (data) {
-                //console.log(data);
-                resolve(data);
-            }, function (err) {
-                reject(false);
-            }, function () { return console.log('Get Notification List'); });
-        });
-    };
-    return PushServiceProvider;
-}());
-PushServiceProvider = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_3__user_service__["a" /* UserService */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_onesignal__["a" /* OneSignal */]])
-], PushServiceProvider);
-
-//# sourceMappingURL=push-service.js.map
-
-/***/ }),
-
 /***/ 126:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -869,7 +715,7 @@ var ListPage_1;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_user_service__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__maintenance_tracker_maintenance_tracker__ = __webpack_require__(222);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_push_service__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_push_service__ = __webpack_require__(90);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -964,7 +810,7 @@ var NotificationPage = (function () {
             title: "", subTitle: "You have accpeted the assignment of administrator.", buttons: ['OK']
         });
         alert.present();
-        this.pushService.notiBuildingManagerForRequest(notification.requestId, this.authUser.first_name + " " + this.authUser.last_name + "(Technician) accepted your assignment.", this.token);
+        this.pushService.notiBuildingManagerForRequest(notification.requestId, this.authUser.first_name + " " + this.authUser.last_name + "(Technician) accepted the assignment of administrator.", this.token);
     };
     return NotificationPage;
 }());
@@ -972,10 +818,16 @@ NotificationPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'page-notification',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/notification/notification.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n    </button>\n    <ion-title>NOTIFICACIONES</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n	<ion-list no-lines>\n	  	<ion-item-sliding style="border-bottom: 1px solid gray;" *ngFor="let notification of notifications" #slidingItem>\n	        <ion-item (click)="gotoMaintenanceView(notification);" class="notification-content" [ngClass]="{\'notification-content-bold\' : notification.read == false}">\n	          	{{notification.notification}}\n	        </ion-item>\n\n	        <ion-item-options side="right">\n	        	<button *ngIf="authUser.level == \'3.1\' || authUser.level == \'3.2\'" ion-button (click)="accept(notification, slidingItem)">\n              <ion-icon name="md-done-all"></ion-icon>\n              Accept\n            </button>\n	        	<button ion-button color="danger" (click)="delete(notification._id)">\n		            <ion-icon name="ios-trash"></ion-icon>\n		            Delete\n		        </button>\n	        </ion-item-options>\n	    </ion-item-sliding>\n    </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/notification/notification.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_user_service__["a" /* UserService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* Events */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_5__providers_push_service__["a" /* PushServiceProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_push_service__["a" /* PushServiceProvider */]) === "function" && _h || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */],
+        __WEBPACK_IMPORTED_MODULE_2__providers_user_service__["a" /* UserService */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
+        __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* Events */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
+        __WEBPACK_IMPORTED_MODULE_5__providers_push_service__["a" /* PushServiceProvider */]])
 ], NotificationPage);
 
-var _a, _b, _c, _d, _e, _f, _g, _h;
 //# sourceMappingURL=notification.js.map
 
 /***/ }),
@@ -1217,7 +1069,7 @@ CreateOfficePage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_user_service__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_push_service__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_push_service__ = __webpack_require__(90);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__ = __webpack_require__(380);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_building__ = __webpack_require__(54);
@@ -1547,7 +1399,7 @@ OtrsRequestPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_building__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_push_service__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_push_service__ = __webpack_require__(90);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_user_service__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_email_composer__ = __webpack_require__(420);
@@ -2244,7 +2096,7 @@ MaintenanceTrackerPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_user_service__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__technician_detail_technician_detail__ = __webpack_require__(424);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_push_service__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_push_service__ = __webpack_require__(90);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2998,7 +2850,7 @@ TechnicianDetailPage = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(118);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__signup_signup__ = __webpack_require__(426);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_user_service__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(27);
@@ -3161,7 +3013,7 @@ LoginPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__maintenance_view_maintenance_view__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(118);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_user_service__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(27);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -4051,7 +3903,7 @@ var MaintenanceViewPage = (function () {
 }());
 MaintenanceViewPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-maintenance-view',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/maintenance-view/maintenance-view.html"*/'<!--\n  Generated template for the MaintenanceViewPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n        </button>\n        <ion-title>SOLICITUDES DE MANTENIMIENTO</ion-title>\n\n        <ion-buttons end>\n          <button ion-button icon-only style="color:white;" (click)="gotoNotification();">\n                <ion-icon name="md-notifications"></ion-icon>\n          </button>\n          <div class="badge" *ngIf="count>0"></div>\n        </ion-buttons>\n    </ion-navbar>\n\n\n</ion-header>\n\n\n<ion-content class="main-bg">\n\n    <button class="main-btn" ion-button block (click)="createNewRequest()" *ngIf="user.level==\'3\'">Enviar Nueva Solicitud</button>\n    <button class="main-btn" ion-button block (click)="gotoMyProfile()" *ngIf="user.level==\'3.1\' || user.level==\'3.2\'">Mi Perfil</button>\n\n    <ion-searchbar [(ngModel)]="myInput" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">\n   </ion-searchbar>\n\n    <ion-list style="margin-top: 20px;" *ngIf="openedRequests.length > 0">\n\n        <ion-list-header class="header-style">\n            SOLICITUDES ABIERTAS\n        </ion-list-header>\n\n        <div *ngIf="user.level == \'7\'">\n            <div *ngFor="let item of openedRequests">\n                <ion-item class="subject-item" *ngIf="item.subject"><span style="font-weight:bold;">ASUNTO</span>: {{item.subject}}</ion-item>\n\n                <ion-item-sliding>\n                    <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{\'row-content-bold\' : item.opened7 == false}">\n                        <div class="col width-10">\n                            <img src="assets/imgs/working-icon.png" />\n                        </div>\n                        <div class="col width-10 request-id" maxlength="10">\n                            {{item._id}}\n                        </div>\n                        <div class="col width-30">\n                            <div class="office-name">{{item.officeName}}</div>\n                            <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                        </div>\n\n                        <div class="col width-20">\n                            <ion-icon name="md-calendar"></ion-icon>\n                            <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                        </div>\n                    </ion-item>\n\n                    <ion-item-options side="right">\n                      <button ion-button color="secondary" (click)="assign(item)">\n                        <ion-icon name="ios-construct"></ion-icon>\n                        Tech\n                      </button>\n                      <button ion-button (click)="edit(item)">\n                        <ion-icon name="ios-create"></ion-icon>\n                        Edit\n                      </button>\n                      <button ion-button color="danger" (click)="delete(item)">\n                        <ion-icon name="ios-trash"></ion-icon>\n                        Delete\n                      </button>\n                    </ion-item-options>\n                </ion-item-sliding>\n            </div>\n        </div>\n\n        <div *ngIf="user.level == \'3.1\'">\n            <ion-item-sliding *ngFor="let item of openedRequests">\n                <ion-item class="subject-item" *ngIf="item.subject">ASUNTO: {{item.subject}}</ion-item>\n                <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{\'row-content-bold\' : item.opened3_1 == false}">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                </ion-item>\n            </ion-item-sliding>\n        </div>\n\n        <div *ngIf="user.level == \'3.2\'">\n            <ion-item-sliding *ngFor="let item of openedRequests">\n                <ion-item class="subject-item" *ngIf="item.subject">ASUNTO: {{item.subject}}</ion-item>\n                <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{\'row-content-bold\' : item.opened3_2 == false}">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                </ion-item>\n            </ion-item-sliding>\n        </div>\n\n        <div *ngIf="user.level == 3">\n            <ion-item-sliding *ngFor="let item of openedRequests">\n                <ion-item class="subject-item" *ngIf="item.subject">ASUNTO: {{item.subject}}</ion-item>\n                <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{\'row-content-bold\' : item.opened3 == false}">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                </ion-item>\n            </ion-item-sliding>\n        </div>\n    </ion-list>\n\n    <ion-list style="margin-top: 20px;" *ngIf="closedRequests.length > 0">\n        <ion-list-header class="header-style">\n            SOLICITUDES CERRADAS\n        </ion-list-header>\n        <div *ngIf="user.level == \'7\'">\n            <div *ngFor="let item of closedRequests">\n                <ion-item class="subject-item" *ngIf="item.subject">ASUNTO: {{item.subject}}</ion-item>\n                \n                <ion-item-sliding>\n                    <ion-item  (click)="viewRequest(item)" class="row row-content">\n                        <div class="col width-10">\n                            <img src="assets/imgs/working-icon.png" />\n                        </div>\n                        <div class="col width-10 request-id">\n                            {{item._id}}\n                        </div>\n                        <div class="col width-30">\n                            <div class="office-name">{{item.officeName}}</div>\n                            <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                        </div>\n\n                        <div class="col width-20">\n                            <ion-icon name="md-calendar"></ion-icon>\n                            <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                        </div>\n                    </ion-item>\n\n                    <ion-item-options side="right">\n                      <button ion-button color="danger" (click)="delete(item)">\n                        <ion-icon name="ios-trash"></ion-icon>\n                        Delete\n                      </button>\n                    </ion-item-options>\n                </ion-item-sliding>\n            </div>\n        </div>\n\n        <div *ngIf="user.level != \'7\'">\n            <ion-item-sliding *ngFor="let item of closedRequests">\n                <ion-item class="subject-item" *ngIf="item.subject">ASUNTO: {{item.subject}}</ion-item>\n                <ion-item  (click)="viewRequest(item)" class="row row-content">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                    \n                    <!-- <div class="col width-30">{{item.officeKey}}</div> -->\n                </ion-item>\n            </ion-item-sliding>\n        </div>\n    </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/maintenance-view/maintenance-view.html"*/
+        selector: 'page-maintenance-view',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/maintenance-view/maintenance-view.html"*/'<!--\n  Generated template for the MaintenanceViewPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <img class="menu-icon" src="assets/imgs/menu_icon.png" />\n        </button>\n        <ion-title>SOLICITUDES DE MANTENIMIENTO</ion-title>\n\n        <ion-buttons end>\n          <button ion-button icon-only style="color:white;" (click)="gotoNotification();">\n                <ion-icon name="md-notifications"></ion-icon>\n          </button>\n          <div class="badge" *ngIf="count>0"></div>\n        </ion-buttons>\n    </ion-navbar>\n\n\n</ion-header>\n\n\n<ion-content class="main-bg">\n\n    <button class="main-btn" ion-button block (click)="createNewRequest()" *ngIf="user.level==\'3\'">Enviar Nueva Solicitud</button>\n    <button class="main-btn" ion-button block (click)="gotoMyProfile()" *ngIf="user.level==\'3.1\' || user.level==\'3.2\'">Mi Perfil</button>\n\n    <ion-searchbar [(ngModel)]="myInput" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">\n   </ion-searchbar>\n\n    <ion-list style="margin-top: 20px;" *ngIf="openedRequests.length > 0">\n\n        <ion-list-header class="header-style">\n            SOLICITUDES ABIERTAS\n        </ion-list-header>\n\n        <div *ngIf="user.level == \'7\'">\n            <div *ngFor="let item of openedRequests">\n                <ion-item class="subject-item" *ngIf="item.subject"><span style="font-weight:bold;">ASUNTO</span>: {{item.subject}}</ion-item>\n\n                <ion-item-sliding>\n                    <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{\'row-content-bold\' : item.opened7 == false}">\n                        <div class="col width-10">\n                            <img src="assets/imgs/working-icon.png" />\n                        </div>\n                        <div class="col width-10 request-id" maxlength="10">\n                            {{item._id}}\n                        </div>\n                        <div class="col width-30">\n                            <div class="office-name">{{item.officeName}}</div>\n                            <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                        </div>\n\n                        <div class="col width-20">\n                            <ion-icon name="md-calendar"></ion-icon>\n                            <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                        </div>\n                    </ion-item>\n\n                    <ion-item-options side="right">\n                      <button ion-button color="secondary" (click)="assign(item)">\n                        <ion-icon name="ios-construct"></ion-icon>\n                        Tech\n                      </button>\n                      <button ion-button (click)="edit(item)">\n                        <ion-icon name="ios-create"></ion-icon>\n                        Edit\n                      </button>\n                      <button ion-button color="danger" (click)="delete(item)">\n                        <ion-icon name="ios-trash"></ion-icon>\n                        Delete\n                      </button>\n                    </ion-item-options>\n                </ion-item-sliding>\n            </div>\n        </div>\n\n        <div *ngIf="user.level == \'3.1\'">\n            <ion-item-sliding *ngFor="let item of openedRequests">\n                <ion-item class="subject-item" *ngIf="item.subject"><span style="font-weight:bold;">ASUNTO</span>: {{item.subject}}</ion-item>\n                <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{\'row-content-bold\' : item.opened3_1 == false}">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                </ion-item>\n            </ion-item-sliding>\n        </div>\n\n        <div *ngIf="user.level == \'3.2\'">\n            <ion-item-sliding *ngFor="let item of openedRequests">\n                <ion-item class="subject-item" *ngIf="item.subject"><span style="font-weight:bold;">ASUNTO</span>: {{item.subject}}</ion-item>\n                <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{\'row-content-bold\' : item.opened3_2 == false}">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                </ion-item>\n            </ion-item-sliding>\n        </div>\n\n        <div *ngIf="user.level == 3">\n            <ion-item-sliding *ngFor="let item of openedRequests">\n                <ion-item class="subject-item" *ngIf="item.subject"><span style="font-weight:bold;">ASUNTO</span>: {{item.subject}}</ion-item>\n                <ion-item (click)="viewRequest(item)" class="row row-content" [ngClass]="{\'row-content-bold\' : item.opened3 == false}">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                </ion-item>\n            </ion-item-sliding>\n        </div>\n    </ion-list>\n\n    <ion-list style="margin-top: 20px;" *ngIf="closedRequests.length > 0">\n        <ion-list-header class="header-style">\n            SOLICITUDES CERRADAS\n        </ion-list-header>\n        <div *ngIf="user.level == \'7\'">\n            <div *ngFor="let item of closedRequests">\n                <ion-item class="subject-item" *ngIf="item.subject"><span style="font-weight:bold;">ASUNTO</span>: {{item.subject}}</ion-item>\n                \n                <ion-item-sliding>\n                    <ion-item  (click)="viewRequest(item)" class="row row-content">\n                        <div class="col width-10">\n                            <img src="assets/imgs/working-icon.png" />\n                        </div>\n                        <div class="col width-10 request-id">\n                            {{item._id}}\n                        </div>\n                        <div class="col width-30">\n                            <div class="office-name">{{item.officeName}}</div>\n                            <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                        </div>\n\n                        <div class="col width-20">\n                            <ion-icon name="md-calendar"></ion-icon>\n                            <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                        </div>\n                    </ion-item>\n\n                    <ion-item-options side="right">\n                      <button ion-button color="danger" (click)="delete(item)">\n                        <ion-icon name="ios-trash"></ion-icon>\n                        Delete\n                      </button>\n                    </ion-item-options>\n                </ion-item-sliding>\n            </div>\n        </div>\n\n        <div *ngIf="user.level != \'7\'">\n            <ion-item-sliding *ngFor="let item of closedRequests">\n                <ion-item class="subject-item" *ngIf="item.subject"><span style="font-weight:bold;">ASUNTO</span>: {{item.subject}}</ion-item>\n                <ion-item  (click)="viewRequest(item)" class="row row-content">\n                    <div class="col width-10">\n                        <img src="assets/imgs/working-icon.png" />\n                    </div>\n                    <div class="col width-10 request-id">\n                        {{item._id}}\n                    </div>\n                    <div class="col width-30">\n                        <div class="office-name">{{item.officeName}}</div>\n                        <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>\n                    </div>\n\n                    <div class="col width-20">\n                        <ion-icon name="md-calendar"></ion-icon>\n                        <div class="created-date">{{item.created_at.substr(0, 10)}}</div>\n                    </div>\n                    \n                    <!-- <div class="col width-30">{{item.officeKey}}</div> -->\n                </ion-item>\n            </ion-item-sliding>\n        </div>\n    </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/maintenance-view/maintenance-view.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_5__providers_user_service__["a" /* UserService */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* Events */]])
@@ -4086,7 +3938,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(779);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(118);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_list_list__ = __webpack_require__(1304);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_login_login__ = __webpack_require__(425);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_signup_signup__ = __webpack_require__(426);
@@ -4105,7 +3957,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_user_service__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__providers_base_service__ = __webpack_require__(335);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__providers_building__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__providers_push_service__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__providers_push_service__ = __webpack_require__(90);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_storage__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26_angular2_text_mask__ = __webpack_require__(1305);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26_angular2_text_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_26_angular2_text_mask__);
@@ -4285,7 +4137,7 @@ AppModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(331);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(334);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(118);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_technician_technician__ = __webpack_require__(223);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_login_login__ = __webpack_require__(425);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_maintenance_view_maintenance_view__ = __webpack_require__(66);
@@ -4528,6 +4380,160 @@ MyApp = __decorate([
 ], MyApp);
 
 //# sourceMappingURL=app.component.js.map
+
+/***/ }),
+
+/***/ 90:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PushServiceProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user_service__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_onesignal__ = __webpack_require__(125);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+/*
+ Generated class for the PushServiceProvider provider.
+
+ See https://angular.io/docs/ts/latest/guide/dependency-injection.html
+ for more info on providers and Angular DI.
+ */
+var PushServiceProvider = (function () {
+    function PushServiceProvider(http, userService, oneSignal) {
+        //console.log('Hello PushServiceProvider Provider');
+        this.http = http;
+        this.userService = userService;
+        this.oneSignal = oneSignal;
+        this.PUSH_CREATE_URL = 'https://onesignal.com/api/v1/notifications';
+        var myHeaders = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */];
+        myHeaders.set('Authorization', "Basic YTUzYzE2NmYtNDZjZC00M2Q4LThkMmYtMjY3ZTJiYTY1MWQy");
+        myHeaders.set('Content-Type', 'application/json; charset=utf-8');
+        this.authOpt = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({
+            headers: myHeaders,
+        });
+    }
+    PushServiceProvider.prototype.notiBuildingManagerForRequest = function (requestId, message, token) {
+        var _this = this;
+        this.userService.getUsersByLevel(7)
+            .subscribe(function (data) {
+            var userDevices = [];
+            var _loop_1 = function (i) {
+                _this.userService.getDeviceById(data[i].email, token)
+                    .subscribe(function (data1) {
+                    userDevices.push(data1.device_token);
+                    //if (userDevices.length == data.length){
+                    console.log("requestid and message", requestId, message, userDevices);
+                    var pushData = {
+                        "app_id": "ae60cbd3-3a45-469c-b6c7-bcb6104c31b4",
+                        "include_player_ids": userDevices,
+                        "contents": { 'en': message },
+                        "ios_badgeType": "Increase",
+                        "ios_badgeCount": 1
+                    };
+                    console.log("push Data", pushData);
+                    _this.http.post(_this.PUSH_CREATE_URL, pushData, _this.authOpt).map(function (res) { return res.json(); }).subscribe(function (data) {
+                        console.log('Notification sent successfully!');
+                    }, function (err) {
+                        console.log('Notification sending error!');
+                    }, function () { return console.log('Create Notification'); });
+                    var notification = {
+                        token: token,
+                        email: data[i].email,
+                        notification: message,
+                        requestId: requestId,
+                        read: false
+                    };
+                    _this.userService.addNotification(notification)
+                        .subscribe(function (data) {
+                        console.log("notification Data:", data);
+                    }, function (data) {
+                    });
+                    //}
+                }, function (data1) {
+                });
+            };
+            for (var i = 0; i < data.length; i++) {
+                _loop_1(i);
+            }
+        }, function (data) {
+        });
+    };
+    PushServiceProvider.prototype.notiUserForRequest = function (userId, requestId, message, token) {
+        var _this = this;
+        this.userService.getUserById(userId)
+            .subscribe(function (data) {
+            _this.userService.getDeviceById(data.email, token)
+                .subscribe(function (data1) {
+                var userDevice = data1;
+                var pushData = {
+                    "app_id": "ae60cbd3-3a45-469c-b6c7-bcb6104c31b4",
+                    "include_player_ids": [userDevice['device_token']],
+                    "contents": { 'en': message },
+                    "data": {
+                        "type": "request",
+                        "typeKey": requestId
+                    },
+                    "ios_badgeType": "Increase",
+                    "ios_badgeCount": 1
+                };
+                console.log("push Data", pushData);
+                _this.http.post(_this.PUSH_CREATE_URL, pushData, _this.authOpt).map(function (res) { return res.json(); }).subscribe(function (data) {
+                    console.log('Notification sent successfully!');
+                }, function (err) {
+                    console.log('Notification sending error!');
+                }, function () { return console.log('Create Notification'); });
+                var notification = {
+                    token: token,
+                    email: data.email,
+                    notification: message,
+                    requestId: requestId,
+                    read: false
+                };
+                _this.userService.addNotification(notification)
+                    .subscribe(function (data) {
+                    console.log("notification Data:", data);
+                }, function (data) {
+                });
+            }, function (data1) {
+            });
+        }, function (data) {
+        });
+    };
+    PushServiceProvider.prototype.getNotifiactionList = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.http.get(_this.PUSH_CREATE_URL, _this.authOpt).map(function (res) { return res.json(); }).subscribe(function (data) {
+                //console.log(data);
+                resolve(data);
+            }, function (err) {
+                reject(false);
+            }, function () { return console.log('Get Notification List'); });
+        });
+    };
+    return PushServiceProvider;
+}());
+PushServiceProvider = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_3__user_service__["a" /* UserService */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_onesignal__["a" /* OneSignal */]])
+], PushServiceProvider);
+
+//# sourceMappingURL=push-service.js.map
 
 /***/ })
 
