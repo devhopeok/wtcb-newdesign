@@ -22,6 +22,8 @@ export class CreateOfficePage {
         area: '',
         garages: '',
         coPay: '',
+        client_email: '',
+        direction: '',
         is_rented: false,
         employees: {
             employee:{
@@ -93,6 +95,8 @@ export class CreateOfficePage {
             this.office.area = nav_office.area;
             this.office.garages = nav_office.garages;
             this.office.coPay = nav_office.coPay;
+            this.office.client_email = nav_office.client_email;
+            this.office.direction = nav_office.direction;
             this.office.is_rented = nav_office.is_rented;
 
             if (nav_office.employees){

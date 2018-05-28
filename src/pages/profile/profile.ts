@@ -98,6 +98,8 @@ export class ProfilePage {
             area: '',
             garages: '',
             coPay: '',
+            client_email: '',
+            direction: '',
             is_rented: false,
             employees: {}
         };

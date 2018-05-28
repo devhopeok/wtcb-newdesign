@@ -29,25 +29,33 @@
             </ion-select>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Oficina No.</ion-label>
+            <ion-label floating color="primary">Oficina No.</ion-label>
             <ion-input type="text" [(ngModel)]="office.name"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Compañia</ion-label>
+            <ion-label floating color="primary">Nombre de la empresa</ion-label>
             <ion-input type="text" [(ngModel)]="office.company"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Area Mts</ion-label>
+            <ion-label floating color="primary">Nit</ion-label>
             <ion-input type="text" [(ngModel)]="office.area"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Garages</ion-label>
+            <ion-label floating color="primary">Persona de contacto</ion-label>
             <ion-input type="text" [(ngModel)]="office.garages"></ion-input>
         </ion-item>
-        <!-- <ion-item>
-            <ion-label fixed>Co-Pago</ion-label>
+        <ion-item>
+            <ion-label floating color="primary">Teléfono</ion-label>
             <ion-input type="text" [(ngModel)]="office.coPay"></ion-input>
-        </ion-item> -->
+        </ion-item>
+        <ion-item>
+            <ion-label floating color="primary">Correo electrónico</ion-label>
+            <ion-input type="text" [(ngModel)]="office.client_email"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating color="primary">Dirección</ion-label>
+            <ion-input type="text" [(ngModel)]="office.direction"></ion-input>
+        </ion-item>
     </ion-list>
 
     <ion-list *ngIf="user.level != 3">
