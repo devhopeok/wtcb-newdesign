@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="news.ctn.wtcb" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>EG</name>
+    <name>EG COLOMBIA</name>
     <description>Official World Trade Center Bogota App</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <author email="hi@ionicframework" href="http://ionicframework.com/">Jimena Arango A.</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -95,6 +95,11 @@
     <plugin name="cordova-plugin-inappbrowser" spec="^1.7.2" />
     <plugin name="onesignal-cordova-plugin" spec="^2.2.5" />
     <plugin name="cordova-plugin-badge" spec="^0.8.7" />
+<<<<<<< Updated upstream
     <engine name="android" spec="~6.4.0" />
     <engine name="ios" spec="~4.5.4" />
+=======
+    <engine name="android" spec="6.4.0" />
+    <engine name="ios" spec="^4.4.0" />
+>>>>>>> Stashed changes
 </widget>

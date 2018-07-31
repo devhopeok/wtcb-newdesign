@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, Events } from 'ionic-angular';
-import {BuildingProvider} from '../../providers/building';
+import { BuildingProvider } from '../../providers/building';
 import { UserService } from '../../providers/user-service';
 import { Storage } from '@ionic/storage';
 import { BuildingListPage } from '../building-list/building-list';
+import { AnalyticsPage } from '../analytics/analytics';
 import { MaintenanceViewPage } from '../maintenance-view/maintenance-view';
 import { NotificationPage } from '../notification/notification';
+import { TechnicianPage } from '../technician/technician';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-home',
@@ -106,6 +109,40 @@ export class HomePage {
 
     gotoNotification(){
       this.navCtrl.setRoot(NotificationPage);
+    }
+
+    gotoTores() {
+      this.navCtrl.setRoot(BuildingListPage);
+    }
+
+    gotoIndicadores() {
+      this.navCtrl.setRoot(AnalyticsPage);
+    }
+
+    gotoTechnician() {
+      this.navCtrl.setRoot(TechnicianPage);
+    }
+
+    logout() {
+      this.storage.remove("userdata");
+      this.storage.remove("notification_count");
+      let params = {
+        token : this.token,
+        device_token: "2",
+      };
+      let loading = this.loadingCtrl.create();
+      loading.present();
+      this.userService.updateDeviceToken(params)
+        .subscribe(
+          (data1)=>{
+            console.log("data1-success", data1);
+            loading.dismiss();
+            this.navCtrl.setRoot(LoginPage);
+          },
+          (data1)=>{
+            loading.dismiss();
+            this.navCtrl.setRoot(LoginPage);
+          });
     }
 
     viewFloorOfffice(floorId, buildingId){

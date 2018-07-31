@@ -1,32 +1,76 @@
 <ion-header>
-    <ion-navbar>
-        <button ion-button menuToggle>
-            <img class="menu-icon" src="assets/imgs/menu_icon.png" />
-        </button>
-
-        <ion-buttons end>
-              <button ion-button icon-only style="color:white;" (click)="gotoNotification();">
-                    <ion-icon name="md-notifications"></ion-icon>
-              </button>
-              <div class="badge" *ngIf="count>0"></div>
-        </ion-buttons>
-    </ion-navbar>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <img class="menu-icon" src="assets/imgs/menu_icon.png" />
+    </button>
+    <ion-title>Inicio</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only style="color:white;" (click)="gotoNotification();">
+        <ion-icon name="md-notifications"></ion-icon>
+      </button>
+      <div class="badge" *ngIf="count>0"></div>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="content-bg" no-bounce>
+  <div class="container-div" style="margin-top: 50px;">
+    <div class="item-div" (click)="gotoMaintenance();">
+      <div class="item-label">
+        Mantenimiento
+      </div>
+      <ion-icon name="md-paper" class="item-icon"></ion-icon>
+    </div>
+
+    <div class="item-div" (click)="gotoTores();">
+      <div class="item-label">
+        Torres
+      </div>
+      <ion-icon name="md-easel" class="item-icon"></ion-icon>
+    </div>
+  </div>
+
+  <div class="container-div">
+    <div class="item-div" (click)="gotoNotification();">
+      <div class="item-label">
+        Notificaciones
+      </div>
+      <ion-icon name="md-notifications" class="item-icon"></ion-icon>
+    </div>
+
+    <div class="item-div" (click)="gotoIndicadores();">
+      <div class="item-label">
+        Indicadores de Gestión
+      </div>
+      <ion-icon name="md-analytics" class="item-icon"></ion-icon>
+    </div>
+  </div>
+
+  <div class="container-div">
+    <div class="item-div" (click)="gotoTechnician();">
+      <div class="item-label">
+        Técnico
+      </div>
+      <ion-icon name="md-calculator" class="item-icon"></ion-icon>
+    </div>
+
+    <div class="item-div" (click)="logout();">
+      <div class="item-label">
+        Cerrar Sesión
+      </div>
+      <ion-icon name="md-log-out" class="item-icon"></ion-icon>
+    </div>
+  </div>
+</ion-content>
+<!-- <ion-content>
     <ion-grid ion-fixed style="height: 100vh">
         <ion-row class="notice-header">
             <ion-col style="background-color:black;color:white;">
                 <ion-slides pager="true" class="superfill">
                     <ion-slide class="dashboard">
-                        <!-- <h1 class="bold" style="color: #1b4c5c;">EG</h1> -->
+                        
                     </ion-slide>
-                    <!-- <ion-slide class="alerts">
-                        <h1>Alertas</h1>
-                    </ion-slide>
-                    <ion-slide class="news">
-                        <h1>Noticias</h1>
-                    </ion-slide> -->
+                    
                 </ion-slides>
             </ion-col>
         </ion-row>
@@ -116,7 +160,7 @@
             </ion-col>
             <ion-scroll scrollY="true" col-4 style="background-color:rgba(239, 239, 239, 0);color:white;border:0;" class="menu-scroll">
                 <ion-list >
-                    <!-- Sliding item -->
+                    
                     <ion-item-sliding menuToggle>
                         <ion-item>
                             <ion-icon name="ios-menu-outline"></ion-icon>
@@ -124,7 +168,7 @@
                         
                     </ion-item-sliding>
 
-                    <!-- Sliding item -->
+                    
                     <ion-item-sliding>
                         <ion-item (click)="viewBuildingList()">
                             TORRES
@@ -133,7 +177,7 @@
                     </ion-item-sliding>
 
 
-                    <!-- Sliding item -->
+                    
                     <ion-item-sliding>
                         <ion-item (click)="gotoMaintenance()">
                             MANTENIMIENTO
@@ -141,7 +185,7 @@
                         
                     </ion-item-sliding>
 
-                    <!-- Sliding item -->
+                    
                     <ion-item-sliding>
                         <ion-item (click)="gotoNotification()">
                             CENTRO DE <br/>NOTIFICACIONES
@@ -149,7 +193,7 @@
                         
                     </ion-item-sliding>
 
-                    <!-- Sliding item -->
+                    
                     <ion-item-sliding>
                         <ion-item>
                             CORREOS
@@ -165,3 +209,4 @@
 
     </ion-grid>
 </ion-content>
+ -->

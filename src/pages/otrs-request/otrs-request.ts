@@ -258,7 +258,7 @@ export class OtrsRequestPage {
                     let requestKey = data.data._id;
 
                     console.log("keys", this.userKey, this.officeKey, requestKey);
-                    this.pushService.notiBuildingManagerForRequest(requestKey, "Usted a recibido una nueva solicitud", this.token);
+                    this.pushService.notiBuildingManagerForRequest(requestKey, "Usted ha recibido una nueva solicitud", this.token);
                     // this.pushService.notiBuildingManagerForRequest(requestKey, "New request is created!", this.token);
 
                     let newSteps = {

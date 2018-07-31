@@ -412,7 +412,7 @@ export class MaintenanceTrackerPage {
           this.scheduleAccept1 = false;
         });
       
-      this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " aceptó la visita programada.", this.token);
+      this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.company + " aceptó la visita programada.", this.token);
       // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
     }
 
@@ -489,7 +489,7 @@ export class MaintenanceTrackerPage {
           this.quoteAccept = false;
         });
       
-      this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " aceptó la cotización.", this.token);
+      this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.company + " aceptó la cotización.", this.token);
       // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your quote", this.token);
     }
 
@@ -517,7 +517,7 @@ export class MaintenanceTrackerPage {
             this.quoteDeny = false;
           });
         
-        this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " rechazo la cotización.", this.token);
+        this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.company + " rechazo la cotización.", this.token);
         // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee denied your quote", this.token);
       });
 

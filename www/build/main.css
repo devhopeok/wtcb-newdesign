@@ -28478,6 +28478,62 @@ page-home .badge {
   right: 2px;
 }
 
+page-home .content-bg {
+  background-image: url("../assets/imgs/torreA.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+page-home .container-div {
+  color: #e69846;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: 28%;
+}
+
+page-home .item-div {
+  background-color: white;
+  width: 30vw;
+  margin: 30px;
+  border: 3px solid #e69846;
+  border-radius: 20px;
+  height: 30vw;
+  text-align: center;
+}
+
+page-home .scroll-content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+}
+
+page-home .item-label {
+  font-size: 3.5vw;
+  font-weight: bold;
+  margin-top: 4vw;
+}
+
+page-home .item-icon {
+  font-size: 10vw;
+  padding: 4vw;
+}
+
 page-maintenance-tracker .client-avatar {
   width: 24%;
   margin-top: 3vw;

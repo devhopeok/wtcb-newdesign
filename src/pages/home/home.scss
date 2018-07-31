@@ -190,4 +190,45 @@ page-home {
         top:1px;
         right:2px;
     }
+
+  .content-bg {
+    background-image: url('../assets/imgs/torreA.jpg');
+    background-size: cover;
+    background-position:  center center;
+    background-repeat: no-repeat;
+  }
+
+  .container-div {
+    color: #e69846;
+    display: flex;
+    justify-content: center;
+    height: 28%;
+  }
+
+  .item-div {
+    background-color: white;
+    width: 30vw;
+    margin: 30px;
+    border: 3px solid #e69846;
+    border-radius: 20px;
+    height: 30vw;
+    text-align: center;
+  }
+
+  .scroll-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .item-label {
+    font-size: 3.5vw;
+    font-weight: bold;
+    margin-top: 4vw;
+  }
+
+  .item-icon {
+    font-size: 10vw;
+    padding: 4vw;
+  }
 }

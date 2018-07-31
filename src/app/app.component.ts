@@ -12,7 +12,7 @@ import { NotificationPage } from '../pages/notification/notification';
 import { AnalyticsPage } from '../pages/analytics/analytics';
 import { ProfilePage } from '../pages/profile/profile';
 import { Storage } from '@ionic/storage';
-import {Push} from '@ionic/cloud-angular';
+import { Push } from '@ionic/cloud-angular';
 import { Badge } from '@ionic-native/badge';
 import { OneSignal } from '@ionic-native/onesignal';
 import { UserService } from '../providers/user-service';
