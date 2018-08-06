@@ -10,7 +10,7 @@
 <ion-content>
 	<ion-list no-lines>
 	  	<ion-item-sliding style="border-bottom: 1px solid gray;" *ngFor="let notification of notifications" #slidingItem>
-	        <ion-item (click)="gotoMaintenanceView(notification);" class="notification-content" [ngClass]="{'notification-content-bold' : notification.read == false}">
+	        <ion-item text-wrap (click)="gotoMaintenanceView(notification);" class="notification-content" [ngClass]="{'notification-content-bold' : notification.read == false}">
 	          	{{notification.notification}}
 	        </ion-item>
 
@@ -20,8 +20,8 @@
               Accept
             </button>
 	        	<button ion-button color="danger" (click)="delete(notification._id)">
-		            <ion-icon name="ios-trash"></ion-icon>
-		            Delete
+	            <ion-icon name="ios-trash"></ion-icon>
+	            Delete
 		        </button>
 	        </ion-item-options>
 	    </ion-item-sliding>

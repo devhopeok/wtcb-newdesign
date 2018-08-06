@@ -28820,17 +28820,16 @@ page-maintenance-view .subject-item.item {
 
 page-notification .notification-content {
   color: #1b4c5c;
-  font-size: 20px;
-  padding: 10px;
+  font-size: 14px;
   margin: 0px;
 }
 
 page-notification .notification-content-bold {
-  color: #1b4c5c;
-  font-size: 20px;
-  padding: 10px;
   font-weight: bold;
-  margin: 0px;
+}
+
+page-notification ion-label {
+  margin: 0px !important;
 }
 
 page-otrs-request ion-list {
