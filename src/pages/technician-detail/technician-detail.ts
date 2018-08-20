@@ -24,7 +24,6 @@ export class TechnicianDetailPage {
 
     ionViewWillEnter(){
         this.storage.get('userdata').then(val=>{
-          console.log("userdata", val);
           if (val != null){
             this.authUser = val.user;
             this.token = val.token;
@@ -46,7 +45,6 @@ export class TechnicianDetailPage {
         let loading = this.loadingCtrl.create();
         loading.present();
 
-        console.log("update user", params);
         this.userService.updateUser(params)
             .subscribe(
               (data) => {

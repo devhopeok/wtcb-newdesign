@@ -64,7 +64,6 @@ export class OtrsRequestPage {
 
     ionViewWillEnter(){
         this.storage.get('userdata').then(val=>{
-          console.log("userdata", val);
           if (val != null){
             this.token = val.token;
             this.officeKey = val.user.officeKey;
@@ -92,7 +91,6 @@ export class OtrsRequestPage {
                 .subscribe(
                   (data) => {
                     loading.dismiss();
-                    console.log("Getting Offices:", data);
 
                     this.office = data[0];
 
@@ -116,7 +114,6 @@ export class OtrsRequestPage {
                         for (let j = 0; j < building.floors.length; j ++) {
                             if (building.floors[j].id.toString() == floorId) {
                                 floor = building.floors[j];
-                                console.log("floor", floor);
                                 break;
                             }
                         }
@@ -146,7 +143,6 @@ export class OtrsRequestPage {
       var file = files[0];
       this.file = file;
       this.filename = new Date().getTime() + this.file.name;
-      console.log("this.file:" + JSON.stringify(this.filename));
       AWS.config.accessKeyId = 'AKIAJNHK7OBATDPIEJJA';
       AWS.config.secretAccessKey = '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';
       // AWS.config.accessKeyId = 'AKIAIPQAVOWPUIP2ENSA';
@@ -161,7 +157,6 @@ export class OtrsRequestPage {
       // let params = {BucketName: 'YOUR-BUCKET-NAME', Key: this.file.name, Body: this.file};
 
       var params = {Bucket: 'wtcb', Key: this.filename, Body: this.file, ContentType: this.file.type, ACL: 'public-read', ServerSideEncrytion: 'AES256'};
-       console.log("params", params);
       let that = this;
       let loading = this.loadingCtrl.create();
       loading.present();
@@ -245,7 +240,6 @@ export class OtrsRequestPage {
 
         this.otrsRequest.buildingName = this.building_name;
         this.otrsRequest.floorName = this.floor_name;
-        console.log("this.otrsRequest", this.otrsRequest);
 
         if (this.create_or_update == false){
             let loading = this.loadingCtrl.create();
@@ -254,12 +248,10 @@ export class OtrsRequestPage {
             .subscribe(
               (data) => {
                 loading.dismiss();
-                console.log("requestdata", data);
 
                 if (data.message == "Success"){
                     let requestKey = data.data._id;
 
-                    console.log("keys", this.userKey, this.officeKey, requestKey);
                     this.pushService.notiBuildingManagerForRequest(requestKey, "Usted ha recibido una nueva solicitud", this.token);
                     // this.pushService.notiBuildingManagerForRequest(requestKey, "New request is created!", this.token);
 
@@ -318,7 +310,6 @@ export class OtrsRequestPage {
           else if (this.create_or_update == true){
             let loading = this.loadingCtrl.create();
             loading.present();
-            //console.log("qqqqqqqqqqqqqqq", this.otrRequest);
             this.userService.updateRequest(this.otrsRequest._id, this.otrsRequest)
             .subscribe(
               (data) => {
@@ -332,8 +323,6 @@ export class OtrsRequestPage {
               (data) => {
                 loading.dismiss();
               });
-          }
-        
+          }   
     }
-
 }

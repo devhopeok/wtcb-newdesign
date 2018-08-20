@@ -23,6 +23,5 @@ export class BaseService {
   public notificationUrl = this.baseUrl + "notification";
   
   constructor(public http: Http) {
-    console.log('Hello BaseService Provider');
   }
 }

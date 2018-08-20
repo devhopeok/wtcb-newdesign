@@ -95,7 +95,6 @@ export class MyApp {
     });
      this.events.subscribe("user:changed", ()=> {
         this.storage.get('userdata').then(val=>{
-          console.log("userdata", val);
           if (val != null){
             if (val.user.level == 7 || val.user.level == 8){
               this.pages = [
@@ -138,7 +137,6 @@ export class MyApp {
 
      this.events.subscribe("notification:changed", ()=>{
        this.storage.get('userdata').then(val=>{
-          console.log("userdata", val);
           if (val != null){
             
             this.token=val.token;
@@ -149,7 +147,6 @@ export class MyApp {
   }
 
   getNotifications(token){
-    console.log("get Notification", token);
     this.count = 0;
     this.userService.getNotifications(token)
     .subscribe(
@@ -194,7 +191,6 @@ export class MyApp {
     });
 
     this.oneSignal.getIds().then((ids)=> {
-      console.log("Push Subscription state changed: ", ids);
       this.storage.set('device_token', ids.userId);
     });
 

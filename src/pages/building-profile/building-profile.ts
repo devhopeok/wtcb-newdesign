@@ -56,7 +56,6 @@ export class BuildingProfilePage {
 
     ionViewDidEnter() {
         this.storage.get('userdata').then(val=>{
-          console.log("userdata", val);
           this.token = val.token;
           let loading = this.loadingCtrl.create();
           loading.present();
@@ -64,8 +63,6 @@ export class BuildingProfilePage {
             .subscribe(
               (data) => {
                 loading.dismiss();
-                console.log("Getting Offices:", data);
-
                 this.offices = data;
               },
               (data) => {

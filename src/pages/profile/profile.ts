@@ -39,7 +39,6 @@ export class ProfilePage {
 
   ionViewWillEnter() {
       this.storage.get('userdata').then(val=>{
-        console.log("userdata", val);
         this.token = val.token;
         this.office.token = this.token;
         this.officeKey = val.user.officeKey;
@@ -49,7 +48,6 @@ export class ProfilePage {
             this.getOffice();
         }
         else{
-          console.log(this.user, "Technician info");
           let loading = this.loadingCtrl.create();
 
           if (this.user.officeKey){
@@ -88,7 +86,6 @@ export class ProfilePage {
   init() {
         this.buildings = this.buildingService.list();
         this.floors = this.buildings[0].floors;
-        console.log("office_token", this.token);
         this.office = {
             token: this.token,
             name: '',
@@ -114,7 +111,6 @@ export class ProfilePage {
         .subscribe(
           (data) => {
             this.loading.dismiss();
-            console.log("office Data:", data);
             this.office = data;
             this.office.token=this.token;
             this.create_or_update = 1;
@@ -140,14 +136,12 @@ export class ProfilePage {
     if (this.user.level == 3){
       this.loading = this.loadingCtrl.create();
       this.loading.present();
-      console.log("param", this.office);
 
       if (this.create_or_update == 0){
         this.userService.createOffice(this.office)
         .subscribe(
           (data) => {
             this.loading.dismiss();
-            console.log("office Data:", data);
             if(data.message == 'Success'){
                 let alert = this.alertCtrl.create({
                     title: "¡Genial!", subTitle: "La información ha sido guardada.", 
@@ -174,7 +168,6 @@ export class ProfilePage {
         .subscribe(
           (data) => {
             this.loading.dismiss();
-            console.log("office Data:", data);
             if(data == 'Success'){
                 let alert = this.alertCtrl.create({
                     title: "Éxito", subTitle: "¡Genial! El perfil ha sido creado con éxito.", 
@@ -203,7 +196,6 @@ export class ProfilePage {
 
   onEdit(){
     this.edit_or_save = 1;
-    console.log("this.edit_or_save", this.edit_or_save);
   }
 
   updateTechnician(){
@@ -217,11 +209,9 @@ export class ProfilePage {
       _id: this.user._id
     }
 
-    console.log("update user", params);
     this.userService.updateUser(params)
         .subscribe(
           (data) => {
-              console.log("result update user", data);
               this.storage.get('userdata').then(val=>{
                 val.user = data.user;
                 this.storage.set('userdata', val);
@@ -243,7 +233,6 @@ export class ProfilePage {
       _id: this.user._id
     }
 
-    console.log("update user", params);
     this.userService.updateUser(params)
         .subscribe(
           (data) => {

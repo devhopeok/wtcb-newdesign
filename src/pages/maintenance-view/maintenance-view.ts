@@ -52,7 +52,6 @@ export class MaintenanceViewPage {
         }else {
             this.loadRequestByOffice();
         }
-        console.log("userdata", this.user);
       }
     });
 
@@ -61,7 +60,6 @@ export class MaintenanceViewPage {
     });
 
     this.events.subscribe("noti2:changed", ()=>{
-      console.log("noti2:changed");
       this.storage.get('notification_count').then(val=>{
         this.count = val;
       });
@@ -104,7 +102,6 @@ export class MaintenanceViewPage {
   }
 
   assign(item){
-    console.log("Assign office key", item);
     this.navCtrl.push(TechnicianPage, {request: item});
   }
 
@@ -148,7 +145,6 @@ export class MaintenanceViewPage {
                   this.openedRequests.push(data[i]);
                 }
               }
-              console.log("openedRequests:", this.officeKey, this.openedRequests);
               this.temp_openedRequests = this.openedRequests;
             },
             (data) => {
@@ -176,7 +172,6 @@ export class MaintenanceViewPage {
                 }
               }
               this.temp_openedRequests = this.openedRequests;
-              console.log("openedRequests", this.openedRequests);
             },
             (data) => {
               loading.dismiss();

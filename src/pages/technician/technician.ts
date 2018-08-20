@@ -35,7 +35,6 @@ export class TechnicianPage {
         this.userService.getUsersByLevel("3.1")
           .subscribe(
             (data) => {
-                console.log("technicians", data);
                 this.technicians1 = data;
             },
             (data) => {
@@ -45,7 +44,6 @@ export class TechnicianPage {
         this.userService.getUsersByLevel("3.2")
           .subscribe(
             (data) => {
-                console.log("technicians", data);
                 this.technicians2 = data;
             },
             (data) => {
@@ -55,7 +53,6 @@ export class TechnicianPage {
 
     ionViewWillEnter(){
         this.storage.get('userdata').then(val=>{
-          console.log("userdata", val);
           if (val != null){
             this.authUser = val.user;
             this.token = val.token;
@@ -118,7 +115,6 @@ export class TechnicianPage {
             let loading = this.loadingCtrl.create();
             loading.present();
 
-            console.log("update user", params);
             this.userService.updateUser(params)
                 .subscribe(
                   (data) => {

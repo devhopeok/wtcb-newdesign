@@ -323,7 +323,6 @@ var HomePage = (function () {
     HomePage.prototype.ionViewWillEnter = function () {
         var _this = this;
         this.storage.get('userdata').then(function (val) {
-            console.log("userdata", val);
             _this.token = val.token;
             _this.authUser = val.user;
             var loading = _this.loadingCtrl.create();
@@ -331,7 +330,6 @@ var HomePage = (function () {
             _this.userService.getAllOffices(_this.token)
                 .subscribe(function (data) {
                 loading.dismiss();
-                console.log("Getting All Offices:", data);
                 _this.offices = data;
             }, function (data) {
                 loading.dismiss();
@@ -343,7 +341,6 @@ var HomePage = (function () {
         this.events.subscribe("noti1:changed", function () {
             _this.storage.get('notification_count').then(function (val) {
                 _this.count = val;
-                console.log("noti1:changed", val, _this.count);
             });
         });
     };
@@ -540,7 +537,6 @@ var ProfilePage = (function () {
     ProfilePage.prototype.ionViewWillEnter = function () {
         var _this = this;
         this.storage.get('userdata').then(function (val) {
-            console.log("userdata", val);
             _this.token = val.token;
             _this.office.token = _this.token;
             _this.officeKey = val.user.officeKey;
@@ -549,7 +545,6 @@ var ProfilePage = (function () {
                 _this.getOffice();
             }
             else {
-                console.log(_this.user, "Technician info");
                 var loading_1 = _this.loadingCtrl.create();
                 if (_this.user.officeKey) {
                     loading_1.present();
@@ -579,7 +574,6 @@ var ProfilePage = (function () {
     ProfilePage.prototype.init = function () {
         this.buildings = this.buildingService.list();
         this.floors = this.buildings[0].floors;
-        console.log("office_token", this.token);
         this.office = {
             token: this.token,
             name: '',
@@ -602,7 +596,6 @@ var ProfilePage = (function () {
         this.userService.getOfficeByEmail(this.token)
             .subscribe(function (data) {
             _this.loading.dismiss();
-            console.log("office Data:", data);
             _this.office = data;
             _this.office.token = _this.token;
             _this.create_or_update = 1;
@@ -625,12 +618,10 @@ var ProfilePage = (function () {
         if (this.user.level == 3) {
             this.loading = this.loadingCtrl.create();
             this.loading.present();
-            console.log("param", this.office);
             if (this.create_or_update == 0) {
                 this.userService.createOffice(this.office)
                     .subscribe(function (data) {
                     _this.loading.dismiss();
-                    console.log("office Data:", data);
                     if (data.message == 'Success') {
                         var alert_1 = _this.alertCtrl.create({
                             title: "¡Genial!", subTitle: "La información ha sido guardada.",
@@ -654,7 +645,6 @@ var ProfilePage = (function () {
                 this.userService.updateOffice(this.office)
                     .subscribe(function (data) {
                     _this.loading.dismiss();
-                    console.log("office Data:", data);
                     if (data == 'Success') {
                         var alert_2 = _this.alertCtrl.create({
                             title: "Éxito", subTitle: "¡Genial! El perfil ha sido creado con éxito.",
@@ -681,7 +671,6 @@ var ProfilePage = (function () {
     };
     ProfilePage.prototype.onEdit = function () {
         this.edit_or_save = 1;
-        console.log("this.edit_or_save", this.edit_or_save);
     };
     ProfilePage.prototype.updateTechnician = function () {
         var _this = this;
@@ -694,10 +683,8 @@ var ProfilePage = (function () {
             company: this.user.company,
             _id: this.user._id
         };
-        console.log("update user", params);
         this.userService.updateUser(params)
             .subscribe(function (data) {
-            console.log("result update user", data);
             _this.storage.get('userdata').then(function (val) {
                 val.user = data.user;
                 _this.storage.set('userdata', val);
@@ -714,7 +701,6 @@ var ProfilePage = (function () {
             officeKey: this.officeKey,
             _id: this.user._id
         };
-        console.log("update user", params);
         this.userService.updateUser(params)
             .subscribe(function (data) {
             console.log("result update user", data);
@@ -783,7 +769,6 @@ var NotificationPage = (function () {
     NotificationPage.prototype.ionViewWillEnter = function () {
         var _this = this;
         this.storage.get('userdata').then(function (val) {
-            console.log("userdata", val);
             if (val != null) {
                 _this.authUser = val.user;
                 _this.token = val.token;
@@ -799,7 +784,6 @@ var NotificationPage = (function () {
             .subscribe(function (data) {
             loading.dismiss();
             _this.notifications = data;
-            console.log("notifications", data);
         }, function (data) {
             loading.dismiss();
         });
@@ -917,13 +901,11 @@ var TechnicianPage = (function () {
         var _this = this;
         this.userService.getUsersByLevel("3.1")
             .subscribe(function (data) {
-            console.log("technicians", data);
             _this.technicians1 = data;
         }, function (data) {
         });
         this.userService.getUsersByLevel("3.2")
             .subscribe(function (data) {
-            console.log("technicians", data);
             _this.technicians2 = data;
         }, function (data) {
         });
@@ -931,7 +913,6 @@ var TechnicianPage = (function () {
     TechnicianPage.prototype.ionViewWillEnter = function () {
         var _this = this;
         this.storage.get('userdata').then(function (val) {
-            console.log("userdata", val);
             if (val != null) {
                 _this.authUser = val.user;
                 _this.token = val.token;
@@ -987,7 +968,6 @@ var TechnicianPage = (function () {
             };
             var loading_1 = this.loadingCtrl.create();
             loading_1.present();
-            console.log("update user", params);
             this.userService.updateUser(params)
                 .subscribe(function (data) {
                 console.log("result update user", data);
@@ -1056,7 +1036,6 @@ var BuildingListPage = (function () {
         this.navParams = navParams;
         this.buildingService = buildingService;
         this.buildings = this.buildingService.list();
-        console.log(this.buildings);
     }
     BuildingListPage.prototype.ionViewDidLoad = function () {
     };
@@ -1156,7 +1135,6 @@ var CreateOfficePage = (function () {
     CreateOfficePage.prototype.ionViewWillEnter = function () {
         var _this = this;
         this.storage.get('userdata').then(function (val) {
-            console.log("userdata", val);
             _this.token = val.token;
             _this.office.token = _this.token;
         });
@@ -1166,10 +1144,8 @@ var CreateOfficePage = (function () {
     CreateOfficePage.prototype.init = function () {
         this.buildings = this.buildingService.list();
         this.floors = this.buildings[0].floors;
-        console.log("office_token", this.token);
         this.office.token = this.token;
         var nav_office = this.navParams.get('office');
-        console.log("nav_office", nav_office);
         if (nav_office) {
             this.office._id = nav_office._id;
             this.office.name = nav_office.name;
@@ -1214,7 +1190,6 @@ var CreateOfficePage = (function () {
         this.userService.updateOffice(this.office)
             .subscribe(function (data) {
             _this.loading.dismiss();
-            console.log("office Data:", data);
             if (data == 'Success') {
                 var alert_1 = _this.alertCtrl.create({
                     title: "!Genial!",
@@ -1229,7 +1204,6 @@ var CreateOfficePage = (function () {
                 alert_1.present();
                 _this.office.employees.employee.officeKey = _this.office._id;
                 _this.office.employees.outsourcing.officeKey = _this.office._id;
-                console.log("office key", _this.office._id, _this.office.employees.outsourcing);
                 _this.userService.signUp(_this.office.employees.employee)
                     .subscribe(function (data) {
                 }, function (data) {
@@ -1309,7 +1283,6 @@ var AnalyticsPage = (function () {
         this.star_flags = [false, false, false, false, false];
     }
     AnalyticsPage.prototype.go = function () {
-        console.log("date", this.fromDate, this.toDate);
         this.getSteps();
     };
     AnalyticsPage.prototype.ionViewDidLoad = function () {
@@ -1317,7 +1290,6 @@ var AnalyticsPage = (function () {
     AnalyticsPage.prototype.ionViewWillEnter = function () {
         var _this = this;
         this.storage.get('userdata').then(function (val) {
-            console.log("userdata", val);
             if (val != null) {
                 _this.authUser = val.user;
                 _this.token = val.token;
@@ -1353,7 +1325,6 @@ var AnalyticsPage = (function () {
         loading.present();
         this.userService.getSteps(this.token)
             .subscribe(function (data) {
-            console.log("steps", data);
             loading.dismiss();
             _this.stars = [];
             _this.avg_time1 = 0;
@@ -1369,7 +1340,6 @@ var AnalyticsPage = (function () {
                     var start_date = new Date(data[i].updated_at5);
                     var start_difference = start_date - from_date;
                     var to_difference = to_date - start_date;
-                    //console.log("start-to-difference", start_difference, to_difference);
                     if (start_difference >= 0 && to_difference >= 0) {
                         if (data[i].status5 == 1) {
                             _this.starSteps.push(data[i]);
@@ -1421,10 +1391,6 @@ var AnalyticsPage = (function () {
             _this.avg_time3 = _this.timeConversion(_this.avg_time3);
             _this.avg_time2 = _this.timeConversion(_this.avg_time2);
             _this.avg_time1 = _this.timeConversion(_this.avg_time1);
-            console.log("444444", _this.avg_time4);
-            console.log("333333", _this.avg_time3);
-            console.log("222222", _this.avg_time2);
-            console.log("111111", _this.avg_time1);
             var xxx = _this.groupBy(_this.starSteps, 'email');
             for (var key in xxx) {
                 console.log("key", key);
@@ -1435,7 +1401,6 @@ var AnalyticsPage = (function () {
                 _this.stars.push({ email: key, star: ave });
             }
             _this.getStarReview();
-            console.log("closed request steps", _this.stars);
             // let loading1 = this.loadingCtrl.create();
             // loading1.present();
             // this.userService.getAllRequests(this.token)
@@ -1514,14 +1479,12 @@ var AnalyticsPage = (function () {
         this.three_stars = [];
         this.two_stars = [];
         this.one_star = [];
-        console.log(this.stars.length, "this.stars.length");
         var _loop_1 = function (i) {
             var loading = this_1.loadingCtrl.create();
             loading.present();
             this_1.userService.getUserByEmail(this_1.stars[i].email).subscribe(function (data) {
                 loading.dismiss();
                 _this.userService.getOfficesById(data.officeKey, _this.token).subscribe(function (data1) {
-                    console.log('stars', data1);
                     if (_this.stars[i].star >= 4.5) {
                         _this.five_stars.push(data1[0].name);
                     }
@@ -1655,7 +1618,6 @@ var OtrsRequestPage = (function () {
     OtrsRequestPage.prototype.ionViewWillEnter = function () {
         var _this = this;
         this.storage.get('userdata').then(function (val) {
-            console.log("userdata", val);
             if (val != null) {
                 _this.token = val.token;
                 _this.officeKey = val.user.officeKey;
@@ -1679,7 +1641,6 @@ var OtrsRequestPage = (function () {
                     _this.userService.getOfficesById(_this.officeKey, _this.token)
                         .subscribe(function (data) {
                         loading_1.dismiss();
-                        console.log("Getting Offices:", data);
                         _this.office = data[0];
                         var buildingId = _this.office.buildingId;
                         var floorId = _this.office.floorId;
@@ -1701,7 +1662,6 @@ var OtrsRequestPage = (function () {
                             for (var j = 0; j < building.floors.length; j++) {
                                 if (building.floors[j].id.toString() == floorId) {
                                     floor = building.floors[j];
-                                    console.log("floor", floor);
                                     break;
                                 }
                             }
@@ -1725,7 +1685,6 @@ var OtrsRequestPage = (function () {
         var file = files[0];
         this.file = file;
         this.filename = new Date().getTime() + this.file.name;
-        console.log("this.file:" + JSON.stringify(this.filename));
         __WEBPACK_IMPORTED_MODULE_8_aws_sdk_global__["config"].accessKeyId = 'AKIAJNHK7OBATDPIEJJA';
         __WEBPACK_IMPORTED_MODULE_8_aws_sdk_global__["config"].secretAccessKey = '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';
         // AWS.config.accessKeyId = 'AKIAIPQAVOWPUIP2ENSA';
@@ -1738,7 +1697,6 @@ var OtrsRequestPage = (function () {
         // let bucket = new S3({params: {Bucket: 'YOUR-BUCKET-NAME'}});
         // let params = {BucketName: 'YOUR-BUCKET-NAME', Key: this.file.name, Body: this.file};
         var params = { Bucket: 'wtcb', Key: this.filename, Body: this.file, ContentType: this.file.type, ACL: 'public-read', ServerSideEncrytion: 'AES256' };
-        console.log("params", params);
         var that = this;
         var loading = this.loadingCtrl.create();
         loading.present();
@@ -1816,17 +1774,14 @@ var OtrsRequestPage = (function () {
         this.otrsRequest.created_at = new Date();
         this.otrsRequest.buildingName = this.building_name;
         this.otrsRequest.floorName = this.floor_name;
-        console.log("this.otrsRequest", this.otrsRequest);
         if (this.create_or_update == false) {
             var loading_2 = this.loadingCtrl.create();
             loading_2.present();
             this.userService.createRequest(this.otrsRequest)
                 .subscribe(function (data) {
                 loading_2.dismiss();
-                console.log("requestdata", data);
                 if (data.message == "Success") {
                     var requestKey = data.data._id;
-                    console.log("keys", _this.userKey, _this.officeKey, requestKey);
                     _this.pushService.notiBuildingManagerForRequest(requestKey, "Usted ha recibido una nueva solicitud", _this.token);
                     // this.pushService.notiBuildingManagerForRequest(requestKey, "New request is created!", this.token);
                     var newSteps = {
@@ -1870,7 +1825,6 @@ var OtrsRequestPage = (function () {
         else if (this.create_or_update == true) {
             var loading_3 = this.loadingCtrl.create();
             loading_3.present();
-            //console.log("qqqqqqqqqqqqqqq", this.otrRequest);
             this.userService.updateRequest(this.otrsRequest._id, this.otrsRequest)
                 .subscribe(function (data) {
                 loading_3.dismiss();
@@ -2208,7 +2162,6 @@ var MaintenanceTrackerPage = (function () {
                     }
                 }
             }
-            console.log("this.officeeeeeeee", _this.office);
         }, function (data) {
             loading.dismiss();
         });
@@ -2673,7 +2626,7 @@ var MaintenanceTrackerPage = (function () {
 }());
 MaintenanceTrackerPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-maintenance-tracker',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/maintenance-tracker/maintenance-tracker.html"*/'<!--\n  Generated template for the MaintenanceTrackerPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>Estado de su Solicitud</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n    <ion-list>\n        <ion-list-header class="header-style">\n            FASE\n        </ion-list-header>\n    </ion-list>\n\n    <div class="wrapper">\n        <ul class="StepProgress">\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 1, \'current\': request.step == 1}">\n\n                <strong class="subheader-style" (click)="onShow1()">FASE 1 - Solicitud</strong>\n\n                <div *ngIf="show1">\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 1">\n                        <ion-item>\n                            <ion-toggle color="custom" checked="true" disabled="true"></ion-toggle>\n                            <ion-label class="icon-style">\n                                Su cotización ha sido enviada\n                            </ion-label>\n                        </ion-item>\n                    </ion-list>\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1 && !scheduleAccept1">\n                        <h2 class="header-style" style="text-align: center;">Visita Técnica</h2>\n\n                        <ion-item>\n                            <ion-label>Fecha</ion-label>\n                            <ion-datetime placeholder="Seleccione una fecha." displayFormat="MMM DD YYYY" [(ngModel)]="quote.date"></ion-datetime>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Hora</ion-label>\n                            <ion-datetime placeholder="Seleccione una hora." displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="quote.time"></ion-datetime>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="quote.name"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del cliente</ion-label>\n                            <ion-input type="text" [(ngModel)]="quote.company"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Teléfono del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="quote.phone"></ion-input>\n                        </ion-item>\n                    </ion-list>\n                    <button ion-button block (click)="goToStep1_5()" class="main-btn" style="margin-top:2vw;" *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1 && !scheduleAccept1">\n                        Programar Visita\n                    </button>\n\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 1.5">\n                        <h2 class="header-style" style="text-align: center;">Técnico</h2>\n\n                        <ion-item>\n                            <ion-label>Fecha</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.quote.date"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Hora</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.quote.time"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.quote.name"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del cliente</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.quote.company"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Teléfono del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.quote.phone"></ion-input>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block (click)="acceptSchedule1()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 1.5 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\')">\n                        Aceptar Horario\n                    </button>\n                    <button ion-button block (click)="rejectSchedule1()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 1.5 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\')">\n                        Rechazar Horario\n                    </button>\n                    <button ion-button block (click)="re_schedule1()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 1.5 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\')">\n                        Reprogramar\n                    </button>\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && (request.step >= 1.5) && scheduleAccept1">\n                        <ion-item>\n                            <ion-toggle color="custom" [(ngModel)]="showQuote"></ion-toggle>\n                            <ion-label>\n                                Cargar Cotización\n                            </ion-label>\n                        </ion-item>\n                        <ion-item *ngIf="showQuote">\n                            <div>\n                                <textarea placeholder="Sus comentarios" class="textarea-style" [(ngModel)]="quote.comment"></textarea>\n                            </div>\n\n                        </ion-item>\n\n                    </ion-list>\n                    \n\n                    <button ion-button block (click)="goToStep2()" class="main-btn" style="margin-top:2vw;" *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1.5 && scheduleAccept1">\n                        Enviar Cotización\n                    </button>\n                </div>\n            </li>\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 2, \'current\': request.step == 2}">\n                <strong class="subheader-style" (click)="onShow2()">FASE 2 - Cotización</strong>\n                \n                <div *ngIf="show2">\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 2">\n                        \n                        \n                        <ion-item>\n                            <div>\n                                <textarea placeholder="Your comments" class="textarea-style" [readonly]="true" [(ngModel)]="requestDetail.quote.comment"></textarea>\n                            </div>\n\n                        </ion-item>\n\n                        \n\n                        <p class="icon-style" style="word-wrap: break-word;">Usted va a recibir un correo electrónico con su cotización.  Por favor revise su correo.</p>\n                        \n                        <p class="icon-style" *ngIf = "quoteAccept" style="word-wrap: break-word;">Cotización Aceptada.</p>\n                        \n                    </ion-list>\n\n                    <button ion-button block (click)="acceptQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && (!quoteAccept && !quoteDeny)">\n                        Aceptar Cotización\n                    </button>\n                    <button ion-button block (click)="denyQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && (!quoteAccept && !quoteDeny)">\n                        Rechazar Cotización\n                    </button>\n                \n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 2">\n                        \n                        <ion-item *ngIf="!quoteAccept && !quoteDeny">\n                            <ion-toggle color="custom" [(ngModel)]="quoteAccept" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Cotización Aceptada\n                            </ion-label>\n                        </ion-item>\n\n                        <ion-item *ngIf="quoteAccept">\n                            <ion-toggle color="custom" [(ngModel)]="quoteAccept" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Cotización Aceptada\n                            </ion-label>\n                        </ion-item>\n\n                        <ion-item *ngIf="quoteDeny">\n                            <ion-toggle color="custom" [(ngModel)]="quoteDeny" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Cotización Rechazada\n                            </ion-label>\n                        </ion-item>\n\n                        <ion-item *ngIf="quoteDeny">\n                            <div>\n                                <textarea class="textarea-style" [(ngModel)]="requestDetail.quote.comment" [readonly]="true"></textarea>\n                            </div>\n\n                        </ion-item>\n\n                        <ion-item *ngIf="quoteAccept">\n                            <ion-toggle color="custom" [(ngModel)]="showSchedule"></ion-toggle>\n                            <ion-label>\n                                Programar visita\n                            </ion-label>\n                        </ion-item>\n                    </ion-list>\n\n                    <ion-list no-lines *ngIf="showSchedule">\n                        <ion-item>\n                            <ion-label>Fecha</ion-label>\n                            <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="technician_date"></ion-datetime>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Hora</ion-label>\n                            <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="technician_time"></ion-datetime>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="technician_name"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del cliente</ion-label>\n                            <ion-input type="text" [(ngModel)]="technician_company"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Teléfono</ion-label>\n                            <ion-input type="text" [(ngModel)]="technician_phone"></ion-input>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block class="main-btn" style="margin-top:2vw;" (click)="goToStep3()"\n                            *ngIf="(authUser.level == 7 || authUser.level == 8) && quoteAccept">\n                        Programar Visita\n                    </button>\n                </div>\n            </li>\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 3, \'current\': request.step == 3}">\n                <strong class="subheader-style" (click)="onShow3()">FASE 3 - Inicio & Finalización trabajo</strong>\n\n                <div *ngIf="show3">\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 3">\n                        <!-- <ion-item>\n                            <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY\'}}</ion-note>\n                            -\n                            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'h:mm a\'}}</ion-note>\n                        </ion-item> -->\n                        <ion-item>\n                            <ion-label>Fecha</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.date" [readonly]="true"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Hora</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.time" [readonly]="true"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.name" [readonly]="true"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del cliente</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.company" [readonly]="true"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Teléfono</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.phone" [readonly]="true"></ion-input>\n                        </ion-item>\n\n                        <p class="icon-style" *ngIf = "scheduleAccept" style="word-wrap: break-word;">Horario Aceptado</p>\n                        <!-- <ion-item>\n                            <ion-toggle [(ngModel)]="scheduleAccept"></ion-toggle>\n                            <ion-label>\n                                Accept Schedule\n                            </ion-label>\n                        </ion-item> -->\n                    </ion-list>\n\n                    <button ion-button block (click)="acceptSchedule()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 3 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\')">\n                        Aceptar Horario\n                    </button>\n\n                    <button ion-button block (click)="rejectSchedule()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 3 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\')">\n                        Rechazar Horario\n                    </button>\n\n                    <button ion-button block (click)="re_schedule()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 3 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\')">\n                        Reprogramar\n                    </button>\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >=3">\n                        <!-- <ion-item>\n                            <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY\'}}</ion-note>\n                            -\n                            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'h:mm a\'}}</ion-note>\n                        </ion-item> -->\n                        \n                        <ion-item>\n                            <ion-toggle color="custom" [(ngModel)]="scheduleAccept" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Programación Aceptada\n                            </ion-label>\n                        </ion-item>\n                        <!-- <ion-item *ngIf="scheduleAccept">\n                            <ion-label>Job Complete</ion-label>\n                            <ion-toggle color="custom" [(ngModel)]="is_completed"></ion-toggle>\n                        </ion-item> -->\n                    </ion-list>\n\n                    <button ion-button block class="main-btn" (click)="goToStep4()"\n                            *ngIf="(authUser.level == 7 || authUser.level == 8) && scheduleAccept">\n                        Trabajo Finalizado\n                    </button>\n                </div>\n            </li>\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 4, \'current\': request.step == 4}">\n                <strong class="subheader-style" (click)="onShow4()">FASE 4 - Facturación</strong>\n\n                <div *ngIf="show4">\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 4">\n                        <!-- <ion-item>\n                            <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY\'}}</ion-note>\n                            -\n                            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'h:mm a\'}}</ion-note>\n                        </ion-item> -->\n                        <ion-item>\n                            <ion-toggle color="custom" [(ngModel)]="requestDetail.is_completed" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Trabajo finalizado\n                            </ion-label>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block icon-left class="main-btn" *ngIf="request.step == 4 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && !is_paid" (click)="payInvoice()">\n                        <ion-icon ios="ios-card" md="md-card"></ion-icon>\n                        Pago de Factura\n                    </button>\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 4">\n                        <!-- <ion-item>\n                            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>\n                            FECHA DE SOLICITUD\n                            <ion-note item-end>{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY, h:mm:ss a\'}}</ion-note>\n                        </ion-item>\n                        <ion-item>\n                            {{office.buildingName}} | {{office.floorName}} | {{office.name}}\n                        </ion-item> -->\n                        <ion-item>\n                            <ion-icon class="icon-style" ios="ios-calendar" md="md-calendar"></ion-icon>\n                            Factura\n                            <ion-note class="icon-style" *ngIf="!is_paid" item-end>En Espera</ion-note>\n                            <ion-note class="icon-style" *ngIf="is_paid" item-end>Pagado</ion-note>\n                        </ion-item>\n                    </ion-list>\n\n                    <!-- <ion-card *ngIf="requestDetail.status3 && (authUser.level == 7 || authUser.level == 8)  && request.step == 4">\n                        <img src="{{requestDetail.invoice}}"/>\n                    </ion-card> -->\n\n                    <button ion-button block class="main-btn" icon-left *ngIf="is_paid && (authUser.level == 7 || authUser.level == 8)" (click)="paidInvoice()">\n                        <ion-icon ios="ios-card" md="md-card"></ion-icon>\n                        Factura Pagada\n                    </button>\n                </div>\n            </li>\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 5, \'current\': request.step == 5}">\n                <strong class="subheader-style" (click)="onShow5()">FASE 5 -  Pago</strong>\n\n                <div *ngIf="show5">\n                    <!-- <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\') && request.step == 5">\n                        <ion-item>\n                            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>\n                            Job Paid\n                            <ion-note item-end (click)="viewInvoice()">View</ion-note>\n                        </ion-item>\n                    </ion-list>\n\n                    <ion-card *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\') && request.step == 5 && showInvoice">\n                        <img src="{{requestDetail.invoice}}"/>\n                    </ion-card> -->\n\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 5">\n                        <ion-item>\n                            \n                            <rating [(ngModel)]="rate" class="rating"></rating>\n                        </ion-item>\n                        <ion-item>\n                            <div>\n                                <textarea placeholder="Sus comentarios" class="textarea-style" [(ngModel)]="comment"></textarea>\n                            </div>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block icon-left class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 5 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\')" (click)="leaveReview()">\n                        <ion-icon ios="ios-star" md="md-star"></ion-icon>\n                        Por favor calificanos\n                    </button>\n\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 5">\n                        <ion-item *ngIf="requestDetail.status5 == 0">\n                            <ion-icon class="icon-style" ios="ios-calendar" md="md-calendar"></ion-icon>\n                            Finalizado\n                            <ion-note class="icon-style" item-end>Evaluación Pendiente</ion-note>\n                        </ion-item>\n                        <ion-item *ngIf="requestDetail.status5 == 1">\n                            \n                            <rating [(ngModel)]="requestDetail.star" readOnly="true" class="rating"></rating>\n                            <!-- <ion-note class="icon-style" item-end>{{requestDetail.star}} stars</ion-note> -->\n                        </ion-item>\n                        <ion-item *ngIf="requestDetail.status5 == 1">\n                            <div>\n                                <textarea class="textarea-style" [(ngModel)]="requestDetail.comment" [readonly]="true"></textarea>\n                            </div>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block icon-left class="main-btn" *ngIf="requestDetail.status5 == 1 && ((authUser.level == 7 || authUser.level == 8))" (click)="archiveRequest()">\n                        <ion-icon ios="ios-cloud-download" md="md-cloud-download"></ion-icon>\n                        Archivo del Ticket\n                    </button>\n                </div>\n            </li>\n        </ul>\n    </div>\n\n    <ion-list no-lines style="margin-top: 20px;">\n        <ion-list-header class="header-style">\n            Información del Cliente\n        </ion-list-header>\n\n        <ion-avatar class="client-avatar">\n            <img src="assets/imgs/ticket.jpeg">\n        </ion-avatar>\n        <h2 class="header-style" style="text-align: center;">{{requestKey}}</h2>\n        <h2 class="header-style" style="text-align: center;">{{office.company}}</h2>\n        <p style="text-align:center; font-size: 15px; color:gray;">{{office.name}}</p>\n        <h2 class="header-style" style="text-align: center; opacity: 0.7;">{{office.buildingName}} - {{office.floorName}}</h2>\n        <ion-item style="opacity:0.7; text-align: center;">\n            <ion-icon class="icon-style" name="md-calendar"></ion-icon>\n            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY\'}}</ion-note>\n            -\n            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>\n            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'h:mm a\'}}</ion-note>\n        </ion-item>\n        <!-- <ion-item>\n            <ion-avatar item-start>\n                <img src="assets/imgs/working-icon.png">\n            </ion-avatar>\n            <h2>{{office.company}}</h2>\n            <p>{{office.name}}</p>\n        </ion-item>\n        <ion-item>\n            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>\n            FECHA DE SOLICITUD\n            <ion-note item-end *ngIf="authUser.level != 4">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY, h:mm:ss a\'}}</ion-note>\n        </ion-item> -->\n    </ion-list>\n\n    <ion-list no-lines>\n        <ion-list-header class="header-style">\n            DESCRIPCIÓN DE SOLICITUD\n        </ion-list-header>\n        <!-- <ion-item class="icon-style">\n            <ion-icon  ios="ios-person" md="md-person"></ion-icon>\n            {{user.first_name + \' \' + user.last_name}}\n        </ion-item> -->\n        <h2 class="header-style" style="text-align: center;">{{user.first_name}} {{user.last_name}}</h2>\n        <ion-item>\n            <ion-toggle color="custom" [(ngModel)]="viewRequest"></ion-toggle>\n            <ion-label class="icon-style">\n                Ver Detalles De La Solicitud\n            </ion-label>\n        </ion-item>\n    </ion-list>\n\n    <ion-card *ngIf="viewRequest">\n        <ion-card-content>\n            <p>{{request.comment}}</p>\n        </ion-card-content>\n\n        <ion-slides pager="true" *ngIf="request.photos && request.photos.length > 0">\n            <ion-slide *ngFor="let item of request.photos;">\n                <img src="{{item}}"/>\n            </ion-slide>\n        </ion-slides>\n    </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/maintenance-tracker/maintenance-tracker.html"*/,
+        selector: 'page-maintenance-tracker',template:/*ion-inline-start:"/Volumes/Data/Git/wtcb-newdesign/src/pages/maintenance-tracker/maintenance-tracker.html"*/'<!--\n  Generated template for the MaintenanceTrackerPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>Estado de su Solicitud</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n    <ion-list>\n        <ion-list-header class="header-style">\n            FASE\n        </ion-list-header>\n    </ion-list>\n\n    <div class="wrapper">\n        <ul class="StepProgress">\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 1, \'current\': request.step == 1}">\n\n                <strong class="subheader-style" (click)="onShow1()">FASE 1 - Solicitud</strong>\n\n                <div *ngIf="show1">\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 1">\n                        <ion-item>\n                            <ion-toggle color="custom" checked="true" disabled="true"></ion-toggle>\n                            <ion-label class="icon-style">\n                                Su cotización ha sido enviada\n                            </ion-label>\n                        </ion-item>\n                    </ion-list>\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1 && !scheduleAccept1">\n                        <h2 class="header-style" style="text-align: center;">Visita Técnica</h2>\n\n                        <ion-item>\n                            <ion-label>Fecha</ion-label>\n                            <ion-datetime placeholder="Seleccione una fecha." displayFormat="MMM DD YYYY" [(ngModel)]="quote.date"></ion-datetime>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Hora</ion-label>\n                            <ion-datetime placeholder="Seleccione una hora." displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="quote.time"></ion-datetime>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="quote.name"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del cliente</ion-label>\n                            <ion-input type="text" [(ngModel)]="quote.company"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Teléfono del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="quote.phone"></ion-input>\n                        </ion-item>\n                    </ion-list>\n                    <button ion-button block (click)="goToStep1_5()" class="main-btn" style="margin-top:2vw;" *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1 && !scheduleAccept1">\n                        Programar Visita\n                    </button>\n\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 1.5">\n                        <h2 class="header-style" style="text-align: center;">Técnico</h2>\n\n                        <ion-item>\n                            <ion-label>Fecha</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.quote.date"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Hora</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.quote.time"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.quote.name"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del cliente</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.quote.company"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Teléfono del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.quote.phone"></ion-input>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block (click)="acceptSchedule1()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 1.5 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\')">\n                        Aceptar Horario\n                    </button>\n                    <button ion-button block (click)="rejectSchedule1()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 1.5 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\')">\n                        Rechazar Horario\n                    </button>\n                    <button ion-button block (click)="re_schedule1()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 1.5 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\')">\n                        Reprogramar\n                    </button>\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && (request.step >= 1.5) && scheduleAccept1">\n                        <ion-item>\n                            <ion-toggle color="custom" [(ngModel)]="showQuote"></ion-toggle>\n                            <ion-label>\n                                Cargar Cotización\n                            </ion-label>\n                        </ion-item>\n                        <ion-item *ngIf="showQuote">\n                            <div>\n                                <textarea placeholder="Sus comentarios" class="textarea-style" [(ngModel)]="quote.comment"></textarea>\n                            </div>\n\n                        </ion-item>\n\n                    </ion-list>\n                    \n\n                    <button ion-button block (click)="goToStep2()" class="main-btn" style="margin-top:2vw;" *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 1.5 && scheduleAccept1">\n                        Enviar Cotización\n                    </button>\n                </div>\n            </li>\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 2, \'current\': request.step == 2}">\n                <strong class="subheader-style" (click)="onShow2()">FASE 2 - Cotización</strong>\n                \n                <div *ngIf="show2">\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 2">\n                        \n                        <ion-item>\n                            <div>\n                                <textarea placeholder="Your comments" class="textarea-style" [readonly]="true" [(ngModel)]="requestDetail.quote.comment"></textarea>\n                            </div>\n\n                        </ion-item>\n\n                        <p class="icon-style" style="word-wrap: break-word;">Usted va a recibir un correo electrónico con su cotización.  Por favor revise su correo.</p>\n                        \n                        <p class="icon-style" *ngIf = "quoteAccept" style="word-wrap: break-word;">Cotización Aceptada.</p>\n                        \n                    </ion-list>\n\n                    <button ion-button block (click)="acceptQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && (!quoteAccept && !quoteDeny)">\n                        Aceptar Cotización\n                    </button>\n                    <button ion-button block (click)="denyQuote()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 2 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && (!quoteAccept && !quoteDeny)">\n                        Rechazar Cotización\n                    </button>\n                \n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 2">\n                        \n                        <ion-item *ngIf="!quoteAccept && !quoteDeny">\n                            <ion-toggle color="custom" [(ngModel)]="quoteAccept" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Cotización Aceptada\n                            </ion-label>\n                        </ion-item>\n\n                        <ion-item *ngIf="quoteAccept">\n                            <ion-toggle color="custom" [(ngModel)]="quoteAccept" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Cotización Aceptada\n                            </ion-label>\n                        </ion-item>\n\n                        <ion-item *ngIf="quoteDeny">\n                            <ion-toggle color="custom" [(ngModel)]="quoteDeny" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Cotización Rechazada\n                            </ion-label>\n                        </ion-item>\n\n                        <ion-item *ngIf="quoteDeny">\n                            <div>\n                                <textarea class="textarea-style" [(ngModel)]="requestDetail.quote.comment" [readonly]="true"></textarea>\n                            </div>\n\n                        </ion-item>\n\n                        <ion-item *ngIf="quoteAccept">\n                            <ion-toggle color="custom" [(ngModel)]="showSchedule"></ion-toggle>\n                            <ion-label>\n                                Programar visita\n                            </ion-label>\n                        </ion-item>\n                    </ion-list>\n\n                    <ion-list no-lines *ngIf="showSchedule">\n                        <ion-item>\n                            <ion-label>Fecha</ion-label>\n                            <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="technician_date"></ion-datetime>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Hora</ion-label>\n                            <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="technician_time"></ion-datetime>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="technician_name"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del cliente</ion-label>\n                            <ion-input type="text" [(ngModel)]="technician_company"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Teléfono</ion-label>\n                            <ion-input type="text" [(ngModel)]="technician_phone"></ion-input>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block class="main-btn" style="margin-top:2vw;" (click)="goToStep3()"\n                            *ngIf="(authUser.level == 7 || authUser.level == 8) && quoteAccept">\n                        Programar Visita\n                    </button>\n                </div>\n            </li>\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 3, \'current\': request.step == 3}">\n                <strong class="subheader-style" (click)="onShow3()">FASE 3 - Inicio & Finalización trabajo</strong>\n\n                <div *ngIf="show3">\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 3">\n                        <!-- <ion-item>\n                            <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY\'}}</ion-note>\n                            -\n                            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'h:mm a\'}}</ion-note>\n                        </ion-item> -->\n                        <ion-item>\n                            <ion-label>Fecha</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.date" [readonly]="true"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Hora</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.time" [readonly]="true"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del técnico</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.name" [readonly]="true"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Nombre del cliente</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.company" [readonly]="true"></ion-input>\n                        </ion-item>\n                        <ion-item>\n                            <ion-label>Teléfono</ion-label>\n                            <ion-input type="text" [(ngModel)]="requestDetail.technician_info.phone" [readonly]="true"></ion-input>\n                        </ion-item>\n\n                        <p class="icon-style" *ngIf = "scheduleAccept" style="word-wrap: break-word;">Horario Aceptado</p>\n                        <!-- <ion-item>\n                            <ion-toggle [(ngModel)]="scheduleAccept"></ion-toggle>\n                            <ion-label>\n                                Accept Schedule\n                            </ion-label>\n                        </ion-item> -->\n                    </ion-list>\n\n                    <button ion-button block (click)="acceptSchedule()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 3 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\')">\n                        Aceptar Horario\n                    </button>\n\n                    <button ion-button block (click)="rejectSchedule()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 3 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\')">\n                        Rechazar Horario\n                    </button>\n\n                    <button ion-button block (click)="re_schedule()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 3 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\')">\n                        Reprogramar\n                    </button>\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >=3">\n                        <!-- <ion-item>\n                            <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY\'}}</ion-note>\n                            -\n                            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'h:mm a\'}}</ion-note>\n                        </ion-item> -->\n                        \n                        <ion-item>\n                            <ion-toggle color="custom" [(ngModel)]="scheduleAccept" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Programación Aceptada\n                            </ion-label>\n                        </ion-item>\n                        <!-- <ion-item *ngIf="scheduleAccept">\n                            <ion-label>Job Complete</ion-label>\n                            <ion-toggle color="custom" [(ngModel)]="is_completed"></ion-toggle>\n                        </ion-item> -->\n                    </ion-list>\n\n                    <button ion-button block class="main-btn" (click)="goToStep4()"\n                            *ngIf="(authUser.level == 7 || authUser.level == 8) && scheduleAccept">\n                        Trabajo Finalizado\n                    </button>\n                </div>\n            </li>\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 4, \'current\': request.step == 4}">\n                <strong class="subheader-style" (click)="onShow4()">FASE 4 - Facturación</strong>\n\n                <div *ngIf="show4">\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 4">\n                        <!-- <ion-item>\n                            <ion-icon class="icon-style" style="padding-left:0;" name="md-calendar"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY\'}}</ion-note>\n                            -\n                            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>\n                            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'h:mm a\'}}</ion-note>\n                        </ion-item> -->\n                        <ion-item>\n                            <ion-toggle color="custom" [(ngModel)]="requestDetail.is_completed" disabled="true"></ion-toggle>\n                            <ion-label>\n                                Trabajo finalizado\n                            </ion-label>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block icon-left class="main-btn" *ngIf="request.step == 4 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && !is_paid" (click)="payInvoice()">\n                        <ion-icon ios="ios-card" md="md-card"></ion-icon>\n                        Pago de Factura\n                    </button>\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 4">\n                        <!-- <ion-item>\n                            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>\n                            FECHA DE SOLICITUD\n                            <ion-note item-end>{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY, h:mm:ss a\'}}</ion-note>\n                        </ion-item>\n                        <ion-item>\n                            {{office.buildingName}} | {{office.floorName}} | {{office.name}}\n                        </ion-item> -->\n                        <ion-item>\n                            <ion-icon class="icon-style" ios="ios-calendar" md="md-calendar"></ion-icon>\n                            Factura\n                            <ion-note class="icon-style" *ngIf="!is_paid" item-end>En Espera</ion-note>\n                            <ion-note class="icon-style" *ngIf="is_paid" item-end>Pagado</ion-note>\n                        </ion-item>\n                    </ion-list>\n\n                    <!-- <ion-card *ngIf="requestDetail.status3 && (authUser.level == 7 || authUser.level == 8)  && request.step == 4">\n                        <img src="{{requestDetail.invoice}}"/>\n                    </ion-card> -->\n\n                    <button ion-button block class="main-btn" icon-left *ngIf="is_paid && (authUser.level == 7 || authUser.level == 8)" (click)="paidInvoice()">\n                        <ion-icon ios="ios-card" md="md-card"></ion-icon>\n                        Factura Pagada\n                    </button>\n                </div>\n            </li>\n            <li class="StepProgress-item" [ngClass]="{\'is-done\': request.step > 5, \'current\': request.step == 5}">\n                <strong class="subheader-style" (click)="onShow5()">FASE 5 -  Pago</strong>\n\n                <div *ngIf="show5">\n                    <!-- <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\') && request.step == 5">\n                        <ion-item>\n                            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>\n                            Job Paid\n                            <ion-note item-end (click)="viewInvoice()">View</ion-note>\n                        </ion-item>\n                    </ion-list>\n\n                    <ion-card *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\') && request.step == 5 && showInvoice">\n                        <img src="{{requestDetail.invoice}}"/>\n                    </ion-card> -->\n\n                    <ion-list no-lines *ngIf="(authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\') && request.step == 5">\n                        <ion-item>\n                            \n                            <rating [(ngModel)]="rate" class="rating"></rating>\n                        </ion-item>\n                        <ion-item>\n                            <div>\n                                <textarea placeholder="Sus comentarios" class="textarea-style" [(ngModel)]="comment"></textarea>\n                            </div>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block icon-left class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 5 && (authUser.level == \'3.1\' || authUser.level == \'3.2\' || authUser.level == \'3\')" (click)="leaveReview()">\n                        <ion-icon ios="ios-star" md="md-star"></ion-icon>\n                        Por favor calificanos\n                    </button>\n\n\n                    <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >= 5">\n                        <ion-item *ngIf="requestDetail.status5 == 0">\n                            <ion-icon class="icon-style" ios="ios-calendar" md="md-calendar"></ion-icon>\n                            Finalizado\n                            <ion-note class="icon-style" item-end>Evaluación Pendiente</ion-note>\n                        </ion-item>\n                        <ion-item *ngIf="requestDetail.status5 == 1">\n                            \n                            <rating [(ngModel)]="requestDetail.star" readOnly="true" class="rating"></rating>\n                            <!-- <ion-note class="icon-style" item-end>{{requestDetail.star}} stars</ion-note> -->\n                        </ion-item>\n                        <ion-item *ngIf="requestDetail.status5 == 1">\n                            <div>\n                                <textarea class="textarea-style" [(ngModel)]="requestDetail.comment" [readonly]="true"></textarea>\n                            </div>\n                        </ion-item>\n                    </ion-list>\n\n                    <button ion-button block icon-left class="main-btn" *ngIf="requestDetail.status5 == 1 && ((authUser.level == 7 || authUser.level == 8))" (click)="archiveRequest()">\n                        <ion-icon ios="ios-cloud-download" md="md-cloud-download"></ion-icon>\n                        Archivo del Ticket\n                    </button>\n                </div>\n            </li>\n        </ul>\n    </div>\n\n    <ion-list no-lines style="margin-top: 20px;">\n        <ion-list-header class="header-style">\n            Información del Cliente\n        </ion-list-header>\n\n        <ion-avatar class="client-avatar">\n            <img src="assets/imgs/ticket.jpeg">\n        </ion-avatar>\n        <h2 class="header-style" style="text-align: center;">{{requestKey}}</h2>\n        <h2 class="header-style" style="text-align: center;">{{office.company}}</h2>\n        <p style="text-align:center; font-size: 15px; color:gray;">{{office.name}}</p>\n        <h2 class="header-style" style="text-align: center; opacity: 0.7;">{{office.buildingName}} - {{office.floorName}}</h2>\n        <ion-item style="opacity:0.7; text-align: center;">\n            <ion-icon class="icon-style" name="md-calendar"></ion-icon>\n            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY\'}}</ion-note>\n            -\n            <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>\n            <ion-note class="icon-style">{{request.created_at | amLocale:\'en\' | amDateFormat:\'h:mm a\'}}</ion-note>\n        </ion-item>\n        <!-- <ion-item>\n            <ion-avatar item-start>\n                <img src="assets/imgs/working-icon.png">\n            </ion-avatar>\n            <h2>{{office.company}}</h2>\n            <p>{{office.name}}</p>\n        </ion-item>\n        <ion-item>\n            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>\n            FECHA DE SOLICITUD\n            <ion-note item-end *ngIf="authUser.level != 4">{{request.created_at | amLocale:\'en\' | amDateFormat:\'MMM Do YYYY, h:mm:ss a\'}}</ion-note>\n        </ion-item> -->\n    </ion-list>\n\n    <ion-list no-lines>\n        <ion-list-header class="header-style">\n            DESCRIPCIÓN DE SOLICITUD\n        </ion-list-header>\n        <!-- <ion-item class="icon-style">\n            <ion-icon  ios="ios-person" md="md-person"></ion-icon>\n            {{user.first_name + \' \' + user.last_name}}\n        </ion-item> -->\n        <h2 class="header-style" style="text-align: center;">{{user.first_name}} {{user.last_name}}</h2>\n        <ion-item>\n            <ion-toggle color="custom" [(ngModel)]="viewRequest"></ion-toggle>\n            <ion-label class="icon-style">\n                Ver Detalles De La Solicitud\n            </ion-label>\n        </ion-item>\n    </ion-list>\n\n    <ion-card *ngIf="viewRequest">\n        <ion-card-content>\n            <p>{{request.comment}}</p>\n        </ion-card-content>\n\n        <ion-slides pager="true" *ngIf="request.photos && request.photos.length > 0">\n            <ion-slide *ngFor="let item of request.photos;">\n                <img src="{{item}}"/>\n            </ion-slide>\n        </ion-slides>\n    </ion-card>\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/Git/wtcb-newdesign/src/pages/maintenance-tracker/maintenance-tracker.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
@@ -2741,7 +2694,6 @@ var LoginPage = (function () {
         var _this = this;
         this.storage.get('userdata').then(function (val) {
             _this.events.publish("user:changed");
-            console.log("userdata", val);
             if (val != null) {
                 if (val.user.level == 7 || val.user.level == 8) {
                     _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */]);
@@ -2752,7 +2704,6 @@ var LoginPage = (function () {
             }
         });
         this.storage.get('device_token').then(function (val) {
-            console.log("device_token", val);
             if (val != null) {
                 _this.device_token = val;
             }
@@ -2775,7 +2726,6 @@ var LoginPage = (function () {
             this.userService.login(this.user)
                 .subscribe(function (data) {
                 loading_1.dismiss();
-                console.log("login Data:", data);
                 if (data.message == 'user logged in!') {
                     _this.storage.set('userdata', data);
                     var count_1 = 0;
@@ -2786,7 +2736,6 @@ var LoginPage = (function () {
                                 count_1++;
                             }
                         }
-                        console.log("notification_login_count", count_1);
                         _this.storage.set("notification_count", count_1);
                         var params = {
                             token: data.token,
@@ -2945,7 +2894,6 @@ var UserService = (function () {
     };
     UserService.prototype.getOffices = function (buildingId, token) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
-        console.log(this.baseService.officeUrl + "/" + buildingId + "?token=" + token);
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({ headers: headers });
         return this.http.get(this.baseService.officeUrl + "/" + buildingId + "?token=" + token, options)
             .map(function (res) { return res.json(); })
@@ -2953,7 +2901,6 @@ var UserService = (function () {
     };
     UserService.prototype.getOfficesById = function (id, token) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
-        console.log(this.baseService.officeUrl + "/id/" + id + "?token=" + token);
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({ headers: headers });
         return this.http.get(this.baseService.officeUrl + "/id/" + id + "?token=" + token, options)
             .map(function (res) { return res.json(); })
@@ -2961,7 +2908,6 @@ var UserService = (function () {
     };
     UserService.prototype.getOfficeByEmail = function (token) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
-        console.log(this.baseService.officeUrl + "/by/email?token=" + token);
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({ headers: headers });
         return this.http.get(this.baseService.officeUrl + "/by/email?token=" + token, options)
             .map(function (res) { return res.json(); })
@@ -2976,7 +2922,6 @@ var UserService = (function () {
     };
     UserService.prototype.updateOffice = function (office) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
-        console.log(this.baseService.officeUrl + "/" + office._id);
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({ headers: headers });
         return this.http.patch(this.baseService.officeUrl + "/" + office._id, JSON.stringify(office), options)
             .map(function (res) { return res.json(); })
@@ -2985,7 +2930,6 @@ var UserService = (function () {
     UserService.prototype.createRequest = function (request) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({ headers: headers });
-        console.log(this.baseService.requestUrl, request);
         return this.http.post(this.baseService.requestUrl, JSON.stringify(request), options)
             .map(function (res) { return res.json(); })
             .catch(function (error) { return __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].throw(error.json().error || 'Server error'); });
@@ -3198,7 +3142,6 @@ var BaseService = (function () {
         this.getUserUrl = this.baseUrl + "getuser";
         this.deviceTokenUrl = this.baseUrl + "device";
         this.notificationUrl = this.baseUrl + "notification";
-        console.log('Hello BaseService Provider');
     }
     return BaseService;
 }());
@@ -3280,14 +3223,12 @@ var BuildingProfilePage = (function () {
     BuildingProfilePage.prototype.ionViewDidEnter = function () {
         var _this = this;
         this.storage.get('userdata').then(function (val) {
-            console.log("userdata", val);
             _this.token = val.token;
             var loading = _this.loadingCtrl.create();
             loading.present();
             _this.userService.getOffices(_this.buildingId, _this.token)
                 .subscribe(function (data) {
                 loading.dismiss();
-                console.log("Getting Offices:", data);
                 _this.offices = data;
             }, function (data) {
                 loading.dismiss();
@@ -3604,7 +3545,6 @@ var TechnicianDetailPage = (function () {
     TechnicianDetailPage.prototype.ionViewWillEnter = function () {
         var _this = this;
         this.storage.get('userdata').then(function (val) {
-            console.log("userdata", val);
             if (val != null) {
                 _this.authUser = val.user;
                 _this.token = val.token;
@@ -3624,7 +3564,6 @@ var TechnicianDetailPage = (function () {
         };
         var loading = this.loadingCtrl.create();
         loading.present();
-        console.log("update user", params);
         this.userService.updateUser(params)
             .subscribe(function (data) {
             console.log("result update user", data);
@@ -3705,7 +3644,6 @@ var SignupPage = (function () {
     SignupPage.prototype.ionViewWillEnter = function () {
         var _this = this;
         this.storage.get('device_token').then(function (val) {
-            console.log("device_token", val);
             if (val != null) {
                 _this.device_token = val;
             }
@@ -3725,11 +3663,9 @@ var SignupPage = (function () {
             var loading_1 = this.loadingCtrl.create();
             loading_1.present();
             this.user.email = this.user.email.toLowerCase();
-            console.log("user param", this.user);
             this.userService.signUp(this.user)
                 .subscribe(function (data) {
                 loading_1.dismiss();
-                console.log("Signup Data:", data);
                 if (data.message == 'user created!') {
                     _this.storage.set('userdata', data);
                     var params = {
@@ -3765,7 +3701,6 @@ var SignupPage = (function () {
                 }
             }, function (data) {
                 loading_1.dismiss();
-                console.log(data, "data");
                 if (data.status == 403) {
                     var alert_3 = _this.alertCtrl.create({
                         title: "Error", subTitle: "User already exists.", buttons: ['OK']
@@ -3861,14 +3796,12 @@ var MaintenanceViewPage = (function () {
                 else {
                     _this.loadRequestByOffice();
                 }
-                console.log("userdata", _this.user);
             }
         });
         this.storage.get('notification_count').then(function (val) {
             _this.count = val;
         });
         this.events.subscribe("noti2:changed", function () {
-            console.log("noti2:changed");
             _this.storage.get('notification_count').then(function (val) {
                 _this.count = val;
             });
@@ -3905,7 +3838,6 @@ var MaintenanceViewPage = (function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__otrs_request_otrs_request__["a" /* OtrsRequestPage */], { requestItem: item });
     };
     MaintenanceViewPage.prototype.assign = function (item) {
-        console.log("Assign office key", item);
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_8__technician_technician__["a" /* TechnicianPage */], { request: item });
     };
     MaintenanceViewPage.prototype.createNewRequest = function () {
@@ -3942,7 +3874,6 @@ var MaintenanceViewPage = (function () {
                     _this.openedRequests.push(data[i]);
                 }
             }
-            console.log("openedRequests:", _this.officeKey, _this.openedRequests);
             _this.temp_openedRequests = _this.openedRequests;
         }, function (data) {
             loading.dismiss();
@@ -3967,7 +3898,6 @@ var MaintenanceViewPage = (function () {
                 }
             }
             _this.temp_openedRequests = _this.openedRequests;
-            console.log("openedRequests", _this.openedRequests);
         }, function (data) {
             loading.dismiss();
         });
@@ -4379,7 +4309,6 @@ var MyApp = (function () {
         });
         this.events.subscribe("user:changed", function () {
             _this.storage.get('userdata').then(function (val) {
-                console.log("userdata", val);
                 if (val != null) {
                     if (val.user.level == 7 || val.user.level == 8) {
                         _this.pages = [
@@ -4420,7 +4349,6 @@ var MyApp = (function () {
         });
         this.events.subscribe("notification:changed", function () {
             _this.storage.get('userdata').then(function (val) {
-                console.log("userdata", val);
                 if (val != null) {
                     _this.token = val.token;
                     _this.getNotifications(val.token);
@@ -4430,7 +4358,6 @@ var MyApp = (function () {
     }
     MyApp.prototype.getNotifications = function (token) {
         var _this = this;
-        console.log("get Notification", token);
         this.count = 0;
         this.userService.getNotifications(token)
             .subscribe(function (data) {
@@ -4468,7 +4395,6 @@ var MyApp = (function () {
             _this.nav.setRoot(__WEBPACK_IMPORTED_MODULE_9__pages_notification_notification__["a" /* NotificationPage */]);
         });
         this.oneSignal.getIds().then(function (ids) {
-            console.log("Push Subscription state changed: ", ids);
             _this.storage.set('device_token', ids.userId);
         });
         this.oneSignal.endInit();
@@ -4573,7 +4499,6 @@ var PushServiceProvider = (function () {
                     .subscribe(function (data1) {
                     userDevices.push(data1.device_token);
                     //if (userDevices.length == data.length){
-                    console.log("requestid and message", requestId, message, userDevices);
                     var pushData = {
                         "app_id": "ae60cbd3-3a45-469c-b6c7-bcb6104c31b4",
                         "include_player_ids": userDevices,
@@ -4581,12 +4506,9 @@ var PushServiceProvider = (function () {
                         "ios_badgeType": "Increase",
                         "ios_badgeCount": 1
                     };
-                    console.log("push Data", pushData);
                     _this.http.post(_this.PUSH_CREATE_URL, pushData, _this.authOpt).map(function (res) { return res.json(); }).subscribe(function (data) {
-                        console.log('Notification sent successfully!');
                     }, function (err) {
-                        console.log('Notification sending error!');
-                    }, function () { return console.log('Create Notification'); });
+                    }, function () { });
                     var notification = {
                         token: token,
                         email: data[i].email,
@@ -4627,12 +4549,9 @@ var PushServiceProvider = (function () {
                     "ios_badgeType": "Increase",
                     "ios_badgeCount": 1
                 };
-                console.log("push Data", pushData);
                 _this.http.post(_this.PUSH_CREATE_URL, pushData, _this.authOpt).map(function (res) { return res.json(); }).subscribe(function (data) {
-                    console.log('Notification sent successfully!');
                 }, function (err) {
-                    console.log('Notification sending error!');
-                }, function () { return console.log('Create Notification'); });
+                }, function () { });
                 var notification = {
                     token: token,
                     email: data.email,
@@ -4658,7 +4577,7 @@ var PushServiceProvider = (function () {
                 resolve(data);
             }, function (err) {
                 reject(false);
-            }, function () { return console.log('Get Notification List'); });
+            }, function () { });
         });
     };
     return PushServiceProvider;

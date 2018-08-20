@@ -128,15 +128,12 @@
                 <div *ngIf="show2">
                     <ion-list no-lines *ngIf="(authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3') && request.step == 2">
                         
-                        
                         <ion-item>
                             <div>
                                 <textarea placeholder="Your comments" class="textarea-style" [readonly]="true" [(ngModel)]="requestDetail.quote.comment"></textarea>
                             </div>
 
                         </ion-item>
-
-                        
 
                         <p class="icon-style" style="word-wrap: break-word;">Usted va a recibir un correo electrónico con su cotización.  Por favor revise su correo.</p>
                         

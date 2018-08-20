@@ -41,7 +41,7 @@ export class PushServiceProvider {
                         userDevices.push(data1.device_token);
 
                         //if (userDevices.length == data.length){
-                            console.log("requestid and message", requestId, message, userDevices);
+                            
 
                             let pushData = {
                                 "app_id": "ae60cbd3-3a45-469c-b6c7-bcb6104c31b4",
@@ -51,15 +51,14 @@ export class PushServiceProvider {
                                 "ios_badgeCount": 1
                             };
 
-                            console.log("push Data", pushData);
                             this.http.post(this.PUSH_CREATE_URL, pushData, this.authOpt).map(res => res.json()).subscribe(
                                 data => {
-                                    console.log('Notification sent successfully!');
+                                    
                                 },
                                 err => {
-                                    console.log('Notification sending error!');
+                                    
                                 },
-                                () => console.log('Create Notification')
+                                () => {}
                             );
 
                             let notification = {
@@ -114,15 +113,14 @@ export class PushServiceProvider {
                                 "ios_badgeCount": 1
                             };
 
-                        console.log("push Data", pushData);
                         this.http.post(this.PUSH_CREATE_URL, pushData, this.authOpt).map(res => res.json()).subscribe(
                             data => {
-                                console.log('Notification sent successfully!');
+                                
                             },
                             err => {
-                                console.log('Notification sending error!');
+                                
                             },
-                            () => console.log('Create Notification')
+                            () => {}
                         );
                         
                         let notification = {
@@ -162,7 +160,7 @@ export class PushServiceProvider {
                 err => {
                     reject(false);
                 },
-                () => console.log('Get Notification List')
+                () => {}
             );
         });
     }

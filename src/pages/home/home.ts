@@ -35,7 +35,6 @@ export class HomePage {
   	ionViewWillEnter() {
        
         this.storage.get('userdata').then(val=>{
-          console.log("userdata", val);
           this.token = val.token;
           this.authUser = val.user;
           let loading = this.loadingCtrl.create();
@@ -44,10 +43,7 @@ export class HomePage {
             .subscribe(
               (data) => {
                 loading.dismiss();
-                console.log("Getting All Offices:", data);
-
                 this.offices = data;
-                
               },
               (data) => {
                 loading.dismiss();
@@ -60,10 +56,9 @@ export class HomePage {
 
         this.events.subscribe("noti1:changed", ()=>{
 
-         this.storage.get('notification_count').then(val=>{
+        this.storage.get('notification_count').then(val=>{
           this.count = val;
-          console.log("noti1:changed", val, this.count);
-          });
+        });
        });
     }
 

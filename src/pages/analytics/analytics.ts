@@ -59,7 +59,6 @@ export class AnalyticsPage {
   }
 
   go(){
-    console.log("date", this.fromDate, this.toDate);
     this.getSteps();
   }
 
@@ -69,7 +68,6 @@ export class AnalyticsPage {
 
   ionViewWillEnter(){
     this.storage.get('userdata').then(val=>{
-      console.log("userdata", val);
       if (val != null){
         this.authUser = val.user;
         this.token = val.token;
@@ -111,7 +109,6 @@ export class AnalyticsPage {
         this.userService.getSteps(this.token)
           .subscribe(
             (data) => {
-              console.log("steps", data);
               loading.dismiss();
               this.stars = [];
               this.avg_time1 = 0;
@@ -130,7 +127,6 @@ export class AnalyticsPage {
                   let start_date: any = new Date(data[i].updated_at5);
                   let start_difference = start_date - from_date;
                   let to_difference = to_date - start_date;
-                  //console.log("start-to-difference", start_difference, to_difference);
                   if (start_difference >= 0 && to_difference >=0){
 
                       if (data[i].status5 == 1){
@@ -196,11 +192,6 @@ export class AnalyticsPage {
               this.avg_time3 = this.timeConversion(this.avg_time3);
               this.avg_time2 = this.timeConversion(this.avg_time2);
               this.avg_time1 = this.timeConversion(this.avg_time1);
-              console.log("444444", this.avg_time4);
-              console.log("333333", this.avg_time3);
-              console.log("222222", this.avg_time2);
-              console.log("111111", this.avg_time1);
-
 
               let xxx = this.groupBy(this.starSteps, 'email');
               for (let key in xxx){
@@ -213,7 +204,6 @@ export class AnalyticsPage {
               }
 
               this.getStarReview();
-              console.log("closed request steps", this.stars);
 
               // let loading1 = this.loadingCtrl.create();
               // loading1.present();
@@ -308,7 +298,6 @@ export class AnalyticsPage {
     this.three_stars = [];
     this.two_stars = [];
     this.one_star = [];
-    console.log(this.stars.length, "this.stars.length");
      for (let i=0; i< this.stars.length; i++){
        let loading = this.loadingCtrl.create();
         loading.present();
@@ -319,7 +308,6 @@ export class AnalyticsPage {
               
               this.userService.getOfficesById(data.officeKey, this.token).subscribe(
                 (data1)=>{
-                  console.log('stars', data1);
                     if (this.stars[i].star >= 4.5){
                       this.five_stars.push(data1[0].name);
                       

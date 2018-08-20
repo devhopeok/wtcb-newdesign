@@ -26,7 +26,6 @@ export class SignupPage {
 
   ionViewWillEnter(){
     this.storage.get('device_token').then(val=>{
-      console.log("device_token", val);
       if (val != null){
         this.device_token = val;
       }
@@ -47,12 +46,10 @@ export class SignupPage {
       loading.present();
       this.user.email = this.user.email.toLowerCase();
 
-      console.log("user param", this.user);
       this.userService.signUp(this.user)
         .subscribe(
           (data) => {
             loading.dismiss();
-            console.log("Signup Data:", data);
 
             if(data.message == 'user created!'){
               this.storage.set('userdata', data);
@@ -93,7 +90,6 @@ export class SignupPage {
           },
           (data) => {
             loading.dismiss();
-            console.log(data, "data");
             
             if (data.status == 403){
               let alert = this.alertCtrl.create({

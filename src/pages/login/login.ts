@@ -28,7 +28,6 @@ export class LoginPage {
 
     this.storage.get('userdata').then(val=>{
       this.events.publish("user:changed");
-      console.log("userdata", val);
       if (val != null){
         if (val.user.level == 7 || val.user.level == 8){
           this.navCtrl.setRoot(HomePage);
@@ -40,7 +39,6 @@ export class LoginPage {
     });
 
     this.storage.get('device_token').then(val=>{
-      console.log("device_token", val);
       if (val != null){
         this.device_token = val;
       }
@@ -64,7 +62,6 @@ export class LoginPage {
         .subscribe(
           (data) => {
             loading.dismiss();
-            console.log("login Data:", data);
              if(data.message == 'user logged in!'){
               this.storage.set('userdata', data);
               let count = 0;
@@ -76,7 +73,6 @@ export class LoginPage {
                       count++;
                     }
                   }
-                  console.log("notification_login_count", count);
                   this.storage.set("notification_count", count);
                   let params = {
                     token : data.token,

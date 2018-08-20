@@ -358,8 +358,6 @@ export class MaintenanceTrackerPage {
                       }
                   }
               }
-
-              console.log("this.officeeeeeeee", this.office);
             },
             (data) => {
               loading.dismiss();

@@ -68,7 +68,6 @@ export class CreateOfficePage {
 
     ionViewWillEnter() {
         this.storage.get('userdata').then(val=>{
-          console.log("userdata", val);
           this.token = val.token;
           this.office.token = this.token;
         });
@@ -81,11 +80,9 @@ export class CreateOfficePage {
     init() {
         this.buildings = this.buildingService.list();
         this.floors = this.buildings[0].floors;
-        console.log("office_token", this.token);
 
         this.office.token = this.token;
         let nav_office = this.navParams.get('office');
-        console.log("nav_office", nav_office);
         if (nav_office){
             this.office._id = nav_office._id;
             this.office.name = nav_office.name;
@@ -139,7 +136,6 @@ export class CreateOfficePage {
         .subscribe(
           (data) => {
             this.loading.dismiss();
-            console.log("office Data:", data);
             if(data == 'Success'){
                 let alert = this.alertCtrl.create({
                     title: "!Genial!", 
@@ -156,7 +152,6 @@ export class CreateOfficePage {
                 this.office.employees.employee.officeKey = this.office._id;
                 this.office.employees.outsourcing.officeKey = this.office._id;
 
-                console.log("office key", this.office._id, this.office.employees.outsourcing);
                 this.userService.signUp(this.office.employees.employee)
                 .subscribe(
                   (data) => {

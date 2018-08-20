@@ -60,7 +60,6 @@ export class UserService {
 
   getOffices(buildingId, token){
     let headers = new Headers({'Content-Type': 'application/json'});
-    console.log(this.baseService.officeUrl + "/" + buildingId + "?token=" + token);
     let options = new RequestOptions({headers: headers});
 
     return this.http.get(this.baseService.officeUrl + "/" + buildingId + "?token=" + token, options)
@@ -70,7 +69,6 @@ export class UserService {
 
   getOfficesById(id, token){
     let headers = new Headers({'Content-Type': 'application/json'});
-    console.log(this.baseService.officeUrl + "/id/" + id + "?token=" + token);
     let options = new RequestOptions({headers: headers});
 
     return this.http.get(this.baseService.officeUrl + "/id/" + id + "?token=" + token, options)
@@ -80,7 +78,6 @@ export class UserService {
 
   getOfficeByEmail(token){
     let headers = new Headers({'Content-Type': 'application/json'});
-    console.log(this.baseService.officeUrl + "/by/email?token=" + token);
     let options = new RequestOptions({headers: headers});
 
     return this.http.get(this.baseService.officeUrl + "/by/email?token=" + token, options)
@@ -100,7 +97,6 @@ export class UserService {
 
   updateOffice(office){
     let headers = new Headers({'Content-Type': 'application/json'});
-    console.log(this.baseService.officeUrl + "/" + office._id);
     let options = new RequestOptions({headers: headers});
 
     return this.http.patch(this.baseService.officeUrl + "/" + office._id, JSON.stringify(office), options)
@@ -111,7 +107,6 @@ export class UserService {
   createRequest(request){
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    console.log(this.baseService.requestUrl, request);
     return this.http.post(this.baseService.requestUrl, JSON.stringify(request), options)
       .map((res:Response) => res.json())
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'));

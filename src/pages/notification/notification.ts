@@ -28,7 +28,6 @@ export class NotificationPage {
 
   ionViewWillEnter(){
     this.storage.get('userdata').then(val=>{
-      console.log("userdata", val);
       if (val != null){
         this.authUser = val.user;
         this.token = val.token;
@@ -45,7 +44,6 @@ export class NotificationPage {
 	    (data) => {
 	      loading.dismiss();
 	      this.notifications = data;
-	      console.log("notifications", data);
 	    },
 	    (data) => {
 	      loading.dismiss();
