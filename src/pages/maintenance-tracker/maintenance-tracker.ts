@@ -37,6 +37,8 @@ export class MaintenanceTrackerPage {
     quote = {date: '', time: '', comment: '', company: '', name: '', phone: ''};
 
     scheduleAccept1: any;
+    scheduleReject1: any;
+    reschedule1: any;
     //step 2
     quoteAccept: any;
     quoteDeny: any;
@@ -49,6 +51,9 @@ export class MaintenanceTrackerPage {
 
     //step 3
     scheduleAccept: any;
+    scheduleReject: any;
+    reschedule: any;
+
     is_completed: any;
 
     //step 4
@@ -117,7 +122,8 @@ export class MaintenanceTrackerPage {
                 star: '',
                 comment: '',
                 status5: 0,
-                updated_at5: ''
+                updated_at5: '', 
+                created_by: ''
         };
         this.office = {};
         this.user = {};
@@ -131,6 +137,8 @@ export class MaintenanceTrackerPage {
         //step1
         this.showQuote = true;
         this.scheduleAccept1 = false;
+        this.scheduleReject1 = false;
+        this.reschedule1 = false;
         //step2
         this.quoteAccept = false;
         this.showSchedule = false;
@@ -142,6 +150,9 @@ export class MaintenanceTrackerPage {
 
         //step 3
         this.scheduleAccept = false;
+        this.scheduleReject = false;
+        this.reschedule = false;
+
         this.is_completed = false;
 
         //step 4
@@ -287,10 +298,18 @@ export class MaintenanceTrackerPage {
 
                 if (this.requestDetail['status1_5'] == 1){
                   this.scheduleAccept1 = true;
+                } else if (this.requestDetail['status1_5'] == 2){
+                  this.scheduleReject1 = true;
+                } else if (this.requestDetail['status1_5'] == 3){
+                  this.reschedule1 = true;
                 }
 
                 if (this.requestDetail['status2'] == 1) {
                     this.scheduleAccept = true;
+                } else if (this.requestDetail['status2'] == 2) {
+                  this.scheduleReject = true;
+                } else if (this.requestDetail['status2'] == 3) {
+                  this.reschedule = true;
                 }
 
                 if (this.requestDetail['status3'] == 1) {
@@ -414,6 +433,47 @@ export class MaintenanceTrackerPage {
       
       this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.company + " aceptó la visita programada.", this.token);
       // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
+    }
+
+    rejectSchedule1(){
+      this.requestDetail.status1_5 = 2;
+      this.requestDetail.token = this.token;
+      let loading = this.loadingCtrl.create();
+      loading.present();
+      this.userService.updateStep(this.requestDetailKey, this.requestDetail)
+      .subscribe(
+        (data1) => {
+          loading.dismiss();
+          this.scheduleReject1 = true;
+        },
+        (data1) => {
+          loading.dismiss();
+          this.scheduleReject1 = false;
+        });
+      
+      this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.company + " rechazó la visita programada.", this.token);
+      // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
+    }
+
+    re_schedule1() {
+      this.requestDetail.status1_5 = 3;
+      this.requestDetail.token = this.token;
+      let loading = this.loadingCtrl.create();
+      loading.present();
+      this.userService.updateStep(this.requestDetailKey, this.requestDetail)
+      .subscribe(
+        (data1) => {
+          loading.dismiss();
+          this.reschedule1 = true;
+          this.scheduleAccept1 = true;
+        },
+        (data1) => {
+          loading.dismiss();
+          this.reschedule1 = false;
+          this.scheduleAccept1 = false;
+        });
+      
+      this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.company + " reprogramado la visita.", this.token);
     }
 
     public goToStep2() {
@@ -634,6 +694,50 @@ export class MaintenanceTrackerPage {
         });
       
       this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " aceptó la visita programada.", this.token);
+      // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
+    }
+
+    rejectSchedule(){
+      this.requestDetail.status2 = 2;
+      this.requestDetail.token = this.token;
+      this.requestDetail.updated_at2 = new Date();
+      let loading = this.loadingCtrl.create();
+      loading.present();
+      this.userService.updateStep(this.requestDetailKey, this.requestDetail)
+      .subscribe(
+        (data1) => {
+          loading.dismiss();
+          this.scheduleReject = true;
+        },
+        (data1) => {
+          loading.dismiss();
+          this.scheduleReject = false;
+        });
+      
+      this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " rechazó la visita programada.", this.token);
+      // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
+    }
+
+    re_schedule(){
+      this.requestDetail.status2 = 3;
+      this.requestDetail.token = this.token;
+      this.requestDetail.updated_at2 = new Date();
+      let loading = this.loadingCtrl.create();
+      loading.present();
+      this.userService.updateStep(this.requestDetailKey, this.requestDetail)
+      .subscribe(
+        (data1) => {
+          loading.dismiss();
+          this.reschedule = true;
+          this.scheduleAccept = true;
+        },
+        (data1) => {
+          loading.dismiss();
+          this.scheduleAccept = false;
+          this.reschedule = false
+        });
+      
+      this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " reprogramado la visita.", this.token);
       // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee accepted your schedule", this.token);
     }
 

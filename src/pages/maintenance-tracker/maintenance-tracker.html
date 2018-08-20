@@ -70,11 +70,11 @@
 
                         <ion-item>
                             <ion-label>Fecha</ion-label>
-                            <ion-input type="text" [readonly]="true" [(ngModel)]="requestDetail.quote.date"></ion-input>
+                            <ion-input type="text" [(ngModel)]="requestDetail.quote.date"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label>Hora</ion-label>
-                            <ion-input type="text" [readonly]="true" [(ngModel)]="requestDetail.quote.time"></ion-input>
+                            <ion-input type="text" [(ngModel)]="requestDetail.quote.time"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label>Nombre del técnico</ion-label>
@@ -90,8 +90,14 @@
                         </ion-item>
                     </ion-list>
 
-                    <button ion-button block (click)="acceptSchedule1()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 1.5 && (authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3') && !scheduleAccept1">
+                    <button ion-button block (click)="acceptSchedule1()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 1.5 && (authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3')">
                         Aceptar Horario
+                    </button>
+                    <button ion-button block (click)="rejectSchedule1()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 1.5 && (authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3')">
+                        Rechazar Horario
+                    </button>
+                    <button ion-button block (click)="re_schedule1()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 1.5 && (authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3')">
+                        Reprogramar
                     </button>
 
                     <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && (request.step >= 1.5) && scheduleAccept1">
@@ -254,8 +260,16 @@
                         </ion-item> -->
                     </ion-list>
 
-                    <button ion-button block (click)="acceptSchedule()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 3 && (authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3') && !scheduleAccept">
+                    <button ion-button block (click)="acceptSchedule()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 3 && (authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3')">
                         Aceptar Horario
+                    </button>
+
+                    <button ion-button block (click)="rejectSchedule()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 3 && (authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3')">
+                        Rechazar Horario
+                    </button>
+
+                    <button ion-button block (click)="re_schedule()" class="main-btn" style="margin-top:2vw;" *ngIf="request.step == 3 && (authUser.level == '3.1' || authUser.level == '3.2' || authUser.level == '3')">
+                        Reprogramar
                     </button>
 
                     <ion-list no-lines *ngIf="(authUser.level == 7 || authUser.level == 8) && request.step >=3">

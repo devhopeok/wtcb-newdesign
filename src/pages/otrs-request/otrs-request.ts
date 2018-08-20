@@ -41,7 +41,8 @@ export class OtrsRequestPage {
             officeName: '',
             buildingName: '',
             floorName: '',
-            token:''
+            token:'',
+            created_by: '',
         };
 
     filename: any;
@@ -239,6 +240,7 @@ export class OtrsRequestPage {
         this.otrsRequest.officeKey = this.officeKey;
         this.otrsRequest.token = this.token;
         this.otrsRequest.officeName = this.office.name;
+        this.otrsRequest.created_by = this.office.company;
         this.otrsRequest.created_at = new Date();
 
         this.otrsRequest.buildingName = this.building_name;
@@ -287,7 +289,8 @@ export class OtrsRequestPage {
                        
                         star: '',
                         comment: '',
-                        updated_at5: this.otrsRequest.created_at
+                        updated_at5: this.otrsRequest.created_at,
+                        created_by: this.otrsRequest.created_by
                     };
 
                     this.userService.createStep(newSteps)

@@ -176,6 +176,7 @@ export class MaintenanceViewPage {
                 }
               }
               this.temp_openedRequests = this.openedRequests;
+              console.log("openedRequests", this.openedRequests);
             },
             (data) => {
               loading.dismiss();

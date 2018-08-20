@@ -51,7 +51,8 @@
                             {{item._id}}
                         </div>
                         <div class="col width-30">
-                            <div class="office-name">{{item.officeName}}</div>
+                            <div *ngIf="item.created_by" class="office-name">{{item.created_by}}</div>
+                            <div *ngIf="!item.created_by" class="office-name">{{item.officeName}}</div>
                             <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>
                         </div>
 
@@ -90,7 +91,8 @@
                         {{item._id}}
                     </div>
                     <div class="col width-30">
-                        <div class="office-name">{{item.officeName}}</div>
+                        <div *ngIf="item.created_by" class="office-name">{{item.created_by}}</div>
+                        <div *ngIf="!item.created_by" class="office-name">{{item.officeName}}</div>
                         <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>
                     </div>
 
@@ -113,7 +115,8 @@
                         {{item._id}}
                     </div>
                     <div class="col width-30">
-                        <div class="office-name">{{item.officeName}}</div>
+                        <div *ngIf="item.created_by" class="office-name">{{item.created_by}}</div>
+                        <div *ngIf="!item.created_by" class="office-name">{{item.officeName}}</div>
                         <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>
                     </div>
 
@@ -136,7 +139,8 @@
                         {{item._id}}
                     </div>
                     <div class="col width-30">
-                        <div class="office-name">{{item.officeName}}</div>
+                        <div *ngIf="item.created_by" class="office-name">{{item.created_by}}</div>
+                        <div *ngIf="!item.created_by" class="office-name">{{item.officeName}}</div>
                         <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>
                     </div>
 
@@ -166,7 +170,8 @@
                             {{item._id}}
                         </div>
                         <div class="col width-30">
-                            <div class="office-name">{{item.officeName}}</div>
+                            <div *ngIf="item.created_by" class="office-name">{{item.created_by}}</div>
+                            <div *ngIf="!item.created_by" class="office-name">{{item.officeName}}</div>
                             <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>
                         </div>
 
@@ -197,7 +202,8 @@
                         {{item._id}}
                     </div>
                     <div class="col width-30">
-                        <div class="office-name">{{item.officeName}}</div>
+                        <div *ngIf="item.created_by" class="office-name">{{item.created_by}}</div>
+                        <div *ngIf="!item.created_by" class="office-name">{{item.officeName}}</div>
                         <div class="building-name">{{item.buildingName}}-{{item.floorName}}</div>
                     </div>
 
