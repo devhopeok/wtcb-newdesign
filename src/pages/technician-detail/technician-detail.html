@@ -1,47 +1,43 @@
 <ion-header>
-
-    <ion-navbar>
-        <!-- <button ion-button menuToggle>
-            <img class="menu-icon" src="assets/imgs/menu_icon.png" />
-        </button> -->
-        <ion-title>Técnico</ion-title>
-    </ion-navbar>
-
+  <ion-navbar>
+    <!-- <button ion-button menuToggle>
+        <img class="menu-icon" src="assets/imgs/menu_icon.png" />
+    </button> -->
+    <ion-title>Técnico</ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-   <ion-list>
-    
-        <ion-item>
-            <ion-label fixed>Compañia</ion-label>
-            <ion-input type="text" [(ngModel)]="technician.company"></ion-input>
-        </ion-item>
+  <ion-list>
+    <ion-item>
+        <ion-label fixed>Compañia</ion-label>
+        <ion-input type="text" [(ngModel)]="technician.company"></ion-input>
+    </ion-item>
 
-        <ion-item>
-            <ion-label fixed>Nombre</ion-label>
-            <ion-input type="text" [(ngModel)]="technician.first_name"></ion-input>
-        </ion-item>
+    <ion-item>
+        <ion-label fixed>Nombre</ion-label>
+        <ion-input type="text" [(ngModel)]="technician.first_name"></ion-input>
+    </ion-item>
 
-        <ion-item>
-            <ion-label fixed>Apellido</ion-label>
-            <ion-input type="text" [(ngModel)]="technician.last_name"></ion-input>
-        </ion-item>
+    <ion-item>
+        <ion-label fixed>Apellido</ion-label>
+        <ion-input type="text" [(ngModel)]="technician.last_name"></ion-input>
+    </ion-item>
 
-       
-        <ion-item>
-            <ion-label fixed>Telefono</ion-label>
-            <ion-input type="text" [(ngModel)]="technician.phone_number"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label fixed>Email</ion-label>
-            <ion-input type="text" [(ngModel)]="technician.email"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label fixed>Especialidad de Trabajo</ion-label>
-            <ion-input type="text" [(ngModel)]="technician.blood_type"></ion-input>
-        </ion-item>
-    </ion-list>
+   
+    <ion-item>
+        <ion-label fixed>Telefono</ion-label>
+        <ion-input type="text" [(ngModel)]="technician.phone_number"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label fixed>Email</ion-label>
+        <ion-input type="text" [(ngModel)]="technician.email"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label fixed>Especialidad de Trabajo</ion-label>
+        <ion-input type="text" [(ngModel)]="technician.blood_type"></ion-input>
+    </ion-item>
+  </ion-list>
 
-    <button (click)="update()" ion-button class="main-btn">Guardar</button>
-
+  <button (click)="update()" ion-button class="main-btn">Guardar</button>
 </ion-content>

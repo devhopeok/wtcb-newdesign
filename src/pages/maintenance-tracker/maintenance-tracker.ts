@@ -99,7 +99,8 @@ export class MaintenanceTrackerPage {
                 updated_at1: '',
             
                 statue1_5: 0,
-            
+                updated_at1_5: '',
+
                 status2: 0,
                 technician_info:{
                     date: '',
@@ -123,7 +124,8 @@ export class MaintenanceTrackerPage {
                 comment: '',
                 status5: 0,
                 updated_at5: '', 
-                created_by: ''
+                created_by: '',
+                updated_at6: '',
         };
         this.office = {};
         this.user = {};
@@ -279,133 +281,131 @@ export class MaintenanceTrackerPage {
       this.show5 = !this.show5;
     }
     private loadStepDetail() {
-        let loading = this.loadingCtrl.create();
-        loading.present();
-        this.userService.getStepById(this.requestKey, this.token)
-          .subscribe(
-            (data) => {
-              loading.dismiss();
-              this.requestDetailKey = data._id;
-                this.requestDetail = data;
+      let loading = this.loadingCtrl.create();
+      loading.present();
+      this.userService.getStepById(this.requestKey, this.token)
+      .subscribe(
+        (data) => {
+          loading.dismiss();
+          this.requestDetailKey = data._id;
+          this.requestDetail = data;
 
-                if (this.requestDetail['status1'] == 1) {
-                    this.quoteAccept = true;
-                }
+          if (this.requestDetail['status1'] == 1) {
+            this.quoteAccept = true;
+          }
 
-                if (this.requestDetail['status1'] == 2) {
-                    this.quoteDeny = true;
-                }
+          if (this.requestDetail['status1'] == 2) {
+            this.quoteDeny = true;
+          }
 
-                if (this.requestDetail['status1_5'] == 1){
-                  this.scheduleAccept1 = true;
-                } else if (this.requestDetail['status1_5'] == 2){
-                  this.scheduleReject1 = true;
-                } else if (this.requestDetail['status1_5'] == 3){
-                  this.reschedule1 = true;
-                }
+          if (this.requestDetail['status1_5'] == 1){
+            this.scheduleAccept1 = true;
+          } else if (this.requestDetail['status1_5'] == 2){
+            this.scheduleReject1 = true;
+          } else if (this.requestDetail['status1_5'] == 3){
+            this.reschedule1 = true;
+          }
 
-                if (this.requestDetail['status2'] == 1) {
-                    this.scheduleAccept = true;
-                } else if (this.requestDetail['status2'] == 2) {
-                  this.scheduleReject = true;
-                } else if (this.requestDetail['status2'] == 3) {
-                  this.reschedule = true;
-                }
+          if (this.requestDetail['status2'] == 1) {
+            this.scheduleAccept = true;
+          } else if (this.requestDetail['status2'] == 2) {
+            this.scheduleReject = true;
+          } else if (this.requestDetail['status2'] == 3) {
+            this.reschedule = true;
+          }
 
-                if (this.requestDetail['status3'] == 1) {
-                    this.is_paid = true;
-                }
-            },
-            (data) => {
-              loading.dismiss();
-              
-            });
+          if (this.requestDetail['status3'] == 1) {
+            this.is_paid = true;
+          }
+        },
+        (data) => {
+          loading.dismiss();
+        });
     }
 
     private loadUser() {
-        let loading = this.loadingCtrl.create();
-        loading.present();
-        this.userService.getUserById(this.request['userKey'])
-          .subscribe(
-            (data) => {
-              loading.dismiss();
-              this.user = data;
-            },
-            (data) => {
-              loading.dismiss();
-              
-            });
+      let loading = this.loadingCtrl.create();
+      loading.present();
+      this.userService.getUserById(this.request['userKey'])
+      .subscribe(
+        (data) => {
+          loading.dismiss();
+          this.user = data;
+        },
+        (data) => {
+          loading.dismiss();
+          
+        });
     }
 
     private loadOffice() {
-        let loading = this.loadingCtrl.create();
-        loading.present();
-        this.userService.getOfficesById(this.request['officeKey'], this.token)
-          .subscribe(
-            (data) => {
-              loading.dismiss();
-              this.office = data[0];
+      let loading = this.loadingCtrl.create();
+      loading.present();
+      this.userService.getOfficesById(this.request['officeKey'], this.token)
+      .subscribe(
+        (data) => {
+          loading.dismiss();
+          this.office = data[0];
 
-              let buildings = this.buildingService.list();
-              for (let i = 0; i < buildings.length; i ++) {
-                  if (buildings[i].id == this.office.buildingId) {
-                      this.office.buildingName = buildings[i].name;
+          let buildings = this.buildingService.list();
+          for (let i = 0; i < buildings.length; i ++) {
+            if (buildings[i].id == this.office.buildingId) {
+              this.office.buildingName = buildings[i].name;
 
-                      for (let j = 0; j < buildings[i].floors.length; j ++) {
-                          if (this.office.floorId == buildings[i].floors[j].id) {
-                              this.office.floorName = buildings[i].floors[j].name;
-                          }
-                      }
-                  }
+              for (let j = 0; j < buildings[i].floors.length; j ++) {
+                if (this.office.floorId == buildings[i].floors[j].id) {
+                  this.office.floorName = buildings[i].floors[j].name;
+                }
               }
-            },
-            (data) => {
-              loading.dismiss();
-              
-            });
+            }
+          }
+        },
+        (data) => {
+          loading.dismiss();
+        });
     }
     
     public goToStep1_5(){
 
       if (this.quote.company == '' || this.quote.date == '' || this.quote.name == '' || 
-           this.quote.phone == '' || this.quote.time == ''){
-          let alert = this.alertCtrl.create({
-            title: "Error", subTitle: "Please fill in the blanks", buttons: ['OK']
-          });
-          alert.present();
-        }
+        this.quote.phone == '' || this.quote.time == ''){
+        let alert = this.alertCtrl.create({
+          title: "Error", subTitle: "Please fill in the blanks", buttons: ['OK']
+        });
+        alert.present();
+      }
       else{
-          this.requestDetail.token = this.token;
-          this.requestDetail.quote = this.quote;
-          this.requestDetail.step = 1.5;
-          this.requestDetail.updated_at1 = new Date();
-          let loading = this.loadingCtrl.create();
-          loading.present();
-       
-          this.userService.updateStep(this.requestDetailKey, this.requestDetail)
-          .subscribe(
-            (data1) => {
-              let params = {
-                  token: this.token,
-                  step: 1.5
-              }
-              this.userService.updateRequest(this.requestKey, params)
-              .subscribe(
-                (data) => {
-                    loading.dismiss();
-                    this.request.step = 1.5;
-                    let alert = this.alertCtrl.create({
-                      title: "", subTitle: "Enviaste el tiempo de visita con éxito.", buttons: ['OK']
-                    });
-                    alert.present();
-                },
-                (data) => {
+        this.requestDetail.token = this.token;
+        this.requestDetail.quote = this.quote;
+        this.requestDetail.step = 1.5;
+        this.requestDetail.updated_at1 = new Date();
+        let loading = this.loadingCtrl.create();
+        loading.present();
+     
+        this.userService.updateStep(this.requestDetailKey, this.requestDetail)
+        .subscribe(
+          (data1) => {
+            let params = {
+                token: this.token,
+                step: 1.5
+            }
+            this.userService.updateRequest(this.requestKey, params)
+            .subscribe(
+              (data) => {
                   loading.dismiss();
-                });
-            },
-            (data1) => {
-              loading.dismiss();
-            });
+                  this.request.step = 1.5;
+                  let alert = this.alertCtrl.create({
+                    title: "", subTitle: "Enviaste el tiempo de visita con éxito.", buttons: ['OK']
+                  });
+                  alert.present();
+              },
+              (data) => {
+                loading.dismiss();
+              });
+          },
+          (data1) => {
+            loading.dismiss();
+          });
           
           // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled the time of first meeting for quote.", this.token);
           this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha programado una visita inicial para hacerle una cotización.", this.token);
@@ -416,6 +416,7 @@ export class MaintenanceTrackerPage {
     acceptSchedule1(){
       this.requestDetail.status1_5 = 1;
       this.requestDetail.token = this.token;
+      this.requestDetail.updated_at1_5 = new Date();
       let loading = this.loadingCtrl.create();
       loading.present();
       this.userService.updateStep(this.requestDetailKey, this.requestDetail)
@@ -605,73 +606,73 @@ export class MaintenanceTrackerPage {
       alert.present();
     }
     public goToStep3() {
-        // let appointment_date;
-        // this.datePicker.show({
-        //   date: new Date(),
-        //   mode: 'datetime',
-        //   androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
-        // }).then(
-        //   (date) => {
-        //     console.log("appointment_date", date + "asdaf");
-            
-        //   },
-        //   (err) => {
-        //     console.log('Error occurred while getting date: ', err);
-        //   }
-        // );
+      // let appointment_date;
+      // this.datePicker.show({
+      //   date: new Date(),
+      //   mode: 'datetime',
+      //   androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+      // }).then(
+      //   (date) => {
+      //     console.log("appointment_date", date + "asdaf");
+          
+      //   },
+      //   (err) => {
+      //     console.log('Error occurred while getting date: ', err);
+      //   }
+      // );
 
-        this.show1=false;
-        this.show2=false;
-        this.show3=true;
-        this.show4=false;
-        this.show5=false;
+      this.show1=false;
+      this.show2=false;
+      this.show3=true;
+      this.show4=false;
+      this.show5=false;
 
-        this.requestDetail.token = this.token;
+      this.requestDetail.token = this.token;
+      this.requestDetail.step = 3;
+
+      this.requestDetail.technician_info={
+          company : this.technician_company,
+          date : this.technician_date,
+          name : this.technician_name,
+          phone : this.technician_phone,
+          time : this.technician_time
+      }
+
+      if (this.requestDetail.technician_info.company == '' || this.requestDetail.technician_info.date == '' || this.requestDetail.technician_info.name == '' || 
+         this.requestDetail.technician_info.phone == '' || this.requestDetail.technician_info.time == ''){
+        let alert = this.alertCtrl.create({
+          title: "Error", subTitle: "Please fill in the blanks", buttons: ['OK']
+        });
+        alert.present();
+      }
+      else{
         this.requestDetail.step = 3;
-
-        this.requestDetail.technician_info={
-            company : this.technician_company,
-            date : this.technician_date,
-            name : this.technician_name,
-            phone : this.technician_phone,
-            time : this.technician_time
-        }
-
-        if (this.requestDetail.technician_info.company == '' || this.requestDetail.technician_info.date == '' || this.requestDetail.technician_info.name == '' || 
-           this.requestDetail.technician_info.phone == '' || this.requestDetail.technician_info.time == ''){
-          let alert = this.alertCtrl.create({
-            title: "Error", subTitle: "Please fill in the blanks", buttons: ['OK']
-          });
-          alert.present();
-        }
-        else{
-          this.requestDetail.step = 3;
-          let loading = this.loadingCtrl.create();
-          loading.present();
-          this.userService.updateStep(this.requestDetailKey, this.requestDetail)
-          .subscribe(
-            (data1) => {
-              let params = {
-                  token: this.token,
-                  step: 3
-              }
-              this.userService.updateRequest(this.requestKey, params)
-              .subscribe(
-                (data) => {
-                    loading.dismiss();
-                    this.request.step = 3;
-                    this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG programó la visita del técnico para el día y hora a continuación: " + this.technician_date + " " + this.technician_time, this.token);
-                
-                    // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled technician time to " + this.technician_date + " " + this.technician_time, this.token);
-                },
-                (data) => {
+        let loading = this.loadingCtrl.create();
+        loading.present();
+        this.userService.updateStep(this.requestDetailKey, this.requestDetail)
+        .subscribe(
+          (data1) => {
+            let params = {
+                token: this.token,
+                step: 3
+            }
+            this.userService.updateRequest(this.requestKey, params)
+            .subscribe(
+              (data) => {
                   loading.dismiss();
-                });
-            },
-            (data1) => {
-              loading.dismiss();
-            });
-        }
+                  this.request.step = 3;
+                  this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG programó la visita del técnico para el día y hora a continuación: " + this.technician_date + " " + this.technician_time, this.token);
+              
+                  // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager scheduled technician time to " + this.technician_date + " " + this.technician_time, this.token);
+              },
+              (data) => {
+                loading.dismiss();
+              });
+          },
+          (data1) => {
+            loading.dismiss();
+          });
+      }
     }
 
     acceptSchedule(){
@@ -740,55 +741,54 @@ export class MaintenanceTrackerPage {
     }
 
     public goToStep4() {
-        // let appointment_date;
-        // this.datePicker.show({
-        //   date: new Date(),
-        //   mode: 'datetime',
-        //   androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
-        // }).then(
-        //   date => console.log('Got date: ', date),
-        //   err => console.log('Error occurred while getting date: ', err)
-        // );
-        this.show1=false;
-        this.show2=false;
-        this.show3=false;
-        this.show4=true;
-        this.show5=false;
+      // let appointment_date;
+      // this.datePicker.show({
+      //   date: new Date(),
+      //   mode: 'datetime',
+      //   androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+      // }).then(
+      //   date => console.log('Got date: ', date),
+      //   err => console.log('Error occurred while getting date: ', err)
+      // );
+      this.show1=false;
+      this.show2=false;
+      this.show3=false;
+      this.show4=true;
+      this.show5=false;
 
-        this.requestDetail.token = this.token;
-        this.requestDetail.step = 4;
+      this.requestDetail.token = this.token;
+      this.requestDetail.step = 4;
 
-            this.requestDetail.token = this.token;
-            this.requestDetail.is_completed = true;
-            this.requestDetail.step = 4;
-            this.requestDetail.updated_at3 = new Date();
+      this.requestDetail.token = this.token;
+      this.requestDetail.is_completed = true;
+      this.requestDetail.step = 4;
+      this.requestDetail.updated_at3 = new Date();
 
-            let loading = this.loadingCtrl.create();
-            loading.present();
-            this.userService.updateStep(this.requestDetailKey, this.requestDetail)
-            .subscribe(
-              (data1) => {
-                let params = {
-                    token: this.token,
-                    step: 4
-                }
-                this.userService.updateRequest(this.requestKey, params)
-                .subscribe(
-                  (data) => {
-                      loading.dismiss();
-                    this.request.step = 4;
-                  },
-                  (data) => {
-                    loading.dismiss();
-                  });
-              },
-              (data1) => {
+      let loading = this.loadingCtrl.create();
+      loading.present();
+      this.userService.updateStep(this.requestDetailKey, this.requestDetail)
+      .subscribe(
+        (data1) => {
+          let params = {
+              token: this.token,
+              step: 4
+          }
+          this.userService.updateRequest(this.requestKey, params)
+          .subscribe(
+            (data) => {
                 loading.dismiss();
-              });
-            
-             this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha finalizado los trabajos. Su factura està disponible para pago.", this.token);
-             // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager completed your request", this.token);
-            
+              this.request.step = 4;
+            },
+            (data) => {
+              loading.dismiss();
+            });
+        },
+        (data1) => {
+          loading.dismiss();
+        });
+      
+       this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha finalizado los trabajos. Su factura està disponible para pago.", this.token);
+       // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager completed your request", this.token);   
     }
 
     public payInvoice() {
@@ -810,42 +810,41 @@ export class MaintenanceTrackerPage {
       this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " pagó su factura", this.token);
       // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee paid to your invoice", this.token);
       this.iab.create('https://www.mipagoamigo.com/MPA_WebSite/');
-     
     }
 
     public paidInvoice() {
-        this.show1=false;
-        this.show2=false;
-        this.show3=false;
-        this.show4=false;
-        this.show5=true;
-        
-        this.requestDetail.token = this.token;
-        this.requestDetail.is_paid = true;
-        this.requestDetail.updated_at4 = new Date();
-        this.requestDetail.step = 5;
-        let loading = this.loadingCtrl.create();
-        loading.present();
-        this.userService.updateStep(this.requestDetailKey, this.requestDetail)
-        .subscribe(
-          (data1) => {
-            let params = {
-                token: this.token,
-                step: 5
-            }
-            this.userService.updateRequest(this.requestKey, params)
-            .subscribe(
-              (data) => {
-                loading.dismiss();
-                this.request.step = 5;
-              },
-              (data) => {
-                loading.dismiss();
-              });
-          },
-          (data1) => {
-            loading.dismiss();
-          });
+      this.show1=false;
+      this.show2=false;
+      this.show3=false;
+      this.show4=false;
+      this.show5=true;
+      
+      this.requestDetail.token = this.token;
+      this.requestDetail.is_paid = true;
+      this.requestDetail.updated_at4 = new Date();
+      this.requestDetail.step = 5;
+      let loading = this.loadingCtrl.create();
+      loading.present();
+      this.userService.updateStep(this.requestDetailKey, this.requestDetail)
+      .subscribe(
+        (data1) => {
+          let params = {
+              token: this.token,
+              step: 5
+          }
+          this.userService.updateRequest(this.requestKey, params)
+          .subscribe(
+            (data) => {
+              loading.dismiss();
+              this.request.step = 5;
+            },
+            (data) => {
+              loading.dismiss();
+            });
+        },
+        (data1) => {
+          loading.dismiss();
+        });
        
         this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG recibió su pago", this.token);
         // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager accepted your payment", this.token);
@@ -853,61 +852,62 @@ export class MaintenanceTrackerPage {
 
 
     public viewInvoice() {
-        this.showInvoice = !this.showInvoice;
+      this.showInvoice = !this.showInvoice;
     }
 
     public leaveReview() {
-        this.show5 = false;
-        this.requestDetail.token = this.token;
-        this.requestDetail.star = this.rate;
-        this.requestDetail.comment = this.comment;
-        this.requestDetail.status5 = 1;
-        let loading = this.loadingCtrl.create();
-        loading.present();
-        this.userService.updateStep(this.requestDetailKey, this.requestDetail)
-        .subscribe(
-          (data1) => {
-            loading.dismiss();
-          },
-          (data1) => {
-            loading.dismiss();
-          });
-        
-        this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " ha calificado el servicio", this.token);
-        // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee provided feedback", this.token);
+      this.show5 = false;
+      this.requestDetail.token = this.token;
+      this.requestDetail.star = this.rate;
+      this.requestDetail.comment = this.comment;
+      this.requestDetail.status5 = 1;
+      let loading = this.loadingCtrl.create();
+      loading.present();
+      this.userService.updateStep(this.requestDetailKey, this.requestDetail)
+      .subscribe(
+        (data1) => {
+          loading.dismiss();
+        },
+        (data1) => {
+          loading.dismiss();
+        });
+      
+      this.pushService.notiBuildingManagerForRequest(this.request._id, this.office.name + " ha calificado el servicio", this.token);
+      // this.pushService.notiBuildingManagerForRequest(this.request._id, "Employee provided feedback", this.token);
     }
 
     public archiveRequest() {
       this.show5 = false;
-        let loading = this.loadingCtrl.create();
-        loading.present();
-        let params = {
-            token: this.token,
-            step: 6
-        }
+      let loading = this.loadingCtrl.create();
+      loading.present();
+      let params = {
+          token: this.token,
+          step: 6
+      }
 
-        this.requestDetail.token = this.token;
-        this.requestDetail.step = 6;       
-            this.userService.updateRequest(this.requestKey, params)
+      this.requestDetail.token = this.token;
+      this.requestDetail.step = 6; 
+      this.requestDetail.updated_at6 = new Date();
+
+      this.userService.updateRequest(this.requestKey, params)
+      .subscribe(
+        (data) => {
+          loading.dismiss();
+          this.request.step = 6;
+          this.userService.updateStep(this.requestDetailKey, this.requestDetail)
             .subscribe(
-              (data) => {
-                  loading.dismiss();
-                this.request.step = 6;
-                this.userService.updateStep(this.requestDetailKey, this.requestDetail)
-                  .subscribe(
-                    (data1) => {
-                      //this.request.step = 6;
-                    },
-                    (data1) => {
-                      
-                    });
+              (data1) => {
+                //this.request.step = 6;
               },
-              (data) => {
-                loading.dismiss();
+              (data1) => {
+                
               });
-        
-        this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha archivado su solicitud", this.token);
-        // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager archived your request", this.token);
-        
+        },
+        (data) => {
+          loading.dismiss();
+        });
+      
+      this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "EG ha archivado su solicitud", this.token);
+      // this.pushService.notiUserForRequest(this.request.userKey, this.request._id, "Building manager archived your request", this.token);
     }
 }

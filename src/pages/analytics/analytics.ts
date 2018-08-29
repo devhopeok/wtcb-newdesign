@@ -34,12 +34,15 @@ export class AnalyticsPage {
   avg_time2: any;
   avg_time3: any;
   avg_time4: any;
+  avg_time5: any;
+  avg_time6: any;
 
   update_time_array1 : any;
   update_time_array2: any;
   update_time_array3: any;
   update_time_array4: any;
-
+  update_time_array5: any;
+  update_time_array6: any;
 
   fromDate: any;
   toDate: any;
@@ -115,11 +118,15 @@ export class AnalyticsPage {
               this.avg_time2 = 0;
               this.avg_time3 = 0;
               this.avg_time4 = 0;
+              this.avg_time5 = 0;
+              this.avg_time6 = 0;
 
               this.update_time_array1 = [];
               this.update_time_array2 = [];
               this.update_time_array3 = [];
               this.update_time_array4 = [];
+              this.update_time_array5 = [];
+              this.update_time_array6 = [];
 
               for (let i=0; i<data.length; i++){
 
@@ -167,6 +174,16 @@ export class AnalyticsPage {
                         let date1: any = new Date(data[i].updated_at1);
                         this.update_time_array1.push(date1 - start_date);
                       }
+
+                      if (data[i].updated_at1_5){
+                        let date5: any = new Date(data[i].updated_at1_5);
+                        this.update_time_array5.push(date5 - start_date);
+                      }
+
+                      if (data[i].updated_at6){
+                        let date6: any = new Date(data[i].updated_at6);
+                        this.update_time_array6.push(date6 - start_date);
+                      }
                   }
                   
                 }
@@ -188,6 +205,16 @@ export class AnalyticsPage {
                 this.avg_time4 += this.update_time_array4[i4]/this.update_time_array4.length;
               }
 
+              for (let i5=0; i5<this.update_time_array5.length; i5++){
+                this.avg_time5 += this.update_time_array5[i5]/this.update_time_array5.length;
+              }
+
+              for (let i6=0; i6<this.update_time_array6.length; i6++){
+                this.avg_time6 += this.update_time_array6[i6]/this.update_time_array6.length;
+              }
+
+              this.avg_time6 = this.timeConversion(this.avg_time6);
+              this.avg_time5 = this.timeConversion(this.avg_time5);
               this.avg_time4 = this.timeConversion(this.avg_time4);
               this.avg_time3 = this.timeConversion(this.avg_time3);
               this.avg_time2 = this.timeConversion(this.avg_time2);
