@@ -390,36 +390,36 @@
   </div>
 
   <ion-list no-lines style="margin-top: 20px;">
-      <ion-list-header class="header-style">
-          Información del Cliente
-      </ion-list-header>
+    <ion-list-header class="header-style">
+      Información del Cliente
+    </ion-list-header>
 
-      <ion-avatar class="client-avatar">
-          <img src="assets/imgs/ticket.jpeg">
+    <ion-avatar class="client-avatar">
+      <img src="assets/imgs/ticket.jpeg">
+    </ion-avatar>
+    <h2 class="header-style" style="text-align: center;">{{requestKey}}</h2>
+    <h2 class="header-style" style="text-align: center;">{{office.company}}</h2>
+    <p style="text-align:center; font-size: 15px; color:gray;">{{office.name}}</p>
+    <h2 class="header-style" style="text-align: center; opacity: 0.7;">{{office.buildingName}} - {{office.floorName}}</h2>
+    <ion-item style="opacity:0.7; text-align: center;">
+      <ion-icon class="icon-style" name="md-calendar"></ion-icon>
+      <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY'}}</ion-note>
+      -
+      <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>
+      <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'h:mm a'}}</ion-note>
+    </ion-item>
+    <!-- <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/imgs/working-icon.png">
       </ion-avatar>
-      <h2 class="header-style" style="text-align: center;">{{requestKey}}</h2>
-      <h2 class="header-style" style="text-align: center;">{{office.company}}</h2>
-      <p style="text-align:center; font-size: 15px; color:gray;">{{office.name}}</p>
-      <h2 class="header-style" style="text-align: center; opacity: 0.7;">{{office.buildingName}} - {{office.floorName}}</h2>
-      <ion-item style="opacity:0.7; text-align: center;">
-          <ion-icon class="icon-style" name="md-calendar"></ion-icon>
-          <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY'}}</ion-note>
-          -
-          <ion-icon class="icon-style" name="ios-clock-outline"></ion-icon>
-          <ion-note class="icon-style">{{request.created_at | amLocale:'en' | amDateFormat:'h:mm a'}}</ion-note>
-      </ion-item>
-      <!-- <ion-item>
-          <ion-avatar item-start>
-              <img src="assets/imgs/working-icon.png">
-          </ion-avatar>
-          <h2>{{office.company}}</h2>
-          <p>{{office.name}}</p>
-      </ion-item>
-      <ion-item>
-          <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
-          FECHA DE SOLICITUD
-          <ion-note item-end *ngIf="authUser.level != 4">{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY, h:mm:ss a'}}</ion-note>
-      </ion-item> -->
+      <h2>{{office.company}}</h2>
+      <p>{{office.name}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
+      FECHA DE SOLICITUD
+      <ion-note item-end *ngIf="authUser.level != 4">{{request.created_at | amLocale:'en' | amDateFormat:'MMM Do YYYY, h:mm:ss a'}}</ion-note>
+    </ion-item> -->
   </ion-list>
 
   <ion-list no-lines>
